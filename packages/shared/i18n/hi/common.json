@@ -1,0 +1,66 @@
+{
+  "_status": "draft",
+  "appName": "SocietyIQ",
+  "comingSoon": "जल्द आ रहा है",
+  "comingSoonBody": "SocietyIQ का यह हिस्सा बन रहा है.",
+  "back": "वापस जाएँ",
+  "close": "बंद करें",
+  "menu": "मेनू",
+  "account": "खाता",
+  "signOut": "साइन आउट",
+  "signOutSoon": "साइन-इन अगले अपडेट में आएगा.",
+  "language": "भाषा",
+  "textSize": {
+    "label": "अक्षर का आकार",
+    "normal": "सामान्य",
+    "large": "बड़ा",
+    "xlarge": "बहुत बड़ा"
+  },
+  "view": {
+    "label": "दृश्य",
+    "simple": "आसान दृश्य",
+    "detailed": "विस्तृत दृश्य"
+  },
+  "status": {
+    "paid": "भुगतान हुआ",
+    "pending": "बाकी",
+    "overdue": "देर हो गई",
+    "open": "खुला",
+    "resolved": "हल हुआ"
+  },
+  "step": "चरण {{current}} / {{total}}",
+  "moneyAdvance": "{{amount}} अग्रिम",
+  "help": {
+    "button": "मदद",
+    "title": "मदद",
+    "society": "आपकी सोसायटी",
+    "societyMissing": "आपकी सोसायटी ने अभी संपर्क नहीं जोड़ा है.",
+    "support": "SocietyIQ सहायता",
+    "email": "ईमेल",
+    "phone": "फ़ोन",
+    "hours": "समय"
+  },
+  "confirm": {
+    "yes": "हाँ",
+    "no": "नहीं, वापस जाएँ"
+  },
+  "toast": {
+    "close": "संदेश बंद करें"
+  },
+  "preview": {
+    "title": "घटक पूर्वावलोकन",
+    "sampleQuestion": "फ़्लैट B-207 से ₹4,200 नकद दर्ज करें?",
+    "sampleYes": "हाँ, दर्ज करें",
+    "sampleToast": "दर्ज हो गया.",
+    "sampleUndo": "गलती हुई? वापस लें",
+    "sampleEmpty": "अभी कोई शिकायत नहीं.",
+    "sampleEmptyAction": "समस्या बताएँ",
+    "sampleField": "फ़ोन नंबर",
+    "sampleFieldHelp": "10 अंक, +91 के बिना",
+    "sampleFieldError": "फ़ोन नंबर में 10 अंक चाहिए",
+    "sampleStat": "इस महीने जमा",
+    "sampleStatNote": "42 भुगतानों से",
+    "showDialog": "पुष्टि संवाद दिखाएँ",
+    "showToast": "संदेश दिखाएँ"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "home": {
+    "duesPlaceholder": "Your dues will show here once your society starts using SocietyIQ.",
+    "pay": "Pay",
+    "notices": "Notices",
+    "report": "Report a problem"
+  },
+  "menu": {
+    "myBills": "My bills",
+    "myReceipts": "My receipts",
+    "myComplaints": "My complaints",
+    "settings": "Language and text size"
+  },
+  "install": {
+    "title": "Add SocietyIQ to your home screen",
+    "body": "Open it like any other app, even with a weak network.",
+    "add": "Add to home screen",
+    "later": "Not now",
+    "iphone": "On iPhone: tap the Share button, then \"Add to Home Screen\"."
+  }
+}

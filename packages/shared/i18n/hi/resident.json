@@ -1,0 +1,22 @@
+{
+  "_status": "draft",
+  "home": {
+    "duesPlaceholder": "आपकी सोसायटी के SocietyIQ शुरू करने पर आपका बकाया यहाँ दिखेगा.",
+    "pay": "भुगतान करें",
+    "notices": "सूचनाएँ",
+    "report": "समस्या बताएँ"
+  },
+  "menu": {
+    "myBills": "मेरे बिल",
+    "myReceipts": "मेरी रसीदें",
+    "myComplaints": "मेरी शिकायतें",
+    "settings": "भाषा और अक्षर का आकार"
+  },
+  "install": {
+    "title": "SocietyIQ को होम स्क्रीन पर जोड़ें",
+    "body": "कमज़ोर नेटवर्क में भी दूसरे ऐप की तरह खोलें.",
+    "add": "होम स्क्रीन पर जोड़ें",
+    "later": "अभी नहीं",
+    "iphone": "iPhone पर: Share बटन दबाएँ, फिर \"Add to Home Screen\"."
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "_status": "draft",
+  "appName": "SocietyIQ",
+  "comingSoon": "ટૂંક સમયમાં આવી રહ્યું છે",
+  "comingSoonBody": "SocietyIQ નો આ ભાગ બની રહ્યો છે.",
+  "back": "પાછા જાઓ",
+  "close": "બંધ કરો",
+  "menu": "મેનુ",
+  "account": "ખાતું",
+  "signOut": "સાઇન આઉટ",
+  "signOutSoon": "સાઇન-ઇન આગામી અપડેટમાં આવશે.",
+  "language": "ભાષા",
+  "textSize": {
+    "label": "અક્ષરનું કદ",
+    "normal": "સામાન્ય",
+    "large": "મોટું",
+    "xlarge": "ખૂબ મોટું"
+  },
+  "view": {
+    "label": "દૃશ્ય",
+    "simple": "સરળ દૃશ્ય",
+    "detailed": "વિગતવાર દૃશ્ય"
+  },
+  "status": {
+    "paid": "ચૂકવેલ",
+    "pending": "બાકી",
+    "overdue": "મુદત વીતી ગઈ",
+    "open": "ખુલ્લું",
+    "resolved": "ઉકેલાયું"
+  },
+  "step": "પગલું {{current}} / {{total}}",
+  "moneyAdvance": "{{amount}} અગાઉથી",
+  "help": {
+    "button": "મદદ",
+    "title": "મદદ",
+    "society": "તમારી સોસાયટી",
+    "societyMissing": "તમારી સોસાયટીએ હજી સંપર્ક ઉમેર્યો નથી.",
+    "support": "SocietyIQ સહાય",
+    "email": "ઈમેલ",
+    "phone": "ફોન",
+    "hours": "સમય"
+  },
+  "confirm": {
+    "yes": "હા",
+    "no": "ના, પાછા જાઓ"
+  },
+  "toast": {
+    "close": "સંદેશ બંધ કરો"
+  },
+  "preview": {
+    "title": "ઘટક પૂર્વાવલોકન",
+    "sampleQuestion": "ફ્લેટ B-207 પાસેથી ₹4,200 રોકડ નોંધવા?",
+    "sampleYes": "હા, નોંધો",
+    "sampleToast": "નોંધાયું.",
+    "sampleUndo": "ભૂલ થઈ? પાછું લો",
+    "sampleEmpty": "હજી કોઈ ફરિયાદ નથી.",
+    "sampleEmptyAction": "સમસ્યા જણાવો",
+    "sampleField": "ફોન નંબર",
+    "sampleFieldHelp": "10 અંક, +91 વગર",
+    "sampleFieldError": "ફોન નંબરમાં 10 અંક જોઈએ",
+    "sampleStat": "આ મહિને જમા",
+    "sampleStatNote": "42 ચુકવણીઓમાંથી",
+    "showDialog": "પુષ્ટિ સંવાદ બતાવો",
+    "showToast": "સંદેશ બતાવો"
+  }
+}

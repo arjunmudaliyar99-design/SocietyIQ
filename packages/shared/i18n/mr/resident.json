@@ -1,0 +1,22 @@
+{
+  "_status": "draft",
+  "home": {
+    "duesPlaceholder": "तुमची सोसायटी SocietyIQ वापरू लागल्यावर तुमची थकबाकी येथे दिसेल.",
+    "pay": "पैसे भरा",
+    "notices": "सूचना",
+    "report": "समस्या कळवा"
+  },
+  "menu": {
+    "myBills": "माझी बिले",
+    "myReceipts": "माझ्या पावत्या",
+    "myComplaints": "माझ्या तक्रारी",
+    "settings": "भाषा आणि अक्षरांचा आकार"
+  },
+  "install": {
+    "title": "SocietyIQ होम स्क्रीनवर जोडा",
+    "body": "कमकुवत नेटवर्कवरही इतर ॲपप्रमाणे उघडा.",
+    "add": "होम स्क्रीनवर जोडा",
+    "later": "आता नाही",
+    "iphone": "iPhone वर: Share बटण दाबा, मग \"Add to Home Screen\"."
+  }
+}

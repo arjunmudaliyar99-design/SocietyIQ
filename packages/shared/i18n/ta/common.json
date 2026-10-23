@@ -1,0 +1,66 @@
+{
+  "_status": "draft",
+  "appName": "SocietyIQ",
+  "comingSoon": "விரைவில் வருகிறது",
+  "comingSoonBody": "SocietyIQ-இன் இந்தப் பகுதி உருவாக்கப்படுகிறது.",
+  "back": "பின் செல்",
+  "close": "மூடு",
+  "menu": "பட்டியல்",
+  "account": "கணக்கு",
+  "signOut": "வெளியேறு",
+  "signOutSoon": "உள்நுழைவு அடுத்த புதுப்பிப்பில் வரும்.",
+  "language": "மொழி",
+  "textSize": {
+    "label": "எழுத்து அளவு",
+    "normal": "சாதாரணம்",
+    "large": "பெரியது",
+    "xlarge": "மிகப் பெரியது"
+  },
+  "view": {
+    "label": "காட்சி",
+    "simple": "எளிய காட்சி",
+    "detailed": "விரிவான காட்சி"
+  },
+  "status": {
+    "paid": "செலுத்தப்பட்டது",
+    "pending": "நிலுவையில்",
+    "overdue": "தாமதம்",
+    "open": "திறந்துள்ளது",
+    "resolved": "தீர்க்கப்பட்டது"
+  },
+  "step": "படி {{current}} / {{total}}",
+  "moneyAdvance": "{{amount}} முன்பணம்",
+  "help": {
+    "button": "உதவி",
+    "title": "உதவி",
+    "society": "உங்கள் சொசைட்டி",
+    "societyMissing": "உங்கள் சொசைட்டி இன்னும் தொடர்பைச் சேர்க்கவில்லை.",
+    "support": "SocietyIQ உதவி",
+    "email": "மின்னஞ்சல்",
+    "phone": "தொலைபேசி",
+    "hours": "நேரம்"
+  },
+  "confirm": {
+    "yes": "ஆம்",
+    "no": "இல்லை, பின் செல்"
+  },
+  "toast": {
+    "close": "செய்தியை மூடு"
+  },
+  "preview": {
+    "title": "கூறு முன்னோட்டம்",
+    "sampleQuestion": "பிளாட் B-207-இடமிருந்து ₹4,200 ரொக்கம் பதிவு செய்யவா?",
+    "sampleYes": "ஆம், பதிவு செய்",
+    "sampleToast": "பதிவு செய்யப்பட்டது.",
+    "sampleUndo": "தவறா? திரும்பப் பெறு",
+    "sampleEmpty": "இன்னும் புகார்கள் இல்லை.",
+    "sampleEmptyAction": "பிரச்சனையைத் தெரிவி",
+    "sampleField": "தொலைபேசி எண்",
+    "sampleFieldHelp": "10 இலக்கங்கள், +91 இல்லாமல்",
+    "sampleFieldError": "தொலைபேசி எண்ணுக்கு 10 இலக்கங்கள் தேவை",
+    "sampleStat": "இந்த மாதம் வசூல்",
+    "sampleStatNote": "42 கட்டணங்களிலிருந்து",
+    "showDialog": "உறுதிப்படுத்தல் உரையாடலைக் காட்டு",
+    "showToast": "செய்தியைக் காட்டு"
+  }
+}

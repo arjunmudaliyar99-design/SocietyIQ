@@ -1,0 +1,31 @@
+# secrets
+.env
+.env.*
+!.env.example
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.coverage
+# node
+node_modules/
+dist/
+build/
+.vite/
+coverage/
+# os / editors
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+# large or private reference files
+reference/videos/
+reference/private/
+docs/legal/sources/*.pdf
+# never commit real society data
+data/real/
+*.real.xlsx
+*.tsbuildinfo

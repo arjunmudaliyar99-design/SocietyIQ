@@ -1,0 +1,21 @@
+{
+  "_status": "draft",
+  "societyPlaceholder": "તમારી સોસાયટી",
+  "nav": {
+    "label": "મુખ્ય મેનુ",
+    "home": "હોમ",
+    "bills": "બિલ",
+    "payments": "ચુકવણીઓ",
+    "dues": "બાકી રકમ",
+    "complaints": "ફરિયાદો",
+    "flats": "ફ્લેટ અને સભ્યો",
+    "charges": "શુલ્ક",
+    "notices": "સૂચનાઓ",
+    "compliance": "અનુપાલન",
+    "settings": "સોસાયટી સેટિંગ્સ"
+  },
+  "home": {
+    "title": "હોમ",
+    "body": "તમારી સોસાયટીનો સારાંશ અહીં દેખાશે."
+  }
+}

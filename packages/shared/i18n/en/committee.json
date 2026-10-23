@@ -1,0 +1,20 @@
+{
+  "societyPlaceholder": "Your society",
+  "nav": {
+    "label": "Main menu",
+    "home": "Home",
+    "bills": "Bills",
+    "payments": "Payments",
+    "dues": "Dues",
+    "complaints": "Complaints",
+    "flats": "Flats and members",
+    "charges": "Charges",
+    "notices": "Notices",
+    "compliance": "Compliance",
+    "settings": "Society settings"
+  },
+  "home": {
+    "title": "Home",
+    "body": "Your society's summary will show here."
+  }
+}

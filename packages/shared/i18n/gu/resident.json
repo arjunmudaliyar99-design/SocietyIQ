@@ -1,0 +1,22 @@
+{
+  "_status": "draft",
+  "home": {
+    "duesPlaceholder": "તમારી સોસાયટી SocietyIQ વાપરવાનું શરૂ કરશે ત્યારે તમારી બાકી રકમ અહીં દેખાશે.",
+    "pay": "ચૂકવો",
+    "notices": "સૂચનાઓ",
+    "report": "સમસ્યા જણાવો"
+  },
+  "menu": {
+    "myBills": "મારાં બિલ",
+    "myReceipts": "મારી રસીદો",
+    "myComplaints": "મારી ફરિયાદો",
+    "settings": "ભાષા અને અક્ષરનું કદ"
+  },
+  "install": {
+    "title": "SocietyIQ હોમ સ્ક્રીન પર ઉમેરો",
+    "body": "નબળા નેટવર્કમાં પણ બીજી ઍપની જેમ ખોલો.",
+    "add": "હોમ સ્ક્રીન પર ઉમેરો",
+    "later": "હમણાં નહીં",
+    "iphone": "iPhone પર: Share બટન દબાવો, પછી \"Add to Home Screen\"."
+  }
+}

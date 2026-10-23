@@ -1,0 +1,66 @@
+{
+  "_status": "draft",
+  "appName": "SocietyIQ",
+  "comingSoon": "लवकरच येत आहे",
+  "comingSoonBody": "SocietyIQ चा हा भाग तयार होत आहे.",
+  "back": "मागे जा",
+  "close": "बंद करा",
+  "menu": "मेनू",
+  "account": "खाते",
+  "signOut": "बाहेर पडा",
+  "signOutSoon": "साइन-इन पुढील अपडेटमध्ये येईल.",
+  "language": "भाषा",
+  "textSize": {
+    "label": "अक्षरांचा आकार",
+    "normal": "सामान्य",
+    "large": "मोठा",
+    "xlarge": "खूप मोठा"
+  },
+  "view": {
+    "label": "दृश्य",
+    "simple": "सोपे दृश्य",
+    "detailed": "सविस्तर दृश्य"
+  },
+  "status": {
+    "paid": "भरले",
+    "pending": "प्रलंबित",
+    "overdue": "थकीत",
+    "open": "उघडे",
+    "resolved": "सोडवले"
+  },
+  "step": "पायरी {{current}} / {{total}}",
+  "moneyAdvance": "{{amount}} आगाऊ",
+  "help": {
+    "button": "मदत",
+    "title": "मदत",
+    "society": "तुमची सोसायटी",
+    "societyMissing": "तुमच्या सोसायटीने अजून संपर्क जोडलेला नाही.",
+    "support": "SocietyIQ सहाय्य",
+    "email": "ईमेल",
+    "phone": "फोन",
+    "hours": "वेळ"
+  },
+  "confirm": {
+    "yes": "होय",
+    "no": "नाही, मागे जा"
+  },
+  "toast": {
+    "close": "संदेश बंद करा"
+  },
+  "preview": {
+    "title": "घटक पूर्वावलोकन",
+    "sampleQuestion": "फ्लॅट B-207 कडून ₹4,200 रोख नोंदवायचे?",
+    "sampleYes": "होय, नोंदवा",
+    "sampleToast": "नोंदवले.",
+    "sampleUndo": "चूक झाली? परत घ्या",
+    "sampleEmpty": "अजून कोणतीही तक्रार नाही.",
+    "sampleEmptyAction": "समस्या कळवा",
+    "sampleField": "फोन नंबर",
+    "sampleFieldHelp": "10 अंक, +91 शिवाय",
+    "sampleFieldError": "फोन नंबरला 10 अंक हवेत",
+    "sampleStat": "या महिन्यात जमा",
+    "sampleStatNote": "42 पेमेंट्समधून",
+    "showDialog": "पुष्टी संवाद दाखवा",
+    "showToast": "संदेश दाखवा"
+  }
+}

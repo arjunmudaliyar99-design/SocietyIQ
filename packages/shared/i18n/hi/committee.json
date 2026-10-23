@@ -1,0 +1,21 @@
+{
+  "_status": "draft",
+  "societyPlaceholder": "आपकी सोसायटी",
+  "nav": {
+    "label": "मुख्य मेनू",
+    "home": "होम",
+    "bills": "बिल",
+    "payments": "भुगतान",
+    "dues": "बकाया",
+    "complaints": "शिकायतें",
+    "flats": "फ़्लैट और सदस्य",
+    "charges": "शुल्क",
+    "notices": "सूचनाएँ",
+    "compliance": "अनुपालन",
+    "settings": "सोसायटी सेटिंग्स"
+  },
+  "home": {
+    "title": "होम",
+    "body": "आपकी सोसायटी का सारांश यहाँ दिखेगा."
+  }
+}

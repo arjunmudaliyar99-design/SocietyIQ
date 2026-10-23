@@ -1,0 +1,65 @@
+{
+  "appName": "SocietyIQ",
+  "comingSoon": "Coming soon",
+  "comingSoonBody": "This part of SocietyIQ is being built.",
+  "back": "Go back",
+  "close": "Close",
+  "menu": "Menu",
+  "account": "Account",
+  "signOut": "Sign out",
+  "signOutSoon": "Sign-in comes in the next update.",
+  "language": "Language",
+  "textSize": {
+    "label": "Text size",
+    "normal": "Normal",
+    "large": "Large",
+    "xlarge": "Extra large"
+  },
+  "view": {
+    "label": "View",
+    "simple": "Simple view",
+    "detailed": "Detailed view"
+  },
+  "status": {
+    "paid": "Paid",
+    "pending": "Pending",
+    "overdue": "Overdue",
+    "open": "Open",
+    "resolved": "Resolved"
+  },
+  "step": "Step {{current}} of {{total}}",
+  "moneyAdvance": "{{amount}} advance",
+  "help": {
+    "button": "Help",
+    "title": "Help",
+    "society": "Your society",
+    "societyMissing": "Your society has not added a contact yet.",
+    "support": "SocietyIQ support",
+    "email": "Email",
+    "phone": "Phone",
+    "hours": "Hours"
+  },
+  "confirm": {
+    "yes": "Yes",
+    "no": "No, go back"
+  },
+  "toast": {
+    "close": "Close message"
+  },
+  "preview": {
+    "title": "Component preview",
+    "sampleQuestion": "Record ₹4,200 cash from Flat B-207?",
+    "sampleYes": "Yes, record",
+    "sampleToast": "Recorded.",
+    "sampleUndo": "Made a mistake? Reverse it",
+    "sampleEmpty": "No complaints yet.",
+    "sampleEmptyAction": "Report a problem",
+    "sampleField": "Phone number",
+    "sampleFieldHelp": "10 digits, without +91",
+    "sampleFieldError": "Phone number needs 10 digits",
+    "sampleStat": "Collected this month",
+    "sampleStatNote": "From 42 payments",
+    "showDialog": "Show confirm dialog",
+    "showToast": "Show message"
+  }
+}
