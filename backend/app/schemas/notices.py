@@ -90,3 +90,7 @@ class NoticeOptionsOut(BaseModel):
     ai_available: bool
     # docs/02 §9: WhatsApp shows "Coming soon".
     whatsapp_available: bool = False
+
+
+class ReadOut(BaseModel):
+    read: bool

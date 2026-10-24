@@ -168,7 +168,11 @@
     "vendorExists": "A vendor with this name already exists.",
     "vendorNotFound": "This vendor was not found. Choose another.",
     "complianceNotActive": "This item is already finished.",
-    "doneInFuture": "The date done cannot be in the future."
+    "doneInFuture": "The date done cannot be in the future.",
+    "noticeChooseWing": "Choose which wing should get this notice.",
+    "noticeNotDraft": "A published notice cannot be changed.",
+    "aiNotConfigured": "AI help is not switched on for this society.",
+    "aiNeedsReview": "The AI answer could not be used. Please write the notice yourself."
   },
   "complaints": {
     "title": "Complaints",
@@ -238,6 +242,68 @@
     "feedback": {
       "fixed": "Resident says: Fixed",
       "not_fixed": "Resident says: Not fixed"
+    }
+  },
+  "notices": {
+    "title": "Notices",
+    "write": "Write a notice",
+    "empty": "No notices yet.",
+    "emptyResident": "No notices yet. The committee's notices will show here.",
+    "back": "Back to notices",
+    "saveDraft": "Save draft",
+    "saveChanges": "Save changes",
+    "saved": "Saved.",
+    "publish": "Publish",
+    "publishYes": "Yes, publish",
+    "publishQuestion": "Publish this notice and email it to {{count}} people?",
+    "discard": "Delete draft",
+    "discardQuestion": "Delete this draft? It has not been sent to anyone.",
+    "adminPublishes": "The admin publishes notices. Your draft is saved.",
+    "readCount": "Residents who opened it",
+    "emailsSent": "Emails sent",
+    "emailsFailed": "{{count}} emails could not be sent.",
+    "unread": "new",
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "archived": "Taken down"
+    },
+    "audience": {
+      "all": "Everyone",
+      "owners": "Owners",
+      "tenants": "Tenants",
+      "wing": "One wing"
+    },
+    "form": {
+      "title": "Title",
+      "body": "Message",
+      "language": "Written in",
+      "audience": "Who should get it",
+      "wing": "Wing",
+      "chooseWing": "Choose a wing"
+    },
+    "ai": {
+      "title": "Help me write",
+      "explain": "Type rough notes. We will turn them into a clear notice for you to check and change.",
+      "notes": "Your notes",
+      "button": "Help me write",
+      "working": "Writing…",
+      "checkDraft": "This draft was written with AI help. Read it carefully and change anything that is wrong before saving.",
+      "assisted": "Written with AI help"
+    },
+    "translations": {
+      "title": "Other languages",
+      "explain": "Residents see the notice in their own language once you save a checked translation. Otherwise they see it as written.",
+      "add": "Add {{language}}",
+      "needsCheck": "needs checking",
+      "checked": "checked",
+      "saveChecked": "Save as checked",
+      "remove": "Remove",
+      "ai": "Translate with AI"
+    },
+    "channels": {
+      "email": "Email",
+      "whatsapp": "WhatsApp"
     }
   }
 }

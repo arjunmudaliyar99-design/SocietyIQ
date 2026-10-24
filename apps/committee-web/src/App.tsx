@@ -9,6 +9,9 @@ import { RunPage } from "./billing/RunPage";
 import { ComplaintPage } from "./complaints/ComplaintPage";
 import { ComplaintsPage } from "./complaints/ComplaintsPage";
 import { NewComplaintPage } from "./complaints/NewComplaintPage";
+import { NewNoticePage } from "./notices/NewNoticePage";
+import { NoticePage } from "./notices/NoticePage";
+import { NoticesPage } from "./notices/NoticesPage";
 import { ChargesPage } from "./charges/ChargesPage";
 import { HeadPage } from "./charges/HeadPage";
 import { PreviewPage } from "./charges/PreviewPage";
@@ -46,7 +49,7 @@ function ComingSoon({ navKey }: { navKey: string }) {
 }
 
 // Menu items with real pages; the rest show "Coming soon" until their milestone.
-const BUILT = new Set(["/", "/settings", "/flats", "/charges", "/bills", "/complaints", "/payments", "/dues", "/compliance"]);
+const BUILT = new Set(["/", "/settings", "/flats", "/charges", "/bills", "/complaints", "/payments", "/dues", "/compliance", "/notices"]);
 
 export default function App() {
   return (
@@ -86,6 +89,9 @@ export default function App() {
         <Route path="/compliance/vendors" element={<VendorsPage />} />
         <Route path="/compliance/:itemId" element={<ItemPage />} />
         <Route path="/compliance/:itemId/edit" element={<ItemFormPage />} />
+        <Route path="/notices" element={<NoticesPage />} />
+        <Route path="/notices/new" element={<NewNoticePage />} />
+        <Route path="/notices/:noticeId" element={<NoticePage />} />
         <Route path="/preview" element={<Preview />} />
         <Route path="*" element={<HomePage />} />
       </Routes>

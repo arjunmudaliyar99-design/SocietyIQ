@@ -35,6 +35,8 @@ Format: **ID — question** · who can answer · status.
 
 - **Q-080 — What does the resident's "Fixed" / "Not fixed" answer do to a resolved complaint (docs/02 §8 gives the buttons, not the effect)?** · founders · open (placeholder: "Fixed" closes it, "Not fixed" sends it back to In progress — `FEEDBACK_STATUS` in `backend/app/services/complaints.py`)
 - **Q-081 — Does a resident see every complaint for their flat (including ones raised by the other owner, the tenant or the committee on their behalf), or only the ones they raised (docs/07 M8 says "their own")?** · founders · open (placeholder: every complaint for the flats they are linked to, plus any they raised)
+- **Q-082 — Which email provider sends notices (docs/04 §12: "choose one with a free tier")?** · founders / Co-founder (Engineering) · open (placeholder: `EMAIL_PROVIDER` unset uses `FakeEmailSender`, which sends nothing; a candidate is Resend, terms and Indian delivery to be checked. Also decide whether sending moves to a background job once a real provider is used)
+- **Q-083 — Which AI provider for "Help me write" and translations, and are its data terms acceptable under DPDP (docs/04 §11)?** · founders · open (placeholder: only `FakeProvider` is built; it tidies the notes without adding facts and labels translations with the language code. Groq and Gemini adapters wait for this answer)
 
 ## Legal and compliance
 

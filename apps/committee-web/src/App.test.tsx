@@ -50,12 +50,6 @@ describe("committee shell", () => {
     expect(screen.getByRole("button", { name: "मदद" })).toBeTruthy();
   });
 
-  it("menu pages say Coming soon", () => {
-    renderApp("/notices");
-    expect(screen.getByRole("heading", { name: "Notices" })).toBeTruthy();
-    expect(screen.getByText(/Coming soon/)).toBeTruthy();
-  });
-
   it("component preview renders", () => {
     renderApp("/preview");
     expect(screen.getByRole("heading", { name: "Component preview" })).toBeTruthy();

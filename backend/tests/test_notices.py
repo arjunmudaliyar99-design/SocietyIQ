@@ -171,7 +171,7 @@ async def test_residents_read_only_published_notices_for_them(client, two_societ
     first = (await client.get(base, headers=owner.headers)).json()
     assert all(n["is_read"] is False for n in first)
     read = await client.post(f"{base}/{for_all}/read", headers=owner.headers)
-    assert read.status_code == 204
+    assert read.json() == {"read": True}
     await client.post(f"{base}/{for_all}/read", headers=owner.headers)
     await client.post(f"{base}/{for_all}/read", headers=tenant.headers)
     after = {n["id"]: n["is_read"] for n in (await client.get(base, headers=owner.headers)).json()}

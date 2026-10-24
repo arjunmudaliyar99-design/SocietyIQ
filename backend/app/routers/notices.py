@@ -19,6 +19,7 @@ from app.schemas.notices import (
     NoticeOut,
     NoticeStatus,
     NoticeUpdate,
+    ReadOut,
     TranslationOut,
 )
 from app.services import notices as service
@@ -128,6 +129,7 @@ async def archive(notice_id: UUID, ctx: Drafter, session: SessionDep) -> NoticeD
     return await _detail(session, ctx, await service.archive(session, ctx, notice_id))
 
 
-@router.post("/{notice_id}/read", status_code=status.HTTP_204_NO_CONTENT)
-async def mark_read(notice_id: UUID, ctx: Anyone, session: SessionDep) -> None:
+@router.post("/{notice_id}/read")
+async def mark_read(notice_id: UUID, ctx: Anyone, session: SessionDep) -> ReadOut:
     await service.mark_read(session, ctx, notice_id)
+    return ReadOut(read=True)

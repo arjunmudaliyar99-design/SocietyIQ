@@ -27,6 +27,7 @@ import {
 } from "@societyiq/shared";
 
 import { ComplaintPage, MyComplaintsPage, ReportPage } from "./complaints/ComplaintPages";
+import { NoticePage, NoticesPage } from "./notices/NoticePages";
 import { support } from "./config";
 import { InstallBanner } from "./InstallBanner";
 import { useMyFlats } from "./api/money";
@@ -245,6 +246,9 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/pay" element={<Signed title={t("home.pay")}><PayPage /></Signed>} />
           <Route path="/notices" element={<ComingSoon title={t("home.notices")} />} />
+          <Route path="/pay" element={<ComingSoon title={t("home.pay")} />} />
+          <Route path="/notices" element={<NoticesPage />} />
+          <Route path="/notices/:noticeId" element={<NoticePage />} />
           <Route path="/report" element={<ReportPage />} />
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/bills" element={<Signed title={t("menu.myBills")}><MyBillsList /></Signed>} />
