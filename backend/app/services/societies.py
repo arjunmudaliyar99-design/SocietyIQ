@@ -13,11 +13,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.config import get_settings
 from app.db import set_society_context
 from app.errors import AppError, not_found
-from app.models import Society, SocietyMembership, User, Wing
+from app.models import Flat, Society, SocietyMembership, User, Wing
 from app.services import audit
 
 COMMITTEE_ROLES = ("admin", "treasurer", "committee", "consultant", "auditor")
-# Flats arrive in M3; until then resident roles cannot be invited.
+# Residents are invited for a flat (docs/05 §1).
 FLAT_ROLES = ("owner", "tenant", "delegate")
 
 # docs/05 §2: create one default wing when a society has no wings. The name is ours.
@@ -66,6 +66,7 @@ class InviteInput:
     name: str | None
     email: str | None
     phone_e164: str | None
+    flat_id: UUID | None = None
 
 
 @dataclass
@@ -75,8 +76,10 @@ class CreatedInvite:
     link: str
 
 
-def _invite_link(society_id: UUID, token: str) -> str:
-    return f"{get_settings().committee_web_url}/invite/{society_id}?token={token}"
+def _invite_link(society_id: UUID, token: str, role: str) -> str:
+    settings = get_settings()
+    app_url = settings.resident_pwa_url if role in FLAT_ROLES else settings.committee_web_url
+    return f"{app_url}/invite/{society_id}?token={token}"
 
 
 def _membership_snapshot(m: SocietyMembership) -> dict[str, Any]:
@@ -88,6 +91,7 @@ def _membership_snapshot(m: SocietyMembership) -> dict[str, Any]:
         "invited_name": m.invited_name,
         "invited_email": m.invited_email,
         "invited_phone_e164": m.invited_phone_e164,
+        "flat_id": str(m.flat_id) if m.flat_id else None,
     }
 
 
@@ -95,13 +99,20 @@ async def create_invite(
     session: AsyncSession, society_id: UUID, actor: User, invite: InviteInput
 ) -> CreatedInvite:
     if invite.role in FLAT_ROLES:
-        raise AppError(422, "FLAT_REQUIRED", "errors.inviteNeedsFlat")
+        if invite.flat_id is None:
+            raise AppError(422, "FLAT_REQUIRED", "errors.inviteNeedsFlat")
+        flat = await session.get(Flat, invite.flat_id)
+        if flat is None or flat.society_id != society_id:
+            raise AppError(422, "FLAT_REQUIRED", "errors.inviteNeedsFlat")
+    elif invite.flat_id is not None:
+        raise AppError(422, "FLAT_NOT_ALLOWED", "errors.inviteFlatNotAllowed")
     if not invite.email and not invite.phone_e164:
         raise AppError(422, "CONTACT_REQUIRED", "errors.inviteNeedsContact")
     token = secrets.token_urlsafe(32)
     membership = SocietyMembership(
         society_id=society_id,
         role=invite.role,
+        flat_id=invite.flat_id,
         status="invited",
         invited_name=invite.name,
         invited_email=invite.email.lower() if invite.email else None,
@@ -121,7 +132,7 @@ async def create_invite(
         entity_id=membership.id,
         after=_membership_snapshot(membership),
     )
-    return CreatedInvite(membership, token, _invite_link(society_id, token))
+    return CreatedInvite(membership, token, _invite_link(society_id, token, invite.role))
 
 
 SOCIETY_FIELDS = (

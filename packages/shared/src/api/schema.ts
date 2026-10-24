@@ -124,6 +124,144 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/flats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Flats */
+        get: operations["list_flats_api_v1_societies__society_id__flats_get"];
+        put?: never;
+        /** Create Flat */
+        post: operations["create_flat_api_v1_societies__society_id__flats_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/flats/{flat_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Flat */
+        get: operations["get_flat_api_v1_societies__society_id__flats__flat_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Flat */
+        patch: operations["update_flat_api_v1_societies__society_id__flats__flat_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/flats/{flat_id}/members": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Member */
+        post: operations["create_member_api_v1_societies__society_id__flats__flat_id__members_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/flats/{flat_id}/members/{member_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Member */
+        patch: operations["update_member_api_v1_societies__society_id__flats__flat_id__members__member_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/imports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Upload */
+        post: operations["upload_api_v1_societies__society_id__imports_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/imports/template": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Download Template */
+        get: operations["download_template_api_v1_societies__society_id__imports_template_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/imports/{job_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Job */
+        get: operations["get_job_api_v1_societies__society_id__imports__job_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/imports/{job_id}/confirm": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Confirm */
+        post: operations["confirm_api_v1_societies__society_id__imports__job_id__confirm_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/societies/{society_id}/invites": {
         parameters: {
             query?: never;
@@ -175,6 +313,41 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/wings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Wings */
+        get: operations["list_wings_api_v1_societies__society_id__wings_get"];
+        put?: never;
+        /** Create Wing */
+        post: operations["create_wing_api_v1_societies__society_id__wings_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/wings/{wing_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Wing */
+        patch: operations["update_wing_api_v1_societies__society_id__wings__wing_id__patch"];
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -210,6 +383,28 @@ export interface components {
             upi_id?: string | null;
             /** Upi Payee Name */
             upi_payee_name?: string | null;
+        };
+        /** Body_upload_api_v1_societies__society_id__imports_post */
+        Body_upload_api_v1_societies__society_id__imports_post: {
+            /** File */
+            file: string;
+        };
+        /**
+         * CommitteeInviteIn
+         * @description Setup wizard step 3: flats do not exist yet, so committee roles only.
+         */
+        CommitteeInviteIn: {
+            /** Email */
+            email?: string | null;
+            /** Name */
+            name?: string | null;
+            /** Phone E164 */
+            phone_e164?: string | null;
+            /**
+             * Role
+             * @enum {string}
+             */
+            role: "admin" | "treasurer" | "committee" | "consultant" | "auditor";
         };
         /**
          * ConsentIn
@@ -253,10 +448,240 @@ export interface components {
             /** Policy Version */
             policy_version: string;
         };
+        /** FlatDetailOut */
+        FlatDetailOut: {
+            /** Balance Paise */
+            balance_paise: number;
+            /** Carpet Area Sqft */
+            carpet_area_sqft: string | null;
+            /** Certified Construction Cost Paise */
+            certified_construction_cost_paise: number | null;
+            /** Flat Number */
+            flat_number: string;
+            /** Flat Type */
+            flat_type: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Active */
+            is_active: boolean;
+            /** Members */
+            members: components["schemas"]["MemberOut"][];
+            /** Municipal Property Account */
+            municipal_property_account: string | null;
+            /**
+             * Occupancy
+             * @enum {string}
+             */
+            occupancy: "owner_occupied" | "family_occupied" | "let_out" | "vacant";
+            /** Primary Member */
+            primary_member: string | null;
+            /**
+             * Usage
+             * @enum {string}
+             */
+            usage: "residential" | "commercial";
+            /** Water Points */
+            water_points: string | null;
+            /**
+             * Wing Id
+             * Format: uuid
+             */
+            wing_id: string;
+            /** Wing Name */
+            wing_name: string;
+        };
+        /** FlatIn */
+        FlatIn: {
+            /** Carpet Area Sqft */
+            carpet_area_sqft?: number | string | null;
+            /** Certified Construction Cost Paise */
+            certified_construction_cost_paise?: number | null;
+            /** Flat Number */
+            flat_number: string;
+            /** Flat Type */
+            flat_type?: string | null;
+            /** Municipal Property Account */
+            municipal_property_account?: string | null;
+            /**
+             * Occupancy
+             * @default owner_occupied
+             * @enum {string}
+             */
+            occupancy: "owner_occupied" | "family_occupied" | "let_out" | "vacant";
+            /**
+             * Usage
+             * @default residential
+             * @enum {string}
+             */
+            usage: "residential" | "commercial";
+            /** Water Points */
+            water_points?: number | string | null;
+            /**
+             * Wing Id
+             * Format: uuid
+             */
+            wing_id: string;
+        };
+        /** FlatOut */
+        FlatOut: {
+            /** Carpet Area Sqft */
+            carpet_area_sqft: string | null;
+            /** Certified Construction Cost Paise */
+            certified_construction_cost_paise: number | null;
+            /** Flat Number */
+            flat_number: string;
+            /** Flat Type */
+            flat_type: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Active */
+            is_active: boolean;
+            /** Municipal Property Account */
+            municipal_property_account: string | null;
+            /**
+             * Occupancy
+             * @enum {string}
+             */
+            occupancy: "owner_occupied" | "family_occupied" | "let_out" | "vacant";
+            /**
+             * Usage
+             * @enum {string}
+             */
+            usage: "residential" | "commercial";
+            /** Water Points */
+            water_points: string | null;
+            /**
+             * Wing Id
+             * Format: uuid
+             */
+            wing_id: string;
+        };
+        /** FlatSummaryOut */
+        FlatSummaryOut: {
+            /** Balance Paise */
+            balance_paise: number;
+            /** Carpet Area Sqft */
+            carpet_area_sqft: string | null;
+            /** Certified Construction Cost Paise */
+            certified_construction_cost_paise: number | null;
+            /** Flat Number */
+            flat_number: string;
+            /** Flat Type */
+            flat_type: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Active */
+            is_active: boolean;
+            /** Municipal Property Account */
+            municipal_property_account: string | null;
+            /**
+             * Occupancy
+             * @enum {string}
+             */
+            occupancy: "owner_occupied" | "family_occupied" | "let_out" | "vacant";
+            /** Primary Member */
+            primary_member: string | null;
+            /**
+             * Usage
+             * @enum {string}
+             */
+            usage: "residential" | "commercial";
+            /** Water Points */
+            water_points: string | null;
+            /**
+             * Wing Id
+             * Format: uuid
+             */
+            wing_id: string;
+            /** Wing Name */
+            wing_name: string;
+        };
+        /** FlatUpdate */
+        FlatUpdate: {
+            /** Carpet Area Sqft */
+            carpet_area_sqft?: number | string | null;
+            /** Certified Construction Cost Paise */
+            certified_construction_cost_paise?: number | null;
+            /** Flat Number */
+            flat_number?: string | null;
+            /** Flat Type */
+            flat_type?: string | null;
+            /** Is Active */
+            is_active?: boolean | null;
+            /** Municipal Property Account */
+            municipal_property_account?: string | null;
+            /** Occupancy */
+            occupancy?: ("owner_occupied" | "family_occupied" | "let_out" | "vacant") | null;
+            /** Usage */
+            usage?: ("residential" | "commercial") | null;
+            /** Water Points */
+            water_points?: number | string | null;
+            /** Wing Id */
+            wing_id?: string | null;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /** ImportIssueOut */
+        ImportIssueOut: {
+            /** Key */
+            key: string;
+            /** Params */
+            params: {
+                [key: string]: string | number | null;
+            };
+        };
+        /** ImportJobOut */
+        ImportJobOut: {
+            /** Error Count */
+            error_count: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Ok Count */
+            ok_count: number;
+            /** Row Count */
+            row_count: number;
+            /** Rows */
+            rows: components["schemas"]["ImportRowOut"][];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "uploaded" | "previewed" | "imported" | "failed";
+        };
+        /** ImportRowOut */
+        ImportRowOut: {
+            /** Flat Number */
+            flat_number: string | null;
+            /** Issues */
+            issues: components["schemas"]["ImportIssueOut"][];
+            /** Opening Balance Paise */
+            opening_balance_paise: number | null;
+            /** Owner Name */
+            owner_name: string | null;
+            /** Row */
+            row: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "ok" | "warning" | "error";
+            /** Wing */
+            wing: string | null;
         };
         /**
          * InviteIn
@@ -265,6 +690,8 @@ export interface components {
         InviteIn: {
             /** Email */
             email?: string | null;
+            /** Flat Id */
+            flat_id?: string | null;
             /** Name */
             name?: string | null;
             /** Phone E164 */
@@ -273,7 +700,7 @@ export interface components {
              * Role
              * @enum {string}
              */
-            role: "admin" | "treasurer" | "committee" | "consultant" | "auditor";
+            role: "admin" | "treasurer" | "committee" | "consultant" | "auditor" | "owner" | "tenant" | "delegate";
         };
         /** InviteOut */
         InviteOut: {
@@ -310,8 +737,94 @@ export interface components {
              */
             text_size: "normal" | "large" | "xlarge";
         };
+        /** MemberIn */
+        MemberIn: {
+            /** Email */
+            email?: string | null;
+            /** From Date */
+            from_date?: string | null;
+            /** Full Name */
+            full_name: string;
+            /**
+             * Is Primary
+             * @default false
+             */
+            is_primary: boolean;
+            /**
+             * Member Type
+             * @enum {string}
+             */
+            member_type: "owner" | "joint_owner" | "tenant" | "delegate";
+            /** Phone E164 */
+            phone_e164?: string | null;
+            /**
+             * Tenant Can Pay
+             * @default false
+             */
+            tenant_can_pay: boolean;
+            /** To Date */
+            to_date?: string | null;
+        };
+        /** MemberOut */
+        MemberOut: {
+            /** Email */
+            email: string | null;
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /** From Date */
+            from_date: string | null;
+            /** Full Name */
+            full_name: string;
+            /**
+             * Has Login
+             * @default false
+             */
+            has_login: boolean;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Primary */
+            is_primary: boolean;
+            /**
+             * Member Type
+             * @enum {string}
+             */
+            member_type: "owner" | "joint_owner" | "tenant" | "delegate";
+            /** Phone E164 */
+            phone_e164: string | null;
+            /** Tenant Can Pay */
+            tenant_can_pay: boolean;
+            /** To Date */
+            to_date: string | null;
+        };
+        /** MemberUpdate */
+        MemberUpdate: {
+            /** Email */
+            email?: string | null;
+            /** From Date */
+            from_date?: string | null;
+            /** Full Name */
+            full_name?: string | null;
+            /** Is Primary */
+            is_primary?: boolean | null;
+            /** Member Type */
+            member_type?: ("owner" | "joint_owner" | "tenant" | "delegate") | null;
+            /** Phone E164 */
+            phone_e164?: string | null;
+            /** Tenant Can Pay */
+            tenant_can_pay?: boolean | null;
+            /** To Date */
+            to_date?: string | null;
+        };
         /** MembershipOut */
         MembershipOut: {
+            /** Flat Id */
+            flat_id: string | null;
             /**
              * Id
              * Format: uuid
@@ -371,7 +884,7 @@ export interface components {
             billing: components["schemas"]["BillingSettingsIn"];
             details: components["schemas"]["SocietyDetailsIn"];
             /** Invites */
-            invites?: components["schemas"]["InviteIn"][];
+            invites?: components["schemas"]["CommitteeInviteIn"][];
         };
         /** SocietyCreatedOut */
         SocietyCreatedOut: {
@@ -453,6 +966,35 @@ export interface components {
             msg: string;
             /** Error Type */
             type: string;
+        };
+        /** WingIn */
+        WingIn: {
+            /**
+             * Has Lift
+             * @default false
+             */
+            has_lift: boolean;
+            /** Name */
+            name: string;
+        };
+        /** WingOut */
+        WingOut: {
+            /** Has Lift */
+            has_lift: boolean;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Name */
+            name: string;
+        };
+        /** WingUpdate */
+        WingUpdate: {
+            /** Has Lift */
+            has_lift?: boolean | null;
+            /** Name */
+            name?: string | null;
         };
     };
     responses: never;
@@ -716,6 +1258,361 @@ export interface operations {
             };
         };
     };
+    list_flats_api_v1_societies__society_id__flats_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlatSummaryOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_flat_api_v1_societies__society_id__flats_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FlatIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlatOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_flat_api_v1_societies__society_id__flats__flat_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlatDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_flat_api_v1_societies__society_id__flats__flat_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FlatUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlatOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_member_api_v1_societies__society_id__flats__flat_id__members_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MemberIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MemberOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_member_api_v1_societies__society_id__flats__flat_id__members__member_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                member_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MemberUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MemberOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    upload_api_v1_societies__society_id__imports_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_upload_api_v1_societies__society_id__imports_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportJobOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    download_template_api_v1_societies__society_id__imports_template_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_job_api_v1_societies__society_id__imports__job_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                job_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportJobOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    confirm_api_v1_societies__society_id__imports__job_id__confirm_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                job_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportJobOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     invite_member_api_v1_societies__society_id__invites_post: {
         parameters: {
             query?: never;
@@ -810,6 +1707,114 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MembershipOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_wings_api_v1_societies__society_id__wings_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WingOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_wing_api_v1_societies__society_id__wings_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WingIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WingOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_wing_api_v1_societies__society_id__wings__wing_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                wing_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WingUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WingOut"];
                 };
             };
             /** @description Validation Error */

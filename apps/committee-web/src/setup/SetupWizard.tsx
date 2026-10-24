@@ -17,12 +17,12 @@ import {
   useQueryClient,
   useSettings,
   useTranslation,
-  type InviteInput,
+  type Schemas,
   type SocietyCreated,
 } from "@societyiq/shared";
 
 import { InviteLinks } from "./InviteLinks";
-import { COMMITTEE_ROLES, phoneToE164, validateInvite, type InviteDraft } from "./invite-form";
+import { COMMITTEE_ROLES, phoneToE164, validateInvite, type CommitteeRole, type InviteDraft } from "./invite-form";
 
 interface Draft {
   name: string;
@@ -115,11 +115,12 @@ export function SetupWizard({ onCancel }: { onCancel?: () => void }) {
 
   function submit() {
     if (!checkStep3()) return;
-    const inviteBody: InviteInput[] = invites.map((inv) => ({
+    const inviteBody: Schemas["CommitteeInviteIn"][] = invites.map((inv) => ({
       name: optional(inv.name),
       email: optional(inv.email),
       phone_e164: inv.phone.trim() ? phoneToE164(inv.phone) : null,
-      role: inv.role,
+      // Step 3 offers committee roles only; flats do not exist yet.
+      role: inv.role as CommitteeRole,
     }));
     create.mutate(
       {
@@ -292,7 +293,7 @@ export function SetupWizard({ onCancel }: { onCancel?: () => void }) {
                 value={inv.role}
                 onChange={(e) =>
                   setInvites((all) =>
-                    all.map((x, j) => (j === i ? { ...x, role: e.target.value as InviteDraft["role"] } : x)),
+                    all.map((x, j) => (j === i ? { ...x, role: e.target.value as CommitteeRole } : x)),
                   )
                 }
               />

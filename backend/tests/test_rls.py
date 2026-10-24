@@ -104,3 +104,33 @@ async def test_legal_parameters_are_read_only(app_conn) -> None:  # noqa: ANN001
     assert count == 1
     with pytest.raises(asyncpg.InsufficientPrivilegeError):
         await app_conn.execute("UPDATE legal_parameters SET value = 18")
+
+
+async def test_every_society_table_has_forced_rls(app_conn) -> None:  # noqa: ANN001
+    """Guard for future migrations: a table with society data must have RLS on and forced,
+    and at least one policy (docs/05 §10)."""
+    rows = await app_conn.fetch(
+        """SELECT c.relname, c.relrowsecurity, c.relforcerowsecurity,
+                  (SELECT count(*) FROM pg_policies p WHERE p.tablename = c.relname) AS policies
+           FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
+           WHERE n.nspname = 'public' AND c.relkind = 'r'
+             AND EXISTS (SELECT 1 FROM information_schema.columns col
+                         WHERE col.table_schema = 'public' AND col.table_name = c.relname
+                           AND col.column_name = 'society_id')"""
+    )
+    assert len(rows) >= 9
+    unprotected = [
+        r["relname"]
+        for r in rows
+        if not (r["relrowsecurity"] and r["relforcerowsecurity"] and r["policies"] > 0)
+    ]
+    assert unprotected == []
+
+
+async def test_ledger_is_append_only(app_conn, two_societies) -> None:  # noqa: ANN001
+    s = two_societies
+    for sql in ("UPDATE ledger_entries SET amount_paise = 0", "DELETE FROM ledger_entries"):
+        with pytest.raises(asyncpg.InsufficientPrivilegeError):
+            async with app_conn.transaction():
+                await _set_context(app_conn, s.a_id, s.a_admin.id)
+                await app_conn.execute(sql)

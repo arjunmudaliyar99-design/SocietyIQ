@@ -43,13 +43,24 @@ class InviteIn(BaseModel):
     name: str | None = Field(default=None, max_length=120)
     email: EmailStr | None = None
     phone_e164: str | None = Field(default=None, pattern=PHONE_E164)
+    role: Role
+    # Required for owner, tenant and delegate (docs/05 §1).
+    flat_id: UUID | None = None
+
+
+class CommitteeInviteIn(BaseModel):
+    """Setup wizard step 3: flats do not exist yet, so committee roles only."""
+
+    name: str | None = Field(default=None, max_length=120)
+    email: EmailStr | None = None
+    phone_e164: str | None = Field(default=None, pattern=PHONE_E164)
     role: CommitteeRole
 
 
 class SocietyCreateIn(BaseModel):
     details: SocietyDetailsIn
     billing: BillingSettingsIn
-    invites: list[InviteIn] = Field(default_factory=list, max_length=20)
+    invites: list[CommitteeInviteIn] = Field(default_factory=list, max_length=20)
 
 
 class SocietyOut(BaseModel):
@@ -89,6 +100,7 @@ class MembershipOut(BaseModel):
     invited_email: str | None
     invited_phone_e164: str | None
     invite_expires_at: datetime | None
+    flat_id: UUID | None
     is_you: bool = False
 
 

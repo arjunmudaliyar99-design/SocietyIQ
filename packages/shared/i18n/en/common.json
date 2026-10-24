@@ -125,6 +125,15 @@
     "inviteNeedsFlat": "Owners and tenants can be invited after flats are added.",
     "inviteExpired": "This invite has expired.",
     "inviteOtherEmail": "This invite was sent to another email address.",
-    "alreadyMember": "Already part of this society."
+    "alreadyMember": "Already part of this society.",
+    "wingExists": "A wing with this name already exists.",
+    "flatExists": "This flat number already exists in this wing.",
+    "datesReversed": "The end date is before the start date.",
+    "notXlsx": "This is not an Excel (.xlsx) file. Download our template and fill it in.",
+    "templateColumns": "This file does not have the template's columns. Download our template and fill it in.",
+    "tooManyRows": "This file has too many rows. Split it into smaller files.",
+    "fileTooLarge": "This file is larger than 10 MB.",
+    "importDone": "This import was already confirmed.",
+    "inviteFlatNotAllowed": "Committee roles are not linked to a flat."
   }
 }

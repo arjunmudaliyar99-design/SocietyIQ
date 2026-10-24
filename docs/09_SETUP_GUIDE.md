@@ -126,6 +126,7 @@ cp .env.example .env
 uv run alembic upgrade head
 # The migration creates the app_backend role WITHOUT login. Enable it once per database:
 docker exec societyiq-pg psql -U postgres -d societyiq -c "ALTER ROLE app_backend LOGIN PASSWORD '<same local password>'"
+uv run python -m app.seed   # demo societies; sign in as demo-admin@example.com
 uv run uvicorn app.main:app --reload --port 8000
 ```
 

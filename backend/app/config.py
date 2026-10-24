@@ -38,6 +38,12 @@ class Settings(BaseSettings):
     # a lawyer's review before the first pilot; bump this when they change.
     policy_version: str = "draft-2026-10"
 
+    # File storage (docs/04 §7): a private Supabase bucket, or a local folder for development.
+    storage_backend: Literal["local", "supabase"] = "local"
+    local_storage_dir: str = ".storage"
+    supabase_storage_bucket: str = "society-files"
+    max_upload_bytes: int = 10 * 1024 * 1024
+
     # AI (docs/04 §11). "fake" works without any key.
     ai_provider: Literal["fake", "groq", "gemini"] = "fake"
     groq_api_key: str | None = None

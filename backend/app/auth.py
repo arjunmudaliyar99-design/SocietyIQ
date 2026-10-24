@@ -6,7 +6,7 @@ published at a JWKS endpoint. SUPABASE_JWKS_URL wins when set.
 
 from dataclasses import dataclass
 from functools import lru_cache
-from uuid import UUID
+from uuid import NAMESPACE_URL, UUID, uuid5
 
 import jwt
 
@@ -50,3 +50,8 @@ def verify_token(token: str) -> AuthUser:
         return AuthUser(id=UUID(claims["sub"]), email=claims.get("email"))
     except (jwt.PyJWTError, ValueError) as exc:
         raise _unauthorized() from exc
+
+
+def dev_user_id(email: str) -> UUID:
+    """Stable user id for local dev sign-in and the demo seed (never used with Supabase)."""
+    return uuid5(NAMESPACE_URL, f"societyiq-dev:{email.lower()}")

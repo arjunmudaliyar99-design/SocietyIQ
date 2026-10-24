@@ -4,9 +4,7 @@ Revision ID: 0001
 Revises:
 """
 
-import re
-
-from alembic import op
+from app.migration_sql import enable_society_isolation, execute_script
 
 revision = "0001"
 down_revision = None
@@ -231,13 +229,6 @@ CREATE POLICY society_isolation ON audit_log
               OR (society_id IS NULL AND actor_user_id = app_current_user()));
 """
 
-STANDARD_POLICY = """
-ALTER TABLE {t} ENABLE ROW LEVEL SECURITY;
-ALTER TABLE {t} FORCE ROW LEVEL SECURITY;
-CREATE POLICY society_isolation ON {t}
-  USING (society_id = app_current_society())
-  WITH CHECK (society_id = app_current_society());
-"""
 
 DOWNGRADE = """
 DROP TABLE IF EXISTS legal_parameters, consents, audit_log, society_memberships, wings,
@@ -246,27 +237,11 @@ DROP FUNCTION IF EXISTS app_current_society(), app_current_user();
 """
 
 
-def _execute_script(sql: str) -> None:
-    # asyncpg runs one statement per call. Split on ';' at line end, but not inside
-    # dollar-quoted bodies ($$ or $f$).
-    statement: list[str] = []
-    in_dollar = False
-    for line in sql.splitlines():
-        statement.append(line)
-        if len(re.findall(r"\$[a-z]*\$", line)) % 2 == 1:
-            in_dollar = not in_dollar
-        if not in_dollar and line.rstrip().endswith(";"):
-            text = "\n".join(statement).strip()
-            if text and not all(x.strip().startswith("--") for x in text.splitlines()):
-                op.execute(text)
-            statement = []
-
-
 def upgrade() -> None:
-    _execute_script(UPGRADE)
+    execute_script(UPGRADE)
     for table in SOCIETY_TABLES_STANDARD:
-        _execute_script(STANDARD_POLICY.format(t=table))
+        enable_society_isolation(table)
 
 
 def downgrade() -> None:
-    _execute_script(DOWNGRADE)
+    execute_script(DOWNGRADE)

@@ -95,6 +95,7 @@ cd backend
 cp .env.example .env               # first time only
 uv sync
 uv run alembic upgrade head        # needs MIGRATIONS_DATABASE_URL; see docs/09 §6a
+uv run python -m app.seed           # fictional demo data (idempotent; never in production)
 uv run uvicorn app.main:app --reload --port 8000
 uv run ruff check . && uv run ruff format --check .
 uv run pytest                      # DB tests need local Postgres on :54329 (docs/09 §6a)

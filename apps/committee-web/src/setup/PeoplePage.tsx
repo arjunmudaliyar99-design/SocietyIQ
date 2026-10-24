@@ -19,7 +19,16 @@ import {
 } from "@societyiq/shared";
 
 import { InviteLinks } from "./InviteLinks";
-import { COMMITTEE_ROLES, phoneToE164, validateInvite, type InviteDraft } from "./invite-form";
+import { useFlats } from "../api/flats";
+import { flatLabel } from "../flats/labels";
+import {
+  COMMITTEE_ROLES,
+  RESIDENT_ROLES,
+  isResidentRole,
+  phoneToE164,
+  validateInvite,
+  type InviteDraft,
+} from "./invite-form";
 
 const EMPTY: InviteDraft = { name: "", email: "", phone: "", role: "committee" };
 
@@ -111,6 +120,7 @@ function InviteForm({ societyId }: { societyId: string }) {
         email: draft.email.trim() || null,
         phone_e164: draft.phone.trim() ? phoneToE164(draft.phone) : null,
         role: draft.role,
+        flat_id: isResidentRole(draft.role) ? (draft.flatId ?? null) : null,
       },
       {
         onSuccess: (result) => {
@@ -141,10 +151,13 @@ function InviteForm({ societyId }: { societyId: string }) {
       />
       <SelectField
         label={t("invites.role")}
-        options={COMMITTEE_ROLES.map((r) => ({ value: r, label: tc(`roles.${r}`) }))}
+        options={[...COMMITTEE_ROLES, ...RESIDENT_ROLES].map((r) => ({ value: r, label: tc(`roles.${r}`) }))}
         value={draft.role}
         onChange={(e) => setDraft({ ...draft, role: e.target.value as InviteDraft["role"] })}
       />
+      {isResidentRole(draft.role) ? (
+        <FlatChoice value={draft.flatId} onChange={(flatId) => setDraft({ ...draft, flatId })} />
+      ) : null}
       {problem ? <ErrorText>{problem}</ErrorText> : null}
       {invite.isError ? <ErrorText>{tc(messageKeyOf(invite.error))}</ErrorText> : null}
       <BigButton onClick={send} disabled={invite.isPending}>
@@ -154,5 +167,24 @@ function InviteForm({ societyId }: { societyId: string }) {
         {tc("back")}
       </Button>
     </Card>
+  );
+}
+
+function FlatChoice({ value, onChange }: { value?: string; onChange: (flatId: string) => void }) {
+  const { t } = useTranslation("committee");
+  const flats = useFlats();
+  const list = flats.data ?? [];
+  const wings = new Set(list.map((f) => f.wing_name)).size;
+  if (flats.data && list.length === 0) return <p className="text-body">{t("invites.noFlats")}</p>;
+  return (
+    <SelectField
+      label={t("invites.flat")}
+      options={[
+        { value: "", label: t("invites.chooseFlat") },
+        ...list.map((f) => ({ value: f.id, label: flatLabel(f, wings) })),
+      ]}
+      value={value ?? ""}
+      onChange={(e) => onChange(e.target.value)}
+    />
   );
 }

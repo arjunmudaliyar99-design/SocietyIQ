@@ -2,12 +2,12 @@
 APP_ENV=local and SUPABASE_JWT_SECRET is set; never in demo or production."""
 
 from datetime import UTC, datetime, timedelta
-from uuid import NAMESPACE_URL, uuid5
 
 import jwt
 from fastapi import APIRouter
 from pydantic import BaseModel, EmailStr
 
+from app.auth import dev_user_id
 from app.config import get_settings
 
 router = APIRouter(prefix="/dev", tags=["dev"])
@@ -29,7 +29,7 @@ async def dev_token(body: DevTokenIn) -> DevTokenOut:
         raise RuntimeError("dev sign-in is local-only")
     email = str(body.email).lower()
     claims = {
-        "sub": str(uuid5(NAMESPACE_URL, f"societyiq-dev:{email}")),
+        "sub": str(dev_user_id(email)),
         "email": email,
         "aud": settings.jwt_audience,
         "exp": datetime.now(UTC) + timedelta(hours=12),

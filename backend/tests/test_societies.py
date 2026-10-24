@@ -256,39 +256,7 @@ async def test_invite_rules(client, two_societies) -> None:  # noqa: ANN001
     assert phone.status_code == 201
 
 
-# --- isolation (docs/04 §6) ----------------------------------------------------------
-
-# Every route under /societies/{society_id}: method and a valid body. A new route must be
-# added here, or test_every_society_route_is_covered fails.
-SOCIETY_ROUTES: dict[tuple[str, str], dict | None] = {
-    ("GET", "/api/v1/societies/{society_id}"): None,
-    ("GET", "/api/v1/societies/{society_id}/memberships"): None,
-    ("POST", "/api/v1/societies/{society_id}/invites"): {
-        "role": "committee",
-        "email": "x@example.com",
-    },
-    ("POST", "/api/v1/societies/{society_id}/invites/accept"): {"token": "x" * 43},
-}
-
-
-def test_every_society_route_is_covered() -> None:
-    from app.main import app
-
-    found = {
-        (method.upper(), path)
-        for path, ops in app.openapi()["paths"].items()
-        if "{society_id}" in path
-        for method in ops
-    }
-    assert found == set(SOCIETY_ROUTES)
-
-
-async def test_society_a_user_gets_404_on_every_society_b_route(client, two_societies) -> None:  # noqa: ANN001
-    s = two_societies
-    for (method, path), body in SOCIETY_ROUTES.items():
-        url = path.replace("{society_id}", str(s.b_id))
-        r = await client.request(method, url, json=body, headers=s.a_admin.headers)
-        assert r.status_code == 404, (method, path, r.status_code, r.text)
+# --- isolation: see test_isolation.py ----------------------------------------------
 
 
 async def test_unknown_society_is_404(client) -> None:

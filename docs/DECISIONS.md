@@ -2,6 +2,9 @@
 
 Decisions made during planning and building. Newest first. Format: date — decision — why — who.
 
+- 2026-10-24 — Excel import keeps warnings importable and errors skipped; confirm re-checks against the database; issues are i18n keys with parameters, never English text from the backend — docs/02 §4 "never import silently" and five UI languages — M3 build session, to be confirmed.
+- 2026-10-24 — Tests log in as `app_backend_test`, a role that inherits `app_backend`'s grants, because Postgres roles are server-wide and tests must not change a developer's local password — M3 build session.
+- 2026-10-24 — Demo seed layout (flat numbering per wing/floor) is chosen to contain every flat listed in docs/02 §12 and reach the stated flat counts; bill day 1 and due after 15 days are demo values only — docs give counts but not numbering — M3 build session, to be confirmed.
 - 2026-10-24 — The migration creates `app_backend` without LOGIN; each environment enables login with its own password outside the migration — no secret ever sits in the repo — M2 build session, to be confirmed by the Co-founder (Engineering).
 - 2026-10-24 — Local-only dev sign-in (`POST /api/v1/dev/token`, mounted only when `APP_ENV=local` and a JWT secret is set; front ends show it only with `VITE_DEV_SIGN_IN=true` in dev builds) — lets anyone preview and test the apps without a Supabase project — M2 build session, to be confirmed.
 - 2026-10-24 — Until email sending (M9), invite links are shown to the admin once, to copy and share; tokens are random, stored only as SHA-256, single use, scoped to one society, and bound to the invited email when one is given — invites must work before an email provider is chosen — M2 build session, to be confirmed.

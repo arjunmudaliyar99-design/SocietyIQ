@@ -25,6 +25,8 @@ Thumbs.db
 reference/videos/
 reference/private/
 docs/legal/sources/*.pdf
+# local file storage (uploads in development)
+backend/.storage/
 # never commit real society data
 data/real/
 *.real.xlsx

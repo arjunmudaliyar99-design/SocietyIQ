@@ -10,6 +10,7 @@ from app.deps import CurrentUserDep, SessionDep, SocietyContext, require_role
 from app.models import SocietyMembership
 from app.schemas.societies import (
     AcceptInviteIn,
+    CommitteeInviteIn,
     InviteIn,
     InviteOut,
     MembershipOut,
@@ -36,12 +37,13 @@ def _invite_out(created: service.CreatedInvite, you: UUID) -> InviteOut:
     return InviteOut(membership=_membership_out(created.membership, you), invite_link=created.link)
 
 
-def _invite_input(body: InviteIn) -> service.InviteInput:
+def _invite_input(body: InviteIn | CommitteeInviteIn) -> service.InviteInput:
     return service.InviteInput(
         role=body.role,
         name=body.name,
         email=str(body.email) if body.email else None,
         phone_e164=body.phone_e164,
+        flat_id=body.flat_id if isinstance(body, InviteIn) else None,
     )
 
 

@@ -34,7 +34,7 @@ export { CenteredPage, ErrorText, LoadingPage } from "./auth/screens";
 export { useCurrentSociety, type CurrentSocietyValue } from "./auth/society-context";
 
 // One TanStack Query instance for both apps and this package.
-export { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
+export { QueryClient, QueryClientProvider, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 // Apps must use this re-export so there is one react-i18next instance and one context.
 export { useTranslation } from "react-i18next";

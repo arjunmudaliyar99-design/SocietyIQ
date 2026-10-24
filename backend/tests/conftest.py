@@ -7,6 +7,7 @@ owner. Locally: `docker run -d --name societyiq-pg -e POSTGRES_PASSWORD=postgres
 
 import asyncio
 import os
+import tempfile
 from collections.abc import AsyncIterator
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
@@ -34,7 +35,10 @@ def _with_db(url: str, db: str, user: str | None = None, password: str | None = 
 
 
 OWNER_URL = _with_db(ADMIN_URL, TEST_DB)
-APP_URL = _with_db(ADMIN_URL, TEST_DB, "app_backend", APP_PASSWORD)
+# Roles are server-wide, so tests log in as their own role that inherits app_backend's
+# grants. Changing app_backend's password here would break a developer's local database.
+APP_ROLE = "app_backend_test"
+APP_URL = _with_db(ADMIN_URL, TEST_DB, APP_ROLE, APP_PASSWORD)
 
 # Settings are read once (lru_cache), so set them before the app is imported.
 os.environ.update(
@@ -44,6 +48,8 @@ os.environ.update(
         "MIGRATIONS_DATABASE_URL": OWNER_URL.replace("postgresql://", "postgresql+asyncpg://"),
         "SUPABASE_JWT_SECRET": JWT_SECRET,
         "SUPABASE_JWKS_URL": "",
+        "STORAGE_BACKEND": "local",
+        "LOCAL_STORAGE_DIR": tempfile.mkdtemp(prefix="societyiq-test-storage-"),
     }
 )
 
@@ -74,7 +80,11 @@ def _migrate() -> None:
 async def _enable_app_login() -> None:
     owner = await asyncpg.connect(OWNER_URL)
     try:
-        await owner.execute(f"ALTER ROLE app_backend LOGIN PASSWORD '{APP_PASSWORD}'")
+        exists = await owner.fetchval("SELECT 1 FROM pg_roles WHERE rolname = $1", APP_ROLE)
+        if not exists:
+            await owner.execute(f"CREATE ROLE {APP_ROLE} LOGIN NOBYPASSRLS INHERIT")
+        await owner.execute(f"ALTER ROLE {APP_ROLE} PASSWORD '{APP_PASSWORD}'")
+        await owner.execute(f"GRANT app_backend TO {APP_ROLE}")
     finally:
         await owner.close()
 

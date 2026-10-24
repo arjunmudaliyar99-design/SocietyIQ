@@ -71,7 +71,7 @@ The schema for v1 and v1.5. Build tables only when their milestone needs them (`
 
 **`ledger_entries`** — the flat's account. Append-only. Positive = flat owes more; negative = flat paid or was credited.
 `id`, `society_id`, `flat_id`, `entry_date DATE`, `entry_type TEXT CHECK IN ('opening_balance','bill','interest','payment','adjustment','reversal')`, `amount_paise BIGINT` (signed), `source_type TEXT` (e.g. 'bill','payment','import'), `source_id UUID`, `reverses_entry_id UUID NULL`, `reason TEXT NULL`, `created_by`, `created_at`.
-Balance of a flat = `SUM(amount_paise)`. Never update or delete rows; add a `reversal` row.
+Balance of a flat = `SUM(amount_paise)`. Never update or delete rows; add a `reversal` row. A flat has at most one `opening_balance` entry (partial unique index, migration 0002). `app_backend` has no UPDATE or DELETE on this table.
 
 ## 5. Complaints and notices
 
@@ -80,7 +80,7 @@ Balance of a flat = `SUM(amount_paise)`. Never update or delete rows; add a `rev
 
 **`complaint_updates`** — `id`, `society_id`, `complaint_id`, `author_user_id`, `message TEXT`, `new_status TEXT NULL`, `visible_to_resident BOOLEAN DEFAULT true`, `created_at`.
 
-**`attachments`** — generic files linked to records. `id`, `society_id`, `owner_type TEXT` ('complaint','notice','payment','compliance_item','expense_bill'), `owner_id UUID`, `storage_path TEXT`, `mime TEXT`, `size_bytes INT`, `sha256 TEXT`, `original_filename TEXT`, `uploaded_by`, `created_at`.
+**`attachments`** — generic files linked to records. `id`, `society_id`, `owner_type TEXT` ('complaint','notice','payment','compliance_item','expense_bill','import_job'), `owner_id UUID`, `storage_path TEXT`, `mime TEXT`, `size_bytes INT`, `sha256 TEXT`, `original_filename TEXT`, `uploaded_by`, `created_at`. Insert-only for `app_backend`; `owner_id` is set at insert.
 
 **`notices`** — `id`, `society_id`, `title TEXT`, `body TEXT`, `language TEXT`, `translations JSONB DEFAULT '{}'` (lang → {title, body, status: 'draft'|'reviewed'}), `audience TEXT CHECK IN ('all','owners','tenants','wing')`, `audience_wing_id NULL`, `status TEXT CHECK IN ('draft','published','archived')`, `ai_assisted BOOLEAN DEFAULT false`, `published_at NULL`, `published_by NULL`, `created_by`, `created_at`, `updated_at`.
 
@@ -108,7 +108,7 @@ Balance of a flat = `SUM(amount_paise)`. Never update or delete rows; add a `rev
 
 **`audit_log`** — append-only. `id BIGSERIAL`, `society_id NULL`, `actor_user_id NULL`, `action TEXT` (e.g. 'payment.confirm'), `entity_type TEXT`, `entity_id UUID`, `before JSONB NULL`, `after JSONB NULL`, `reason TEXT NULL`, `ip INET NULL`, `created_at`. No UPDATE or DELETE grants for `app_backend`.
 
-**`import_jobs`** — `id`, `society_id`, `kind TEXT` ('flats_members'), `attachment_id`, `status TEXT CHECK IN ('uploaded','previewed','imported','failed')`, `row_count INT`, `ok_count INT`, `error_count INT`, `preview JSONB`, `created_by`, `created_at`.
+**`import_jobs`** — `id`, `society_id`, `kind TEXT` ('flats_members'), `attachment_id`, `status TEXT CHECK IN ('uploaded','previewed','imported','failed')`, `row_count INT`, `ok_count INT`, `error_count INT`, `preview JSONB`, `created_by`, `created_at`, `updated_at`. `preview` holds every row's status, issues (i18n key + parameters) and normalised values; confirm imports from it after re-checking against the database.
 
 **`notification_log`** — `id`, `society_id`, `channel TEXT CHECK IN ('email','sms','whatsapp','in_app')`, `template TEXT`, `language TEXT`, `to_member_id NULL`, `to_address_masked TEXT`, `status TEXT`, `provider_message_id NULL`, `error NULL`, `created_at`.
 

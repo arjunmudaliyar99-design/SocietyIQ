@@ -9,7 +9,7 @@ What is built, what is in progress, and what is next. Every Claude Code session 
 | M0 Repository and tooling | IN REVIEW | feat/m0-scaffold (not yet committed or pushed) | CI not yet run on GitHub |
 | M1 Design system and app shells | IN REVIEW | feat/m0-scaffold (shipped together with M0) | Axe check and Android PWA install not yet verified |
 | M2 Database base, auth, isolation | IN REVIEW | feat/m2-auth-isolation (merged into `dev` locally) | Needs a Supabase project for real sign-in; CI not yet run |
-| M3 Flats, members, import | NOT STARTED | | |
+| M3 Flats, members, import | IN REVIEW | feat/m3-flats-members (merged into `dev` locally) | Supabase Storage path untested |
 | M4 Charge setup and calculation engine | NOT STARTED | | |
 | M5 Billing runs, bills, PDFs | NOT STARTED | | |
 | M6 Payments, receipts, dues | NOT STARTED | | |
@@ -27,6 +27,13 @@ Statuses: NOT STARTED · IN PROGRESS (branch) · IN REVIEW (PR link) · DONE · 
 ## Log
 
 Newest first. One entry per merged PR: date, milestone, what was built, how to try it, known gaps.
+
+- 2026-10-24 — M3 — Flats, members, Excel import, demo seed.
+  Backend: migration `0002` adds `flats`, `members`, `attachments`, `import_jobs`, `ledger_entries` (append-only, one opening balance per flat) with forced RLS, and the FK from memberships to flats. CRUD for wings (with lift), flats and members (no deletes; "moved out" sets `to_date`); flat list and detail show the main member and ledger balance. Import: template download (`.xlsx` with dropdowns and a "How to fill" sheet), upload → per-row OK / warning / error with i18n keys ("Row 14: owner phone has 9 digits"), confirm re-checks and imports OK + warning rows in one transaction, opening balances become `opening_balance` ledger entries sourced to the import. Money parsed to paise without floats (Indian commas, ₹, Excel float noise). File storage: local folder or Supabase Storage (`STORAGE_BACKEND`). Owners, tenants and delegates can now be invited for a flat; their links open the resident app. Seed: `uv run python -m app.seed` loads the three fictional societies (226 flats, listed dues as opening balances, A-305 let out) plus demo logins `demo-admin@example.com` (admin of all three) and `resident.b207@example.com` (owner of B-207); running it again adds nothing.
+  Tests: backend 77 (30 pure import-row tests incl. money parsing; acceptance test with 3 wrong rows → exactly 3 errors, confirm imports the rest, ledger = opening balances; seed idempotent; isolation now covers all 17 society routes plus B's ids under A's path; guard that every table with `society_id` has forced RLS). Front end 86, incl. an import-preview screen test with axe.
+  Front end (committee): Flats and members (grouped by wing, search, balances), flat page (details, edit, people, add person, mark moved out), add flat, wings and lifts, 3-step Excel import with preview and confirm; people page can invite residents to a flat. All text in 5 languages (non-English drafts).
+  How to try: docs/09 §6a, then `uv run python -m app.seed`, sign in at http://localhost:5173 as `demo-admin@example.com`, choose Shanti Sadan CHS, open Flats and members (Detailed view in Account).
+  Known gaps: Supabase Storage upload untested (no project yet); seeded flats have no carpet area (docs/02 §12 gives none); resident app does not show flat data yet (M7); no Playwright end-to-end test yet.
 
 - 2026-10-24 — M2 — Database base, sign-in and society isolation.
   Backend: Alembic set up; migration `0001` creates `users`, `societies`, `wings`, `society_memberships`, `audit_log`, `consents`, `legal_parameters` (seeded from docs/08 §3, unverified), the `app_backend` role (no BYPASSRLS, no DELETE, audit log insert-only) and forced RLS on every table with user or society data. Supabase JWT check (HS256 secret or JWKS), per-request transaction with `set_config(..., true)` tenant context, `require_role` (404 for non-members, 403 for wrong role), error format `{error: {code, message_key}}`. Endpoints: `GET /me`, `PATCH /me/preferences`, `GET/POST /me/consents`, `GET /me/societies`, `POST /societies` (3 steps in one call; creator becomes admin; default wing), `GET /societies/{id}`, `GET /societies/{id}/memberships`, `POST /societies/{id}/invites`, `POST /societies/{id}/invites/accept`. Audit rows for society create, membership create, invite, accept and preference changes. Local-only `POST /dev/token`.
