@@ -17,7 +17,7 @@ What is built, what is in progress, and what is next. Every Claude Code session 
 | M8 Complaints | IN REVIEW | feat/m8-complaints (merged into `dev`) | Phone camera upload not yet tried on a real phone |
 | M9 Notices and email | NOT STARTED | | |
 | M10 Committee home and compliance | IN REVIEW | feat/m10-compliance | Then M11 |
-| M11 Analytics and admin tools | NOT STARTED | | |
+| M11 Analytics and admin tools | IN PROGRESS (feat/m11-admin) | | |
 | M12 Vendor bills, AI, alerts | NOT STARTED | | |
 | M13 Quote comparison | NOT STARTED | | |
 | M14 Minutes drafting | NOT STARTED | | |
