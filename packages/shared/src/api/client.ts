@@ -9,12 +9,15 @@ export class ApiError extends Error {
   readonly code: string;
   /** i18n key from the backend, e.g. "errors.notFound". */
   readonly messageKey: string;
+  /** Extra data, e.g. the legal problems behind a refusal. */
+  readonly details: unknown;
 
-  constructor(status: number, code: string, messageKey: string) {
+  constructor(status: number, code: string, messageKey: string, details?: unknown) {
     super(code);
     this.status = status;
     this.code = code;
     this.messageKey = messageKey;
+    this.details = details;
   }
 }
 
@@ -69,10 +72,15 @@ export function createApiClient(baseUrl: string, getToken: () => string | null):
 
 async function throwFor(response: Response): Promise<never> {
   const payload = (await response.json().catch(() => null)) as {
-    error?: { code?: string; message_key?: string };
+    error?: { code?: string; message_key?: string; details?: unknown };
   } | null;
   if (payload?.error?.code) {
-    throw new ApiError(response.status, payload.error.code, payload.error.message_key ?? "errors.generic");
+    throw new ApiError(
+      response.status,
+      payload.error.code,
+      payload.error.message_key ?? "errors.generic",
+      payload.error.details,
+    );
   }
   // FastAPI validation errors (422) have another shape; the forms check fields first.
   throw new ApiError(response.status, response.status === 422 ? "INVALID" : "HTTP", "errors.generic");

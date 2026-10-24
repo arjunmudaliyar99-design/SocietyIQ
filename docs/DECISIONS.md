@@ -2,6 +2,10 @@
 
 Decisions made during planning and building. Newest first. Format: date — decision — why — who.
 
+- 2026-10-24 — Saving a charge head counts as its approval (`approved_by` = the admin, treasurer or consultant who saved it); no separate approval step — docs/02 §5 says heads are "approved by the committee" without a workflow — M4 build session, to be confirmed.
+- 2026-10-24 — "Per member" (education fund) counts owners and joint owners active in the period; tenants and delegates are not members — co-operative membership is the owner's — M4 build session, to be confirmed with the consultant.
+- 2026-10-24 — A flat missing any input a head needs (carpet area, water taps, construction cost) is left out of the whole run, not just that head; equal splits are shared among the flats billed — docs/06 §2 "flat excluded from the run until fixed", applied to every input — M4 build session.
+- 2026-10-24 — Legal percents reach the screens only through the API (`/charges/standard-heads` reads `legal_parameters`); front ends hard-code no legal value — CLAUDE.md §1.2 — M4 build session.
 - 2026-10-24 — Excel import keeps warnings importable and errors skipped; confirm re-checks against the database; issues are i18n keys with parameters, never English text from the backend — docs/02 §4 "never import silently" and five UI languages — M3 build session, to be confirmed.
 - 2026-10-24 — Tests log in as `app_backend_test`, a role that inherits `app_backend`'s grants, because Postgres roles are server-wide and tests must not change a developer's local password — M3 build session.
 - 2026-10-24 — Demo seed layout (flat numbering per wing/floor) is chosen to contain every flat listed in docs/02 §12 and reach the stated flat counts; bill day 1 and due after 15 days are demo values only — docs give counts but not numbering — M3 build session, to be confirmed.

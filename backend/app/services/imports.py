@@ -5,36 +5,29 @@ every row against the database (someone may have added a flat since the preview)
 OK and warning rows in one transaction. Error rows are skipped and listed.
 """
 
-import io
-import zipfile
 from dataclasses import asdict
 from typing import Any
 from uuid import UUID, uuid4
 
-from openpyxl import Workbook, load_workbook
-from openpyxl.styles import Font
-from openpyxl.worksheet.datavalidation import DataValidation
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import get_settings
 from app.errors import AppError, not_found
 from app.models import Attachment, Flat, ImportJob, Member, User, Wing
-from app.services import audit, ledger
+from app.services import audit, ledger, workbook
 from app.services.import_rows import (
     COLUMNS,
     Issue,
     RowResult,
     check_rows,
-    normalise_header,
 )
 from app.services.societies import DEFAULT_WING_NAME
+from app.services.workbook import XLSX_MIME
 from app.storage import store
 from app.timeutil import today_ist
 
-XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 SHEET_NAME = "Flats"
-MAX_ROWS = 5000
 
 INSTRUCTIONS = [
     "How to fill the Flats sheet",
@@ -54,78 +47,20 @@ INSTRUCTIONS = [
 
 
 def build_template() -> bytes:
-    workbook = Workbook()
-    sheet = workbook.active
-    assert sheet is not None
-    sheet.title = SHEET_NAME
-    sheet.append([header for _, header in COLUMNS])
-    for cell in sheet[1]:
-        cell.font = Font(bold=True)
-    for index, (_, header) in enumerate(COLUMNS, start=1):
-        sheet.column_dimensions[cell_letter(index)].width = max(14, len(header) + 2)
-    sheet.freeze_panes = "A2"
-
-    choices = {
-        "wing_has_lift": '"Y,N"',
-        "usage": '"Residential,Commercial"',
-        "occupancy": '"Owner occupied,Family occupied,Let out,Vacant"',
-    }
-    for index, (key, _) in enumerate(COLUMNS, start=1):
-        if key in choices:
-            rule = DataValidation(type="list", formula1=choices[key], allow_blank=True)
-            sheet.add_data_validation(rule)
-            rule.add(f"{cell_letter(index)}2:{cell_letter(index)}{MAX_ROWS + 1}")
-
-    help_sheet = workbook.create_sheet("How to fill")
-    for line in INSTRUCTIONS:
-        help_sheet.append([line])
-    help_sheet["A1"].font = Font(bold=True)
-    help_sheet.column_dimensions["A"].width = 100
-
-    buffer = io.BytesIO()
-    workbook.save(buffer)
-    return buffer.getvalue()
-
-
-def cell_letter(index: int) -> str:
-    letters = ""
-    while index:
-        index, rem = divmod(index - 1, 26)
-        letters = chr(65 + rem) + letters
-    return letters
+    return workbook.build_template(
+        SHEET_NAME,
+        COLUMNS,
+        {
+            "wing_has_lift": "Y,N",
+            "usage": "Residential,Commercial",
+            "occupancy": "Owner occupied,Family occupied,Let out,Vacant",
+        },
+        INSTRUCTIONS,
+    )
 
 
 def read_workbook(data: bytes) -> list[tuple[int, dict[str, object]]]:
-    """Rows keyed by column key. Raises AppError for files that are not our template."""
-    if not data.startswith(b"PK\x03\x04"):
-        raise AppError(422, "NOT_XLSX", "errors.notXlsx")
-    try:
-        workbook = load_workbook(io.BytesIO(data), read_only=True, data_only=True)
-    except (zipfile.BadZipFile, KeyError, ValueError, OSError) as exc:
-        raise AppError(422, "NOT_XLSX", "errors.notXlsx") from exc
-    sheet = workbook[SHEET_NAME] if SHEET_NAME in workbook.sheetnames else workbook.worksheets[0]
-
-    rows = sheet.iter_rows(values_only=True)
-    header = next(rows, None) or ()
-    by_header = {normalise_header(h): key for key, h in COLUMNS}
-    positions = {
-        by_header[normalise_header(text)]: i
-        for i, text in enumerate(header)
-        if normalise_header(text) in by_header
-    }
-    if "flat_number" not in positions:
-        raise AppError(422, "TEMPLATE_COLUMNS", "errors.templateColumns")
-
-    result: list[tuple[int, dict[str, object]]] = []
-    for row_number, values in enumerate(rows, start=2):
-        raw = {key: values[i] if i < len(values) else None for key, i in positions.items()}
-        if all(v is None or str(v).strip() == "" for v in raw.values()):
-            continue
-        result.append((row_number, raw))
-        if len(result) > MAX_ROWS:
-            raise AppError(422, "TOO_MANY_ROWS", "errors.tooManyRows")
-    workbook.close()
-    return result
+    return workbook.read_workbook(data, SHEET_NAME, COLUMNS, "flat_number")
 
 
 async def _existing(

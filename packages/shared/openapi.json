@@ -95,6 +95,20 @@
         "title": "BillingSettingsIn",
         "type": "object"
       },
+      "Body_tax_upload_api_v1_societies__society_id__property_tax_imports_post": {
+        "properties": {
+          "file": {
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "type": "string"
+          }
+        },
+        "required": [
+          "file"
+        ],
+        "title": "Body_tax_upload_api_v1_societies__society_id__property_tax_imports_post",
+        "type": "object"
+      },
       "Body_upload_api_v1_societies__society_id__imports_post": {
         "properties": {
           "file": {
@@ -107,6 +121,621 @@
           "file"
         ],
         "title": "Body_upload_api_v1_societies__society_id__imports_post",
+        "type": "object"
+      },
+      "ChargeHeadIn": {
+        "properties": {
+          "applies_to": {
+            "default": "all",
+            "enum": [
+              "all",
+              "let_out_only"
+            ],
+            "title": "Applies To",
+            "type": "string"
+          },
+          "calc_type": {
+            "enum": [
+              "equal_per_flat",
+              "equal_per_flat_with_lift",
+              "per_carpet_area",
+              "per_water_point",
+              "as_assessed_per_flat",
+              "pct_of_head",
+              "pct_of_construction_cost",
+              "per_parking_allotment",
+              "per_member_fixed",
+              "fixed_per_flat",
+              "custom_per_flat",
+              "voluntary"
+            ],
+            "title": "Calc Type",
+            "type": "string"
+          },
+          "fixed_amount_paise": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fixed Amount Paise"
+          },
+          "frequency": {
+            "default": "every_bill",
+            "enum": [
+              "every_bill",
+              "one_time"
+            ],
+            "title": "Frequency",
+            "type": "string"
+          },
+          "gb_resolution_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gb Resolution Date"
+          },
+          "gb_resolution_ref": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gb Resolution Ref"
+          },
+          "method_deviation_reason": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Method Deviation Reason"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "one_time_period": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "One Time Period"
+          },
+          "percent": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent"
+          },
+          "percent_of_head_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent Of Head Id"
+          },
+          "period_total_paise": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period Total Paise"
+          },
+          "sort_order": {
+            "default": 0,
+            "maximum": 1000.0,
+            "minimum": 0.0,
+            "title": "Sort Order",
+            "type": "integer"
+          },
+          "standard_code": {
+            "anyOf": [
+              {
+                "enum": [
+                  "service",
+                  "property_tax",
+                  "water",
+                  "lift",
+                  "parking",
+                  "non_occupancy",
+                  "insurance",
+                  "lease_rent",
+                  "major_repair",
+                  "sinking_fund",
+                  "repair_fund",
+                  "election_fund",
+                  "education_fund",
+                  "welfare_fund",
+                  "other"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Standard Code"
+          }
+        },
+        "required": [
+          "name",
+          "calc_type"
+        ],
+        "title": "ChargeHeadIn",
+        "type": "object"
+      },
+      "ChargeHeadOut": {
+        "properties": {
+          "applies_to": {
+            "enum": [
+              "all",
+              "let_out_only"
+            ],
+            "title": "Applies To",
+            "type": "string"
+          },
+          "approved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approved At"
+          },
+          "calc_type": {
+            "enum": [
+              "equal_per_flat",
+              "equal_per_flat_with_lift",
+              "per_carpet_area",
+              "per_water_point",
+              "as_assessed_per_flat",
+              "pct_of_head",
+              "pct_of_construction_cost",
+              "per_parking_allotment",
+              "per_member_fixed",
+              "fixed_per_flat",
+              "custom_per_flat",
+              "voluntary"
+            ],
+            "title": "Calc Type",
+            "type": "string"
+          },
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "fixed_amount_paise": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fixed Amount Paise"
+          },
+          "frequency": {
+            "enum": [
+              "every_bill",
+              "one_time"
+            ],
+            "title": "Frequency",
+            "type": "string"
+          },
+          "gb_resolution_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gb Resolution Date"
+          },
+          "gb_resolution_ref": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gb Resolution Ref"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "is_active": {
+            "title": "Is Active",
+            "type": "boolean"
+          },
+          "method_deviation_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Method Deviation Reason"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "one_time_period": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "One Time Period"
+          },
+          "percent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent"
+          },
+          "percent_of_head_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent Of Head Id"
+          },
+          "period_total_paise": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period Total Paise"
+          },
+          "sort_order": {
+            "title": "Sort Order",
+            "type": "integer"
+          },
+          "standard_code": {
+            "anyOf": [
+              {
+                "enum": [
+                  "service",
+                  "property_tax",
+                  "water",
+                  "lift",
+                  "parking",
+                  "non_occupancy",
+                  "insurance",
+                  "lease_rent",
+                  "major_repair",
+                  "sinking_fund",
+                  "repair_fund",
+                  "election_fund",
+                  "education_fund",
+                  "welfare_fund",
+                  "other"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Standard Code"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "code",
+          "standard_code",
+          "calc_type",
+          "period_total_paise",
+          "fixed_amount_paise",
+          "percent",
+          "percent_of_head_id",
+          "applies_to",
+          "gb_resolution_ref",
+          "gb_resolution_date",
+          "method_deviation_reason",
+          "frequency",
+          "one_time_period",
+          "sort_order",
+          "is_active",
+          "approved_at"
+        ],
+        "title": "ChargeHeadOut",
+        "type": "object"
+      },
+      "ChargeHeadSaved": {
+        "properties": {
+          "head": {
+            "$ref": "#/components/schemas/ChargeHeadOut"
+          },
+          "warnings": {
+            "items": {
+              "$ref": "#/components/schemas/LegalProblemOut"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "head",
+          "warnings"
+        ],
+        "title": "ChargeHeadSaved",
+        "type": "object"
+      },
+      "ChargeHeadUpdate": {
+        "properties": {
+          "applies_to": {
+            "anyOf": [
+              {
+                "enum": [
+                  "all",
+                  "let_out_only"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applies To"
+          },
+          "calc_type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "equal_per_flat",
+                  "equal_per_flat_with_lift",
+                  "per_carpet_area",
+                  "per_water_point",
+                  "as_assessed_per_flat",
+                  "pct_of_head",
+                  "pct_of_construction_cost",
+                  "per_parking_allotment",
+                  "per_member_fixed",
+                  "fixed_per_flat",
+                  "custom_per_flat",
+                  "voluntary"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calc Type"
+          },
+          "fixed_amount_paise": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fixed Amount Paise"
+          },
+          "frequency": {
+            "anyOf": [
+              {
+                "enum": [
+                  "every_bill",
+                  "one_time"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Frequency"
+          },
+          "gb_resolution_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gb Resolution Date"
+          },
+          "gb_resolution_ref": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gb Resolution Ref"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Active"
+          },
+          "method_deviation_reason": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Method Deviation Reason"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "one_time_period": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "One Time Period"
+          },
+          "percent": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent"
+          },
+          "percent_of_head_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent Of Head Id"
+          },
+          "period_total_paise": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period Total Paise"
+          },
+          "sort_order": {
+            "anyOf": [
+              {
+                "maximum": 1000.0,
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sort Order"
+          }
+        },
+        "title": "ChargeHeadUpdate",
         "type": "object"
       },
       "CommitteeInviteIn": {
@@ -239,6 +868,47 @@
           "granted"
         ],
         "title": "ConsentStatusOut",
+        "type": "object"
+      },
+      "EndDateIn": {
+        "properties": {
+          "end_date": {
+            "format": "date",
+            "title": "End Date",
+            "type": "string"
+          }
+        },
+        "required": [
+          "end_date"
+        ],
+        "title": "EndDateIn",
+        "type": "object"
+      },
+      "ExcludedFlatOut": {
+        "properties": {
+          "flat_id": {
+            "format": "uuid",
+            "title": "Flat Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Reasons",
+            "type": "array"
+          }
+        },
+        "required": [
+          "flat_id",
+          "label",
+          "reasons"
+        ],
+        "title": "ExcludedFlatOut",
         "type": "object"
       },
       "FlatDetailOut": {
@@ -1130,6 +1800,36 @@
         "title": "InviteOut",
         "type": "object"
       },
+      "LegalProblemOut": {
+        "properties": {
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "level": {
+            "enum": [
+              "block",
+              "warn"
+            ],
+            "title": "Level",
+            "type": "string"
+          },
+          "params": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Params",
+            "type": "object"
+          }
+        },
+        "required": [
+          "level",
+          "key",
+          "params"
+        ],
+        "title": "LegalProblemOut",
+        "type": "object"
+      },
       "MeOut": {
         "properties": {
           "email": {
@@ -1646,6 +2346,278 @@
         "title": "MySocietyOut",
         "type": "object"
       },
+      "OverrideIn": {
+        "properties": {
+          "amount_paise": {
+            "minimum": 0.0,
+            "title": "Amount Paise",
+            "type": "integer"
+          },
+          "charge_head_id": {
+            "format": "uuid",
+            "title": "Charge Head Id",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Reason",
+            "type": "string"
+          },
+          "valid_from": {
+            "format": "date",
+            "title": "Valid From",
+            "type": "string"
+          },
+          "valid_to": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid To"
+          }
+        },
+        "required": [
+          "charge_head_id",
+          "amount_paise",
+          "reason",
+          "valid_from"
+        ],
+        "title": "OverrideIn",
+        "type": "object"
+      },
+      "OverrideOut": {
+        "properties": {
+          "amount_paise": {
+            "title": "Amount Paise",
+            "type": "integer"
+          },
+          "charge_head_id": {
+            "format": "uuid",
+            "title": "Charge Head Id",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "valid_from": {
+            "format": "date",
+            "title": "Valid From",
+            "type": "string"
+          },
+          "valid_to": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid To"
+          }
+        },
+        "required": [
+          "id",
+          "charge_head_id",
+          "amount_paise",
+          "reason",
+          "valid_from",
+          "valid_to"
+        ],
+        "title": "OverrideOut",
+        "type": "object"
+      },
+      "ParkingIn": {
+        "properties": {
+          "from_date": {
+            "format": "date",
+            "title": "From Date",
+            "type": "string"
+          },
+          "gb_resolution_ref": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gb Resolution Ref"
+          },
+          "monthly_rate_paise": {
+            "minimum": 0.0,
+            "title": "Monthly Rate Paise",
+            "type": "integer"
+          },
+          "slot_label": {
+            "maxLength": 40,
+            "minLength": 1,
+            "title": "Slot Label",
+            "type": "string"
+          },
+          "slot_type": {
+            "enum": [
+              "open",
+              "stilt",
+              "covered",
+              "podium",
+              "mechanical",
+              "other"
+            ],
+            "title": "Slot Type",
+            "type": "string"
+          },
+          "to_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "To Date"
+          },
+          "vehicle_number": {
+            "anyOf": [
+              {
+                "maxLength": 20,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle Number"
+          },
+          "vehicle_type": {
+            "enum": [
+              "two_wheeler",
+              "four_wheeler",
+              "other"
+            ],
+            "title": "Vehicle Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "slot_label",
+          "slot_type",
+          "vehicle_type",
+          "monthly_rate_paise",
+          "from_date"
+        ],
+        "title": "ParkingIn",
+        "type": "object"
+      },
+      "ParkingOut": {
+        "properties": {
+          "from_date": {
+            "format": "date",
+            "title": "From Date",
+            "type": "string"
+          },
+          "gb_resolution_ref": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gb Resolution Ref"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "monthly_rate_paise": {
+            "minimum": 0.0,
+            "title": "Monthly Rate Paise",
+            "type": "integer"
+          },
+          "slot_label": {
+            "maxLength": 40,
+            "minLength": 1,
+            "title": "Slot Label",
+            "type": "string"
+          },
+          "slot_type": {
+            "enum": [
+              "open",
+              "stilt",
+              "covered",
+              "podium",
+              "mechanical",
+              "other"
+            ],
+            "title": "Slot Type",
+            "type": "string"
+          },
+          "to_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "To Date"
+          },
+          "vehicle_number": {
+            "anyOf": [
+              {
+                "maxLength": 20,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vehicle Number"
+          },
+          "vehicle_type": {
+            "enum": [
+              "two_wheeler",
+              "four_wheeler",
+              "other"
+            ],
+            "title": "Vehicle Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "slot_label",
+          "slot_type",
+          "vehicle_type",
+          "monthly_rate_paise",
+          "from_date",
+          "id"
+        ],
+        "title": "ParkingOut",
+        "type": "object"
+      },
       "PreferencesIn": {
         "properties": {
           "full_name": {
@@ -1708,6 +2680,536 @@
           }
         },
         "title": "PreferencesIn",
+        "type": "object"
+      },
+      "PreviewFlatOut": {
+        "properties": {
+          "charges_paise": {
+            "title": "Charges Paise",
+            "type": "integer"
+          },
+          "flat_id": {
+            "format": "uuid",
+            "title": "Flat Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "lines": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Lines",
+            "type": "object"
+          },
+          "overridden": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Overridden",
+            "type": "array"
+          },
+          "rounding_paise": {
+            "title": "Rounding Paise",
+            "type": "integer"
+          },
+          "total_paise": {
+            "title": "Total Paise",
+            "type": "integer"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "flat_id",
+          "label",
+          "lines",
+          "charges_paise",
+          "rounding_paise",
+          "total_paise",
+          "overridden",
+          "warnings"
+        ],
+        "title": "PreviewFlatOut",
+        "type": "object"
+      },
+      "PreviewHeadOut": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "total_paise": {
+            "title": "Total Paise",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "total_paise"
+        ],
+        "title": "PreviewHeadOut",
+        "type": "object"
+      },
+      "PreviewOut": {
+        "properties": {
+          "excluded": {
+            "items": {
+              "$ref": "#/components/schemas/ExcludedFlatOut"
+            },
+            "title": "Excluded",
+            "type": "array"
+          },
+          "flats": {
+            "items": {
+              "$ref": "#/components/schemas/PreviewFlatOut"
+            },
+            "title": "Flats",
+            "type": "array"
+          },
+          "heads": {
+            "items": {
+              "$ref": "#/components/schemas/PreviewHeadOut"
+            },
+            "title": "Heads",
+            "type": "array"
+          },
+          "missing": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Missing",
+            "type": "object"
+          },
+          "period_end": {
+            "format": "date",
+            "title": "Period End",
+            "type": "string"
+          },
+          "period_start": {
+            "format": "date",
+            "title": "Period Start",
+            "type": "string"
+          },
+          "total_paise": {
+            "title": "Total Paise",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "period_start",
+          "period_end",
+          "heads",
+          "flats",
+          "excluded",
+          "total_paise",
+          "missing"
+        ],
+        "title": "PreviewOut",
+        "type": "object"
+      },
+      "PropertyTaxIn": {
+        "properties": {
+          "annual_amount_paise": {
+            "minimum": 0.0,
+            "title": "Annual Amount Paise",
+            "type": "integer"
+          },
+          "authority": {
+            "maxLength": 40,
+            "minLength": 1,
+            "title": "Authority",
+            "type": "string"
+          },
+          "exemption_reason": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exemption Reason"
+          },
+          "financial_year": {
+            "pattern": "^\\d{4}-\\d{2}$",
+            "title": "Financial Year",
+            "type": "string"
+          },
+          "is_exempt": {
+            "default": false,
+            "title": "Is Exempt",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "authority",
+          "financial_year",
+          "annual_amount_paise"
+        ],
+        "title": "PropertyTaxIn",
+        "type": "object"
+      },
+      "PropertyTaxOut": {
+        "properties": {
+          "annual_amount_paise": {
+            "minimum": 0.0,
+            "title": "Annual Amount Paise",
+            "type": "integer"
+          },
+          "authority": {
+            "maxLength": 40,
+            "minLength": 1,
+            "title": "Authority",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "exemption_reason": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exemption Reason"
+          },
+          "financial_year": {
+            "pattern": "^\\d{4}-\\d{2}$",
+            "title": "Financial Year",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "is_exempt": {
+            "default": false,
+            "title": "Is Exempt",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "authority",
+          "financial_year",
+          "annual_amount_paise",
+          "id",
+          "created_at"
+        ],
+        "title": "PropertyTaxOut",
+        "type": "object"
+      },
+      "SettingsOut": {
+        "properties": {
+          "bank_account_last4": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bank Account Last4"
+          },
+          "bank_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bank Name"
+          },
+          "bill_day": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bill Day"
+          },
+          "billing_frequency": {
+            "enum": [
+              "monthly",
+              "quarterly"
+            ],
+            "title": "Billing Frequency",
+            "type": "string"
+          },
+          "due_days": {
+            "title": "Due Days",
+            "type": "integer"
+          },
+          "interest_enabled": {
+            "title": "Interest Enabled",
+            "type": "boolean"
+          },
+          "interest_gb_resolution_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interest Gb Resolution Date"
+          },
+          "interest_grace_days": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interest Grace Days"
+          },
+          "interest_rate_annual_pct": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interest Rate Annual Pct"
+          },
+          "rounding_rule": {
+            "enum": [
+              "none",
+              "nearest_rupee"
+            ],
+            "title": "Rounding Rule",
+            "type": "string"
+          },
+          "upi_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upi Id"
+          },
+          "upi_payee_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upi Payee Name"
+          }
+        },
+        "required": [
+          "billing_frequency",
+          "bill_day",
+          "due_days",
+          "upi_id",
+          "upi_payee_name",
+          "bank_name",
+          "bank_account_last4",
+          "interest_enabled",
+          "interest_rate_annual_pct",
+          "interest_gb_resolution_date",
+          "interest_grace_days",
+          "rounding_rule"
+        ],
+        "title": "SettingsOut",
+        "type": "object"
+      },
+      "SettingsUpdate": {
+        "properties": {
+          "bank_account_last4": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bank Account Last4"
+          },
+          "bank_name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bank Name"
+          },
+          "bill_day": {
+            "anyOf": [
+              {
+                "maximum": 28.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bill Day"
+          },
+          "billing_frequency": {
+            "anyOf": [
+              {
+                "enum": [
+                  "monthly",
+                  "quarterly"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Billing Frequency"
+          },
+          "due_days": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Due Days"
+          },
+          "interest_enabled": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interest Enabled"
+          },
+          "interest_gb_resolution_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interest Gb Resolution Date"
+          },
+          "interest_grace_days": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interest Grace Days"
+          },
+          "interest_rate_annual_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interest Rate Annual Pct"
+          },
+          "rounding_rule": {
+            "anyOf": [
+              {
+                "enum": [
+                  "none",
+                  "nearest_rupee"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rounding Rule"
+          },
+          "upi_id": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upi Id"
+          },
+          "upi_payee_name": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upi Payee Name"
+          }
+        },
+        "title": "SettingsUpdate",
         "type": "object"
       },
       "SocietyCreateIn": {
@@ -1976,6 +3478,208 @@
           "bank_account_last4"
         ],
         "title": "SocietyOut",
+        "type": "object"
+      },
+      "StandardHeadOut": {
+        "properties": {
+          "applies_to": {
+            "enum": [
+              "all",
+              "let_out_only"
+            ],
+            "title": "Applies To",
+            "type": "string"
+          },
+          "calc_type": {
+            "enum": [
+              "equal_per_flat",
+              "equal_per_flat_with_lift",
+              "per_carpet_area",
+              "per_water_point",
+              "as_assessed_per_flat",
+              "pct_of_head",
+              "pct_of_construction_cost",
+              "per_parking_allotment",
+              "per_member_fixed",
+              "fixed_per_flat",
+              "custom_per_flat",
+              "voluntary"
+            ],
+            "title": "Calc Type",
+            "type": "string"
+          },
+          "legal_percent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Legal Percent"
+          },
+          "legal_percent_kind": {
+            "anyOf": [
+              {
+                "enum": [
+                  "fixed",
+                  "minimum"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Legal Percent Kind"
+          },
+          "legal_source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Legal Source"
+          },
+          "rule": {
+            "title": "Rule",
+            "type": "string"
+          },
+          "standard_code": {
+            "enum": [
+              "service",
+              "property_tax",
+              "water",
+              "lift",
+              "parking",
+              "non_occupancy",
+              "insurance",
+              "lease_rent",
+              "major_repair",
+              "sinking_fund",
+              "repair_fund",
+              "election_fund",
+              "education_fund",
+              "welfare_fund",
+              "other"
+            ],
+            "title": "Standard Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "standard_code",
+          "calc_type",
+          "applies_to",
+          "rule",
+          "legal_percent",
+          "legal_percent_kind",
+          "legal_source"
+        ],
+        "title": "StandardHeadOut",
+        "type": "object"
+      },
+      "TaxImportOut": {
+        "properties": {
+          "error_count": {
+            "title": "Error Count",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "ok_count": {
+            "title": "Ok Count",
+            "type": "integer"
+          },
+          "row_count": {
+            "title": "Row Count",
+            "type": "integer"
+          },
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/TaxImportRowOut"
+            },
+            "title": "Rows",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "uploaded",
+              "previewed",
+              "imported",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "row_count",
+          "ok_count",
+          "error_count",
+          "rows"
+        ],
+        "title": "TaxImportOut",
+        "type": "object"
+      },
+      "TaxImportRowOut": {
+        "properties": {
+          "annual_amount_paise": {
+            "title": "Annual Amount Paise",
+            "type": "integer"
+          },
+          "financial_year": {
+            "title": "Financial Year",
+            "type": "string"
+          },
+          "flat_label": {
+            "title": "Flat Label",
+            "type": "string"
+          },
+          "is_exempt": {
+            "title": "Is Exempt",
+            "type": "boolean"
+          },
+          "issues": {
+            "items": {
+              "$ref": "#/components/schemas/ImportIssueOut"
+            },
+            "title": "Issues",
+            "type": "array"
+          },
+          "row": {
+            "title": "Row",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "ok",
+              "warning",
+              "error"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "row",
+          "status",
+          "issues",
+          "flat_label",
+          "financial_year",
+          "annual_amount_paise",
+          "is_exempt"
+        ],
+        "title": "TaxImportRowOut",
         "type": "object"
       },
       "ValidationError": {
@@ -2507,6 +4211,349 @@
         ]
       }
     },
+    "/api/v1/societies/{society_id}/charges/heads": {
+      "get": {
+        "operationId": "list_heads_api_v1_societies__society_id__charges_heads_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ChargeHeadOut"
+                  },
+                  "title": "Response List Heads Api V1 Societies  Society Id  Charges Heads Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Heads",
+        "tags": [
+          "charges"
+        ]
+      },
+      "post": {
+        "operationId": "create_head_api_v1_societies__society_id__charges_heads_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeHeadIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeHeadSaved"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Head",
+        "tags": [
+          "charges"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/charges/heads/{head_id}": {
+      "patch": {
+        "operationId": "update_head_api_v1_societies__society_id__charges_heads__head_id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "head_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Head Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeHeadUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeHeadSaved"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Update Head",
+        "tags": [
+          "charges"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/charges/preview": {
+      "get": {
+        "operationId": "preview_api_v1_societies__society_id__charges_preview_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "First day of the billing period",
+            "in": "query",
+            "name": "period_start",
+            "required": true,
+            "schema": {
+              "description": "First day of the billing period",
+              "format": "date",
+              "title": "Period Start",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Preview",
+        "tags": [
+          "charges"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/charges/standard-heads": {
+      "get": {
+        "operationId": "standard_heads_api_v1_societies__society_id__charges_standard_heads_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/StandardHeadOut"
+                  },
+                  "title": "Response Standard Heads Api V1 Societies  Society Id  Charges Standard Heads Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Standard Heads",
+        "tags": [
+          "charges"
+        ]
+      }
+    },
     "/api/v1/societies/{society_id}/flats": {
       "get": {
         "operationId": "list_flats_api_v1_societies__society_id__flats_get",
@@ -2948,6 +4995,634 @@
         "summary": "Update Member",
         "tags": [
           "flats"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/flats/{flat_id}/overrides": {
+      "get": {
+        "operationId": "list_overrides_api_v1_societies__society_id__flats__flat_id__overrides_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/OverrideOut"
+                  },
+                  "title": "Response List Overrides Api V1 Societies  Society Id  Flats  Flat Id  Overrides Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Overrides",
+        "tags": [
+          "charges"
+        ]
+      },
+      "post": {
+        "operationId": "create_override_api_v1_societies__society_id__flats__flat_id__overrides_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OverrideIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OverrideOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Override",
+        "tags": [
+          "charges"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/flats/{flat_id}/overrides/{override_id}": {
+      "patch": {
+        "operationId": "end_override_api_v1_societies__society_id__flats__flat_id__overrides__override_id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "override_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Override Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EndDateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OverrideOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "End Override",
+        "tags": [
+          "charges"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/flats/{flat_id}/parking": {
+      "get": {
+        "operationId": "list_parking_api_v1_societies__society_id__flats__flat_id__parking_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ParkingOut"
+                  },
+                  "title": "Response List Parking Api V1 Societies  Society Id  Flats  Flat Id  Parking Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Parking",
+        "tags": [
+          "charges"
+        ]
+      },
+      "post": {
+        "operationId": "create_parking_api_v1_societies__society_id__flats__flat_id__parking_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParkingIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParkingOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Parking",
+        "tags": [
+          "charges"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/flats/{flat_id}/parking/{allotment_id}": {
+      "patch": {
+        "operationId": "end_parking_api_v1_societies__society_id__flats__flat_id__parking__allotment_id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "allotment_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Allotment Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EndDateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParkingOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "End Parking",
+        "tags": [
+          "charges"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/flats/{flat_id}/property-tax": {
+      "get": {
+        "operationId": "list_tax_api_v1_societies__society_id__flats__flat_id__property_tax_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/PropertyTaxOut"
+                  },
+                  "title": "Response List Tax Api V1 Societies  Society Id  Flats  Flat Id  Property Tax Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Tax",
+        "tags": [
+          "charges"
+        ]
+      },
+      "post": {
+        "operationId": "add_tax_api_v1_societies__society_id__flats__flat_id__property_tax_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PropertyTaxIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropertyTaxOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Add Tax",
+        "tags": [
+          "charges"
         ]
       }
     },
@@ -3408,6 +6083,322 @@
         "summary": "List Memberships",
         "tags": [
           "societies"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/property-tax/imports": {
+      "post": {
+        "operationId": "tax_upload_api_v1_societies__society_id__property_tax_imports_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_tax_upload_api_v1_societies__society_id__property_tax_imports_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaxImportOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Tax Upload",
+        "tags": [
+          "charges"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/property-tax/imports/{job_id}/confirm": {
+      "post": {
+        "operationId": "tax_confirm_api_v1_societies__society_id__property_tax_imports__job_id__confirm_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Job Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaxImportOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Tax Confirm",
+        "tags": [
+          "charges"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/property-tax/template": {
+      "get": {
+        "operationId": "tax_template_api_v1_societies__society_id__property_tax_template_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Tax Template",
+        "tags": [
+          "charges"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/settings": {
+      "get": {
+        "operationId": "read_settings_api_v1_societies__society_id__settings_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettingsOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Read Settings",
+        "tags": [
+          "charges"
+        ]
+      },
+      "patch": {
+        "operationId": "change_settings_api_v1_societies__society_id__settings_patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SettingsUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SettingsOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Change Settings",
+        "tags": [
+          "charges"
         ]
       }
     },

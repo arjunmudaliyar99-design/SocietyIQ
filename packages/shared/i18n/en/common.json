@@ -134,6 +134,13 @@
     "tooManyRows": "This file has too many rows. Split it into smaller files.",
     "fileTooLarge": "This file is larger than 10 MB.",
     "importDone": "This import was already confirmed.",
-    "inviteFlatNotAllowed": "Committee roles are not linked to a flat."
+    "inviteFlatNotAllowed": "Committee roles are not linked to a flat.",
+    "legalBlock": "This is not allowed by the rules. See the details.",
+    "reasonRequired": "Give a reason to save this.",
+    "resolutionRequired": "Give the general body resolution to save this.",
+    "headExists": "This charge is already added.",
+    "headSelfReference": "A charge cannot be a percentage of itself.",
+    "exemptionReason": "Give the reason for the exemption.",
+    "periodStart": "A billing period starts on the 1st of a month."
   }
 }

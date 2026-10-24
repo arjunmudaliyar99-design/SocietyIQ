@@ -10,7 +10,7 @@ What is built, what is in progress, and what is next. Every Claude Code session 
 | M1 Design system and app shells | IN REVIEW | feat/m0-scaffold (shipped together with M0) | Axe check and Android PWA install not yet verified |
 | M2 Database base, auth, isolation | IN REVIEW | feat/m2-auth-isolation (merged into `dev` locally) | Needs a Supabase project for real sign-in; CI not yet run |
 | M3 Flats, members, import | IN REVIEW | feat/m3-flats-members (merged into `dev` locally) | Supabase Storage path untested |
-| M4 Charge setup and calculation engine | NOT STARTED | | |
+| M4 Charge setup and calculation engine | IN REVIEW | feat/m4-charges (merged into `dev` locally) | Legal values unverified until the consultant checks them |
 | M5 Billing runs, bills, PDFs | NOT STARTED | | |
 | M6 Payments, receipts, dues | NOT STARTED | | |
 | M7 Resident PWA core | NOT STARTED | | |
@@ -27,6 +27,14 @@ Statuses: NOT STARTED · IN PROGRESS (branch) · IN REVIEW (PR link) · DONE · 
 ## Log
 
 Newest first. One entry per merged PR: date, milestone, what was built, how to try it, known gaps.
+
+- 2026-10-24 — M4 — Charge setup and the calculation engine.
+  Calc (pure, 100% covered, enforced in CI): `app/calc/charges.py` implements every apportionment method of docs/06 §2 with the remainder-paise rule in flat-number order, overrides, one-time heads, monthly and quarterly periods, bill rounding; flats missing an input a head needs are left out of the run with the reason, never billed a silent zero. `app/calc/legal.py`: statutory method per head; blocks interest above the cap, non-occupancy other than the fixed percent / base / let-out; warns below fund minimums and on method deviation (reason, and GB resolution for deviation, required). All limits come from `legal_parameters`, with the source shown in messages. Tests cover both worked examples (₹4,545 and the seed ₹4,200 / ₹4,540).
+  Backend: migration `0003` (`charge_heads`, `flat_charge_overrides`, `parking_allotments`, append-only `property_tax_assessments`; import jobs gain `property_tax`). Endpoints for society billing and interest settings (admin), charge heads, standard heads with today's legal percents, per-flat overrides / parking / property tax, property tax Excel import (template, preview, confirm), and the per-flat preview for a period with missing-data counts. Seed now adds the docs/02 §12 charge setup.
+  Front end (committee): Charges list, add/change charge starting from the statutory head (legal percent from the API, problems shown with their rule), preview table per flat with left-out flats and missing data, billing and interest settings, property tax import, and on each flat page: parking, property tax and special amounts.
+  Tests: backend 122 (incl. 34 isolation-checked society routes), front end 89.
+  How to try: run the seed again (`uv run python -m app.seed`), sign in as `demo-admin@example.com`, Detailed view → Charges → "See what each flat pays".
+  Known gaps: legal values are unverified (docs/08 §3); common-area property tax by carpet area is entered as a separate per-carpet-area head; education fund collected monthly (annual collection setting not built); welfare fund opt-in is via a per-flat special amount; Q-003 (vacant flats) defaults to no non-occupancy charge.
 
 - 2026-10-24 — M3 — Flats, members, Excel import, demo seed.
   Backend: migration `0002` adds `flats`, `members`, `attachments`, `import_jobs`, `ledger_entries` (append-only, one opening balance per flat) with forced RLS, and the FK from memberships to flats. CRUD for wings (with lift), flats and members (no deletes; "moved out" sets `to_date`); flat list and detail show the main member and ledger balance. Import: template download (`.xlsx` with dropdowns and a "How to fill" sheet), upload → per-row OK / warning / error with i18n keys ("Row 14: owner phone has 9 digits"), confirm re-checks and imports OK + warning rows in one transaction, opening balances become `opening_balance` ledger entries sourced to the import. Money parsed to paise without floats (Indian commas, ₹, Excel float noise). File storage: local folder or Supabase Storage (`STORAGE_BACKEND`). Owners, tenants and delegates can now be invited for a flat; their links open the resident app. Seed: `uv run python -m app.seed` loads the three fictional societies (226 flats, listed dues as opening balances, A-305 let out) plus demo logins `demo-admin@example.com` (admin of all three) and `resident.b207@example.com` (owner of B-207); running it again adds nothing.

@@ -40,6 +40,48 @@ SOCIETY_ROUTES: dict[tuple[str, str], object] = {
     ("POST", "/api/v1/societies/{society_id}/imports"): FILE,
     ("GET", "/api/v1/societies/{society_id}/imports/{job_id}"): None,
     ("POST", "/api/v1/societies/{society_id}/imports/{job_id}/confirm"): None,
+    ("GET", "/api/v1/societies/{society_id}/settings"): None,
+    ("PATCH", "/api/v1/societies/{society_id}/settings"): {"due_days": 10},
+    ("GET", "/api/v1/societies/{society_id}/charges/standard-heads"): None,
+    ("GET", "/api/v1/societies/{society_id}/charges/heads"): None,
+    ("POST", "/api/v1/societies/{society_id}/charges/heads"): {
+        "name": "Service",
+        "standard_code": "service",
+        "calc_type": "equal_per_flat",
+        "period_total_paise": 100,
+    },
+    ("PATCH", "/api/v1/societies/{society_id}/charges/heads/{head_id}"): {"sort_order": 2},
+    ("GET", "/api/v1/societies/{society_id}/charges/preview"): None,
+    ("GET", "/api/v1/societies/{society_id}/flats/{flat_id}/overrides"): None,
+    ("POST", "/api/v1/societies/{society_id}/flats/{flat_id}/overrides"): {
+        "charge_head_id": ANY_ID,
+        "amount_paise": 1,
+        "reason": "test reason",
+        "valid_from": "2026-11-01",
+    },
+    ("PATCH", "/api/v1/societies/{society_id}/flats/{flat_id}/overrides/{override_id}"): {
+        "end_date": "2026-11-30"
+    },
+    ("GET", "/api/v1/societies/{society_id}/flats/{flat_id}/parking"): None,
+    ("POST", "/api/v1/societies/{society_id}/flats/{flat_id}/parking"): {
+        "slot_label": "P1",
+        "slot_type": "open",
+        "vehicle_type": "two_wheeler",
+        "monthly_rate_paise": 100,
+        "from_date": "2026-11-01",
+    },
+    ("PATCH", "/api/v1/societies/{society_id}/flats/{flat_id}/parking/{allotment_id}"): {
+        "end_date": "2026-11-30"
+    },
+    ("GET", "/api/v1/societies/{society_id}/property-tax/template"): None,
+    ("POST", "/api/v1/societies/{society_id}/property-tax/imports"): FILE,
+    ("POST", "/api/v1/societies/{society_id}/property-tax/imports/{job_id}/confirm"): None,
+    ("GET", "/api/v1/societies/{society_id}/flats/{flat_id}/property-tax"): None,
+    ("POST", "/api/v1/societies/{society_id}/flats/{flat_id}/property-tax"): {
+        "authority": "MCGM",
+        "financial_year": "2026-27",
+        "annual_amount_paise": 100,
+    },
 }
 
 
@@ -57,8 +99,18 @@ def test_every_society_route_is_covered() -> None:
 
 def _url(path: str, society_id: object) -> str:
     url = path.replace("{society_id}", str(society_id))
-    for name in ("wing_id", "flat_id", "member_id", "job_id"):
+    for name in (
+        "wing_id",
+        "flat_id",
+        "member_id",
+        "job_id",
+        "head_id",
+        "override_id",
+        "allotment_id",
+    ):
         url = url.replace("{" + name + "}", ANY_ID)
+    if url.endswith("/charges/preview"):
+        url += "?period_start=2026-11-01"
     return url
 
 

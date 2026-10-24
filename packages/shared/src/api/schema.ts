@@ -124,6 +124,75 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/charges/heads": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Heads */
+        get: operations["list_heads_api_v1_societies__society_id__charges_heads_get"];
+        put?: never;
+        /** Create Head */
+        post: operations["create_head_api_v1_societies__society_id__charges_heads_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/charges/heads/{head_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Head */
+        patch: operations["update_head_api_v1_societies__society_id__charges_heads__head_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/charges/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Preview */
+        get: operations["preview_api_v1_societies__society_id__charges_preview_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/charges/standard-heads": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Standard Heads */
+        get: operations["standard_heads_api_v1_societies__society_id__charges_standard_heads_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/societies/{society_id}/flats": {
         parameters: {
             query?: never;
@@ -192,6 +261,94 @@ export interface paths {
         head?: never;
         /** Update Member */
         patch: operations["update_member_api_v1_societies__society_id__flats__flat_id__members__member_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/flats/{flat_id}/overrides": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Overrides */
+        get: operations["list_overrides_api_v1_societies__society_id__flats__flat_id__overrides_get"];
+        put?: never;
+        /** Create Override */
+        post: operations["create_override_api_v1_societies__society_id__flats__flat_id__overrides_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/flats/{flat_id}/overrides/{override_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** End Override */
+        patch: operations["end_override_api_v1_societies__society_id__flats__flat_id__overrides__override_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/flats/{flat_id}/parking": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Parking */
+        get: operations["list_parking_api_v1_societies__society_id__flats__flat_id__parking_get"];
+        put?: never;
+        /** Create Parking */
+        post: operations["create_parking_api_v1_societies__society_id__flats__flat_id__parking_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/flats/{flat_id}/parking/{allotment_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** End Parking */
+        patch: operations["end_parking_api_v1_societies__society_id__flats__flat_id__parking__allotment_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/flats/{flat_id}/property-tax": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Tax */
+        get: operations["list_tax_api_v1_societies__society_id__flats__flat_id__property_tax_get"];
+        put?: never;
+        /** Add Tax */
+        post: operations["add_tax_api_v1_societies__society_id__flats__flat_id__property_tax_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/api/v1/societies/{society_id}/imports": {
@@ -313,6 +470,75 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/property-tax/imports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Tax Upload */
+        post: operations["tax_upload_api_v1_societies__society_id__property_tax_imports_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/property-tax/imports/{job_id}/confirm": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Tax Confirm */
+        post: operations["tax_confirm_api_v1_societies__society_id__property_tax_imports__job_id__confirm_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/property-tax/template": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Tax Template */
+        get: operations["tax_template_api_v1_societies__society_id__property_tax_template_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Read Settings */
+        get: operations["read_settings_api_v1_societies__society_id__settings_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Change Settings */
+        patch: operations["change_settings_api_v1_societies__society_id__settings_patch"];
+        trace?: never;
+    };
     "/api/v1/societies/{society_id}/wings": {
         parameters: {
             query?: never;
@@ -384,10 +610,148 @@ export interface components {
             /** Upi Payee Name */
             upi_payee_name?: string | null;
         };
+        /** Body_tax_upload_api_v1_societies__society_id__property_tax_imports_post */
+        Body_tax_upload_api_v1_societies__society_id__property_tax_imports_post: {
+            /** File */
+            file: string;
+        };
         /** Body_upload_api_v1_societies__society_id__imports_post */
         Body_upload_api_v1_societies__society_id__imports_post: {
             /** File */
             file: string;
+        };
+        /** ChargeHeadIn */
+        ChargeHeadIn: {
+            /**
+             * Applies To
+             * @default all
+             * @enum {string}
+             */
+            applies_to: "all" | "let_out_only";
+            /**
+             * Calc Type
+             * @enum {string}
+             */
+            calc_type: "equal_per_flat" | "equal_per_flat_with_lift" | "per_carpet_area" | "per_water_point" | "as_assessed_per_flat" | "pct_of_head" | "pct_of_construction_cost" | "per_parking_allotment" | "per_member_fixed" | "fixed_per_flat" | "custom_per_flat" | "voluntary";
+            /** Fixed Amount Paise */
+            fixed_amount_paise?: number | null;
+            /**
+             * Frequency
+             * @default every_bill
+             * @enum {string}
+             */
+            frequency: "every_bill" | "one_time";
+            /** Gb Resolution Date */
+            gb_resolution_date?: string | null;
+            /** Gb Resolution Ref */
+            gb_resolution_ref?: string | null;
+            /** Method Deviation Reason */
+            method_deviation_reason?: string | null;
+            /** Name */
+            name: string;
+            /** One Time Period */
+            one_time_period?: string | null;
+            /** Percent */
+            percent?: number | string | null;
+            /** Percent Of Head Id */
+            percent_of_head_id?: string | null;
+            /** Period Total Paise */
+            period_total_paise?: number | null;
+            /**
+             * Sort Order
+             * @default 0
+             */
+            sort_order: number;
+            /** Standard Code */
+            standard_code?: ("service" | "property_tax" | "water" | "lift" | "parking" | "non_occupancy" | "insurance" | "lease_rent" | "major_repair" | "sinking_fund" | "repair_fund" | "election_fund" | "education_fund" | "welfare_fund" | "other") | null;
+        };
+        /** ChargeHeadOut */
+        ChargeHeadOut: {
+            /**
+             * Applies To
+             * @enum {string}
+             */
+            applies_to: "all" | "let_out_only";
+            /** Approved At */
+            approved_at: string | null;
+            /**
+             * Calc Type
+             * @enum {string}
+             */
+            calc_type: "equal_per_flat" | "equal_per_flat_with_lift" | "per_carpet_area" | "per_water_point" | "as_assessed_per_flat" | "pct_of_head" | "pct_of_construction_cost" | "per_parking_allotment" | "per_member_fixed" | "fixed_per_flat" | "custom_per_flat" | "voluntary";
+            /** Code */
+            code: string;
+            /** Fixed Amount Paise */
+            fixed_amount_paise: number | null;
+            /**
+             * Frequency
+             * @enum {string}
+             */
+            frequency: "every_bill" | "one_time";
+            /** Gb Resolution Date */
+            gb_resolution_date: string | null;
+            /** Gb Resolution Ref */
+            gb_resolution_ref: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Active */
+            is_active: boolean;
+            /** Method Deviation Reason */
+            method_deviation_reason: string | null;
+            /** Name */
+            name: string;
+            /** One Time Period */
+            one_time_period: string | null;
+            /** Percent */
+            percent: string | null;
+            /** Percent Of Head Id */
+            percent_of_head_id: string | null;
+            /** Period Total Paise */
+            period_total_paise: number | null;
+            /** Sort Order */
+            sort_order: number;
+            /** Standard Code */
+            standard_code: ("service" | "property_tax" | "water" | "lift" | "parking" | "non_occupancy" | "insurance" | "lease_rent" | "major_repair" | "sinking_fund" | "repair_fund" | "election_fund" | "education_fund" | "welfare_fund" | "other") | null;
+        };
+        /** ChargeHeadSaved */
+        ChargeHeadSaved: {
+            head: components["schemas"]["ChargeHeadOut"];
+            /** Warnings */
+            warnings: components["schemas"]["LegalProblemOut"][];
+        };
+        /** ChargeHeadUpdate */
+        ChargeHeadUpdate: {
+            /** Applies To */
+            applies_to?: ("all" | "let_out_only") | null;
+            /** Calc Type */
+            calc_type?: ("equal_per_flat" | "equal_per_flat_with_lift" | "per_carpet_area" | "per_water_point" | "as_assessed_per_flat" | "pct_of_head" | "pct_of_construction_cost" | "per_parking_allotment" | "per_member_fixed" | "fixed_per_flat" | "custom_per_flat" | "voluntary") | null;
+            /** Fixed Amount Paise */
+            fixed_amount_paise?: number | null;
+            /** Frequency */
+            frequency?: ("every_bill" | "one_time") | null;
+            /** Gb Resolution Date */
+            gb_resolution_date?: string | null;
+            /** Gb Resolution Ref */
+            gb_resolution_ref?: string | null;
+            /** Is Active */
+            is_active?: boolean | null;
+            /** Method Deviation Reason */
+            method_deviation_reason?: string | null;
+            /** Name */
+            name?: string | null;
+            /** One Time Period */
+            one_time_period?: string | null;
+            /** Percent */
+            percent?: number | string | null;
+            /** Percent Of Head Id */
+            percent_of_head_id?: string | null;
+            /** Period Total Paise */
+            period_total_paise?: number | null;
+            /** Sort Order */
+            sort_order?: number | null;
         };
         /**
          * CommitteeInviteIn
@@ -447,6 +811,26 @@ export interface components {
             needs_consent: boolean;
             /** Policy Version */
             policy_version: string;
+        };
+        /** EndDateIn */
+        EndDateIn: {
+            /**
+             * End Date
+             * Format: date
+             */
+            end_date: string;
+        };
+        /** ExcludedFlatOut */
+        ExcludedFlatOut: {
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /** Label */
+            label: string;
+            /** Reasons */
+            reasons: string[];
         };
         /** FlatDetailOut */
         FlatDetailOut: {
@@ -708,6 +1092,20 @@ export interface components {
             invite_link: string;
             membership: components["schemas"]["MembershipOut"];
         };
+        /** LegalProblemOut */
+        LegalProblemOut: {
+            /** Key */
+            key: string;
+            /**
+             * Level
+             * @enum {string}
+             */
+            level: "block" | "warn";
+            /** Params */
+            params: {
+                [key: string]: string;
+            };
+        };
         /** MeOut */
         MeOut: {
             /** Email */
@@ -868,6 +1266,110 @@ export interface components {
             /** Roles */
             roles: ("admin" | "treasurer" | "committee" | "consultant" | "auditor" | "owner" | "tenant" | "delegate")[];
         };
+        /** OverrideIn */
+        OverrideIn: {
+            /** Amount Paise */
+            amount_paise: number;
+            /**
+             * Charge Head Id
+             * Format: uuid
+             */
+            charge_head_id: string;
+            /** Reason */
+            reason: string;
+            /**
+             * Valid From
+             * Format: date
+             */
+            valid_from: string;
+            /** Valid To */
+            valid_to?: string | null;
+        };
+        /** OverrideOut */
+        OverrideOut: {
+            /** Amount Paise */
+            amount_paise: number;
+            /**
+             * Charge Head Id
+             * Format: uuid
+             */
+            charge_head_id: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Reason */
+            reason: string;
+            /**
+             * Valid From
+             * Format: date
+             */
+            valid_from: string;
+            /** Valid To */
+            valid_to: string | null;
+        };
+        /** ParkingIn */
+        ParkingIn: {
+            /**
+             * From Date
+             * Format: date
+             */
+            from_date: string;
+            /** Gb Resolution Ref */
+            gb_resolution_ref?: string | null;
+            /** Monthly Rate Paise */
+            monthly_rate_paise: number;
+            /** Slot Label */
+            slot_label: string;
+            /**
+             * Slot Type
+             * @enum {string}
+             */
+            slot_type: "open" | "stilt" | "covered" | "podium" | "mechanical" | "other";
+            /** To Date */
+            to_date?: string | null;
+            /** Vehicle Number */
+            vehicle_number?: string | null;
+            /**
+             * Vehicle Type
+             * @enum {string}
+             */
+            vehicle_type: "two_wheeler" | "four_wheeler" | "other";
+        };
+        /** ParkingOut */
+        ParkingOut: {
+            /**
+             * From Date
+             * Format: date
+             */
+            from_date: string;
+            /** Gb Resolution Ref */
+            gb_resolution_ref?: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Monthly Rate Paise */
+            monthly_rate_paise: number;
+            /** Slot Label */
+            slot_label: string;
+            /**
+             * Slot Type
+             * @enum {string}
+             */
+            slot_type: "open" | "stilt" | "covered" | "podium" | "mechanical" | "other";
+            /** To Date */
+            to_date?: string | null;
+            /** Vehicle Number */
+            vehicle_number?: string | null;
+            /**
+             * Vehicle Type
+             * @enum {string}
+             */
+            vehicle_type: "two_wheeler" | "four_wheeler" | "other";
+        };
         /** PreferencesIn */
         PreferencesIn: {
             /** Full Name */
@@ -878,6 +1380,169 @@ export interface components {
             simple_mode?: boolean | null;
             /** Text Size */
             text_size?: ("normal" | "large" | "xlarge") | null;
+        };
+        /** PreviewFlatOut */
+        PreviewFlatOut: {
+            /** Charges Paise */
+            charges_paise: number;
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /** Label */
+            label: string;
+            /** Lines */
+            lines: {
+                [key: string]: number;
+            };
+            /** Overridden */
+            overridden: string[];
+            /** Rounding Paise */
+            rounding_paise: number;
+            /** Total Paise */
+            total_paise: number;
+            /** Warnings */
+            warnings: string[];
+        };
+        /** PreviewHeadOut */
+        PreviewHeadOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Name */
+            name: string;
+            /** Total Paise */
+            total_paise: number;
+        };
+        /** PreviewOut */
+        PreviewOut: {
+            /** Excluded */
+            excluded: components["schemas"]["ExcludedFlatOut"][];
+            /** Flats */
+            flats: components["schemas"]["PreviewFlatOut"][];
+            /** Heads */
+            heads: components["schemas"]["PreviewHeadOut"][];
+            /** Missing */
+            missing: {
+                [key: string]: number;
+            };
+            /**
+             * Period End
+             * Format: date
+             */
+            period_end: string;
+            /**
+             * Period Start
+             * Format: date
+             */
+            period_start: string;
+            /** Total Paise */
+            total_paise: number;
+        };
+        /** PropertyTaxIn */
+        PropertyTaxIn: {
+            /** Annual Amount Paise */
+            annual_amount_paise: number;
+            /** Authority */
+            authority: string;
+            /** Exemption Reason */
+            exemption_reason?: string | null;
+            /** Financial Year */
+            financial_year: string;
+            /**
+             * Is Exempt
+             * @default false
+             */
+            is_exempt: boolean;
+        };
+        /** PropertyTaxOut */
+        PropertyTaxOut: {
+            /** Annual Amount Paise */
+            annual_amount_paise: number;
+            /** Authority */
+            authority: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Exemption Reason */
+            exemption_reason?: string | null;
+            /** Financial Year */
+            financial_year: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Is Exempt
+             * @default false
+             */
+            is_exempt: boolean;
+        };
+        /** SettingsOut */
+        SettingsOut: {
+            /** Bank Account Last4 */
+            bank_account_last4: string | null;
+            /** Bank Name */
+            bank_name: string | null;
+            /** Bill Day */
+            bill_day: number | null;
+            /**
+             * Billing Frequency
+             * @enum {string}
+             */
+            billing_frequency: "monthly" | "quarterly";
+            /** Due Days */
+            due_days: number;
+            /** Interest Enabled */
+            interest_enabled: boolean;
+            /** Interest Gb Resolution Date */
+            interest_gb_resolution_date: string | null;
+            /** Interest Grace Days */
+            interest_grace_days: number | null;
+            /** Interest Rate Annual Pct */
+            interest_rate_annual_pct: string | null;
+            /**
+             * Rounding Rule
+             * @enum {string}
+             */
+            rounding_rule: "none" | "nearest_rupee";
+            /** Upi Id */
+            upi_id: string | null;
+            /** Upi Payee Name */
+            upi_payee_name: string | null;
+        };
+        /** SettingsUpdate */
+        SettingsUpdate: {
+            /** Bank Account Last4 */
+            bank_account_last4?: string | null;
+            /** Bank Name */
+            bank_name?: string | null;
+            /** Bill Day */
+            bill_day?: number | null;
+            /** Billing Frequency */
+            billing_frequency?: ("monthly" | "quarterly") | null;
+            /** Due Days */
+            due_days?: number | null;
+            /** Interest Enabled */
+            interest_enabled?: boolean | null;
+            /** Interest Gb Resolution Date */
+            interest_gb_resolution_date?: string | null;
+            /** Interest Grace Days */
+            interest_grace_days?: number | null;
+            /** Interest Rate Annual Pct */
+            interest_rate_annual_pct?: number | string | null;
+            /** Rounding Rule */
+            rounding_rule?: ("none" | "nearest_rupee") | null;
+            /** Upi Id */
+            upi_id?: string | null;
+            /** Upi Payee Name */
+            upi_payee_name?: string | null;
         };
         /** SocietyCreateIn */
         SocietyCreateIn: {
@@ -953,6 +1618,73 @@ export interface components {
             upi_id: string | null;
             /** Upi Payee Name */
             upi_payee_name: string | null;
+        };
+        /** StandardHeadOut */
+        StandardHeadOut: {
+            /**
+             * Applies To
+             * @enum {string}
+             */
+            applies_to: "all" | "let_out_only";
+            /**
+             * Calc Type
+             * @enum {string}
+             */
+            calc_type: "equal_per_flat" | "equal_per_flat_with_lift" | "per_carpet_area" | "per_water_point" | "as_assessed_per_flat" | "pct_of_head" | "pct_of_construction_cost" | "per_parking_allotment" | "per_member_fixed" | "fixed_per_flat" | "custom_per_flat" | "voluntary";
+            /** Legal Percent */
+            legal_percent: string | null;
+            /** Legal Percent Kind */
+            legal_percent_kind: ("fixed" | "minimum") | null;
+            /** Legal Source */
+            legal_source: string | null;
+            /** Rule */
+            rule: string;
+            /**
+             * Standard Code
+             * @enum {string}
+             */
+            standard_code: "service" | "property_tax" | "water" | "lift" | "parking" | "non_occupancy" | "insurance" | "lease_rent" | "major_repair" | "sinking_fund" | "repair_fund" | "election_fund" | "education_fund" | "welfare_fund" | "other";
+        };
+        /** TaxImportOut */
+        TaxImportOut: {
+            /** Error Count */
+            error_count: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Ok Count */
+            ok_count: number;
+            /** Row Count */
+            row_count: number;
+            /** Rows */
+            rows: components["schemas"]["TaxImportRowOut"][];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "uploaded" | "previewed" | "imported" | "failed";
+        };
+        /** TaxImportRowOut */
+        TaxImportRowOut: {
+            /** Annual Amount Paise */
+            annual_amount_paise: number;
+            /** Financial Year */
+            financial_year: string;
+            /** Flat Label */
+            flat_label: string;
+            /** Is Exempt */
+            is_exempt: boolean;
+            /** Issues */
+            issues: components["schemas"]["ImportIssueOut"][];
+            /** Row */
+            row: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "ok" | "warning" | "error";
         };
         /** ValidationError */
         ValidationError: {
@@ -1258,6 +1990,183 @@ export interface operations {
             };
         };
     };
+    list_heads_api_v1_societies__society_id__charges_heads_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChargeHeadOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_head_api_v1_societies__society_id__charges_heads_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ChargeHeadIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChargeHeadSaved"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_head_api_v1_societies__society_id__charges_heads__head_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                head_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ChargeHeadUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChargeHeadSaved"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    preview_api_v1_societies__society_id__charges_preview_get: {
+        parameters: {
+            query: {
+                /** @description First day of the billing period */
+                period_start: string;
+            };
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PreviewOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    standard_heads_api_v1_societies__society_id__charges_standard_heads_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StandardHeadOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     list_flats_api_v1_societies__society_id__flats_get: {
         parameters: {
             query?: never;
@@ -1464,6 +2373,300 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MemberOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_overrides_api_v1_societies__society_id__flats__flat_id__overrides_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OverrideOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_override_api_v1_societies__society_id__flats__flat_id__overrides_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OverrideIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OverrideOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    end_override_api_v1_societies__society_id__flats__flat_id__overrides__override_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                override_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EndDateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OverrideOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_parking_api_v1_societies__society_id__flats__flat_id__parking_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ParkingOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_parking_api_v1_societies__society_id__flats__flat_id__parking_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ParkingIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ParkingOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    end_parking_api_v1_societies__society_id__flats__flat_id__parking__allotment_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                allotment_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EndDateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ParkingOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_tax_api_v1_societies__society_id__flats__flat_id__property_tax_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PropertyTaxOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_tax_api_v1_societies__society_id__flats__flat_id__property_tax_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PropertyTaxIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PropertyTaxOut"];
                 };
             };
             /** @description Validation Error */
@@ -1707,6 +2910,178 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MembershipOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    tax_upload_api_v1_societies__society_id__property_tax_imports_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_tax_upload_api_v1_societies__society_id__property_tax_imports_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TaxImportOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    tax_confirm_api_v1_societies__society_id__property_tax_imports__job_id__confirm_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                job_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TaxImportOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    tax_template_api_v1_societies__society_id__property_tax_template_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    read_settings_api_v1_societies__society_id__settings_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettingsOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    change_settings_api_v1_societies__society_id__settings_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SettingsUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SettingsOut"];
                 };
             };
             /** @description Validation Error */

@@ -1,12 +1,13 @@
 """Fictional demo data from docs/02 §12. Safe to run again: it only adds what is missing.
 
-Societies, flats, members and the listed dues (as opening balances). Charges, spending and
-compliance items are seeded by the milestones that build those tables (M4, M10, M12).
+Societies, flats, members, the listed dues (as opening balances) and the charge setup from
+the "Seed charge setup" table. Spending and compliance items come with M10 and M12.
 Bill day 1 and due after 15 days are demo choices, not rules. Logins are @example.com and
 work with the local dev sign-in (their user ids match `dev_user_id`).
 """
 
 from dataclasses import dataclass, field
+from decimal import Decimal
 from uuid import UUID
 
 from sqlalchemy import select
@@ -16,6 +17,7 @@ from app.auth import AuthUser, dev_user_id
 from app.db import get_sessionmaker, set_society_context, set_user_context
 from app.models import Flat, Member, SocietyMembership, User, Wing
 from app.services import auth as user_service
+from app.services import charges as charge_service
 from app.services import flats as flat_service
 from app.services import ledger
 from app.services import societies as society_service
@@ -33,6 +35,7 @@ class SeedSociety:
     city: str
     flat_count: int
     cost_per_flat_paise: int
+    service_per_flat_paise: int
     # flat label → dues in rupees (docs/02 §12)
     dues: dict[str, int]
     # wing name → flat numbers; a single unnamed wing uses the default wing
@@ -62,6 +65,7 @@ SOCIETIES = [
         city="Mumbai",
         flat_count=120,
         cost_per_flat_paise=96000000,
+        service_per_flat_paise=340000,
         dues={
             "A-101": 0,
             "A-204": 4200,
@@ -83,6 +87,7 @@ SOCIETIES = [
         city="Thane",
         flat_count=64,
         cost_per_flat_paise=84000000,
+        service_per_flat_paise=290000,
         dues={
             "1-01": 0,
             "1-04": 3600,
@@ -101,6 +106,7 @@ SOCIETIES = [
         city="Mumbai",
         flat_count=42,
         cost_per_flat_paise=72000000,
+        service_per_flat_paise=240000,
         dues={"101": 0, "102": 3000, "201": 0, "202": 0, "301": 6000},
         # 7 floors x 6 flats (101 ... 706).
         layout={None: _numbers(range(1, 8), range(1, 7), "{floor}{unit:02d}")},
@@ -117,6 +123,7 @@ class SeedReport:
     societies_created: int = 0
     flats_created: int = 0
     balances_created: int = 0
+    heads_created: int = 0
 
 
 async def _ensure_user(session: AsyncSession, email: str) -> User:
@@ -208,7 +215,60 @@ async def _seed_society(session: AsyncSession, spec: SeedSociety, report: SeedRe
                 report.balances_created += 1
             report.flats_created += 1
     await session.flush()
+    await _seed_heads(session, society_id, admin, spec, report)
     return society_id
+
+
+async def _seed_heads(
+    session: AsyncSession, society_id: UUID, admin: User, spec: SeedSociety, report: SeedReport
+) -> None:
+    """docs/02 §12 "Seed charge setup": service equal per flat, repair fund 0.75% and sinking
+    fund 0.25% of the certified cost, and non-occupancy at 10% of service for let-out flats."""
+    existing = {h.code: h for h in await charge_service.list_heads(session, society_id)}
+    plan = [
+        {
+            "name": "Service charges",
+            "standard_code": "service",
+            "calc_type": "equal_per_flat",
+            "period_total_paise": spec.service_per_flat_paise * spec.flat_count,
+            "sort_order": 1,
+        },
+        {
+            "name": "Repair and maintenance fund",
+            "standard_code": "repair_fund",
+            "calc_type": "pct_of_construction_cost",
+            "percent": Decimal("0.75"),
+            "sort_order": 2,
+        },
+        {
+            "name": "Sinking fund",
+            "standard_code": "sinking_fund",
+            "calc_type": "pct_of_construction_cost",
+            "percent": Decimal("0.25"),
+            "sort_order": 3,
+        },
+    ]
+    for fields in plan:
+        if fields["standard_code"] not in existing:
+            head, _ = await charge_service.save_head(session, society_id, admin, fields)
+            existing[head.code] = head
+            report.heads_created += 1
+    if "non_occupancy" not in existing:
+        await charge_service.save_head(
+            session,
+            society_id,
+            admin,
+            {
+                "name": "Non-occupancy charges",
+                "standard_code": "non_occupancy",
+                "calc_type": "pct_of_head",
+                "percent": Decimal(10),
+                "percent_of_head_id": existing["service"].id,
+                "applies_to": "let_out_only",
+                "sort_order": 4,
+            },
+        )
+        report.heads_created += 1
 
 
 async def _seed_resident(session: AsyncSession, society_id: UUID, flat_label: str) -> None:
