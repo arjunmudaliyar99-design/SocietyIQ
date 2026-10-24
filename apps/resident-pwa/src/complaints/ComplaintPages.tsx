@@ -15,6 +15,7 @@ import {
   ComplaintStatusPill,
   EmptyState,
   ErrorText,
+  LoadingBlock,
   categoryIcon,
   messageKeyOf,
   useComplaint,
@@ -58,7 +59,7 @@ export function MyComplaintsPage() {
       <BigButton icon={<MessageSquareWarning size={26} />} onClick={() => navigate("/report")}>
         {t("complaints.report")}
       </BigButton>
-      {complaints.isPending ? <p role="status">{t("loading")}</p> : null}
+      {complaints.isPending ? <LoadingBlock /> : null}
       {complaints.isError ? <ErrorText>{t(messageKeyOf(complaints.error))}</ErrorText> : null}
       {complaints.data?.length === 0 ? <EmptyState message={t("complaints.empty")} /> : null}
       {complaints.data?.length ? (
@@ -79,7 +80,7 @@ export function ComplaintPage() {
   const feedback = useComplaintFeedback(complaintId);
   const justSent = new URLSearchParams(window.location.search).get("sent") === "1";
 
-  if (complaint.isPending) return <p role="status">{t("loading")}</p>;
+  if (complaint.isPending) return <LoadingBlock />;
   if (complaint.isError) return <ErrorText>{t(messageKeyOf(complaint.error))}</ErrorText>;
   const c = complaint.data;
 

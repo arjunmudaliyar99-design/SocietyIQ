@@ -9,6 +9,7 @@ import {
   ComplaintRow,
   EmptyState,
   ErrorText,
+  LoadingBlock,
   messageKeyOf,
   useComplaints,
   useTranslation,
@@ -49,7 +50,7 @@ export function ComplaintsPage() {
         ))}
       </div>
 
-      {complaints.isPending ? <p role="status">{t("loading")}</p> : null}
+      {complaints.isPending ? <LoadingBlock /> : null}
       {complaints.isError ? <ErrorText>{t(messageKeyOf(complaints.error))}</ErrorText> : null}
       {complaints.data?.length === 0 ? (
         <EmptyState message={status ? t("complaints.emptyFiltered") : t("complaints.empty")} />

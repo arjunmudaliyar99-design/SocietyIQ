@@ -1,6 +1,6 @@
 // TanStack Query hooks for complaints (docs/02 §8). Shared: the committee manages, residents
 // raise and follow; the backend decides what each person may see.
-import { useEffect, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type { Schemas } from "../api/client";
@@ -25,14 +25,18 @@ function useBase() {
 function useInvalidate() {
   const client = useQueryClient();
   const { societyId } = useBase();
-  return () => client.invalidateQueries({ queryKey: ["societies", societyId, "complaints"] });
+  return () =>
+    client.invalidateQueries({
+      queryKey: ["societies", societyId, "complaints"],
+    });
 }
 
 export function useComplaints(status?: ComplaintStatus) {
   const { api, societyId, base } = useBase();
   return useQuery({
     queryKey: ["societies", societyId, "complaints", "list", status ?? "all"],
-    queryFn: () => api.get<Complaint[]>(status ? `${base}?status=${status}` : base),
+    queryFn: () =>
+      api.get<Complaint[]>(status ? `${base}?status=${status}` : base),
   });
 }
 
@@ -49,10 +53,20 @@ export function useRaiseComplaint() {
   const { api, base } = useBase();
   const invalidate = useInvalidate();
   return useMutation({
-    mutationFn: async ({ complaint, photo }: { complaint: NewComplaint; photo?: File | null }) => {
+    mutationFn: async ({
+      complaint,
+      photo,
+    }: {
+      complaint: NewComplaint;
+      photo?: File | null;
+    }) => {
       const created = await api.post<ComplaintDetail>(base, complaint);
       if (!photo) return created;
-      return api.upload<ComplaintDetail>(`${base}/${created.id}/photos`, photo, photo.name || "photo.jpg");
+      return api.upload<ComplaintDetail>(
+        `${base}/${created.id}/photos`,
+        photo,
+        photo.name || "photo.jpg",
+      );
     },
     onSuccess: invalidate,
   });
@@ -62,7 +76,8 @@ export function useAddComplaintUpdate(id: string) {
   const { api, base } = useBase();
   const invalidate = useInvalidate();
   return useMutation({
-    mutationFn: (body: Schemas["ComplaintUpdateIn"]) => api.post<ComplaintDetail>(`${base}/${id}/updates`, body),
+    mutationFn: (body: Schemas["ComplaintUpdateIn"]) =>
+      api.post<ComplaintDetail>(`${base}/${id}/updates`, body),
     onSuccess: invalidate,
   });
 }
@@ -72,7 +87,9 @@ export function useAssignComplaint(id: string) {
   const invalidate = useInvalidate();
   return useMutation({
     mutationFn: (assignedTo: string) =>
-      api.patch<ComplaintDetail>(`${base}/${id}/assignee`, { assigned_to_text: assignedTo }),
+      api.patch<ComplaintDetail>(`${base}/${id}/assignee`, {
+        assigned_to_text: assignedTo,
+      }),
     onSuccess: invalidate,
   });
 }
@@ -88,19 +105,32 @@ export function useComplaintFeedback(id: string) {
 }
 
 /** Photos need the sign-in header, so they are fetched as blobs and shown via object URLs. */
-export function useComplaintPhoto(complaintId: string, photoId: string): string | null {
+export function useComplaintPhoto(
+  complaintId: string,
+  photoId: string,
+): string | null {
   const { api, societyId, base } = useBase();
   const blob = useQuery({
-    queryKey: ["societies", societyId, "complaints", complaintId, "photo", photoId],
+    queryKey: [
+      "societies",
+      societyId,
+      "complaints",
+      complaintId,
+      "photo",
+      photoId,
+    ],
     queryFn: () => api.download(`${base}/${complaintId}/photos/${photoId}`),
     staleTime: Infinity,
   });
-  const [url, setUrl] = useState<string | null>(null);
-  useEffect(() => {
-    if (!blob.data) return;
-    const next = URL.createObjectURL(blob.data);
-    setUrl(next);
-    return () => URL.revokeObjectURL(next);
-  }, [blob.data]);
+  const url = useMemo(
+    () => (blob.data ? URL.createObjectURL(blob.data) : null),
+    [blob.data],
+  );
+  useEffect(
+    () => () => {
+      if (url) URL.revokeObjectURL(url);
+    },
+    [url],
+  );
   return url;
 }

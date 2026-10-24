@@ -31,6 +31,11 @@ Format: **ID — question** · who can answer · status.
 - **Q-033 — Name of the default wing created with a society (docs/05 §2 asks for one; no name given)?** · founders · open (placeholder: "Main")
 - **Q-034 — Terms of use and privacy policy texts for the consent screen (docs/08 §8): who drafts, and where are they hosted?** · founders / lawyer · open (consent recorded against `POLICY_VERSION=draft-2026-10`; no links shown yet)
 
+## Build questions (M8–M9; IDs Q-080 to Q-089)
+
+- **Q-080 — What does the resident's "Fixed" / "Not fixed" answer do to a resolved complaint (docs/02 §8 gives the buttons, not the effect)?** · founders · open (placeholder: "Fixed" closes it, "Not fixed" sends it back to In progress — `FEEDBACK_STATUS` in `backend/app/services/complaints.py`)
+- **Q-081 — Does a resident see every complaint for their flat (including ones raised by the other owner, the tenant or the committee on their behalf), or only the ones they raised (docs/07 M8 says "their own")?** · founders · open (placeholder: every complaint for the flats they are linked to, plus any they raised)
+
 ## Legal and compliance
 
 - **Q-012 — Exact provision allowing notices by SMS/electronic means (the Legal & Society Advisor's point): which section, rule or circular, and for which notices?** · the Legal & Society Advisor / lawyer · open

@@ -2,7 +2,7 @@
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-import { Button, ComplaintForm, useTranslation } from "@societyiq/shared";
+import { Button, ComplaintForm, LoadingBlock, useTranslation } from "@societyiq/shared";
 
 import { useFlats } from "../api/flats";
 import { flatLabel } from "../flats/labels";
@@ -25,7 +25,7 @@ export function NewComplaintPage() {
       <h1 className="mb-2 text-title font-bold">{t("complaints.newTitle")}</h1>
       <p className="mb-6 text-body">{t("complaints.onBehalfNote")}</p>
       {flats.isPending ? (
-        <p role="status">{t("loading")}</p>
+        <LoadingBlock />
       ) : (
         <ComplaintForm flats={options} onDone={(c) => navigate(`/complaints/${c.id}`)} />
       )}

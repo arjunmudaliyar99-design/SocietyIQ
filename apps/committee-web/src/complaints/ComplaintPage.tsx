@@ -11,6 +11,7 @@ import {
   ComplaintPhotos,
   ComplaintStatusPill,
   ErrorText,
+  LoadingBlock,
   Field,
   SelectField,
   categoryIcon,
@@ -123,7 +124,7 @@ export function ComplaintPage() {
   const navigate = useNavigate();
   const complaint = useComplaint(complaintId);
 
-  if (complaint.isPending) return <p role="status">{t("loading")}</p>;
+  if (complaint.isPending) return <LoadingBlock />;
   if (complaint.isError) return <ErrorText>{t(messageKeyOf(complaint.error))}</ErrorText>;
   const c = complaint.data;
 

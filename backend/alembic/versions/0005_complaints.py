@@ -1,12 +1,12 @@
 """M8: complaints and complaint updates (docs/05 §5).
 
-Revision ID: 0005
+Revision ID: 0005_complaints
 Revises: 0004
 """
 
 from app.migration_sql import enable_society_isolation, execute_script
 
-revision = "0005"
+revision = "0005_complaints"
 down_revision = "0004"
 branch_labels = None
 depends_on = None

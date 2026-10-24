@@ -1,22 +1,15 @@
 // Complaint pieces used by both apps (docs/02 §8): category icons, status pill, the raise form,
 // photos and the update history.
 import {
-  ArrowUpDown,
   Camera,
-  Car,
   CircleCheck,
   CircleDot,
-  CircleHelp,
   Clock,
-  Droplets,
   Home,
   Lock,
   Send,
-  Shield,
-  Sparkles,
   Trees,
   X,
-  Zap,
 } from "lucide-react";
 import { useId, useRef, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
@@ -37,24 +30,22 @@ import {
   type ComplaintLocation,
   type ComplaintStatus,
 } from "./api";
-
-export const COMPLAINT_CATEGORIES: { value: ComplaintCategory; icon: ReactNode }[] = [
-  { value: "water", icon: <Droplets size={28} /> },
-  { value: "lift", icon: <ArrowUpDown size={28} /> },
-  { value: "electricity", icon: <Zap size={28} /> },
-  { value: "cleaning", icon: <Sparkles size={28} /> },
-  { value: "security", icon: <Shield size={28} /> },
-  { value: "parking", icon: <Car size={28} /> },
-  { value: "other", icon: <CircleHelp size={28} /> },
-];
-
-export const COMPLAINT_STATUSES: ComplaintStatus[] = ["open", "in_progress", "resolved", "closed"];
+import { categoryIcon, COMPLAINT_CATEGORIES } from "./categories";
 
 // Word + icon + colour, never colour alone (docs/03 §3).
-const STATUS_STYLE: Record<ComplaintStatus, { className: string; icon: ReactNode }> = {
+const STATUS_STYLE: Record<
+  ComplaintStatus,
+  { className: string; icon: ReactNode }
+> = {
   open: { className: "text-teal border-teal", icon: <CircleDot size={18} /> },
-  in_progress: { className: "text-ink border-muted", icon: <Clock size={18} /> },
-  resolved: { className: "text-green border-green", icon: <CircleCheck size={18} /> },
+  in_progress: {
+    className: "text-ink border-muted",
+    icon: <Clock size={18} />,
+  },
+  resolved: {
+    className: "text-green border-green",
+    icon: <CircleCheck size={18} />,
+  },
   closed: { className: "text-muted border-line", icon: <Lock size={18} /> },
 };
 
@@ -71,28 +62,34 @@ export function ComplaintStatusPill({ status }: { status: ComplaintStatus }) {
   );
 }
 
-export function categoryIcon(category: ComplaintCategory): ReactNode {
-  return COMPLAINT_CATEGORIES.find((c) => c.value === category)?.icon;
-}
-
 /** One row in a list: icon, category, flat or common area, date and status. */
-export function ComplaintRow({ complaint, onOpen }: { complaint: Complaint; onOpen: () => void }) {
+export function ComplaintRow({
+  complaint,
+  onOpen,
+}: {
+  complaint: Complaint;
+  onOpen: () => void;
+}) {
   const { t } = useTranslation();
   const { language } = useSettings();
   const where =
-    complaint.location === "common_area" ? t("complaints.location.common_area") : (complaint.flat_label ?? "");
+    complaint.location === "common_area"
+      ? t("complaints.location.common_area")
+      : (complaint.flat_label ?? "");
   return (
     <li>
       <button
         type="button"
         onClick={onOpen}
-        className="flex w-full items-center gap-3 rounded-lg border-2 border-line bg-surface p-4 text-left focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ink"
+        className="flex w-full items-center gap-3 rounded-card border border-line bg-surface p-4 text-left shadow-card transition hover:border-teal hover:shadow-raised focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ink"
       >
         <span aria-hidden="true" className="text-teal">
           {categoryIcon(complaint.category)}
         </span>
         <span className="flex flex-1 flex-col">
-          <span className="text-body font-semibold">{t(`complaints.category.${complaint.category}`)}</span>
+          <span className="text-body font-semibold">
+            {t(`complaints.category.${complaint.category}`)}
+          </span>
           <span className="text-small text-muted">
             {where ? `${where} · ` : ""}
             {formatDate(complaint.created_at.slice(0, 10), language)}
@@ -108,7 +105,11 @@ export function ComplaintRow({ complaint, onOpen }: { complaint: Complaint; onOp
 const MAX_SIDE = 1600;
 
 async function shrinkPhoto(file: File): Promise<File> {
-  if (typeof createImageBitmap !== "function" || !file.type.startsWith("image/")) return file;
+  if (
+    typeof createImageBitmap !== "function" ||
+    !file.type.startsWith("image/")
+  )
+    return file;
   try {
     const bitmap = await createImageBitmap(file);
     const scale = Math.min(1, MAX_SIDE / Math.max(bitmap.width, bitmap.height));
@@ -116,8 +117,12 @@ async function shrinkPhoto(file: File): Promise<File> {
     const canvas = document.createElement("canvas");
     canvas.width = Math.round(bitmap.width * scale);
     canvas.height = Math.round(bitmap.height * scale);
-    canvas.getContext("2d")?.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.85));
+    canvas
+      .getContext("2d")
+      ?.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob(resolve, "image/jpeg", 0.85),
+    );
     return blob ? new File([blob], "photo.jpg", { type: "image/jpeg" }) : file;
   } catch {
     // Formats the browser cannot draw (e.g. HEIC on some phones) go as they are.
@@ -168,7 +173,9 @@ export function ComplaintForm({ flats, onDone }: ComplaintFormProps) {
   return (
     <div className="flex flex-col gap-6">
       <fieldset>
-        <legend className="mb-3 text-section font-bold">{t("complaints.form.what")}</legend>
+        <legend className="mb-3 text-section font-bold">
+          {t("complaints.form.what")}
+        </legend>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {COMPLAINT_CATEGORIES.map((c) => (
             <button
@@ -177,7 +184,9 @@ export function ComplaintForm({ flats, onDone }: ComplaintFormProps) {
               aria-pressed={category === c.value}
               onClick={() => setCategory(c.value)}
               className={`flex min-h-[88px] flex-col items-center justify-center gap-2 rounded-xl border-2 p-3 text-body font-semibold focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ink ${
-                category === c.value ? "border-teal bg-teal text-white" : "border-line bg-surface text-ink"
+                category === c.value
+                  ? "border-teal bg-teal text-white"
+                  : "border-line bg-surface text-ink"
               }`}
             >
               <span aria-hidden="true">{c.icon}</span>
@@ -185,11 +194,15 @@ export function ComplaintForm({ flats, onDone }: ComplaintFormProps) {
             </button>
           ))}
         </div>
-        {tried && !category ? <ErrorText>{t("complaints.form.pickCategory")}</ErrorText> : null}
+        {tried && !category ? (
+          <ErrorText>{t("complaints.form.pickCategory")}</ErrorText>
+        ) : null}
       </fieldset>
 
       <fieldset>
-        <legend className="mb-3 text-section font-bold">{t("complaints.form.where")}</legend>
+        <legend className="mb-3 text-section font-bold">
+          {t("complaints.form.where")}
+        </legend>
         <div className="grid grid-cols-2 gap-3">
           {(
             [
@@ -203,7 +216,9 @@ export function ComplaintForm({ flats, onDone }: ComplaintFormProps) {
               aria-pressed={location === value}
               onClick={() => setLocation(value)}
               className={`flex min-h-[64px] items-center justify-center gap-2 rounded-xl border-2 p-3 text-body font-semibold focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ink ${
-                location === value ? "border-teal bg-teal text-white" : "border-line bg-surface text-ink"
+                location === value
+                  ? "border-teal bg-teal text-white"
+                  : "border-line bg-surface text-ink"
               }`}
             >
               <span aria-hidden="true">{icon}</span>
@@ -219,9 +234,14 @@ export function ComplaintForm({ flats, onDone }: ComplaintFormProps) {
             label={t("complaints.form.flat")}
             value={flatId}
             onChange={(e) => setFlatId(e.target.value)}
-            options={[{ value: "", label: t("complaints.form.chooseFlat") }, ...flats]}
+            options={[
+              { value: "", label: t("complaints.form.chooseFlat") },
+              ...flats,
+            ]}
           />
-          {tried && needsFlat ? <ErrorText>{t("complaints.form.pickFlat")}</ErrorText> : null}
+          {tried && needsFlat ? (
+            <ErrorText>{t("complaints.form.pickFlat")}</ErrorText>
+          ) : null}
         </div>
       ) : null}
 
@@ -239,13 +259,21 @@ export function ComplaintForm({ flats, onDone }: ComplaintFormProps) {
         {photo ? (
           <div className="flex items-center gap-3">
             <span className="text-body">{t("complaints.form.photoAdded")}</span>
-            <Button variant="secondary" icon={<X size={22} />} onClick={() => setPhoto(null)}>
+            <Button
+              variant="secondary"
+              icon={<X size={22} />}
+              onClick={() => setPhoto(null)}
+            >
               {t("complaints.form.removePhoto")}
             </Button>
           </div>
         ) : (
           <div>
-            <Button variant="secondary" icon={<Camera size={22} />} onClick={() => photoInput.current?.click()}>
+            <Button
+              variant="secondary"
+              icon={<Camera size={22} />}
+              onClick={() => photoInput.current?.click()}
+            >
               {t("complaints.form.addPhoto")}
             </Button>
           </div>
@@ -266,18 +294,37 @@ export function ComplaintForm({ flats, onDone }: ComplaintFormProps) {
         />
       </div>
 
-      <BigButton icon={<Send size={24} />} onClick={() => void send()} disabled={raise.isPending}>
-        {raise.isPending ? t("complaints.form.sending") : t("complaints.form.send")}
+      <BigButton
+        icon={<Send size={24} />}
+        onClick={() => void send()}
+        disabled={raise.isPending}
+      >
+        {raise.isPending
+          ? t("complaints.form.sending")
+          : t("complaints.form.send")}
       </BigButton>
-      {raise.isError ? <ErrorText>{t(messageKeyOf(raise.error))}</ErrorText> : null}
+      {raise.isError ? (
+        <ErrorText>{t(messageKeyOf(raise.error))}</ErrorText>
+      ) : null}
     </div>
   );
 }
 
-function Photo({ complaintId, photoId, index }: { complaintId: string; photoId: string; index: number }) {
+function Photo({
+  complaintId,
+  photoId,
+  index,
+}: {
+  complaintId: string;
+  photoId: string;
+  index: number;
+}) {
   const { t } = useTranslation();
   const url = useComplaintPhoto(complaintId, photoId);
-  if (!url) return <div className="h-32 w-32 rounded-lg border-2 border-line bg-surface" />;
+  if (!url)
+    return (
+      <div className="h-32 w-32 rounded-lg border-2 border-line bg-surface" />
+    );
   return (
     <a href={url} target="_blank" rel="noopener noreferrer" className="block">
       <img
@@ -301,7 +348,11 @@ export function ComplaintPhotos({ complaint }: { complaint: ComplaintDetail }) {
 }
 
 /** What happened so far, oldest first. Resident feedback is stored as an i18n key. */
-export function ComplaintHistory({ complaint }: { complaint: ComplaintDetail }) {
+export function ComplaintHistory({
+  complaint,
+}: {
+  complaint: ComplaintDetail;
+}) {
   const { t } = useTranslation();
   const { language } = useSettings();
   const updates = complaint.updates ?? [];
@@ -310,20 +361,33 @@ export function ComplaintHistory({ complaint }: { complaint: ComplaintDetail }) 
       <h2 className="mb-3 text-section font-bold">{t("complaints.history")}</h2>
       <ol className="flex flex-col gap-3">
         <li className="border-l-4 border-teal pl-3">
-          <p className="text-small text-muted">{formatDate(complaint.created_at.slice(0, 10), language)}</p>
+          <p className="text-small text-muted">
+            {formatDate(complaint.created_at.slice(0, 10), language)}
+          </p>
           <p className="text-body">
-            {complaint.raised_on_behalf ? t("complaints.raisedOnBehalf") : t("complaints.raised")}
+            {complaint.raised_on_behalf
+              ? t("complaints.raisedOnBehalf")
+              : t("complaints.raised")}
           </p>
         </li>
         {updates.map((u) => (
-          <li key={u.id} className={`border-l-4 pl-3 ${u.visible_to_resident ? "border-teal" : "border-muted"}`}>
+          <li
+            key={u.id}
+            className={`border-l-4 pl-3 ${u.visible_to_resident ? "border-teal" : "border-muted"}`}
+          >
             <p className="text-small text-muted">
               {formatDate(u.created_at.slice(0, 10), language)}
-              {u.new_status ? ` · ${t(`complaints.status.${u.new_status}`)}` : ""}
-              {u.visible_to_resident ? "" : ` · ${t("complaints.committeeOnly")}`}
+              {u.new_status
+                ? ` · ${t(`complaints.status.${u.new_status}`)}`
+                : ""}
+              {u.visible_to_resident
+                ? ""
+                : ` · ${t("complaints.committeeOnly")}`}
             </p>
             <p className="whitespace-pre-line text-body">
-              {u.message.startsWith("complaints.feedback.") ? t(u.message) : u.message}
+              {u.message.startsWith("complaints.feedback.")
+                ? t(u.message)
+                : u.message}
             </p>
           </li>
         ))}

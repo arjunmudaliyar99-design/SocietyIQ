@@ -14,7 +14,7 @@ What is built, what is in progress, and what is next. Every Claude Code session 
 | M5 Billing runs, bills, PDFs | IN REVIEW | feat/m5-billing (merged into `dev` locally) | Email to residents is M9 |
 | M6 Payments, receipts, dues | IN PROGRESS (feat/m6-payments) | | Then M7 |
 | M7 Resident PWA core | NOT STARTED | | |
-| M8 Complaints | IN PROGRESS (feat/m8-complaints) | | Then M9 in the same session |
+| M8 Complaints | IN REVIEW | feat/m8-complaints (merged into `dev`) | Phone camera upload not yet tried on a real phone |
 | M9 Notices and email | NOT STARTED | | |
 | M10 Committee home and compliance | IN PROGRESS (feat/m10-compliance) | | Then M11 in the same session |
 | M11 Analytics and admin tools | NOT STARTED | | |
@@ -27,6 +27,14 @@ Statuses: NOT STARTED · IN PROGRESS (branch) · IN REVIEW (PR link) · DONE · 
 ## Log
 
 Newest first. One entry per merged PR: date, milestone, what was built, how to try it, known gaps.
+
+- 2026-10-24 — M8 — Complaints.
+  Backend: migration `0005_complaints` (`complaints`, append-only `complaint_updates`, forced RLS). Endpoints under `/societies/{id}/complaints`: list (filter `?status=`), raise, detail, post an update (optionally change status, optionally committee-only), assign to a person or vendor, resident feedback (Fixed / Not fixed, only after Resolved), add photo (JPEG/PNG/WebP checked by content, max 3), get photo. Admin, treasurer and committee manage; owners, tenants and delegates raise and see their flat's complaints (others' are 404); consultant and auditor get 403. Committee raising for a flat is recorded as "on behalf". Create, assign, status and feedback write `audit_log`.
+  Front end: shared `packages/shared/src/complaints` (hooks, category icons, status pill, raise form with photo shrink, photo viewer, history). Committee: Complaints list (Open first, filter by status), raise for a flat, complaint page (assign, update with status change, committee-only notes). Resident: Report a problem (category icons, my flat / common area, photo from camera or gallery, optional text, one Send), My complaints, complaint page with Fixed / Not fixed. Five languages (non-English drafts).
+  Acceptance: photo upload tested by API and UI test (real phone camera not yet tried); residents see only their own (test); committee list filters by status (API and UI tests).
+  Tests: backend 152 (7 new complaint tests + 8 isolation-checked routes), front end: 4 new.
+  How to try: sign in to the committee app as `demo-admin@example.com` → Complaints; resident app as `resident.b207@example.com` → Report a problem.
+  Known gaps: residents linked to several flats cannot pick one in the PWA yet (API asks for `flat_id`; flat picker comes with M7 flat linking); no demo complaints in the seed (docs/02 §12 lists none); Q-080 and Q-081 use placeholders; complaint emails/notifications wait for M9.
 
 - 2026-10-24 — M5 — Billing runs, bills and PDFs.
   Calc: `app/calc/bills.py` (arrears, advance, total due per docs/06 §3; simple interest per §5 from the later of due date + grace and the last run's bill date, so never charged twice; 100% covered).
