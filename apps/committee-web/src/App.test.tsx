@@ -49,8 +49,8 @@ describe("committee shell", () => {
   });
 
   it("menu pages say Coming soon", () => {
-    renderApp("/bills");
-    expect(screen.getByRole("heading", { name: "Bills" })).toBeTruthy();
+    renderApp("/dues");
+    expect(screen.getByRole("heading", { name: "Dues" })).toBeTruthy();
     expect(screen.getByText(/Coming soon/)).toBeTruthy();
   });
 

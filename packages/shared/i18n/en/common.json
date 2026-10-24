@@ -141,6 +141,17 @@
     "headExists": "This charge is already added.",
     "headSelfReference": "A charge cannot be a percentage of itself.",
     "exemptionReason": "Give the reason for the exemption.",
-    "periodStart": "A billing period starts on the 1st of a month."
+    "periodStart": "A billing period starts on the 1st of a month.",
+    "billDayMissing": "Set the bill date in billing settings first.",
+    "runExists": "Bills for this period already exist.",
+    "noCharges": "Set up the charges first.",
+    "runNotDraft": "Only a draft can be approved or cancelled.",
+    "runStale": "Charges or flats changed after this draft was made. Cancel it and create the bills again.",
+    "billNotCancellable": "Only an unpaid bill can be cancelled.",
+    "billNotCancelled": "Cancel the bill before issuing a corrected one.",
+    "billAlreadyReissued": "A corrected bill was already issued.",
+    "flatLeftOut": "This flat is missing information needed for its charges.",
+    "pdfUnavailable": "The PDF cannot be made on this computer right now. Please contact SocietyIQ support.",
+    "noBills": "There are no bills to print."
   }
 }

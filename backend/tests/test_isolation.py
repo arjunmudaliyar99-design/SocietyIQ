@@ -73,6 +73,17 @@ SOCIETY_ROUTES: dict[tuple[str, str], object] = {
     ("PATCH", "/api/v1/societies/{society_id}/flats/{flat_id}/parking/{allotment_id}"): {
         "end_date": "2026-11-30"
     },
+    ("GET", "/api/v1/societies/{society_id}/billing-runs"): None,
+    ("POST", "/api/v1/societies/{society_id}/billing-runs"): {"period_start": "2026-11-01"},
+    ("GET", "/api/v1/societies/{society_id}/billing-runs/{run_id}"): None,
+    ("POST", "/api/v1/societies/{society_id}/billing-runs/{run_id}/approve"): None,
+    ("POST", "/api/v1/societies/{society_id}/billing-runs/{run_id}/cancel"): {"reason": "test"},
+    ("GET", "/api/v1/societies/{society_id}/billing-runs/{run_id}/pdf"): None,
+    ("GET", "/api/v1/societies/{society_id}/bills"): None,
+    ("GET", "/api/v1/societies/{society_id}/bills/{bill_id}"): None,
+    ("POST", "/api/v1/societies/{society_id}/bills/{bill_id}/cancel"): {"reason": "test"},
+    ("POST", "/api/v1/societies/{society_id}/bills/{bill_id}/reissue"): None,
+    ("GET", "/api/v1/societies/{society_id}/bills/{bill_id}/pdf"): None,
     ("GET", "/api/v1/societies/{society_id}/property-tax/template"): None,
     ("POST", "/api/v1/societies/{society_id}/property-tax/imports"): FILE,
     ("POST", "/api/v1/societies/{society_id}/property-tax/imports/{job_id}/confirm"): None,

@@ -106,6 +106,7 @@ SETTINGS_FIELDS = (
     "interest_gb_resolution_date",
     "interest_grace_days",
     "rounding_rule",
+    "auto_approve_billing",
 )
 
 

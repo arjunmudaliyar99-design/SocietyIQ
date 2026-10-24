@@ -2,6 +2,10 @@
 
 Decisions made during planning and building. Newest first. Format: date — decision — why — who.
 
+- 2026-10-24 — Bill PDFs are rendered when first opened and then stored, not inside the approval transaction (docs/04 §8 and docs/07 M5 put them in it) — a font or renderer failure must never block or roll back money records; the bill's figures are fixed at approval either way — M5 build session, to be confirmed by the Co-founder (Engineering).
+- 2026-10-24 — Interest is charged from the later of (due date + grace days) and the previous approved run's bill date, up to the new bill date, on unpaid charges only — docs/06 §5 formula; prevents charging the same days twice; Q-002 still open — M5 build session.
+- 2026-10-24 — The billing job reads societies through a read-only `scheduler_read` policy enabled by `app.job = 'scheduler'`; all writes still happen per society inside its RLS context — the job must find societies without a user — M5 build session.
+- 2026-10-24 — Approval re-computes the charges and refuses (`RUN_STALE`) if anything changed since the draft — what is approved must be exactly what was reviewed — M5 build session.
 - 2026-10-24 — Saving a charge head counts as its approval (`approved_by` = the admin, treasurer or consultant who saved it); no separate approval step — docs/02 §5 says heads are "approved by the committee" without a workflow — M4 build session, to be confirmed.
 - 2026-10-24 — "Per member" (education fund) counts owners and joint owners active in the period; tenants and delegates are not members — co-operative membership is the owner's — M4 build session, to be confirmed with the consultant.
 - 2026-10-24 — A flat missing any input a head needs (carpet area, water taps, construction cost) is left out of the whole run, not just that head; equal splits are shared among the flats billed — docs/06 §2 "flat excluded from the run until fixed", applied to every input — M4 build session.

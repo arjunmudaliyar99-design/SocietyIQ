@@ -136,6 +136,7 @@ class SettingsUpdate(BaseModel):
     interest_gb_resolution_date: date | None = None
     interest_grace_days: int | None = Field(default=None, ge=0)
     rounding_rule: Literal["none", "nearest_rupee"] | None = None
+    auto_approve_billing: bool | None = None
 
 
 class SettingsOut(BaseModel):
@@ -153,6 +154,7 @@ class SettingsOut(BaseModel):
     interest_gb_resolution_date: date | None
     interest_grace_days: int | None
     rounding_rule: Literal["none", "nearest_rupee"]
+    auto_approve_billing: bool
 
 
 class OverrideIn(BaseModel):

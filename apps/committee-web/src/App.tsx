@@ -3,6 +3,9 @@ import { Route, Routes } from "react-router-dom";
 
 import { EmptyState, useTranslation } from "@societyiq/shared";
 
+import { BillPage } from "./billing/BillPage";
+import { BillsPage } from "./billing/BillsPage";
+import { RunPage } from "./billing/RunPage";
 import { ChargesPage } from "./charges/ChargesPage";
 import { HeadPage } from "./charges/HeadPage";
 import { PreviewPage } from "./charges/PreviewPage";
@@ -40,7 +43,7 @@ function ComingSoon({ navKey }: { navKey: string }) {
 }
 
 // Menu items with real pages; the rest show "Coming soon" until their milestone.
-const BUILT = new Set(["/", "/settings", "/flats", "/charges"]);
+const BUILT = new Set(["/", "/settings", "/flats", "/charges", "/bills"]);
 
 export default function App() {
   return (
@@ -58,6 +61,9 @@ export default function App() {
         <Route path="/flats/wings" element={<WingsPage />} />
         <Route path="/flats/import" element={<ImportPage />} />
         <Route path="/flats/:flatId" element={<FlatPage />} />
+        <Route path="/bills" element={<BillsPage />} />
+        <Route path="/bills/runs/:runId" element={<RunPage />} />
+        <Route path="/bills/:billId" element={<BillPage />} />
         <Route path="/charges" element={<ChargesPage />} />
         <Route path="/charges/new" element={<HeadPage />} />
         <Route path="/charges/preview" element={<PreviewPage />} />

@@ -28,6 +28,8 @@ jobs:
         working-directory: backend
     steps:
       - uses: actions/checkout@v4
+      # WeasyPrint needs Pango and HarfBuzz to render bill PDFs (docs/04 §8).
+      - run: sudo apt-get update && sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b
       - uses: astral-sh/setup-uv@v6
       - run: uv python install 3.12
       - run: uv sync --locked
@@ -35,7 +37,7 @@ jobs:
       - run: uv run ruff format --check .
       - run: uv run pytest
       # Money rules: every line of app/calc must be tested (docs/04 §15).
-      - run: uv run pytest tests/test_calc_charges.py tests/test_calc_legal.py --cov=app/calc --cov-fail-under=100
+      - run: uv run pytest tests/test_calc_charges.py tests/test_calc_legal.py tests/test_calc_bills.py --cov=app/calc --cov-fail-under=100
 
   frontend:
     runs-on: ubuntu-latest

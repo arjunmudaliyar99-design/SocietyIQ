@@ -28,6 +28,7 @@ import {
   type Member,
   type MemberInput,
 } from "../api/flats";
+import { FlatBills } from "./FlatBills";
 import { FlatExtras } from "./FlatExtras";
 import { FlatForm } from "./FlatForm";
 import { MEMBER_TYPES, flatLabel } from "./labels";
@@ -73,6 +74,7 @@ export function FlatPage() {
 
       <h2 className="mt-10 mb-4 text-section font-bold">{t("members.title")}</h2>
       <Members flat={data} canManage={canManage} />
+      <FlatBills flatId={data.id} />
       <FlatExtras flatId={data.id} canManage={canManage} />
     </>
   );

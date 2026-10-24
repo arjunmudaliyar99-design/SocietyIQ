@@ -23,6 +23,7 @@ async def record(
     before: dict[str, Any] | None = None,
     after: dict[str, Any] | None = None,
     reason: str | None = None,
+    flush: bool = True,
 ) -> None:
     session.add(
         AuditLog(
@@ -36,4 +37,6 @@ async def record(
             reason=reason,
         )
     )
-    await session.flush()
+    # Bulk writers (billing runs) flush once at the end of the transaction instead.
+    if flush:
+        await session.flush()

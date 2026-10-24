@@ -1,0 +1,21 @@
+name: Scheduled jobs
+
+# Daily jobs from docs/04 §13. The backend does the work; this only calls it.
+# Repository secrets: JOBS_BASE_URL (e.g. https://api.example.com) and INTERNAL_JOBS_TOKEN.
+on:
+  schedule:
+    # 00:30 UTC = 06:00 India time
+    - cron: "30 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  create-draft-billing-runs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create draft billing runs
+        env:
+          JOBS_BASE_URL: ${{ secrets.JOBS_BASE_URL }}
+          INTERNAL_JOBS_TOKEN: ${{ secrets.INTERNAL_JOBS_TOKEN }}
+        run: |
+          if [ -z "$JOBS_BASE_URL" ]; then echo "JOBS_BASE_URL not set; skipping"; exit 0; fi
+          curl --fail-with-body -sS -X POST "$JOBS_BASE_URL/api/v1/internal/jobs/create-draft-billing-runs"             -H "X-Jobs-Token: $INTERNAL_JOBS_TOKEN" -H "Content-Type: application/json" -d '{}'

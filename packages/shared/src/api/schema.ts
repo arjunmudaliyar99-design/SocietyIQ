@@ -21,6 +21,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/internal/jobs/create-draft-billing-runs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Run Billing Job */
+        post: operations["run_billing_job_api_v1_internal_jobs_create_draft_billing_runs_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/me": {
         parameters: {
             query?: never;
@@ -118,6 +135,184 @@ export interface paths {
         get: operations["get_society_api_v1_societies__society_id__get"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/billing-runs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Runs */
+        get: operations["list_runs_api_v1_societies__society_id__billing_runs_get"];
+        put?: never;
+        /** Create Run */
+        post: operations["create_run_api_v1_societies__society_id__billing_runs_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/billing-runs/{run_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Run */
+        get: operations["get_run_api_v1_societies__society_id__billing_runs__run_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/billing-runs/{run_id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Approve Run */
+        post: operations["approve_run_api_v1_societies__society_id__billing_runs__run_id__approve_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/billing-runs/{run_id}/cancel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Cancel Run */
+        post: operations["cancel_run_api_v1_societies__society_id__billing_runs__run_id__cancel_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/billing-runs/{run_id}/pdf": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Run Pdf
+         * @description Every live bill of the run, one per page, for the watchman to hand out.
+         */
+        get: operations["run_pdf_api_v1_societies__society_id__billing_runs__run_id__pdf_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/bills": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Bills */
+        get: operations["list_bills_api_v1_societies__society_id__bills_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/bills/{bill_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Bill */
+        get: operations["get_bill_api_v1_societies__society_id__bills__bill_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/bills/{bill_id}/cancel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Cancel Bill */
+        post: operations["cancel_bill_api_v1_societies__society_id__bills__bill_id__cancel_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/bills/{bill_id}/pdf": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Bill Pdf
+         * @description Rendered once and kept in storage (docs/04 §8); a cancelled bill is shown fresh with
+         *     its CANCELLED mark.
+         */
+        get: operations["bill_pdf_api_v1_societies__society_id__bills__bill_id__pdf_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/bills/{bill_id}/reissue": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reissue Bill */
+        post: operations["reissue_bill_api_v1_societies__society_id__bills__bill_id__reissue_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -583,6 +778,130 @@ export interface components {
             /** Token */
             token: string;
         };
+        /** BillLineOut */
+        BillLineOut: {
+            /** Amount Paise */
+            amount_paise: number;
+            /** Charge Head Id */
+            charge_head_id: string | null;
+            /** Description */
+            description: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Line Type
+             * @enum {string}
+             */
+            line_type: "charge" | "rounding" | "interest";
+        };
+        /** BillOut */
+        BillOut: {
+            /** Advance Paise */
+            advance_paise: number;
+            /** Arrears Paise */
+            arrears_paise: number;
+            /**
+             * Bill Date
+             * Format: date
+             */
+            bill_date: string;
+            /** Bill Number */
+            bill_number: string;
+            /**
+             * Billing Run Id
+             * Format: uuid
+             */
+            billing_run_id: string;
+            /** Cancelled At */
+            cancelled_at: string | null;
+            /** Cancelled Reason */
+            cancelled_reason: string | null;
+            /** Charges Paise */
+            charges_paise: number;
+            /**
+             * Due Date
+             * Format: date
+             */
+            due_date: string;
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /** Flat Label */
+            flat_label: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Interest Paise */
+            interest_paise: number;
+            /** Lines */
+            lines: components["schemas"]["BillLineOut"][];
+            /** Member Name */
+            member_name: string | null;
+            /**
+             * Period End
+             * Format: date
+             */
+            period_end: string;
+            /**
+             * Period Start
+             * Format: date
+             */
+            period_start: string;
+            /** Replaced By Bill Id */
+            replaced_by_bill_id: string | null;
+            /** Replaces Bill Id */
+            replaces_bill_id: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "issued" | "partially_paid" | "paid" | "cancelled";
+            /** Total Due Paise */
+            total_due_paise: number;
+        };
+        /** BillSummaryOut */
+        BillSummaryOut: {
+            /** Advance Paise */
+            advance_paise: number;
+            /** Arrears Paise */
+            arrears_paise: number;
+            /** Bill Number */
+            bill_number: string;
+            /** Charges Paise */
+            charges_paise: number;
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /** Flat Label */
+            flat_label: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Interest Paise */
+            interest_paise: number;
+            /** Member Name */
+            member_name: string | null;
+            /** Replaces Bill Id */
+            replaces_bill_id: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "issued" | "partially_paid" | "paid" | "cancelled";
+            /** Total Due Paise */
+            total_due_paise: number;
+        };
         /**
          * BillingSettingsIn
          * @description Step 2 of 3.
@@ -811,6 +1130,18 @@ export interface components {
             needs_consent: boolean;
             /** Policy Version */
             policy_version: string;
+        };
+        /** DraftFlatOut */
+        DraftFlatOut: {
+            /** Charges Paise */
+            charges_paise: number;
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /** Label */
+            label: string;
         };
         /** EndDateIn */
         EndDateIn: {
@@ -1091,6 +1422,11 @@ export interface components {
             /** Invite Link */
             invite_link: string;
             membership: components["schemas"]["MembershipOut"];
+        };
+        /** JobIn */
+        JobIn: {
+            /** Today */
+            today?: string | null;
         };
         /** LegalProblemOut */
         LegalProblemOut: {
@@ -1484,8 +1820,126 @@ export interface components {
              */
             is_exempt: boolean;
         };
+        /** ReasonIn */
+        ReasonIn: {
+            /** Reason */
+            reason: string;
+        };
+        /** RunCreateIn */
+        RunCreateIn: {
+            /**
+             * Period Start
+             * Format: date
+             */
+            period_start: string;
+        };
+        /** RunDetailOut */
+        RunDetailOut: {
+            /** Approved At */
+            approved_at: string | null;
+            /**
+             * Bill Date
+             * Format: date
+             */
+            bill_date: string;
+            /** Bills */
+            bills: components["schemas"]["BillSummaryOut"][];
+            /** Cancelled Reason */
+            cancelled_reason: string | null;
+            /** Created By Job */
+            created_by_job: boolean;
+            /** Draft Flats */
+            draft_flats: components["schemas"]["DraftFlatOut"][];
+            /**
+             * Due Date
+             * Format: date
+             */
+            due_date: string;
+            /** Flat Count */
+            flat_count: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Period End
+             * Format: date
+             */
+            period_end: string;
+            /**
+             * Period Start
+             * Format: date
+             */
+            period_start: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "approved" | "sent" | "cancelled";
+            /** Total Paise */
+            total_paise: number;
+            /** Warnings */
+            warnings: components["schemas"]["RunWarningOut"][];
+        };
+        /** RunOut */
+        RunOut: {
+            /** Approved At */
+            approved_at: string | null;
+            /**
+             * Bill Date
+             * Format: date
+             */
+            bill_date: string;
+            /** Cancelled Reason */
+            cancelled_reason: string | null;
+            /** Created By Job */
+            created_by_job: boolean;
+            /**
+             * Due Date
+             * Format: date
+             */
+            due_date: string;
+            /** Flat Count */
+            flat_count: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Period End
+             * Format: date
+             */
+            period_end: string;
+            /**
+             * Period Start
+             * Format: date
+             */
+            period_start: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "approved" | "sent" | "cancelled";
+            /** Total Paise */
+            total_paise: number;
+            /** Warnings */
+            warnings: components["schemas"]["RunWarningOut"][];
+        };
+        /** RunWarningOut */
+        RunWarningOut: {
+            /** Flat */
+            flat?: string | null;
+            /** Key */
+            key: string;
+            /** Reasons */
+            reasons?: string[];
+        };
         /** SettingsOut */
         SettingsOut: {
+            /** Auto Approve Billing */
+            auto_approve_billing: boolean;
             /** Bank Account Last4 */
             bank_account_last4: string | null;
             /** Bank Name */
@@ -1519,6 +1973,8 @@ export interface components {
         };
         /** SettingsUpdate */
         SettingsUpdate: {
+            /** Auto Approve Billing */
+            auto_approve_billing?: boolean | null;
             /** Bank Account Last4 */
             bank_account_last4?: string | null;
             /** Bank Name */
@@ -1759,6 +2215,43 @@ export interface operations {
             };
         };
     };
+    run_billing_job_api_v1_internal_jobs_create_draft_billing_runs_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "x-jobs-token"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["JobIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     get_me_api_v1_me_get: {
         parameters: {
             query?: never;
@@ -1977,6 +2470,387 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SocietyOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_runs_api_v1_societies__society_id__billing_runs_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RunOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_run_api_v1_societies__society_id__billing_runs_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RunCreateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RunOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_run_api_v1_societies__society_id__billing_runs__run_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                run_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RunDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    approve_run_api_v1_societies__society_id__billing_runs__run_id__approve_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                run_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RunOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    cancel_run_api_v1_societies__society_id__billing_runs__run_id__cancel_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                run_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReasonIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RunOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    run_pdf_api_v1_societies__society_id__billing_runs__run_id__pdf_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                run_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_bills_api_v1_societies__society_id__bills_get: {
+        parameters: {
+            query?: {
+                flat_id?: string | null;
+            };
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BillSummaryOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_bill_api_v1_societies__society_id__bills__bill_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                bill_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BillOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    cancel_bill_api_v1_societies__society_id__bills__bill_id__cancel_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                bill_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReasonIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BillSummaryOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    bill_pdf_api_v1_societies__society_id__bills__bill_id__pdf_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                bill_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    reissue_bill_api_v1_societies__society_id__bills__bill_id__reissue_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                bill_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BillSummaryOut"];
                 };
             };
             /** @description Validation Error */

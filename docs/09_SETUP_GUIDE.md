@@ -136,6 +136,11 @@ Tests create their own scratch database `societyiq_test` on the same server (`TE
 
 **Supabase (demo and later):** run migrations with the project's owner connection string as `MIGRATIONS_DATABASE_URL`; then, in the SQL editor, run `ALTER ROLE app_backend LOGIN PASSWORD '<strong secret>'` and use that role in `DATABASE_URL` (through the pooler in transaction mode). Set `SUPABASE_JWKS_URL` or `SUPABASE_JWT_SECRET` to match how the project signs tokens (check the project's API settings). Front ends get `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` only, never the service-role key.
 
+## 6b. Bill PDFs and the daily billing job (from M5)
+
+- PDFs need Pango (Linux). On Windows they answer "PDF unavailable"; use the image: `docker build -t societyiq-backend backend` then run it with the same `.env`. Hosting uses `backend/Dockerfile`.
+- GitHub → Settings → Secrets → Actions: add `JOBS_BASE_URL` (the backend's public URL) and `INTERNAL_JOBS_TOKEN` (same long random value as the backend's `INTERNAL_JOBS_TOKEN`). `.github/workflows/jobs.yml` then calls the billing job every day at 06:00 India time; it does nothing until these are set.
+
 ## 7. Hosting
 
 **Demo / internal sharing:** Vercel (front ends) + Render free (FastAPI) + Supabase free. Costs nothing; the backend sleeps when idle, so the first click after a while is slow.

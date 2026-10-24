@@ -436,5 +436,62 @@
     "save": "Save special amount",
     "needHead": "Choose the charge",
     "needReason": "Give the reason"
+  },
+  "billing": {
+    "title": "Bills",
+    "body": "Bills are made once for each period. First a draft you can check; nothing reaches residents until you approve it.",
+    "createTitle": "Make bills for a month",
+    "create": "Create bills now",
+    "createNote": "SocietyIQ also makes the draft by itself on your bill date.",
+    "empty": "No bills yet.",
+    "runLine": "{{count}} flats · bill date {{date}}",
+    "byJob": "made automatically",
+    "status": {
+      "draft": "Draft, not sent",
+      "approved": "Approved",
+      "sent": "Sent",
+      "cancelled": "Cancelled"
+    },
+    "runTitle": "Bills for {{period}}",
+    "dates": "Bill date {{bill}} · Pay by {{due}}",
+    "flats": "Flats",
+    "toBill": "To be billed",
+    "billed": "Billed",
+    "warningsTitle": "Please check before approving",
+    "warnings": {
+      "flatLeftOut": "{{flat}} is left out: {{reasons}}",
+      "noMember": "{{flat}} has no owner added",
+      "zeroAmount": "{{flat}} has nothing to pay this period",
+      "noCharges": "No charges are set up"
+    },
+    "approve": "Approve {{count}} bills",
+    "approverOnly": "The admin or treasurer approves bills.",
+    "cancelDraft": "Cancel this draft",
+    "cancelReason": "Reason",
+    "approveQuestion": "Approve {{count}} bills for {{total}}? Each bill gets a number and is added to the flat's account. A wrong bill can later be cancelled and corrected.",
+    "approveYes": "Yes, approve",
+    "printAll": "Print all bills",
+    "number": "Bill number",
+    "charges": "Charges",
+    "totalDue": "Total to pay",
+    "billStatus": {
+      "issued": "Not paid",
+      "partially_paid": "Partly paid",
+      "paid": "Paid",
+      "cancelled": "Cancelled"
+    },
+    "backToRun": "All bills of this month",
+    "billTitle": "Bill {{number}}",
+    "cancelledWith": "Cancelled: {{reason}}",
+    "seeCorrected": "See the corrected bill",
+    "arrears": "Previous dues",
+    "advance": "Advance paid",
+    "interest": "Interest on overdue dues",
+    "openPdf": "Open the bill (PDF)",
+    "cancelBill": "Cancel this bill",
+    "cancelBillNote": "The bill stays in the records marked cancelled, and its amount is taken off the flat's account. You can then issue a corrected bill.",
+    "reissue": "Issue a corrected bill",
+    "flatBills": "Bills",
+    "noBills": "No bills yet."
   }
 }

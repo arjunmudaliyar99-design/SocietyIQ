@@ -49,6 +49,7 @@ os.environ.update(
         "SUPABASE_JWT_SECRET": JWT_SECRET,
         "SUPABASE_JWKS_URL": "",
         "STORAGE_BACKEND": "local",
+        "INTERNAL_JOBS_TOKEN": "jobs-token-for-tests-only",
         "LOCAL_STORAGE_DIR": tempfile.mkdtemp(prefix="societyiq-test-storage-"),
     }
 )

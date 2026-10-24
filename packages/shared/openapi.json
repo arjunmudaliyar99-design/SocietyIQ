@@ -16,6 +16,311 @@
         "title": "AcceptInviteIn",
         "type": "object"
       },
+      "BillLineOut": {
+        "properties": {
+          "amount_paise": {
+            "title": "Amount Paise",
+            "type": "integer"
+          },
+          "charge_head_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Charge Head Id"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "line_type": {
+            "enum": [
+              "charge",
+              "rounding",
+              "interest"
+            ],
+            "title": "Line Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "charge_head_id",
+          "line_type",
+          "description",
+          "amount_paise"
+        ],
+        "title": "BillLineOut",
+        "type": "object"
+      },
+      "BillOut": {
+        "properties": {
+          "advance_paise": {
+            "title": "Advance Paise",
+            "type": "integer"
+          },
+          "arrears_paise": {
+            "title": "Arrears Paise",
+            "type": "integer"
+          },
+          "bill_date": {
+            "format": "date",
+            "title": "Bill Date",
+            "type": "string"
+          },
+          "bill_number": {
+            "title": "Bill Number",
+            "type": "string"
+          },
+          "billing_run_id": {
+            "format": "uuid",
+            "title": "Billing Run Id",
+            "type": "string"
+          },
+          "cancelled_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cancelled At"
+          },
+          "cancelled_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cancelled Reason"
+          },
+          "charges_paise": {
+            "title": "Charges Paise",
+            "type": "integer"
+          },
+          "due_date": {
+            "format": "date",
+            "title": "Due Date",
+            "type": "string"
+          },
+          "flat_id": {
+            "format": "uuid",
+            "title": "Flat Id",
+            "type": "string"
+          },
+          "flat_label": {
+            "title": "Flat Label",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "interest_paise": {
+            "title": "Interest Paise",
+            "type": "integer"
+          },
+          "lines": {
+            "items": {
+              "$ref": "#/components/schemas/BillLineOut"
+            },
+            "title": "Lines",
+            "type": "array"
+          },
+          "member_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Name"
+          },
+          "period_end": {
+            "format": "date",
+            "title": "Period End",
+            "type": "string"
+          },
+          "period_start": {
+            "format": "date",
+            "title": "Period Start",
+            "type": "string"
+          },
+          "replaced_by_bill_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Replaced By Bill Id"
+          },
+          "replaces_bill_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Replaces Bill Id"
+          },
+          "status": {
+            "enum": [
+              "issued",
+              "partially_paid",
+              "paid",
+              "cancelled"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "total_due_paise": {
+            "title": "Total Due Paise",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "flat_id",
+          "flat_label",
+          "bill_number",
+          "member_name",
+          "charges_paise",
+          "arrears_paise",
+          "advance_paise",
+          "interest_paise",
+          "total_due_paise",
+          "status",
+          "replaces_bill_id",
+          "billing_run_id",
+          "period_start",
+          "period_end",
+          "bill_date",
+          "due_date",
+          "cancelled_reason",
+          "cancelled_at",
+          "lines",
+          "replaced_by_bill_id"
+        ],
+        "title": "BillOut",
+        "type": "object"
+      },
+      "BillSummaryOut": {
+        "properties": {
+          "advance_paise": {
+            "title": "Advance Paise",
+            "type": "integer"
+          },
+          "arrears_paise": {
+            "title": "Arrears Paise",
+            "type": "integer"
+          },
+          "bill_number": {
+            "title": "Bill Number",
+            "type": "string"
+          },
+          "charges_paise": {
+            "title": "Charges Paise",
+            "type": "integer"
+          },
+          "flat_id": {
+            "format": "uuid",
+            "title": "Flat Id",
+            "type": "string"
+          },
+          "flat_label": {
+            "title": "Flat Label",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "interest_paise": {
+            "title": "Interest Paise",
+            "type": "integer"
+          },
+          "member_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Member Name"
+          },
+          "replaces_bill_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Replaces Bill Id"
+          },
+          "status": {
+            "enum": [
+              "issued",
+              "partially_paid",
+              "paid",
+              "cancelled"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "total_due_paise": {
+            "title": "Total Due Paise",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "flat_id",
+          "flat_label",
+          "bill_number",
+          "member_name",
+          "charges_paise",
+          "arrears_paise",
+          "advance_paise",
+          "interest_paise",
+          "total_due_paise",
+          "status",
+          "replaces_bill_id"
+        ],
+        "title": "BillSummaryOut",
+        "type": "object"
+      },
       "BillingSettingsIn": {
         "description": "Step 2 of 3.",
         "properties": {
@@ -868,6 +1173,30 @@
           "granted"
         ],
         "title": "ConsentStatusOut",
+        "type": "object"
+      },
+      "DraftFlatOut": {
+        "properties": {
+          "charges_paise": {
+            "title": "Charges Paise",
+            "type": "integer"
+          },
+          "flat_id": {
+            "format": "uuid",
+            "title": "Flat Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "flat_id",
+          "label",
+          "charges_paise"
+        ],
+        "title": "DraftFlatOut",
         "type": "object"
       },
       "EndDateIn": {
@@ -1798,6 +2127,24 @@
           "invite_link"
         ],
         "title": "InviteOut",
+        "type": "object"
+      },
+      "JobIn": {
+        "properties": {
+          "today": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Today"
+          }
+        },
+        "title": "JobIn",
         "type": "object"
       },
       "LegalProblemOut": {
@@ -2921,8 +3268,282 @@
         "title": "PropertyTaxOut",
         "type": "object"
       },
+      "ReasonIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "ReasonIn",
+        "type": "object"
+      },
+      "RunCreateIn": {
+        "properties": {
+          "period_start": {
+            "format": "date",
+            "title": "Period Start",
+            "type": "string"
+          }
+        },
+        "required": [
+          "period_start"
+        ],
+        "title": "RunCreateIn",
+        "type": "object"
+      },
+      "RunDetailOut": {
+        "properties": {
+          "approved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approved At"
+          },
+          "bill_date": {
+            "format": "date",
+            "title": "Bill Date",
+            "type": "string"
+          },
+          "bills": {
+            "items": {
+              "$ref": "#/components/schemas/BillSummaryOut"
+            },
+            "title": "Bills",
+            "type": "array"
+          },
+          "cancelled_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cancelled Reason"
+          },
+          "created_by_job": {
+            "title": "Created By Job",
+            "type": "boolean"
+          },
+          "draft_flats": {
+            "items": {
+              "$ref": "#/components/schemas/DraftFlatOut"
+            },
+            "title": "Draft Flats",
+            "type": "array"
+          },
+          "due_date": {
+            "format": "date",
+            "title": "Due Date",
+            "type": "string"
+          },
+          "flat_count": {
+            "title": "Flat Count",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "period_end": {
+            "format": "date",
+            "title": "Period End",
+            "type": "string"
+          },
+          "period_start": {
+            "format": "date",
+            "title": "Period Start",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "approved",
+              "sent",
+              "cancelled"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "total_paise": {
+            "title": "Total Paise",
+            "type": "integer"
+          },
+          "warnings": {
+            "items": {
+              "$ref": "#/components/schemas/RunWarningOut"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "period_start",
+          "period_end",
+          "bill_date",
+          "due_date",
+          "status",
+          "flat_count",
+          "total_paise",
+          "created_by_job",
+          "approved_at",
+          "cancelled_reason",
+          "warnings",
+          "draft_flats",
+          "bills"
+        ],
+        "title": "RunDetailOut",
+        "type": "object"
+      },
+      "RunOut": {
+        "properties": {
+          "approved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approved At"
+          },
+          "bill_date": {
+            "format": "date",
+            "title": "Bill Date",
+            "type": "string"
+          },
+          "cancelled_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cancelled Reason"
+          },
+          "created_by_job": {
+            "title": "Created By Job",
+            "type": "boolean"
+          },
+          "due_date": {
+            "format": "date",
+            "title": "Due Date",
+            "type": "string"
+          },
+          "flat_count": {
+            "title": "Flat Count",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "period_end": {
+            "format": "date",
+            "title": "Period End",
+            "type": "string"
+          },
+          "period_start": {
+            "format": "date",
+            "title": "Period Start",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "approved",
+              "sent",
+              "cancelled"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "total_paise": {
+            "title": "Total Paise",
+            "type": "integer"
+          },
+          "warnings": {
+            "items": {
+              "$ref": "#/components/schemas/RunWarningOut"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "period_start",
+          "period_end",
+          "bill_date",
+          "due_date",
+          "status",
+          "flat_count",
+          "total_paise",
+          "created_by_job",
+          "approved_at",
+          "cancelled_reason",
+          "warnings"
+        ],
+        "title": "RunOut",
+        "type": "object"
+      },
+      "RunWarningOut": {
+        "properties": {
+          "flat": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Flat"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Reasons",
+            "type": "array"
+          }
+        },
+        "required": [
+          "key"
+        ],
+        "title": "RunWarningOut",
+        "type": "object"
+      },
       "SettingsOut": {
         "properties": {
+          "auto_approve_billing": {
+            "title": "Auto Approve Billing",
+            "type": "boolean"
+          },
           "bank_account_last4": {
             "anyOf": [
               {
@@ -3049,13 +3670,25 @@
           "interest_rate_annual_pct",
           "interest_gb_resolution_date",
           "interest_grace_days",
-          "rounding_rule"
+          "rounding_rule",
+          "auto_approve_billing"
         ],
         "title": "SettingsOut",
         "type": "object"
       },
       "SettingsUpdate": {
         "properties": {
+          "auto_approve_billing": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Auto Approve Billing"
+          },
           "bank_account_last4": {
             "anyOf": [
               {
@@ -3826,6 +4459,67 @@
         "summary": "Health"
       }
     },
+    "/api/v1/internal/jobs/create-draft-billing-runs": {
+      "post": {
+        "operationId": "run_billing_job_api_v1_internal_jobs_create_draft_billing_runs_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "x-jobs-token",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Jobs-Token"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Run Billing Job Api V1 Internal Jobs Create Draft Billing Runs Post",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Run Billing Job",
+        "tags": [
+          "internal"
+        ]
+      }
+    },
     "/api/v1/me": {
       "get": {
         "operationId": "get_me_api_v1_me_get",
@@ -4208,6 +4902,776 @@
         "summary": "Get Society",
         "tags": [
           "societies"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/billing-runs": {
+      "get": {
+        "operationId": "list_runs_api_v1_societies__society_id__billing_runs_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/RunOut"
+                  },
+                  "title": "Response List Runs Api V1 Societies  Society Id  Billing Runs Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Runs",
+        "tags": [
+          "billing"
+        ]
+      },
+      "post": {
+        "operationId": "create_run_api_v1_societies__society_id__billing_runs_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunCreateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Run",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/billing-runs/{run_id}": {
+      "get": {
+        "operationId": "get_run_api_v1_societies__society_id__billing_runs__run_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Run Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Run",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/billing-runs/{run_id}/approve": {
+      "post": {
+        "operationId": "approve_run_api_v1_societies__society_id__billing_runs__run_id__approve_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Run Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Approve Run",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/billing-runs/{run_id}/cancel": {
+      "post": {
+        "operationId": "cancel_run_api_v1_societies__society_id__billing_runs__run_id__cancel_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Run Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReasonIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Cancel Run",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/billing-runs/{run_id}/pdf": {
+      "get": {
+        "description": "Every live bill of the run, one per page, for the watchman to hand out.",
+        "operationId": "run_pdf_api_v1_societies__society_id__billing_runs__run_id__pdf_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Run Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Run Pdf",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/bills": {
+      "get": {
+        "operationId": "list_bills_api_v1_societies__society_id__bills_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "flat_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Flat Id"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/BillSummaryOut"
+                  },
+                  "title": "Response List Bills Api V1 Societies  Society Id  Bills Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Bills",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/bills/{bill_id}": {
+      "get": {
+        "operationId": "get_bill_api_v1_societies__society_id__bills__bill_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bill_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Bill Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Bill",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/bills/{bill_id}/cancel": {
+      "post": {
+        "operationId": "cancel_bill_api_v1_societies__society_id__bills__bill_id__cancel_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bill_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Bill Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReasonIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillSummaryOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Cancel Bill",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/bills/{bill_id}/pdf": {
+      "get": {
+        "description": "Rendered once and kept in storage (docs/04 \u00a78); a cancelled bill is shown fresh with\nits CANCELLED mark.",
+        "operationId": "bill_pdf_api_v1_societies__society_id__bills__bill_id__pdf_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bill_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Bill Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Bill Pdf",
+        "tags": [
+          "billing"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/bills/{bill_id}/reissue": {
+      "post": {
+        "operationId": "reissue_bill_api_v1_societies__society_id__bills__bill_id__reissue_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bill_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Bill Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillSummaryOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Reissue Bill",
+        "tags": [
+          "billing"
         ]
       }
     },

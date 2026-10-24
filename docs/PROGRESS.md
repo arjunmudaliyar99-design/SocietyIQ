@@ -11,7 +11,7 @@ What is built, what is in progress, and what is next. Every Claude Code session 
 | M2 Database base, auth, isolation | IN REVIEW | feat/m2-auth-isolation (merged into `dev` locally) | Needs a Supabase project for real sign-in; CI not yet run |
 | M3 Flats, members, import | IN REVIEW | feat/m3-flats-members (merged into `dev` locally) | Supabase Storage path untested |
 | M4 Charge setup and calculation engine | IN REVIEW | feat/m4-charges (merged into `dev` locally) | Legal values unverified until the consultant checks them |
-| M5 Billing runs, bills, PDFs | NOT STARTED | | |
+| M5 Billing runs, bills, PDFs | IN REVIEW | feat/m5-billing (merged into `dev` locally) | Email to residents is M9 |
 | M6 Payments, receipts, dues | NOT STARTED | | |
 | M7 Resident PWA core | NOT STARTED | | |
 | M8 Complaints | NOT STARTED | | |
@@ -27,6 +27,14 @@ Statuses: NOT STARTED · IN PROGRESS (branch) · IN REVIEW (PR link) · DONE · 
 ## Log
 
 Newest first. One entry per merged PR: date, milestone, what was built, how to try it, known gaps.
+
+- 2026-10-24 — M5 — Billing runs, bills and PDFs.
+  Calc: `app/calc/bills.py` (arrears, advance, total due per docs/06 §3; simple interest per §5 from the later of due date + grace and the last run's bill date, so never charged twice; 100% covered).
+  Backend: migration `0004` (`billing_runs`, `bills`, `bill_lines`, `number_sequences`, `job_runs`, scheduler read policy). Draft run freezes every flat's lines; approve re-checks the setup, reserves a gap-free block of numbers (`B/2026-27/000001`) under a row lock, writes bills, lines, `bill` and `interest` ledger entries and audit rows in one transaction (batched: ~1.7 s for 64 flats locally). Cancel a bill with a reason (reversal entries), reissue a corrected bill (`replaces_bill_id`). Bill PDF and "print all" PDF: Jinja2 + WeasyPrint, Noto fonts bundled, English plus the society's language, UPI QR (`upi://pay?...&am=29400.00`); rendered on first request and stored; 503 `PDF_UNAVAILABLE` where Pango is missing. Scheduled job `POST /api/v1/internal/jobs/create-draft-billing-runs` (token; idempotent; auto-approves when the setup is unchanged and the society turned it on) and `.github/workflows/jobs.yml` (daily 06:00 IST). Backend `Dockerfile` with Pango for hosting.
+  Front end (committee): Bills (create bills for a month), run page (warnings, every flat's amount, approve with confirmation, cancel draft, print all), bill page (lines, arrears, advance, interest, PDF, cancel with reason, issue corrected bill), bills list on each flat page. Five languages.
+  Acceptance: Shanti Sadan run → 120 bills numbered B/2026-27/000001–000120 in flat order; B-207 arrears ₹29,400 + ₹4,200 = ₹33,600 and ledger balance ₹33,600 (test and live); job run twice → one draft. Visual check: Marathi, Gujarati and Tamil bills rendered in the Linux image (`docker build -t societyiq-backend backend`), conjuncts shaped correctly (screenshots checked in this session).
+  Tests: backend 144, front end 90.
+  Known gaps: bills are not emailed yet (M9); PDFs cannot be made on Windows without Pango (use the Docker image or Linux); interest start date follows a placeholder rule (Q-002); quarterly runs start only in a quarter month of the financial year (Q-007); paid bills cannot be cancelled until payments exist (M6).
 
 - 2026-10-24 — M4 — Charge setup and the calculation engine.
   Calc (pure, 100% covered, enforced in CI): `app/calc/charges.py` implements every apportionment method of docs/06 §2 with the remainder-paise rule in flat-number order, overrides, one-time heads, monthly and quarterly periods, bill rounding; flats missing an input a head needs are left out of the run with the reason, never billed a silent zero. `app/calc/legal.py`: statutory method per head; blocks interest above the cap, non-occupancy other than the fixed percent / base / let-out; warns below fund minimums and on method deviation (reason, and GB resolution for deviation, required). All limits come from `legal_parameters`, with the source shown in messages. Tests cover both worked examples (₹4,545 and the seed ₹4,200 / ₹4,540).

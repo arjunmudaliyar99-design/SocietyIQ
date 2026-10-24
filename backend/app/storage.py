@@ -28,6 +28,8 @@ class StoredFile:
 class Storage(Protocol):
     async def put(self, path: str, data: bytes, mime: str) -> None: ...
 
+    async def get(self, path: str) -> bytes: ...
+
 
 class LocalStorage:
     def __init__(self, root: str) -> None:
@@ -37,6 +39,9 @@ class LocalStorage:
         target = self.root / path
         await asyncio.to_thread(target.parent.mkdir, parents=True, exist_ok=True)
         await asyncio.to_thread(target.write_bytes, data)
+
+    async def get(self, path: str) -> bytes:
+        return await asyncio.to_thread((self.root / path).read_bytes)
 
 
 class SupabaseStorage:
@@ -53,6 +58,12 @@ class SupabaseStorage:
                 headers={**self.headers, "Content-Type": mime, "x-upsert": "false"},
             )
             response.raise_for_status()
+
+    async def get(self, path: str) -> bytes:
+        async with httpx.AsyncClient(timeout=30) as client:
+            response = await client.get(f"{self.base}/{path}", headers=self.headers)
+            response.raise_for_status()
+            return response.content
 
 
 def get_storage() -> Storage:

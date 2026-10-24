@@ -27,6 +27,7 @@ async def _society_totals() -> dict[str, tuple[int, int]]:
                 flats = await conn.fetchval("SELECT count(*) FROM flats")
                 dues = await conn.fetchval(
                     "SELECT coalesce(sum(amount_paise), 0) FROM ledger_entries"
+                    " WHERE entry_type = 'opening_balance'"
                 )
             result[s["name"]] = (flats, int(dues))
     finally:

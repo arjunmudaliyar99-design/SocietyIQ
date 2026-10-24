@@ -13,4 +13,4 @@ def test_health_returns_ok() -> None:
 def test_only_built_domains_are_mounted() -> None:
     # Stubs exist for every domain; only those whose milestone is built are exposed.
     prefixes = {p.split("/")[3] for p in app.openapi()["paths"]}
-    assert prefixes == {"health", "me", "societies"}
+    assert prefixes == {"health", "internal", "me", "societies"}
