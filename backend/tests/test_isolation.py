@@ -93,6 +93,24 @@ SOCIETY_ROUTES: dict[tuple[str, str], object] = {
         "financial_year": "2026-27",
         "annual_amount_paise": 100,
     },
+    ("GET", "/api/v1/societies/{society_id}/complaints"): None,
+    ("POST", "/api/v1/societies/{society_id}/complaints"): {
+        "category": "water",
+        "location": "common_area",
+    },
+    ("GET", "/api/v1/societies/{society_id}/complaints/{complaint_id}"): None,
+    ("POST", "/api/v1/societies/{society_id}/complaints/{complaint_id}/updates"): {"message": "x"},
+    ("PATCH", "/api/v1/societies/{society_id}/complaints/{complaint_id}/assignee"): {
+        "assigned_to_text": "x"
+    },
+    ("POST", "/api/v1/societies/{society_id}/complaints/{complaint_id}/feedback"): {
+        "feedback": "fixed"
+    },
+    ("POST", "/api/v1/societies/{society_id}/complaints/{complaint_id}/photos"): FILE,
+    (
+        "GET",
+        "/api/v1/societies/{society_id}/complaints/{complaint_id}/photos/{attachment_id}",
+    ): None,
 }
 
 
@@ -118,6 +136,8 @@ def _url(path: str, society_id: object) -> str:
         "head_id",
         "override_id",
         "allotment_id",
+        "complaint_id",
+        "attachment_id",
     ):
         url = url.replace("{" + name + "}", ANY_ID)
     if url.endswith("/charges/preview"):

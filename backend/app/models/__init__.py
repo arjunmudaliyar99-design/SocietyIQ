@@ -8,6 +8,7 @@ from app.models.charges import (
     ParkingAllotment,
     PropertyTaxAssessment,
 )
+from app.models.complaints import Complaint, ComplaintUpdate
 from app.models.flats import Flat, Member, Wing
 from app.models.ledger import LedgerEntry
 from app.models.people import Consent, Society, SocietyMembership, User
@@ -21,6 +22,8 @@ __all__ = [
     "BillLine",
     "BillingRun",
     "ChargeHead",
+    "Complaint",
+    "ComplaintUpdate",
     "Consent",
     "Flat",
     "FlatChargeOverride",

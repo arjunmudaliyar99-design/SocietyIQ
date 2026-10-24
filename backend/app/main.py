@@ -5,7 +5,17 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
 from app.errors import install_error_handlers
-from app.routers import auth, billing, charges, dev, flats, imports, internal_jobs, societies
+from app.routers import (
+    auth,
+    billing,
+    charges,
+    complaints,
+    dev,
+    flats,
+    imports,
+    internal_jobs,
+    societies,
+)
 
 
 def create_app() -> FastAPI:
@@ -32,6 +42,7 @@ def create_app() -> FastAPI:
     api.include_router(imports.router)
     api.include_router(charges.router)
     api.include_router(billing.router)
+    api.include_router(complaints.router)
     api.include_router(internal_jobs.router)
     if settings.app_env == "local" and settings.supabase_jwt_secret:
         api.include_router(dev.router)

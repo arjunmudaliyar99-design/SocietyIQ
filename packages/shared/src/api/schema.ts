@@ -388,6 +388,126 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/complaints": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Complaints */
+        get: operations["list_complaints_api_v1_societies__society_id__complaints_get"];
+        put?: never;
+        /** Create Complaint */
+        post: operations["create_complaint_api_v1_societies__society_id__complaints_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/complaints/{complaint_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Complaint */
+        get: operations["get_complaint_api_v1_societies__society_id__complaints__complaint_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/complaints/{complaint_id}/assignee": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Assign */
+        patch: operations["assign_api_v1_societies__society_id__complaints__complaint_id__assignee_patch"];
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/complaints/{complaint_id}/feedback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Give Feedback */
+        post: operations["give_feedback_api_v1_societies__society_id__complaints__complaint_id__feedback_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/complaints/{complaint_id}/photos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add Photo */
+        post: operations["add_photo_api_v1_societies__society_id__complaints__complaint_id__photos_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/complaints/{complaint_id}/photos/{attachment_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Photo */
+        get: operations["get_photo_api_v1_societies__society_id__complaints__complaint_id__photos__attachment_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/complaints/{complaint_id}/updates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add Update */
+        post: operations["add_update_api_v1_societies__society_id__complaints__complaint_id__updates_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/societies/{society_id}/flats": {
         parameters: {
             query?: never;
@@ -778,6 +898,11 @@ export interface components {
             /** Token */
             token: string;
         };
+        /** AssignIn */
+        AssignIn: {
+            /** Assigned To Text */
+            assigned_to_text?: string | null;
+        };
         /** BillLineOut */
         BillLineOut: {
             /** Amount Paise */
@@ -928,6 +1053,11 @@ export interface components {
             upi_id?: string | null;
             /** Upi Payee Name */
             upi_payee_name?: string | null;
+        };
+        /** Body_add_photo_api_v1_societies__society_id__complaints__complaint_id__photos_post */
+        Body_add_photo_api_v1_societies__society_id__complaints__complaint_id__photos_post: {
+            /** File */
+            file: string;
         };
         /** Body_tax_upload_api_v1_societies__society_id__property_tax_imports_post */
         Body_tax_upload_api_v1_societies__society_id__property_tax_imports_post: {
@@ -1089,6 +1219,161 @@ export interface components {
              */
             role: "admin" | "treasurer" | "committee" | "consultant" | "auditor";
         };
+        /** ComplaintDetailOut */
+        ComplaintDetailOut: {
+            /** Assigned To Text */
+            assigned_to_text: string | null;
+            /**
+             * Can Manage
+             * @default false
+             */
+            can_manage: boolean;
+            /**
+             * Category
+             * @enum {string}
+             */
+            category: "water" | "lift" | "electricity" | "cleaning" | "security" | "parking" | "other";
+            /** Closed At */
+            closed_at: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Description */
+            description: string | null;
+            /** Flat Id */
+            flat_id: string | null;
+            /** Flat Label */
+            flat_label?: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Location
+             * @enum {string}
+             */
+            location: "my_flat" | "common_area";
+            /** Photo Ids */
+            photo_ids?: string[];
+            /** Raised On Behalf */
+            raised_on_behalf: boolean;
+            /** Resident Feedback */
+            resident_feedback: ("fixed" | "not_fixed") | null;
+            /** Resolved At */
+            resolved_at: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "open" | "in_progress" | "resolved" | "closed";
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+            /** Updates */
+            updates?: components["schemas"]["ComplaintUpdateOut"][];
+        };
+        /** ComplaintIn */
+        ComplaintIn: {
+            /**
+             * Category
+             * @enum {string}
+             */
+            category: "water" | "lift" | "electricity" | "cleaning" | "security" | "parking" | "other";
+            /** Description */
+            description?: string | null;
+            /** Flat Id */
+            flat_id?: string | null;
+            /**
+             * Location
+             * @enum {string}
+             */
+            location: "my_flat" | "common_area";
+        };
+        /** ComplaintOut */
+        ComplaintOut: {
+            /** Assigned To Text */
+            assigned_to_text: string | null;
+            /**
+             * Category
+             * @enum {string}
+             */
+            category: "water" | "lift" | "electricity" | "cleaning" | "security" | "parking" | "other";
+            /** Closed At */
+            closed_at: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Description */
+            description: string | null;
+            /** Flat Id */
+            flat_id: string | null;
+            /** Flat Label */
+            flat_label?: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Location
+             * @enum {string}
+             */
+            location: "my_flat" | "common_area";
+            /** Raised On Behalf */
+            raised_on_behalf: boolean;
+            /** Resident Feedback */
+            resident_feedback: ("fixed" | "not_fixed") | null;
+            /** Resolved At */
+            resolved_at: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "open" | "in_progress" | "resolved" | "closed";
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** ComplaintUpdateIn */
+        ComplaintUpdateIn: {
+            /** Message */
+            message: string;
+            /** New Status */
+            new_status?: ("open" | "in_progress" | "resolved" | "closed") | null;
+            /**
+             * Visible To Resident
+             * @default true
+             */
+            visible_to_resident: boolean;
+        };
+        /** ComplaintUpdateOut */
+        ComplaintUpdateOut: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Message */
+            message: string;
+            /** New Status */
+            new_status: ("open" | "in_progress" | "resolved" | "closed") | null;
+            /** Visible To Resident */
+            visible_to_resident: boolean;
+        };
         /**
          * ConsentIn
          * @description Accepting terms and privacy is implied by submitting the consent screen.
@@ -1162,6 +1447,14 @@ export interface components {
             label: string;
             /** Reasons */
             reasons: string[];
+        };
+        /** FeedbackIn */
+        FeedbackIn: {
+            /**
+             * Feedback
+             * @enum {string}
+             */
+            feedback: "fixed" | "not_fixed";
         };
         /** FlatDetailOut */
         FlatDetailOut: {
@@ -3028,6 +3321,297 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["StandardHeadOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_complaints_api_v1_societies__society_id__complaints_get: {
+        parameters: {
+            query?: {
+                status?: ("open" | "in_progress" | "resolved" | "closed") | null;
+            };
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ComplaintOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_complaint_api_v1_societies__society_id__complaints_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ComplaintIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ComplaintDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_complaint_api_v1_societies__society_id__complaints__complaint_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                complaint_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ComplaintDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    assign_api_v1_societies__society_id__complaints__complaint_id__assignee_patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                complaint_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssignIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ComplaintDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    give_feedback_api_v1_societies__society_id__complaints__complaint_id__feedback_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                complaint_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FeedbackIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ComplaintDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_photo_api_v1_societies__society_id__complaints__complaint_id__photos_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                complaint_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_add_photo_api_v1_societies__society_id__complaints__complaint_id__photos_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ComplaintDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_photo_api_v1_societies__society_id__complaints__complaint_id__photos__attachment_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                complaint_id: string;
+                attachment_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_update_api_v1_societies__society_id__complaints__complaint_id__updates_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                complaint_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ComplaintUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ComplaintDetailOut"];
                 };
             };
             /** @description Validation Error */
