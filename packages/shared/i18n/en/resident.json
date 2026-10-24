@@ -25,5 +25,61 @@
   "nav": {
     "home": "Home",
     "label": "Main menu"
+  },
+  "money": {
+    "cannotLoad": "Could not load your dues. Check your internet and try again.",
+    "noFlat": "Your flat is not linked yet. Ask your society committee to invite you for your flat.",
+    "flat": "Flat {{label}}",
+    "ownerPays": "Bills for this flat go to the owner.",
+    "due": "Due now",
+    "payBy": "Pay by {{date}}",
+    "advance": "Advance paid",
+    "nothingDue": "Nothing due. Thank you!",
+    "waiting": "{{count}} payment received, waiting for confirmation",
+    "reported": "Received, waiting for confirmation",
+    "reportedBody": "Your treasurer will check it and confirm. Your receipt will appear under My receipts.",
+    "badAmount": "Enter the amount in rupees, for example 4200",
+    "needReference": "Enter the reference number from your payment app or bank",
+    "toPay": "Amount to pay",
+    "qrAlt": "UPI QR code to pay {{payee}}",
+    "openUpi": "Open UPI app",
+    "upiId": "UPI ID",
+    "copied": "Copied",
+    "copyUpi": "Copy UPI ID",
+    "directNote": "The money goes straight to your society's own bank account.",
+    "noUpi": "Your society has not added UPI details yet. Ask your treasurer how to pay.",
+    "iPaid": "I have paid",
+    "iPaidBody": "Paid already? Tell us here so your treasurer can confirm it.",
+    "amount": "Amount paid (₹)",
+    "howPaid": "How did you pay?",
+    "method": {
+      "upi": "UPI",
+      "neft": "Bank transfer (NEFT)",
+      "cash": "Cash to the office",
+      "cheque": "Cheque"
+    },
+    "paidOn": "Date paid",
+    "chequeNumber": "Cheque number",
+    "reference": "Reference number",
+    "referenceHelp": "The UPI reference or bank UTR from your payment message",
+    "send": "Send",
+    "noBills": "No bills yet.",
+    "billStatus": {
+      "issued": "Not paid",
+      "partially_paid": "Partly paid",
+      "paid": "Paid",
+      "cancelled": "Cancelled"
+    },
+    "openBill": "Open the bill",
+    "noPayments": "No payments yet.",
+    "paymentStatus": {
+      "pending": "Received, waiting for confirmation",
+      "recorded": "Received, waiting for confirmation",
+      "confirmed": "Confirmed",
+      "bounced": "Cheque bounced",
+      "reversed": "Cancelled"
+    },
+    "openReceipt": "Open the receipt",
+    "offline": "You are offline. Showing what was last loaded."
   }
 }

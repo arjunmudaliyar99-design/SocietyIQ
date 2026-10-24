@@ -944,6 +944,95 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/my/flats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** My Flats */
+        get: operations["my_flats_api_v1_societies__society_id__my_flats_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/my/flats/{flat_id}/bills": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** My Bills */
+        get: operations["my_bills_api_v1_societies__society_id__my_flats__flat_id__bills_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/my/flats/{flat_id}/bills/{bill_id}/pdf": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** My Bill Pdf */
+        get: operations["my_bill_pdf_api_v1_societies__society_id__my_flats__flat_id__bills__bill_id__pdf_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/my/flats/{flat_id}/payments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * My Payments
+         * @description Confirmed payments with receipts, and reports still waiting for the treasurer
+         *     ("Received, waiting for confirmation", docs/02 §6).
+         */
+        get: operations["my_payments_api_v1_societies__society_id__my_flats__flat_id__payments_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/my/flats/{flat_id}/payments/{payment_id}/receipt": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** My Receipt */
+        get: operations["my_receipt_api_v1_societies__society_id__my_flats__flat_id__payments__payment_id__receipt_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/societies/{society_id}/payments": {
         parameters: {
             query?: never;
@@ -2261,6 +2350,25 @@ export interface components {
             /** Today */
             today?: string | null;
         };
+        /** LatestBillOut */
+        LatestBillOut: {
+            /** Bill Number */
+            bill_number: string;
+            /**
+             * Due Date
+             * Format: date
+             */
+            due_date: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Status */
+            status: string;
+            /** Total Due Paise */
+            total_due_paise: number;
+        };
         /** LatestRunOut */
         LatestRunOut: {
             /**
@@ -2583,6 +2691,19 @@ export interface components {
              */
             vehicle_type: "two_wheeler" | "four_wheeler" | "other";
         };
+        /** PayInfoOut */
+        PayInfoOut: {
+            /** Amount Paise */
+            amount_paise: number;
+            /** Payee */
+            payee: string;
+            /** Qr Data Uri */
+            qr_data_uri: string;
+            /** Upi Id */
+            upi_id: string;
+            /** Upi Link */
+            upi_link: string;
+        };
         /** PaymentDetailOut */
         PaymentDetailOut: {
             /** Allocations */
@@ -2852,6 +2973,28 @@ export interface components {
         ReasonIn: {
             /** Reason */
             reason: string;
+        };
+        /** ResidentFlatOut */
+        ResidentFlatOut: {
+            /** Balance Paise */
+            balance_paise: number | null;
+            /** Can Pay */
+            can_pay: boolean;
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /** Label */
+            label: string;
+            latest_bill: components["schemas"]["LatestBillOut"] | null;
+            /** Months Pending */
+            months_pending: number | null;
+            pay: components["schemas"]["PayInfoOut"] | null;
+            /** Pending Reports */
+            pending_reports: number;
+            /** Role */
+            role: string;
         };
         /**
          * ResidentPaymentIn
@@ -5568,6 +5711,173 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["MembershipOut"][];
                 };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_flats_api_v1_societies__society_id__my_flats_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResidentFlatOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_bills_api_v1_societies__society_id__my_flats__flat_id__bills_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BillSummaryOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_bill_pdf_api_v1_societies__society_id__my_flats__flat_id__bills__bill_id__pdf_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                bill_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_payments_api_v1_societies__society_id__my_flats__flat_id__payments_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaymentOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_receipt_api_v1_societies__society_id__my_flats__flat_id__payments__payment_id__receipt_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                payment_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Validation Error */
             422: {

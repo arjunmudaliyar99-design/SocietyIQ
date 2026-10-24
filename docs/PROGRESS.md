@@ -13,7 +13,7 @@ What is built, what is in progress, and what is next. Every Claude Code session 
 | M4 Charge setup and calculation engine | IN REVIEW | feat/m4-charges (merged into `dev` locally) | Legal values unverified until the consultant checks them |
 | M5 Billing runs, bills, PDFs | IN REVIEW | feat/m5-billing (merged into `dev` locally) | Email to residents is M9 |
 | M6 Payments, receipts, dues | IN REVIEW | feat/m6-payments (merged into `dev`) | Resident screens in M7 |
-| M7 Resident PWA core | IN PROGRESS (feat/m7-resident) | | |
+| M7 Resident PWA core | IN REVIEW | feat/m7-resident (merged into `dev`) | Android install check still open |
 | M8 Complaints | IN REVIEW | feat/m8-complaints (merged into `dev`) | Phone camera upload not yet tried on a real phone |
 | M9 Notices and email | NOT STARTED | | |
 | M10 Committee home and compliance | IN REVIEW | feat/m10-compliance | Then M11 |
@@ -27,6 +27,13 @@ Statuses: NOT STARTED · IN PROGRESS (branch) · IN REVIEW (PR link) · DONE · 
 ## Log
 
 Newest first. One entry per merged PR: date, milestone, what was built, how to try it, known gaps.
+
+- 2026-10-24 — M7 — Resident PWA core.
+  Backend: `/societies/{id}/my/flats` (the person's linked flats with balance, months pending, latest bill, payments waiting, and UPI pay details: deep link `upi://pay?...&am=4200.00` and QR), my bills, my payments (pending reports show as "Received, waiting for confirmation"), bill and receipt PDFs. One access rule (`services/residents.py`): owners and delegates see and pay; a tenant only if `members.tenant_can_pay`.
+  Front end (resident): dues banner ("Flat B-207 · ₹4,200 · Pay by 16 Nov"), Pay (amount, QR, "Open UPI app", copy UPI ID, "I have paid" form), My bills and My receipts with PDFs; Pay hidden for a tenant the owner has not allowed; offline banner and network-first caching of dues, bills, receipts and notices for offline reading. Five languages.
+  Tests: backend 224 (resident access, tenant rule, isolation of 5 new routes); front end 99 incl. owner banner, UPI deep link, tenant without Pay, axe.
+  How to try: seed, open http://localhost:5174, sign in as `resident.b207@example.com`.
+  Known gaps: Android install and the 360 px hallway test need a real phone; flat switcher for people with several flats picks the first payable one (no switch screen yet); screenshot proof for "I have paid" upload is not built (reference number only).
 
 - 2026-10-24 — M10 — Committee home and compliance tracker.
   Calc (pure, 100% covered, in the CI coverage gate): `app/calc/compliance.py` — status per docs/06 §9 (Overdue before today, Due soon within 30 days, else OK), next due = date done + repeat months (same day, clamped to month end), reminder days 90/60/30/7/0 then weekly while overdue.

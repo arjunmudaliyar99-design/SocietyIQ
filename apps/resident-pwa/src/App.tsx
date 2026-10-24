@@ -29,6 +29,11 @@ import {
 import { ComplaintPage, MyComplaintsPage, ReportPage } from "./complaints/ComplaintPages";
 import { support } from "./config";
 import { InstallBanner } from "./InstallBanner";
+import { useMyFlats } from "./api/money";
+import { DuesCard } from "./money/DuesCard";
+import { MyBillsList, MyReceiptsList } from "./money/HistoryPages";
+import { OfflineBanner } from "./money/OfflineBanner";
+import { PayPage } from "./money/PayPage";
 
 function TopBar() {
   const { t } = useTranslation();
@@ -85,21 +90,26 @@ function BottomBar() {
 }
 
 /** Simple-mode home: dues banner plus three big buttons (docs/02 §11). */
+/** Pay is hidden only once we know none of the person's flats may pay (a tenant the owner
+ * has not allowed, docs/07 M7). */
+function useCanPay(): boolean {
+  const flats = useMyFlats();
+  if (!flats.data || flats.data.length === 0) return true;
+  return flats.data.some((f) => f.can_pay);
+}
+
 function Home() {
   const { t } = useTranslation("resident");
   const navigate = useNavigate();
+  const current = useCurrentSociety();
   return (
     <div className="flex flex-col gap-4">
-      {/* Real dues (flat, amount, due date) come from the API in M7. */}
-      <section
-        aria-label={t("home.pay")}
-        className="rounded-card bg-gradient-to-br from-teal to-teal-dark p-5 text-surface shadow-raised"
-      >
-        <p className="text-body">{t("home.duesPlaceholder")}</p>
-      </section>
-      <BigButton icon={<Wallet size={26} />} onClick={() => navigate("/pay")} className="sm:w-full">
-        {t("home.pay")}
-      </BigButton>
+      <DuesCard />
+      {current ? <PayButton /> : (
+        <BigButton icon={<Wallet size={26} />} onClick={() => navigate("/pay")} className="sm:w-full">
+          {t("home.pay")}
+        </BigButton>
+      )}
       <div className="grid grid-cols-2 gap-3">
         <BigButton
           variant="secondary"
@@ -119,6 +129,17 @@ function Home() {
         </BigButton>
       </div>
     </div>
+  );
+}
+
+function PayButton() {
+  const { t } = useTranslation("resident");
+  const navigate = useNavigate();
+  if (!useCanPay()) return null;
+  return (
+    <BigButton icon={<Wallet size={26} />} onClick={() => navigate("/pay")} className="sm:w-full">
+      {t("home.pay")}
+    </BigButton>
   );
 }
 
@@ -203,6 +224,13 @@ function SettingsPage() {
   );
 }
 
+/** Money pages need a signed-in society; outside it (previews, tests) they say Coming soon. */
+function Signed({ title, children }: { title: string; children: ReactNode }) {
+  const current = useCurrentSociety();
+  if (!current) return <ComingSoon title={title} />;
+  return <Page title={title}>{children}</Page>;
+}
+
 export default function App() {
   const { t } = useTranslation("resident");
   const location = useLocation();
@@ -211,15 +239,16 @@ export default function App() {
       <TopBar />
       {/* Bottom padding keeps the last item clear of the tab bar. */}
       <main key={location.pathname} className="mx-auto max-w-xl animate-enter p-4 pb-28">
+        <OfflineBanner />
         <InstallBanner />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/pay" element={<ComingSoon title={t("home.pay")} />} />
+          <Route path="/pay" element={<Signed title={t("home.pay")}><PayPage /></Signed>} />
           <Route path="/notices" element={<ComingSoon title={t("home.notices")} />} />
           <Route path="/report" element={<ReportPage />} />
           <Route path="/menu" element={<MenuPage />} />
-          <Route path="/bills" element={<ComingSoon title={t("menu.myBills")} />} />
-          <Route path="/receipts" element={<ComingSoon title={t("menu.myReceipts")} />} />
+          <Route path="/bills" element={<Signed title={t("menu.myBills")}><MyBillsList /></Signed>} />
+          <Route path="/receipts" element={<Signed title={t("menu.myReceipts")}><MyReceiptsList /></Signed>} />
           <Route path="/complaints" element={<MyComplaintsPage />} />
           <Route path="/complaints/:complaintId" element={<ComplaintPage />} />
           <Route path="/settings" element={<SettingsPage />} />

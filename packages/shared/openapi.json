@@ -3460,6 +3460,41 @@
         "title": "JobIn",
         "type": "object"
       },
+      "LatestBillOut": {
+        "properties": {
+          "bill_number": {
+            "title": "Bill Number",
+            "type": "string"
+          },
+          "due_date": {
+            "format": "date",
+            "title": "Due Date",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "total_due_paise": {
+            "title": "Total Due Paise",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "bill_number",
+          "total_due_paise",
+          "due_date",
+          "status"
+        ],
+        "title": "LatestBillOut",
+        "type": "object"
+      },
       "LatestRunOut": {
         "properties": {
           "id": {
@@ -4376,6 +4411,39 @@
         "title": "ParkingOut",
         "type": "object"
       },
+      "PayInfoOut": {
+        "properties": {
+          "amount_paise": {
+            "title": "Amount Paise",
+            "type": "integer"
+          },
+          "payee": {
+            "title": "Payee",
+            "type": "string"
+          },
+          "qr_data_uri": {
+            "title": "Qr Data Uri",
+            "type": "string"
+          },
+          "upi_id": {
+            "title": "Upi Id",
+            "type": "string"
+          },
+          "upi_link": {
+            "title": "Upi Link",
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount_paise",
+          "upi_id",
+          "payee",
+          "upi_link",
+          "qr_data_uri"
+        ],
+        "title": "PayInfoOut",
+        "type": "object"
+      },
       "PaymentDetailOut": {
         "properties": {
           "allocations": {
@@ -5099,6 +5167,86 @@
           "reason"
         ],
         "title": "ReasonIn",
+        "type": "object"
+      },
+      "ResidentFlatOut": {
+        "properties": {
+          "balance_paise": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Balance Paise"
+          },
+          "can_pay": {
+            "title": "Can Pay",
+            "type": "boolean"
+          },
+          "flat_id": {
+            "format": "uuid",
+            "title": "Flat Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "latest_bill": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LatestBillOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "months_pending": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Months Pending"
+          },
+          "pay": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PayInfoOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pending_reports": {
+            "title": "Pending Reports",
+            "type": "integer"
+          },
+          "role": {
+            "title": "Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "flat_id",
+          "label",
+          "role",
+          "can_pay",
+          "balance_paise",
+          "months_pending",
+          "latest_bill",
+          "pending_reports",
+          "pay"
+        ],
+        "title": "ResidentFlatOut",
         "type": "object"
       },
       "ResidentPaymentIn": {
@@ -11036,6 +11184,360 @@
         "summary": "List Memberships",
         "tags": [
           "societies"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/my/flats": {
+      "get": {
+        "operationId": "my_flats_api_v1_societies__society_id__my_flats_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ResidentFlatOut"
+                  },
+                  "title": "Response My Flats Api V1 Societies  Society Id  My Flats Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "My Flats",
+        "tags": [
+          "resident"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/my/flats/{flat_id}/bills": {
+      "get": {
+        "operationId": "my_bills_api_v1_societies__society_id__my_flats__flat_id__bills_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/BillSummaryOut"
+                  },
+                  "title": "Response My Bills Api V1 Societies  Society Id  My Flats  Flat Id  Bills Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "My Bills",
+        "tags": [
+          "resident"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/my/flats/{flat_id}/bills/{bill_id}/pdf": {
+      "get": {
+        "operationId": "my_bill_pdf_api_v1_societies__society_id__my_flats__flat_id__bills__bill_id__pdf_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "bill_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Bill Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "My Bill Pdf",
+        "tags": [
+          "resident"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/my/flats/{flat_id}/payments": {
+      "get": {
+        "description": "Confirmed payments with receipts, and reports still waiting for the treasurer\n(\"Received, waiting for confirmation\", docs/02 \u00a76).",
+        "operationId": "my_payments_api_v1_societies__society_id__my_flats__flat_id__payments_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentOut"
+                  },
+                  "title": "Response My Payments Api V1 Societies  Society Id  My Flats  Flat Id  Payments Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "My Payments",
+        "tags": [
+          "resident"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/my/flats/{flat_id}/payments/{payment_id}/receipt": {
+      "get": {
+        "operationId": "my_receipt_api_v1_societies__society_id__my_flats__flat_id__payments__payment_id__receipt_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "payment_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Payment Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "My Receipt",
+        "tags": [
+          "resident"
         ]
       }
     },

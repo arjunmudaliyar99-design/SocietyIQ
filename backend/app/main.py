@@ -17,6 +17,7 @@ from app.routers import (
     imports,
     internal_jobs,
     payments,
+    residents,
     societies,
 )
 
@@ -49,6 +50,7 @@ def create_app() -> FastAPI:
     api.include_router(payments.router)
     api.include_router(compliance.router)
     api.include_router(home.router)
+    api.include_router(residents.router)
     api.include_router(internal_jobs.router)
     if settings.app_env == "local" and settings.supabase_jwt_secret:
         api.include_router(dev.router)

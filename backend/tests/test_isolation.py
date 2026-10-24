@@ -15,6 +15,14 @@ FILE = "multipart-file"
 ANY_ID = str(uuid4())
 
 SOCIETY_ROUTES: dict[tuple[str, str], object] = {
+    ("GET", "/api/v1/societies/{society_id}/my/flats"): None,
+    ("GET", "/api/v1/societies/{society_id}/my/flats/{flat_id}/bills"): None,
+    ("GET", "/api/v1/societies/{society_id}/my/flats/{flat_id}/bills/{bill_id}/pdf"): None,
+    ("GET", "/api/v1/societies/{society_id}/my/flats/{flat_id}/payments"): None,
+    (
+        "GET",
+        "/api/v1/societies/{society_id}/my/flats/{flat_id}/payments/{payment_id}/receipt",
+    ): None,
     ("GET", "/api/v1/societies/{society_id}/payments"): None,
     ("POST", "/api/v1/societies/{society_id}/payments"): {
         "flat_id": ANY_ID,

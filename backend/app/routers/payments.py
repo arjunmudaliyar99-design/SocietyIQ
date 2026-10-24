@@ -15,8 +15,8 @@ from sqlalchemy import select
 
 from app.config import get_settings
 from app.deps import SessionDep, SocietyContext, require_role
-from app.errors import AppError, not_found
-from app.models import ChargeHead, Member, Payment, Receipt, Society, SocietyMembership
+from app.errors import AppError
+from app.models import ChargeHead, Member, Payment, Receipt, Society
 from app.pdf import bills as pdf
 from app.pdf import documents
 from app.schemas.payments import (
@@ -33,6 +33,7 @@ from app.schemas.payments import (
 )
 from app.services import billing as billing_service
 from app.services import payments as service
+from app.services import residents
 from app.timeutil import today_ist
 
 router = APIRouter(prefix="/societies/{society_id}", tags=["payments"])
@@ -275,41 +276,11 @@ async def export_ledger(
 # --- residents ------------------------------------------------------------------------
 
 
-async def resident_flat(
-    session: SessionDep, ctx: SocietyContext, flat_id: UUID, *, to_pay: bool
-) -> None:
-    """A resident may act only for a flat they are linked to. A tenant may pay only if the
-    owner allowed it (members.tenant_can_pay, docs/07 M7)."""
-    membership = await session.scalar(
-        select(SocietyMembership).where(
-            SocietyMembership.society_id == ctx.society_id,
-            SocietyMembership.user_id == ctx.user.id,
-            SocietyMembership.flat_id == flat_id,
-            SocietyMembership.status == "active",
-            SocietyMembership.role.in_(("owner", "tenant", "delegate")),
-        )
-    )
-    if membership is None:
-        raise not_found()
-    if to_pay and membership.role == "tenant":
-        allowed = await session.scalar(
-            select(Member.id).where(
-                Member.flat_id == flat_id,
-                Member.member_type == "tenant",
-                Member.tenant_can_pay.is_(True),
-                Member.to_date.is_(None),
-                (Member.user_id == ctx.user.id) | (Member.email == (ctx.user.email or "").lower()),
-            )
-        )
-        if allowed is None:
-            raise AppError(403, "TENANT_CANNOT_PAY", "errors.tenantCannotPay")
-
-
 @router.post("/flats/{flat_id}/payment-reports", status_code=status.HTTP_201_CREATED)
 async def report_payment(
     flat_id: UUID, body: ResidentPaymentIn, ctx: AnyMember, session: SessionDep
 ) -> PaymentOut:
-    await resident_flat(session, ctx, flat_id, to_pay=True)
+    await residents.flat_access(session, ctx.society_id, ctx.user, flat_id, to_pay=True)
     payment = await service.record(
         session,
         ctx.society_id,

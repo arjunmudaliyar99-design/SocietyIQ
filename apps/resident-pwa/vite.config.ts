@@ -27,9 +27,22 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // App shell and fonts only. Caching last-loaded dues, bills and notices comes with M7.
         globPatterns: ["**/*.{js,css,html,svg,png,ico,woff2}"],
         navigateFallback: "/index.html",
+        // docs/04 §16: keep the last-loaded dues, bills, receipts and notices for offline
+        // reading. Network first, so online the data is always fresh.
+        runtimeCaching: [
+          {
+            urlPattern: ({ url, request }) =>
+              request.method === "GET" && /\/api\/v1\/societies\/[^/]+\/(my\/flats|notices)/.test(url.pathname),
+            handler: "NetworkFirst",
+            options: {
+              cacheName: "resident-data",
+              networkTimeoutSeconds: 6,
+              expiration: { maxEntries: 60, maxAgeSeconds: 30 * 24 * 60 * 60 },
+            },
+          },
+        ],
       },
     }),
   ],
