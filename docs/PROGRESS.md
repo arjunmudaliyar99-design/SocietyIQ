@@ -12,11 +12,11 @@ What is built, what is in progress, and what is next. Every Claude Code session 
 | M3 Flats, members, import | IN REVIEW | feat/m3-flats-members (merged into `dev` locally) | Supabase Storage path untested |
 | M4 Charge setup and calculation engine | IN REVIEW | feat/m4-charges (merged into `dev` locally) | Legal values unverified until the consultant checks them |
 | M5 Billing runs, bills, PDFs | IN REVIEW | feat/m5-billing (merged into `dev` locally) | Email to residents is M9 |
-| M6 Payments, receipts, dues | NOT STARTED | | |
+| M6 Payments, receipts, dues | IN PROGRESS (feat/m6-payments) | | Then M7 |
 | M7 Resident PWA core | NOT STARTED | | |
-| M8 Complaints | NOT STARTED | | |
+| M8 Complaints | IN PROGRESS (feat/m8-complaints) | | Then M9 in the same session |
 | M9 Notices and email | NOT STARTED | | |
-| M10 Committee home and compliance | NOT STARTED | | |
+| M10 Committee home and compliance | IN PROGRESS (feat/m10-compliance) | | Then M11 in the same session |
 | M11 Analytics and admin tools | NOT STARTED | | |
 | M12 Vendor bills, AI, alerts | NOT STARTED | | |
 | M13 Quote comparison | NOT STARTED | | |
