@@ -154,6 +154,18 @@ SOCIETY_ROUTES: dict[tuple[str, str], object] = {
     ("GET", "/api/v1/societies/{society_id}/vendors"): None,
     ("POST", "/api/v1/societies/{society_id}/vendors"): {"name": "Vendor"},
     ("PATCH", "/api/v1/societies/{society_id}/vendors/{vendor_id}"): {"notes": "x"},
+    ("GET", "/api/v1/societies/{society_id}/notices"): None,
+    ("POST", "/api/v1/societies/{society_id}/notices"): {"title": "T", "body": "B"},
+    ("GET", "/api/v1/societies/{society_id}/notices/options"): None,
+    ("POST", "/api/v1/societies/{society_id}/notices/ai-draft"): {"notes": "abc def"},
+    ("GET", "/api/v1/societies/{society_id}/notices/{notice_id}"): None,
+    ("PATCH", "/api/v1/societies/{society_id}/notices/{notice_id}"): {"title": "T"},
+    ("POST", "/api/v1/societies/{society_id}/notices/{notice_id}/ai-translate"): {
+        "languages": ["hi"]
+    },
+    ("POST", "/api/v1/societies/{society_id}/notices/{notice_id}/publish"): None,
+    ("POST", "/api/v1/societies/{society_id}/notices/{notice_id}/archive"): None,
+    ("POST", "/api/v1/societies/{society_id}/notices/{notice_id}/read"): None,
 }
 
 
@@ -183,6 +195,7 @@ def _url(path: str, society_id: object) -> str:
         "attachment_id",
         "item_id",
         "vendor_id",
+        "notice_id",
     ):
         url = url.replace("{" + name + "}", ANY_ID)
     if url.endswith("/charges/preview"):

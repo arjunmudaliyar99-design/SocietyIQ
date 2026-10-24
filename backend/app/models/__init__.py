@@ -12,6 +12,7 @@ from app.models.complaints import Complaint, ComplaintUpdate
 from app.models.compliance import ComplianceEvent, ComplianceItem, ComplianceReminder, Vendor
 from app.models.flats import Flat, Member, Wing
 from app.models.ledger import LedgerEntry
+from app.models.notices import Notice, NoticeRead, NotificationLog
 from app.models.payments import Payment, PaymentAllocation, Receipt
 from app.models.people import Consent, Society, SocietyMembership, User
 from app.models.system import Attachment, AuditLog, ImportJob, LegalParameter
@@ -37,6 +38,9 @@ __all__ = [
     "LedgerEntry",
     "LegalParameter",
     "Member",
+    "Notice",
+    "NoticeRead",
+    "NotificationLog",
     "NumberSequence",
     "ParkingAllotment",
     "Payment",

@@ -1,0 +1,28 @@
+{
+  "_status": "en final; mr, hi, gu, ta draft (native-speaker review before a pilot)",
+  "en": {
+    "noticeSubject": "{society}: {title}",
+    "noticeOpen": "Read it in the SocietyIQ app: {link}",
+    "noticeFooter": "You get this email because you are a member of {society}. This mailbox is not read; contact your society committee."
+  },
+  "mr": {
+    "noticeSubject": "{society}: {title}",
+    "noticeOpen": "SocietyIQ अ‍ॅपमध्ये वाचा: {link}",
+    "noticeFooter": "तुम्ही {society} चे सदस्य असल्यामुळे हा ईमेल तुम्हाला आला आहे. या पत्त्यावरील उत्तरे वाचली जात नाहीत; तुमच्या सोसायटी समितीशी संपर्क साधा."
+  },
+  "hi": {
+    "noticeSubject": "{society}: {title}",
+    "noticeOpen": "SocietyIQ ऐप में पढ़ें: {link}",
+    "noticeFooter": "आप {society} के सदस्य हैं, इसलिए आपको यह ईमेल मिला है। इस पते पर भेजे जवाब पढ़े नहीं जाते; अपनी सोसायटी समिति से संपर्क करें।"
+  },
+  "gu": {
+    "noticeSubject": "{society}: {title}",
+    "noticeOpen": "SocietyIQ ઍપમાં વાંચો: {link}",
+    "noticeFooter": "તમે {society} ના સભ્ય છો તેથી તમને આ ઈમેલ મળ્યો છે. આ સરનામે મોકલેલા જવાબ વંચાતા નથી; તમારી સોસાયટી સમિતિનો સંપર્ક કરો."
+  },
+  "ta": {
+    "noticeSubject": "{society}: {title}",
+    "noticeOpen": "SocietyIQ செயலியில் படிக்கவும்: {link}",
+    "noticeFooter": "நீங்கள் {society} உறுப்பினர் என்பதால் இந்த மின்னஞ்சல் வந்தது. இந்த முகவரிக்கு அனுப்பும் பதில்கள் படிக்கப்படுவதில்லை; உங்கள் சொசைட்டி குழுவைத் தொடர்பு கொள்ளவும்."
+  }
+}
