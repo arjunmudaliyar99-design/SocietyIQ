@@ -33,6 +33,7 @@ async def add_opening_balance(
     source_type: str,
     source_id: UUID | None,
     created_by: UUID | None,
+    months_pending: int | None = None,
 ) -> LedgerEntry:
     entry = LedgerEntry(
         society_id=society_id,
@@ -43,6 +44,7 @@ async def add_opening_balance(
         source_type=source_type,
         source_id=source_id,
         created_by=created_by,
+        months_pending=months_pending,
     )
     session.add(entry)
     await session.flush()

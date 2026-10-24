@@ -28,6 +28,7 @@ COLUMNS: list[tuple[str, str]] = [
     ("tenant_name", "Tenant name"),
     ("tenant_phone", "Tenant phone"),
     ("opening_balance", "Opening balance (₹, positive = flat owes)"),
+    ("opening_months", "Opening balance months pending"),
 ]
 
 USAGE_CHOICES = {"residential": "residential", "commercial": "commercial"}
@@ -232,6 +233,17 @@ def _check_one(row: int, raw: dict[str, object]) -> tuple[list[Issue], dict[str,
             problem(key, "opening_balance")
         else:
             data["opening_balance_paise"] = paise
+
+    # Optional: how many months the opening balance covers, for dues ageing (docs/06 §6).
+    data["opening_months"] = None
+    if _text(raw.get("opening_months")):
+        months, key = _positive_number(raw["opening_months"], 0)
+        if key:
+            problem(key, "opening_months")
+        elif months == "0":
+            problem("notPositive", "opening_months")
+        elif (data["opening_balance_paise"] or 0) > 0:
+            data["opening_months"] = int(months)
 
     return issues, data
 

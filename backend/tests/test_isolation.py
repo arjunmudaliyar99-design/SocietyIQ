@@ -15,6 +15,25 @@ FILE = "multipart-file"
 ANY_ID = str(uuid4())
 
 SOCIETY_ROUTES: dict[tuple[str, str], object] = {
+    ("GET", "/api/v1/societies/{society_id}/payments"): None,
+    ("POST", "/api/v1/societies/{society_id}/payments"): {
+        "flat_id": ANY_ID,
+        "amount_paise": 100,
+        "method": "cash",
+        "received_on": "2026-11-01",
+    },
+    ("GET", "/api/v1/societies/{society_id}/payments/{payment_id}"): None,
+    ("POST", "/api/v1/societies/{society_id}/payments/{payment_id}/confirm"): None,
+    ("POST", "/api/v1/societies/{society_id}/payments/{payment_id}/bounce"): {"reason": "test"},
+    ("POST", "/api/v1/societies/{society_id}/payments/{payment_id}/reverse"): {"reason": "test"},
+    ("GET", "/api/v1/societies/{society_id}/payments/{payment_id}/receipt"): None,
+    ("GET", "/api/v1/societies/{society_id}/dues"): None,
+    ("GET", "/api/v1/societies/{society_id}/flats/{flat_id}/ledger"): None,
+    ("GET", "/api/v1/societies/{society_id}/flats/{flat_id}/ledger/export"): None,
+    ("POST", "/api/v1/societies/{society_id}/flats/{flat_id}/payment-reports"): {
+        "amount_paise": 100,
+        "received_on": "2026-11-01",
+    },
     ("GET", "/api/v1/societies/{society_id}"): None,
     ("GET", "/api/v1/societies/{society_id}/memberships"): None,
     ("POST", "/api/v1/societies/{society_id}/invites"): {

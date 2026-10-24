@@ -1,41 +1,5 @@
-<!doctype html>
-<html lang="{{ language }}">
-<head>
-<meta charset="utf-8">
-<style>
-  @font-face { font-family: "Noto Sans"; src: url("fonts/NotoSans.ttf"); }
-  @font-face { font-family: "Noto Sans Devanagari"; src: url("fonts/NotoSansDevanagari.ttf"); }
-  @font-face { font-family: "Noto Sans Gujarati"; src: url("fonts/NotoSansGujarati.ttf"); }
-  @font-face { font-family: "Noto Sans Tamil"; src: url("fonts/NotoSansTamil.ttf"); }
-  @page { size: A4; margin: 14mm 14mm 16mm; }
-  body {
-    font-family: "Noto Sans", "Noto Sans Devanagari", "Noto Sans Gujarati", "Noto Sans Tamil", sans-serif;
-    font-size: 10.5pt; color: #17262e;
-  }
-  .bill { page-break-after: always; }
-  .bill:last-child { page-break-after: auto; }
-  header { border-bottom: 2px solid #2e6b5e; padding-bottom: 6pt; margin-bottom: 10pt; }
-  h1 { font-size: 16pt; margin: 0; color: #2e6b5e; }
-  .society { font-size: 9.5pt; }
-  .label { color: #55636b; font-size: 8.5pt; }
-  .local { display: block; color: #55636b; font-size: 8.5pt; }
-  table { width: 100%; border-collapse: collapse; }
-  .facts td { padding: 3pt 6pt 3pt 0; vertical-align: top; width: 33%; }
-  .lines { margin-top: 10pt; }
-  .lines th { text-align: left; border-bottom: 1px solid #d9e2df; padding: 4pt 0; }
-  .lines td { padding: 4pt 0; border-bottom: 1px solid #eef2f1; }
-  .num { text-align: right; white-space: nowrap; }
-  .sum td { font-weight: bold; }
-  .total td { font-size: 13pt; font-weight: bold; border-top: 2px solid #17262e; padding-top: 6pt; }
-  .pay { margin-top: 14pt; border: 1px solid #d9e2df; padding: 8pt; }
-  .pay img { width: 30mm; height: 30mm; float: right; }
-  .pay .row { margin: 4pt 0; }
-  .pay .row strong { display: block; }
-  .stamp { color: #b3261e; font-size: 20pt; font-weight: bold; border: 3px solid #b3261e; display: inline-block; padding: 2pt 8pt; }
-  footer { margin-top: 10pt; font-size: 8pt; color: #55636b; }
-</style>
-</head>
-<body>
+{% extends "base.html" %}
+{% block body %}
 {% for b in bills %}
 <section class="bill">
   <header>
@@ -81,5 +45,4 @@
   <footer>© SocietyIQ{% if company %} · {{ company }}{% endif %}</footer>
 </section>
 {% endfor %}
-</body>
-</html>
+{% endblock %}

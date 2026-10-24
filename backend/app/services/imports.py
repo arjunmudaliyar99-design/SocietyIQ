@@ -42,6 +42,7 @@ INSTRUCTIONS = [
     "Occupancy: Owner occupied, Family occupied, Let out or Vacant.",
     "Phones: 10 digits. Email is optional.",
     "Opening balance: amount the flat owes today, in rupees. Use a minus sign for an advance.",
+    "Opening balance months pending: how many months of maintenance that amount covers.",
     "Nothing is saved until you check the preview and confirm.",
 ]
 
@@ -263,6 +264,7 @@ async def confirm(session: AsyncSession, society_id: UUID, actor: User, job_id: 
                 source_type="import",
                 source_id=job.id,
                 created_by=actor.id,
+                months_pending=data.get("opening_months"),
             )
         await session.flush()
         await audit.record(

@@ -65,13 +65,13 @@ The schema for v1 and v1.5. Build tables only when their milestone needs them (`
 **`payments`**
 `id`, `society_id`, `flat_id`, `amount_paise BIGINT CHECK > 0`, `method TEXT CHECK IN ('cash','cheque','upi','neft','gateway','other')`, `status TEXT CHECK IN ('pending','recorded','confirmed','bounced','reversed')`, `received_on DATE`, `reference TEXT NULL` (UPI ref, NEFT UTR, cheque number), `cheque_bank TEXT NULL`, `cheque_date DATE NULL`, `reported_by_resident BOOLEAN DEFAULT false`, `proof_file_path TEXT NULL`, `recorded_by UUID`, `resident_confirmed_at NULL`, `confirmed_by UUID NULL`, `confirmed_at NULL`, `reversal_of UUID NULL`, `reason TEXT NULL`, `notes TEXT NULL`, `created_at`.
 
-**`payment_allocations`** — `id`, `society_id`, `payment_id`, `bill_id`, `amount_paise BIGINT`.
+**`payment_allocations`** — `id`, `society_id`, `payment_id`, `bill_id NULL`, `ledger_entry_id NULL` (an opening balance; exactly one of the two), `amount_paise BIGINT`, `reversed_at NULL` (undone by a reversal; never deleted), `created_at`.
 
 **`receipts`** — `id`, `society_id`, `payment_id UNIQUE`, `receipt_number TEXT`, `issued_at TIMESTAMPTZ`, `pdf_path TEXT NULL`, `cancelled_at NULL`, `cancelled_reason NULL`.
 
 **`ledger_entries`** — the flat's account. Append-only. Positive = flat owes more; negative = flat paid or was credited.
 `id`, `society_id`, `flat_id`, `entry_date DATE`, `entry_type TEXT CHECK IN ('opening_balance','bill','interest','payment','adjustment','reversal')`, `amount_paise BIGINT` (signed), `source_type TEXT` (e.g. 'bill','payment','import'), `source_id UUID`, `reverses_entry_id UUID NULL`, `reason TEXT NULL`, `created_by`, `created_at`.
-Balance of a flat = `SUM(amount_paise)`. Never update or delete rows; add a `reversal` row. A flat has at most one `opening_balance` entry (partial unique index, migration 0002). `app_backend` has no UPDATE or DELETE on this table.
+`months_pending SMALLINT NULL` on opening balances: the months that amount covers, for dues ageing. Balance of a flat = `SUM(amount_paise)`. Never update or delete rows; add a `reversal` row. A flat has at most one `opening_balance` entry (partial unique index, migration 0002). `app_backend` has no UPDATE or DELETE on this table.
 
 ## 5. Complaints and notices
 

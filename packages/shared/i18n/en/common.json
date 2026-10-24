@@ -157,7 +157,14 @@
     "complaintChooseFlat": "Choose which flat this is for.",
     "complaintNotResolved": "You can answer this after the committee marks it Resolved.",
     "notAPhoto": "This is not a photo. Choose a JPG or PNG picture.",
-    "tooManyPhotos": "This complaint already has 3 photos."
+    "tooManyPhotos": "This complaint already has 3 photos.",
+    "chequeNumberRequired": "Enter the cheque number.",
+    "chequeNotCleared": "A cheque is confirmed only when it clears.",
+    "paymentNotOpen": "This payment is already confirmed or closed.",
+    "notARecordedCheque": "Only a recorded cheque can bounce.",
+    "paymentNotReversible": "This payment cannot be reversed.",
+    "noReceipt": "There is no receipt until the payment is confirmed.",
+    "tenantCannotPay": "The owner has not allowed the tenant to pay for this flat."
   },
   "complaints": {
     "title": "Complaints",

@@ -508,6 +508,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/dues": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Dues */
+        get: operations["dues_api_v1_societies__society_id__dues_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/societies/{society_id}/flats": {
         parameters: {
             query?: never;
@@ -542,6 +559,44 @@ export interface paths {
         head?: never;
         /** Update Flat */
         patch: operations["update_flat_api_v1_societies__society_id__flats__flat_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/flats/{flat_id}/ledger": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Flat Ledger */
+        get: operations["flat_ledger_api_v1_societies__society_id__flats__flat_id__ledger_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/flats/{flat_id}/ledger/export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Export Ledger
+         * @description The flat's statement for a recovery application (docs/06 §6): every bill, payment,
+         *     interest line and reversal, with the resolutions behind the charges.
+         */
+        get: operations["export_ledger_api_v1_societies__society_id__flats__flat_id__ledger_export_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/api/v1/societies/{society_id}/flats/{flat_id}/members": {
@@ -646,6 +701,23 @@ export interface paths {
         head?: never;
         /** End Parking */
         patch: operations["end_parking_api_v1_societies__society_id__flats__flat_id__parking__allotment_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/flats/{flat_id}/payment-reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Report Payment */
+        post: operations["report_payment_api_v1_societies__society_id__flats__flat_id__payment_reports_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/api/v1/societies/{society_id}/flats/{flat_id}/property-tax": {
@@ -785,6 +857,109 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/payments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Payments */
+        get: operations["list_payments_api_v1_societies__society_id__payments_get"];
+        put?: never;
+        /** Record Payment */
+        post: operations["record_payment_api_v1_societies__society_id__payments_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/payments/{payment_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Payment */
+        get: operations["get_payment_api_v1_societies__society_id__payments__payment_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/payments/{payment_id}/bounce": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Bounce Payment */
+        post: operations["bounce_payment_api_v1_societies__society_id__payments__payment_id__bounce_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/payments/{payment_id}/confirm": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Confirm Payment */
+        post: operations["confirm_payment_api_v1_societies__society_id__payments__payment_id__confirm_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/payments/{payment_id}/receipt": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Receipt Pdf */
+        get: operations["receipt_pdf_api_v1_societies__society_id__payments__payment_id__receipt_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/payments/{payment_id}/reverse": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reverse Payment */
+        post: operations["reverse_payment_api_v1_societies__society_id__payments__payment_id__reverse_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/societies/{society_id}/property-tax/imports": {
         parameters: {
             query?: never;
@@ -897,6 +1072,13 @@ export interface components {
         AcceptInviteIn: {
             /** Token */
             token: string;
+        };
+        /** AllocationOut */
+        AllocationOut: {
+            /** Amount Paise */
+            amount_paise: number;
+            /** Settles */
+            settles: string;
         };
         /** AssignIn */
         AssignIn: {
@@ -1428,6 +1610,36 @@ export interface components {
             /** Label */
             label: string;
         };
+        /** DuesOut */
+        DuesOut: {
+            /** Counts */
+            counts: {
+                [key: string]: number;
+            };
+            /** Outstanding Paise */
+            outstanding_paise: number;
+            /** Rows */
+            rows: components["schemas"]["DuesRowOut"][];
+        };
+        /** DuesRowOut */
+        DuesRowOut: {
+            /** Balance Paise */
+            balance_paise: number;
+            /**
+             * Bucket
+             * @enum {string}
+             */
+            bucket: "paid_up" | "friendly" | "formal" | "long";
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /** Flat Label */
+            flat_label: string;
+            /** Months Pending */
+            months_pending: number;
+        };
         /** EndDateIn */
         EndDateIn: {
             /**
@@ -1532,6 +1744,22 @@ export interface components {
              * Format: uuid
              */
             wing_id: string;
+        };
+        /** FlatLedgerOut */
+        FlatLedgerOut: {
+            /** Balance Paise */
+            balance_paise: number;
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /** Flat Label */
+            flat_label: string;
+            /** Lines */
+            lines: components["schemas"]["LedgerLineOut"][];
+            /** Months Pending */
+            months_pending: number;
         };
         /** FlatOut */
         FlatOut: {
@@ -1720,6 +1948,32 @@ export interface components {
         JobIn: {
             /** Today */
             today?: string | null;
+        };
+        /** LedgerLineOut */
+        LedgerLineOut: {
+            /** Amount Paise */
+            amount_paise: number;
+            /** Document */
+            document: string | null;
+            /**
+             * Entry Date
+             * Format: date
+             */
+            entry_date: string;
+            /**
+             * Entry Type
+             * @enum {string}
+             */
+            entry_type: "opening_balance" | "bill" | "interest" | "payment" | "adjustment" | "reversal";
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Reason */
+            reason: string | null;
+            /** Running Paise */
+            running_paise: number;
         };
         /** LegalProblemOut */
         LegalProblemOut: {
@@ -1999,6 +2253,157 @@ export interface components {
              */
             vehicle_type: "two_wheeler" | "four_wheeler" | "other";
         };
+        /** PaymentDetailOut */
+        PaymentDetailOut: {
+            /** Allocations */
+            allocations: components["schemas"]["AllocationOut"][];
+            /** Amount Paise */
+            amount_paise: number;
+            /** Cheque Bank */
+            cheque_bank: string | null;
+            /** Cheque Date */
+            cheque_date: string | null;
+            /** Confirmed At */
+            confirmed_at: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /**
+             * Flat Label
+             * @default
+             */
+            flat_label: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Method */
+            method: string;
+            /** Notes */
+            notes: string | null;
+            /** Reason */
+            reason: string | null;
+            /**
+             * Receipt Cancelled
+             * @default false
+             */
+            receipt_cancelled: boolean;
+            /** Receipt Number */
+            receipt_number?: string | null;
+            /**
+             * Received On
+             * Format: date
+             */
+            received_on: string;
+            /** Reference */
+            reference: string | null;
+            /** Reported By Resident */
+            reported_by_resident: boolean;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "pending" | "recorded" | "confirmed" | "bounced" | "reversed";
+        };
+        /** PaymentIn */
+        PaymentIn: {
+            /** Amount Paise */
+            amount_paise: number;
+            /** Cheque Bank */
+            cheque_bank?: string | null;
+            /** Cheque Date */
+            cheque_date?: string | null;
+            /**
+             * Confirm Now
+             * @default false
+             */
+            confirm_now: boolean;
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /**
+             * Method
+             * @enum {string}
+             */
+            method: "cash" | "cheque" | "upi" | "neft" | "other";
+            /** Notes */
+            notes?: string | null;
+            /**
+             * Received On
+             * Format: date
+             */
+            received_on: string;
+            /** Reference */
+            reference?: string | null;
+        };
+        /** PaymentOut */
+        PaymentOut: {
+            /** Amount Paise */
+            amount_paise: number;
+            /** Cheque Bank */
+            cheque_bank: string | null;
+            /** Cheque Date */
+            cheque_date: string | null;
+            /** Confirmed At */
+            confirmed_at: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Flat Id
+             * Format: uuid
+             */
+            flat_id: string;
+            /**
+             * Flat Label
+             * @default
+             */
+            flat_label: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Method */
+            method: string;
+            /** Notes */
+            notes: string | null;
+            /** Reason */
+            reason: string | null;
+            /**
+             * Receipt Cancelled
+             * @default false
+             */
+            receipt_cancelled: boolean;
+            /** Receipt Number */
+            receipt_number?: string | null;
+            /**
+             * Received On
+             * Format: date
+             */
+            received_on: string;
+            /** Reference */
+            reference: string | null;
+            /** Reported By Resident */
+            reported_by_resident: boolean;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "pending" | "recorded" | "confirmed" | "bounced" | "reversed";
+        };
         /** PreferencesIn */
         PreferencesIn: {
             /** Full Name */
@@ -2117,6 +2522,29 @@ export interface components {
         ReasonIn: {
             /** Reason */
             reason: string;
+        };
+        /**
+         * ResidentPaymentIn
+         * @description 'I have paid' from the resident app (docs/02 §11): waits for the treasurer.
+         */
+        ResidentPaymentIn: {
+            /** Amount Paise */
+            amount_paise: number;
+            /**
+             * Method
+             * @default upi
+             * @enum {string}
+             */
+            method: "upi" | "neft" | "cash" | "cheque" | "other";
+            /** Notes */
+            notes?: string | null;
+            /**
+             * Received On
+             * Format: date
+             */
+            received_on: string;
+            /** Reference */
+            reference?: string | null;
         };
         /** RunCreateIn */
         RunCreateIn: {
@@ -3625,6 +4053,41 @@ export interface operations {
             };
         };
     };
+    dues_api_v1_societies__society_id__dues_get: {
+        parameters: {
+            query?: {
+                bucket?: string | null;
+            };
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DuesOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     list_flats_api_v1_societies__society_id__flats_get: {
         parameters: {
             query?: never;
@@ -3755,6 +4218,74 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["FlatOut"];
                 };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    flat_ledger_api_v1_societies__society_id__flats__flat_id__ledger_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlatLedgerOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    export_ledger_api_v1_societies__society_id__flats__flat_id__ledger_export_get: {
+        parameters: {
+            query?: {
+                format?: string;
+            };
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Validation Error */
             422: {
@@ -4053,6 +4584,44 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ParkingOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    report_payment_api_v1_societies__society_id__flats__flat_id__payment_reports_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                flat_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ResidentPaymentIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaymentOut"];
                 };
             };
             /** @description Validation Error */
@@ -4368,6 +4937,255 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MembershipOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_payments_api_v1_societies__society_id__payments_get: {
+        parameters: {
+            query?: {
+                status?: string | null;
+                flat_id?: string | null;
+            };
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaymentOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    record_payment_api_v1_societies__society_id__payments_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PaymentIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaymentDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_payment_api_v1_societies__society_id__payments__payment_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                payment_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaymentDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    bounce_payment_api_v1_societies__society_id__payments__payment_id__bounce_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                payment_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReasonIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaymentDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    confirm_payment_api_v1_societies__society_id__payments__payment_id__confirm_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                payment_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaymentDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    receipt_pdf_api_v1_societies__society_id__payments__payment_id__receipt_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                payment_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    reverse_payment_api_v1_societies__society_id__payments__payment_id__reverse_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                payment_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReasonIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaymentDetailOut"];
                 };
             };
             /** @description Validation Error */

@@ -19,6 +19,11 @@ import { FlatsPage } from "./flats/FlatsPage";
 import { ImportPage } from "./flats/ImportPage";
 import { NewFlatPage } from "./flats/NewFlatPage";
 import { WingsPage } from "./flats/WingsPage";
+import { DuesPage } from "./payments/DuesPage";
+import { LedgerPage } from "./payments/LedgerPage";
+import { PaymentPage } from "./payments/PaymentPage";
+import { PaymentsPage } from "./payments/PaymentsPage";
+import { RecordPaymentPage } from "./payments/RecordPaymentPage";
 import { Preview } from "./Preview";
 import { DETAILED_NAV, SIMPLE_NAV } from "./nav";
 import { PeoplePage } from "./setup/PeoplePage";
@@ -46,7 +51,7 @@ function ComingSoon({ navKey }: { navKey: string }) {
 }
 
 // Menu items with real pages; the rest show "Coming soon" until their milestone.
-const BUILT = new Set(["/", "/settings", "/flats", "/charges", "/bills", "/complaints"]);
+const BUILT = new Set(["/", "/settings", "/flats", "/charges", "/bills", "/complaints", "/payments", "/dues"]);
 
 export default function App() {
   return (
@@ -64,6 +69,11 @@ export default function App() {
         <Route path="/flats/wings" element={<WingsPage />} />
         <Route path="/flats/import" element={<ImportPage />} />
         <Route path="/flats/:flatId" element={<FlatPage />} />
+        <Route path="/flats/:flatId/ledger" element={<LedgerPage />} />
+        <Route path="/payments" element={<PaymentsPage />} />
+        <Route path="/payments/new" element={<RecordPaymentPage />} />
+        <Route path="/payments/:paymentId" element={<PaymentPage />} />
+        <Route path="/dues" element={<DuesPage />} />
         <Route path="/bills" element={<BillsPage />} />
         <Route path="/bills/runs/:runId" element={<RunPage />} />
         <Route path="/bills/:billId" element={<BillPage />} />

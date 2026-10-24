@@ -29,12 +29,11 @@ from app.models import (
     Flat,
     LedgerEntry,
     Member,
-    NumberSequence,
     Society,
     User,
     Wing,
 )
-from app.services import audit, ledger
+from app.services import audit, ledger, numbers, payments
 from app.services import charges as charge_service
 
 EPOCH = date(1970, 1, 1)
@@ -224,31 +223,6 @@ async def cancel_draft(
     return run
 
 
-async def _reserve_numbers(
-    session: AsyncSession, society_id: UUID, financial_year: str, count: int
-) -> int:
-    """Gap-free numbering (docs/05 §3): lock the sequence row for the rest of the money
-    transaction and take `count` numbers in one go. Returns the first."""
-    seq = await session.scalar(
-        select(NumberSequence)
-        .where(
-            NumberSequence.society_id == society_id,
-            NumberSequence.kind == "bill",
-            NumberSequence.financial_year == financial_year,
-        )
-        .with_for_update()
-    )
-    if seq is None:
-        seq = NumberSequence(
-            society_id=society_id, kind="bill", financial_year=financial_year, next_value=1
-        )
-        session.add(seq)
-        await session.flush()
-    first = seq.next_value
-    seq.next_value = first + count
-    return first
-
-
 async def _interest_by_flat(
     session: AsyncSession,
     society: Society,
@@ -261,14 +235,18 @@ async def _interest_by_flat(
         return result
     # Unpaid charges of earlier bills. Payments arrive in M6 and will reduce the principal.
     rows = await session.execute(
-        select(Bill.flat_id, Bill.charges_paise, Bill.due_date).where(
+        select(Bill.id, Bill.flat_id, Bill.charges_paise, Bill.due_date).where(
             Bill.flat_id.in_(flat_ids),
             Bill.status.in_(("issued", "partially_paid")),
             Bill.bill_date < bill_date,
         )
     )
+    paid = await payments._allocated(session, flat_ids)
     overdue: dict[UUID, list[OverdueBill]] = {}
-    for flat_id, principal, due in rows:
+    for bill_id, flat_id, charges, due in rows:
+        # TODO(confirm): Q-008 — until decided, payments count against charges first, so
+        # interest runs only on charges still unpaid (the gentler reading for residents).
+        principal = max(charges - paid.get(bill_id, 0), 0)
         overdue.setdefault(flat_id, []).append(OverdueBill(principal, due))
     for flat_id, bills in overdue.items():
         result[flat_id] = interest_on_overdue(
@@ -457,7 +435,7 @@ async def approve(
     flat_ids = [UUID(f["flat_id"]) for f in snapshot["flats"]]
     balances = await ledger.balances(session, flat_ids)
     interest = await _interest_by_flat(session, society, flat_ids, run.bill_date, charged_through)
-    first = await _reserve_numbers(session, society_id, fy, len(flat_ids))
+    first = await numbers.reserve(session, society_id, "bill", fy, len(flat_ids))
 
     total = 0
     for offset, data in enumerate(snapshot["flats"]):  # flat-number order
@@ -478,6 +456,10 @@ async def approve(
         )
         total += bill.charges_paise + bill.interest_paise
     await session.flush()
+    # Flats in advance: their unallocated money now settles the new bill.
+    for flat_id in flat_ids:
+        if balances[flat_id] < 0:
+            await payments.reconcile(session, society_id, flat_id)
 
     run.status = "approved"
     run.approved_by = actor.id if actor else None
@@ -615,13 +597,14 @@ async def reissue_bill(session: AsyncSession, society_id: UUID, actor: User, bil
         head_names={h["id"]: h["name"] for h in snapshot["heads"]},
         head_order=[h["id"] for h in snapshot["heads"]],
         member_name=members.get(old.flat_id),
-        number=bill_number(fy, await _reserve_numbers(session, society_id, fy, 1)),
+        number=bill_number(fy, await numbers.reserve(session, society_id, "bill", fy, 1)),
         balance_before=(await ledger.balances(session, [old.flat_id]))[old.flat_id],
         interest=interest[old.flat_id],
         actor=actor,
         replaces=old,
     )
     await session.flush()
+    await payments.reconcile(session, society_id, old.flat_id)
     return bill
 
 

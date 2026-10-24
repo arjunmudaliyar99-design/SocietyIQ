@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block body %}
+{% for r in receipts %}
+<section class="doc">
+  <header>
+    <h1>{{ r.society_name }}</h1>
+    <div class="society">{% if r.society_address %}{{ r.society_address }}{% endif %}</div>
+  </header>
+  <h2>{{ L("receiptTitle") }}</h2>
+  {% if r.cancelled %}<p class="stamp">{{ L("cancelled") }}</p>{% endif %}
+  <table class="facts">
+    <tr>
+      <td><span class="label">{{ L("receiptNumber") }}</span><br><strong>{{ r.number }}</strong></td>
+      <td><span class="label">{{ L("flat") }}</span><br><strong>{{ r.flat }}</strong></td>
+      <td><span class="label">{{ L("receivedOn") }}</span><br>{{ r.received_on }}</td>
+    </tr>
+    <tr>
+      <td><span class="label">{{ L("receivedFrom") }}</span><br>{{ r.member or "" }}</td>
+      <td><span class="label">{{ L("method") }}</span><br>{{ L("m_" ~ r.method) }}</td>
+      <td><span class="label">{{ L("reference") }}</span><br>{{ r.reference or "" }}</td>
+    </tr>
+  </table>
+  <table class="lines">
+    <tr class="total"><td>{{ L("amountReceived") }}</td><td class="num">{{ r.amount }}</td></tr>
+  </table>
+  <p class="words">{{ L("inWords") }}: {{ r.words }}</p>
+  {% if r.allocations %}
+  <table class="lines">
+    <tr><th>{{ L("settles") }}</th><th class="num">{{ L("amount") }}</th></tr>
+    {% for a in r.allocations %}
+    <tr><td>{% if a.opening %}{{ L("openingBalance") }}{% else %}{{ a.settles }}{% endif %}</td><td class="num">{{ a.amount }}</td></tr>
+    {% endfor %}
+    {% if r.advance %}<tr><td>{{ L("advanceNote") }}</td><td class="num">{{ r.advance }}</td></tr>{% endif %}
+  </table>
+  {% endif %}
+  <footer>{{ L("computerGenerated") }} © SocietyIQ{% if company %} · {{ company }}{% endif %}</footer>
+</section>
+{% endfor %}
+{% endblock %}

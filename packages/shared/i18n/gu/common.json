@@ -158,7 +158,14 @@
     "complaintChooseFlat": "આ કયા ફ્લેટ માટે છે તે પસંદ કરો.",
     "complaintNotResolved": "સમિતિ \"ઉકેલાઈ\" કરે પછી તમે જવાબ આપી શકો.",
     "notAPhoto": "આ ફોટો નથી. JPG અથવા PNG ચિત્ર પસંદ કરો.",
-    "tooManyPhotos": "આ ફરિયાદમાં પહેલેથી 3 ફોટા છે."
+    "tooManyPhotos": "આ ફરિયાદમાં પહેલેથી 3 ફોટા છે.",
+    "chequeNumberRequired": "ચેક નંબર લખો.",
+    "chequeNotCleared": "ચેક ક્લિયર થાય ત્યારે જ પાકો થાય છે.",
+    "paymentNotOpen": "આ ચુકવણી પહેલેથી પાકી અથવા બંધ છે.",
+    "notARecordedCheque": "ફક્ત નોંધેલો ચેક જ બાઉન્સ થઈ શકે.",
+    "paymentNotReversible": "આ ચુકવણી ઉલટાવી શકાતી નથી.",
+    "noReceipt": "ચુકવણી પાકી થાય ત્યાં સુધી પહોંચ નથી.",
+    "tenantCannotPay": "માલિકે ભાડૂતને આ ફ્લેટ માટે ચૂકવવાની પરવાનગી આપી નથી."
   },
   "complaints": {
     "title": "ફરિયાદો",

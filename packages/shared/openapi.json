@@ -16,6 +16,24 @@
         "title": "AcceptInviteIn",
         "type": "object"
       },
+      "AllocationOut": {
+        "properties": {
+          "amount_paise": {
+            "title": "Amount Paise",
+            "type": "integer"
+          },
+          "settles": {
+            "title": "Settles",
+            "type": "string"
+          }
+        },
+        "required": [
+          "settles",
+          "amount_paise"
+        ],
+        "title": "AllocationOut",
+        "type": "object"
+      },
       "AssignIn": {
         "properties": {
           "assigned_to_text": {
@@ -1701,6 +1719,75 @@
         "title": "DraftFlatOut",
         "type": "object"
       },
+      "DuesOut": {
+        "properties": {
+          "counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Counts",
+            "type": "object"
+          },
+          "outstanding_paise": {
+            "title": "Outstanding Paise",
+            "type": "integer"
+          },
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/DuesRowOut"
+            },
+            "title": "Rows",
+            "type": "array"
+          }
+        },
+        "required": [
+          "rows",
+          "counts",
+          "outstanding_paise"
+        ],
+        "title": "DuesOut",
+        "type": "object"
+      },
+      "DuesRowOut": {
+        "properties": {
+          "balance_paise": {
+            "title": "Balance Paise",
+            "type": "integer"
+          },
+          "bucket": {
+            "enum": [
+              "paid_up",
+              "friendly",
+              "formal",
+              "long"
+            ],
+            "title": "Bucket",
+            "type": "string"
+          },
+          "flat_id": {
+            "format": "uuid",
+            "title": "Flat Id",
+            "type": "string"
+          },
+          "flat_label": {
+            "title": "Flat Label",
+            "type": "string"
+          },
+          "months_pending": {
+            "title": "Months Pending",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "flat_id",
+          "flat_label",
+          "balance_paise",
+          "months_pending",
+          "bucket"
+        ],
+        "title": "DuesRowOut",
+        "type": "object"
+      },
       "EndDateIn": {
         "properties": {
           "end_date": {
@@ -2004,6 +2091,43 @@
           "flat_number"
         ],
         "title": "FlatIn",
+        "type": "object"
+      },
+      "FlatLedgerOut": {
+        "properties": {
+          "balance_paise": {
+            "title": "Balance Paise",
+            "type": "integer"
+          },
+          "flat_id": {
+            "format": "uuid",
+            "title": "Flat Id",
+            "type": "string"
+          },
+          "flat_label": {
+            "title": "Flat Label",
+            "type": "string"
+          },
+          "lines": {
+            "items": {
+              "$ref": "#/components/schemas/LedgerLineOut"
+            },
+            "title": "Lines",
+            "type": "array"
+          },
+          "months_pending": {
+            "title": "Months Pending",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "flat_id",
+          "flat_label",
+          "balance_paise",
+          "months_pending",
+          "lines"
+        ],
+        "title": "FlatLedgerOut",
         "type": "object"
       },
       "FlatOut": {
@@ -2664,6 +2788,73 @@
           }
         },
         "title": "JobIn",
+        "type": "object"
+      },
+      "LedgerLineOut": {
+        "properties": {
+          "amount_paise": {
+            "title": "Amount Paise",
+            "type": "integer"
+          },
+          "document": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document"
+          },
+          "entry_date": {
+            "format": "date",
+            "title": "Entry Date",
+            "type": "string"
+          },
+          "entry_type": {
+            "enum": [
+              "opening_balance",
+              "bill",
+              "interest",
+              "payment",
+              "adjustment",
+              "reversal"
+            ],
+            "title": "Entry Type",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "running_paise": {
+            "title": "Running Paise",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "entry_date",
+          "entry_type",
+          "amount_paise",
+          "running_paise",
+          "document",
+          "reason"
+        ],
+        "title": "LedgerLineOut",
         "type": "object"
       },
       "LegalProblemOut": {
@@ -3484,6 +3675,413 @@
         "title": "ParkingOut",
         "type": "object"
       },
+      "PaymentDetailOut": {
+        "properties": {
+          "allocations": {
+            "items": {
+              "$ref": "#/components/schemas/AllocationOut"
+            },
+            "title": "Allocations",
+            "type": "array"
+          },
+          "amount_paise": {
+            "title": "Amount Paise",
+            "type": "integer"
+          },
+          "cheque_bank": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cheque Bank"
+          },
+          "cheque_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cheque Date"
+          },
+          "confirmed_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confirmed At"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "flat_id": {
+            "format": "uuid",
+            "title": "Flat Id",
+            "type": "string"
+          },
+          "flat_label": {
+            "default": "",
+            "title": "Flat Label",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "method": {
+            "title": "Method",
+            "type": "string"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "receipt_cancelled": {
+            "default": false,
+            "title": "Receipt Cancelled",
+            "type": "boolean"
+          },
+          "receipt_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Receipt Number"
+          },
+          "received_on": {
+            "format": "date",
+            "title": "Received On",
+            "type": "string"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference"
+          },
+          "reported_by_resident": {
+            "title": "Reported By Resident",
+            "type": "boolean"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "recorded",
+              "confirmed",
+              "bounced",
+              "reversed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "flat_id",
+          "amount_paise",
+          "method",
+          "status",
+          "received_on",
+          "reference",
+          "cheque_bank",
+          "cheque_date",
+          "reported_by_resident",
+          "reason",
+          "notes",
+          "confirmed_at",
+          "created_at",
+          "allocations"
+        ],
+        "title": "PaymentDetailOut",
+        "type": "object"
+      },
+      "PaymentIn": {
+        "properties": {
+          "amount_paise": {
+            "exclusiveMinimum": 0.0,
+            "title": "Amount Paise",
+            "type": "integer"
+          },
+          "cheque_bank": {
+            "anyOf": [
+              {
+                "maxLength": 60,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cheque Bank"
+          },
+          "cheque_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cheque Date"
+          },
+          "confirm_now": {
+            "default": false,
+            "title": "Confirm Now",
+            "type": "boolean"
+          },
+          "flat_id": {
+            "format": "uuid",
+            "title": "Flat Id",
+            "type": "string"
+          },
+          "method": {
+            "enum": [
+              "cash",
+              "cheque",
+              "upi",
+              "neft",
+              "other"
+            ],
+            "title": "Method",
+            "type": "string"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "received_on": {
+            "format": "date",
+            "title": "Received On",
+            "type": "string"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "maxLength": 60,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference"
+          }
+        },
+        "required": [
+          "flat_id",
+          "amount_paise",
+          "method",
+          "received_on"
+        ],
+        "title": "PaymentIn",
+        "type": "object"
+      },
+      "PaymentOut": {
+        "properties": {
+          "amount_paise": {
+            "title": "Amount Paise",
+            "type": "integer"
+          },
+          "cheque_bank": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cheque Bank"
+          },
+          "cheque_date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cheque Date"
+          },
+          "confirmed_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confirmed At"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "flat_id": {
+            "format": "uuid",
+            "title": "Flat Id",
+            "type": "string"
+          },
+          "flat_label": {
+            "default": "",
+            "title": "Flat Label",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "method": {
+            "title": "Method",
+            "type": "string"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "receipt_cancelled": {
+            "default": false,
+            "title": "Receipt Cancelled",
+            "type": "boolean"
+          },
+          "receipt_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Receipt Number"
+          },
+          "received_on": {
+            "format": "date",
+            "title": "Received On",
+            "type": "string"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference"
+          },
+          "reported_by_resident": {
+            "title": "Reported By Resident",
+            "type": "boolean"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "recorded",
+              "confirmed",
+              "bounced",
+              "reversed"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "flat_id",
+          "amount_paise",
+          "method",
+          "status",
+          "received_on",
+          "reference",
+          "cheque_bank",
+          "cheque_date",
+          "reported_by_resident",
+          "reason",
+          "notes",
+          "confirmed_at",
+          "created_at"
+        ],
+        "title": "PaymentOut",
+        "type": "object"
+      },
       "PreferencesIn": {
         "properties": {
           "full_name": {
@@ -3800,6 +4398,63 @@
           "reason"
         ],
         "title": "ReasonIn",
+        "type": "object"
+      },
+      "ResidentPaymentIn": {
+        "description": "'I have paid' from the resident app (docs/02 \u00a711): waits for the treasurer.",
+        "properties": {
+          "amount_paise": {
+            "exclusiveMinimum": 0.0,
+            "title": "Amount Paise",
+            "type": "integer"
+          },
+          "method": {
+            "default": "upi",
+            "enum": [
+              "upi",
+              "neft",
+              "cash",
+              "cheque",
+              "other"
+            ],
+            "title": "Method",
+            "type": "string"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "received_on": {
+            "format": "date",
+            "title": "Received On",
+            "type": "string"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "maxLength": 60,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference"
+          }
+        },
+        "required": [
+          "amount_paise",
+          "received_on"
+        ],
+        "title": "ResidentPaymentIn",
         "type": "object"
       },
       "RunCreateIn": {
@@ -7146,6 +7801,81 @@
         ]
       }
     },
+    "/api/v1/societies/{society_id}/dues": {
+      "get": {
+        "operationId": "dues_api_v1_societies__society_id__dues_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "bucket",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Bucket"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DuesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Dues",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
     "/api/v1/societies/{society_id}/flats": {
       "get": {
         "operationId": "list_flats_api_v1_societies__society_id__flats_get",
@@ -7419,6 +8149,149 @@
         "summary": "Update Flat",
         "tags": [
           "flats"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/flats/{flat_id}/ledger": {
+      "get": {
+        "operationId": "flat_ledger_api_v1_societies__society_id__flats__flat_id__ledger_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlatLedgerOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Flat Ledger",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/flats/{flat_id}/ledger/export": {
+      "get": {
+        "description": "The flat's statement for a recovery application (docs/06 \u00a76): every bill, payment,\ninterest line and reversal, with the resolutions behind the charges.",
+        "operationId": "export_ledger_api_v1_societies__society_id__flats__flat_id__ledger_export_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "schema": {
+              "default": "pdf",
+              "pattern": "^(pdf|xlsx)$",
+              "title": "Format",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Export Ledger",
+        "tags": [
+          "payments"
         ]
       }
     },
@@ -8068,6 +8941,85 @@
         ]
       }
     },
+    "/api/v1/societies/{society_id}/flats/{flat_id}/payment-reports": {
+      "post": {
+        "operationId": "report_payment_api_v1_societies__society_id__flats__flat_id__payment_reports_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "flat_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Flat Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResidentPaymentIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Report Payment",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
     "/api/v1/societies/{society_id}/flats/{flat_id}/property-tax": {
       "get": {
         "operationId": "list_tax_api_v1_societies__society_id__flats__flat_id__property_tax_get",
@@ -8675,6 +9627,527 @@
         "summary": "List Memberships",
         "tags": [
           "societies"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/payments": {
+      "get": {
+        "operationId": "list_payments_api_v1_societies__society_id__payments_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "in": "query",
+            "name": "flat_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Flat Id"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentOut"
+                  },
+                  "title": "Response List Payments Api V1 Societies  Society Id  Payments Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Payments",
+        "tags": [
+          "payments"
+        ]
+      },
+      "post": {
+        "operationId": "record_payment_api_v1_societies__society_id__payments_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Record Payment",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/payments/{payment_id}": {
+      "get": {
+        "operationId": "get_payment_api_v1_societies__society_id__payments__payment_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Payment Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Payment",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/payments/{payment_id}/bounce": {
+      "post": {
+        "operationId": "bounce_payment_api_v1_societies__society_id__payments__payment_id__bounce_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Payment Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReasonIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Bounce Payment",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/payments/{payment_id}/confirm": {
+      "post": {
+        "operationId": "confirm_payment_api_v1_societies__society_id__payments__payment_id__confirm_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Payment Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Confirm Payment",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/payments/{payment_id}/receipt": {
+      "get": {
+        "operationId": "receipt_pdf_api_v1_societies__society_id__payments__payment_id__receipt_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Payment Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Receipt Pdf",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/payments/{payment_id}/reverse": {
+      "post": {
+        "operationId": "reverse_payment_api_v1_societies__society_id__payments__payment_id__reverse_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "payment_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Payment Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReasonIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Reverse Payment",
+        "tags": [
+          "payments"
         ]
       }
     },

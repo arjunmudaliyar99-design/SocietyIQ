@@ -158,7 +158,14 @@
     "complaintChooseFlat": "ही कोणत्या सदनिकेसाठी आहे ते निवडा.",
     "complaintNotResolved": "समितीने \"सोडवली\" केल्यावर तुम्ही उत्तर देऊ शकता.",
     "notAPhoto": "हा फोटो नाही. JPG किंवा PNG चित्र निवडा.",
-    "tooManyPhotos": "या तक्रारीत आधीच 3 फोटो आहेत."
+    "tooManyPhotos": "या तक्रारीत आधीच 3 फोटो आहेत.",
+    "chequeNumberRequired": "धनादेश क्रमांक टाका.",
+    "chequeNotCleared": "धनादेश वटल्यावरच निश्चित होतो.",
+    "paymentNotOpen": "हा भरणा आधीच निश्चित किंवा बंद आहे.",
+    "notARecordedCheque": "फक्त नोंदवलेला धनादेश न वटलेला ठरू शकतो.",
+    "paymentNotReversible": "हा भरणा उलटवता येत नाही.",
+    "noReceipt": "भरणा निश्चित होईपर्यंत पावती नसते.",
+    "tenantCannotPay": "मालकाने भाडेकरूला या फ्लॅटसाठी भरण्याची परवानगी दिलेली नाही."
   },
   "complaints": {
     "title": "तक्रारी",

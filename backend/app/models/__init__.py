@@ -11,6 +11,7 @@ from app.models.charges import (
 from app.models.complaints import Complaint, ComplaintUpdate
 from app.models.flats import Flat, Member, Wing
 from app.models.ledger import LedgerEntry
+from app.models.payments import Payment, PaymentAllocation, Receipt
 from app.models.people import Consent, Society, SocietyMembership, User
 from app.models.system import Attachment, AuditLog, ImportJob, LegalParameter
 
@@ -34,7 +35,10 @@ __all__ = [
     "Member",
     "NumberSequence",
     "ParkingAllotment",
+    "Payment",
+    "PaymentAllocation",
     "PropertyTaxAssessment",
+    "Receipt",
     "Society",
     "SocietyMembership",
     "User",

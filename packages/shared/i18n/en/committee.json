@@ -204,7 +204,8 @@
       "authority": "Municipal authority",
       "financial_year": "Financial year",
       "annual_amount": "Yearly property tax (₹)",
-      "is_exempt": "Exempt"
+      "is_exempt": "Exempt",
+      "opening_months": "Opening balance months"
     },
     "issues": {
       "required": "{{field}} is empty.",
@@ -493,5 +494,108 @@
     "reissue": "Issue a corrected bill",
     "flatBills": "Bills",
     "noBills": "No bills yet."
+  },
+  "payments": {
+    "title": "Payments",
+    "body": "Money received from flats. A receipt is made only when you confirm a payment.",
+    "record": "Record a payment",
+    "tab": {
+      "waiting": "Waiting for you",
+      "all": "All payments"
+    },
+    "noneWaiting": "Nothing is waiting for confirmation.",
+    "none": "No payments yet.",
+    "status": {
+      "pending": "Waiting",
+      "recorded": "Recorded",
+      "confirmed": "Confirmed",
+      "bounced": "Bounced",
+      "reversed": "Reversed"
+    },
+    "method": {
+      "cash": "Cash",
+      "cheque": "Cheque",
+      "upi": "UPI",
+      "neft": "Bank transfer (NEFT)",
+      "other": "Other",
+      "gateway": "Online"
+    },
+    "byResident": "reported by resident",
+    "chooseFlat": "Choose a flat",
+    "flat": "Flat",
+    "owes": "This flat owes {{amount}}.",
+    "amount": "Amount (₹)",
+    "howPaid": "How was it paid?",
+    "receivedOn": "Date received",
+    "chequeNumber": "Cheque number",
+    "reference": "Reference number",
+    "referenceHelp": "UPI reference or bank UTR, if you have it",
+    "chequeBank": "Bank",
+    "chequeDate": "Cheque date",
+    "chequeNote": "A cheque is confirmed when it clears. Open it later and tap \"Cleared\" or \"Bounced\".",
+    "confirmNow": "I can see this money; confirm it now and make the receipt",
+    "save": "Save payment",
+    "saveAndReceipt": "Save and make receipt",
+    "needFlat": "Choose the flat",
+    "needChequeNumber": "Enter the cheque number",
+    "reasonLine": "Reason: {{reason}}",
+    "paidTowards": "Paid towards",
+    "openingBalance": "Opening balance",
+    "advance": "Kept as advance",
+    "confirm": "Confirm payment",
+    "cleared": "Cheque cleared",
+    "bounced": "Cheque bounced",
+    "openReceipt": "Open receipt {{number}}",
+    "noReceiptYet": "The receipt is made when you confirm this payment.",
+    "reverse": "Reverse this payment",
+    "reject": "This payment was not received",
+    "bounceNote": "The cheque did not clear. Nothing was added to the flat's account, so nothing changes there.",
+    "reverseNote": "The payment stays in the records marked reversed. Its amount goes back on the flat's account and the receipt is cancelled.",
+    "confirmQuestion": "Confirm {{amount}} from {{flat}}? A receipt will be made and the flat's dues will go down.",
+    "confirmYes": "Yes, confirm"
+  },
+  "dues": {
+    "title": "Dues",
+    "body": "Flats that owe money, largest first. Only committee members can see this list.",
+    "outstanding": "Total outstanding",
+    "flats": "flats",
+    "filter": "Show",
+    "all": "All",
+    "bucket": {
+      "paid_up": "Paid up",
+      "friendly": "1–2 months",
+      "formal": "3–5 months",
+      "long": "6 months or more"
+    },
+    "months": "{{count}} months pending",
+    "none": "No flat in this group owes anything.",
+    "step": {
+      "paid_up": "Nothing to do.",
+      "friendly": "Suggested: a friendly reminder.",
+      "formal": "Suggested: a formal reminder notice.",
+      "long": "The committee may consider a recovery application under section 154B-29 of the MCS Act (Form Y-6, Rule 106C-14). Consult your legal adviser."
+    }
+  },
+  "ledger": {
+    "title": "Account of flat {{flat}}",
+    "open": "Account statement of {{flat}}",
+    "monthsPending": "Months pending",
+    "exportPdf": "Statement (PDF)",
+    "exportExcel": "Statement (Excel)",
+    "recoveryNote": "The statement lists every bill, payment, interest line and reversal, and the general body resolutions behind the charges, as needed for a recovery application.",
+    "empty": "Nothing in this account yet.",
+    "date": "Date",
+    "details": "Details",
+    "charged": "Charged",
+    "paid": "Paid or credited",
+    "balance": "Balance",
+    "type": {
+      "opening_balance": "Opening balance",
+      "bill": "Bill",
+      "interest": "Interest",
+      "payment": "Payment",
+      "adjustment": "Adjustment",
+      "reversal": "Reversal"
+    }
   }
 }

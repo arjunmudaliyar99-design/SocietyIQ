@@ -2,6 +2,10 @@
 
 Decisions made during planning and building. Newest first. Format: date — decision — why — who.
 
+- 2026-10-24 — Opening balances are the oldest debt and are settled first; they carry an optional month count (`ledger_entries.months_pending`, import column, seed from docs/02 §12). Unpaid months = months × unpaid share, rounded up — docs/06 §6 counts months by unpaid bills, but imported arrears are not bills — M6 build session, to be confirmed.
+- 2026-10-24 — Until Q-008 is answered, payments settle a bill as a whole and interest runs only on charges still unpaid (payments count against charges first) — the gentler reading for residents; easy to change in one place — M6 build session.
+- 2026-10-24 — Allocations are never deleted: a reversal sets `reversed_at` and re-runs allocation for the flat — docs/05 "never delete financial records" — M6 build session.
+- 2026-10-24 — Email provider recommendation: Resend (free tier, simple API) behind the notifier interface; SMS later via an Indian DLT-registered provider such as MSG91 once the business is registered — the Founder asked us to recommend — M6 build session; to be confirmed by the Founder.
 - 2026-10-24 — Bill PDFs are rendered when first opened and then stored, not inside the approval transaction (docs/04 §8 and docs/07 M5 put them in it) — a font or renderer failure must never block or roll back money records; the bill's figures are fixed at approval either way — M5 build session, to be confirmed by the Co-founder (Engineering).
 - 2026-10-24 — Interest is charged from the later of (due date + grace days) and the previous approved run's bill date, up to the new bill date, on unpaid charges only — docs/06 §5 formula; prevents charging the same days twice; Q-002 still open — M5 build session.
 - 2026-10-24 — Complaint photos: JPEG, PNG or WebP checked by content, at most 3 per complaint, stored as `attachments` (owner_type `complaint`); the PWA shrinks photos to 1600 px JPEG before upload — docs/04 §7 "validate uploads by content", slow phone networks — M8 build session.

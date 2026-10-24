@@ -178,3 +178,12 @@ def test_tenant_phone_without_name() -> None:
 def test_flat_number_from_numeric_cell() -> None:
     [result] = check_rows([(2, _row(flat_number=101.0))])
     assert result.data["flat_number"] == "101"
+
+
+def test_opening_months() -> None:
+    [ok] = check_rows([(2, _row(opening_balance=29400, opening_months=7))])
+    assert ok.data["opening_months"] == 7
+    [bad] = check_rows([(2, _row(opening_balance=29400, opening_months="seven"))])
+    assert "notNumber" in _keys(bad.issues)
+    [ignored] = check_rows([(2, _row(opening_balance=0, opening_months=3))])
+    assert ignored.data["opening_months"] is None

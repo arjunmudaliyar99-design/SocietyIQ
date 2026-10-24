@@ -1,7 +1,7 @@
 // One flat: details, balance and the people linked to it (docs/02 §4).
 import { ArrowLeft, Pencil, UserPlus } from "lucide-react";
 import { useState, type FormEvent } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import {
   BigButton,
@@ -57,7 +57,12 @@ export function FlatPage() {
           {t("flats.title")}
         </Button>
       </div>
-      <h1 className="mb-6 text-title font-bold">{t("flats.flatTitle", { label })}</h1>
+      <h1 className="mb-2 text-title font-bold">{t("flats.flatTitle", { label })}</h1>
+      <p className="mb-6">
+        <Link to={`/flats/${data.id}/ledger`} className="text-body font-semibold text-teal underline">
+          {t("ledger.open", { flat: label })}
+        </Link>
+      </p>
 
       {editing ? (
         <FlatForm

@@ -38,6 +38,8 @@ class SeedSociety:
     service_per_flat_paise: int
     # flat label → dues in rupees (docs/02 §12)
     dues: dict[str, int]
+    # flat label → months pending, as listed in docs/02 §12 ("₹, months")
+    dues_months: dict[str, int]
     # wing name → flat numbers; a single unnamed wing uses the default wing
     layout: dict[str | None, list[str]]
     let_out: set[str] = field(default_factory=set)
@@ -78,6 +80,7 @@ SOCIETIES = [
             "C-404": 4200,
             "D-201": 0,
         },
+        dues_months={"A-204": 1, "A-305": 3, "B-207": 7, "B-401": 2, "C-302": 4, "C-404": 1},
         layout=_shanti_layout(),
         let_out={"A-305"},
     ),
@@ -97,6 +100,7 @@ SOCIETIES = [
             "3-04": 25200,
             "4-02": 7200,
         },
+        dues_months={"1-04": 1, "2-02": 3, "3-04": 7, "4-02": 2},
         # 16 floors x 4 flats, written floor-flat as in docs/02 §12 (1-01 ... 16-04).
         layout={None: _numbers(range(1, 17), range(1, 5), "{floor}-{unit:02d}")},
     ),
@@ -108,6 +112,7 @@ SOCIETIES = [
         cost_per_flat_paise=72000000,
         service_per_flat_paise=240000,
         dues={"101": 0, "102": 3000, "201": 0, "202": 0, "301": 6000},
+        dues_months={"102": 1, "301": 2},
         # 7 floors x 6 flats (101 ... 706).
         layout={None: _numbers(range(1, 8), range(1, 7), "{floor}{unit:02d}")},
     ),
@@ -207,6 +212,7 @@ async def _seed_society(session: AsyncSession, spec: SeedSociety, report: SeedRe
                     society_id=society_id,
                     flat_id=flat.id,
                     amount_paise=rupees * 100,
+                    months_pending=spec.dues_months.get(label),
                     entry_date=entry_date,
                     source_type="seed",
                     source_id=None,

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block body %}
+<section class="doc">
+  <header>
+    <h1>{{ l.society_name }}</h1>
+    <div class="society">{% if l.society_address %}{{ l.society_address }}<br>{% endif %}
+      {% if l.registration_number %}<span class="label">{{ L("regNo") }}</span> {{ l.registration_number }}{% endif %}</div>
+  </header>
+  <h2>{{ L("ledgerTitle") }}</h2>
+  <table class="facts">
+    <tr>
+      <td><span class="label">{{ L("flat") }}</span><br><strong>{{ l.flat }}</strong></td>
+      <td><span class="label">{{ L("member") }}</span><br>{{ l.member or "" }}</td>
+      <td><span class="label">{{ L("asOn") }}</span><br>{{ l.as_on }}</td>
+    </tr>
+  </table>
+  <table class="ledger" style="margin-top: 8pt">
+    <tr><th>{{ L("date") }}</th><th>{{ L("details") }}</th><th class="num">{{ L("debit") }}</th><th class="num">{{ L("credit") }}</th><th class="num">{{ L("balance") }}</th></tr>
+    {% for line in l.lines %}
+    <tr>
+      <td>{{ line.date }}</td>
+      <td>{{ L("type_" ~ line.type) }}{% if line.document %} {{ line.document }}{% endif %}{% if line.reason %} · {{ line.reason }}{% endif %}</td>
+      <td class="num">{{ line.debit or "" }}</td>
+      <td class="num">{{ line.credit or "" }}</td>
+      <td class="num">{{ line.running }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <table class="lines"><tr class="total"><td>{{ L("closingBalance") }}</td><td class="num">{{ l.balance }}</td></tr></table>
+  <h3>{{ L("resolutions") }}</h3>
+  <table class="ledger">
+    {% for r in l.resolutions %}
+    <tr><td>{{ r.name }}</td><td>{{ r.ref or L("noResolution") }}{% if r.date %} · {{ r.date }}{% endif %}</td></tr>
+    {% endfor %}
+    {% if l.interest_resolution %}<tr><td colspan="2">{{ L("interestResolution") }} {{ l.interest_resolution }}</td></tr>{% endif %}
+  </table>
+  <footer>© SocietyIQ{% if company %} · {{ company }}{% endif %}</footer>
+</section>
+{% endblock %}

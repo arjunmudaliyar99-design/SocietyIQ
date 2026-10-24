@@ -12,8 +12,8 @@ What is built, what is in progress, and what is next. Every Claude Code session 
 | M3 Flats, members, import | IN REVIEW | feat/m3-flats-members (merged into `dev` locally) | Supabase Storage path untested |
 | M4 Charge setup and calculation engine | IN REVIEW | feat/m4-charges (merged into `dev` locally) | Legal values unverified until the consultant checks them |
 | M5 Billing runs, bills, PDFs | IN REVIEW | feat/m5-billing (merged into `dev` locally) | Email to residents is M9 |
-| M6 Payments, receipts, dues | IN PROGRESS (feat/m6-payments) | | Then M7 |
-| M7 Resident PWA core | NOT STARTED | | |
+| M6 Payments, receipts, dues | IN REVIEW | feat/m6-payments (merged into `dev`) | Resident screens in M7 |
+| M7 Resident PWA core | IN PROGRESS (feat/m7-resident) | | |
 | M8 Complaints | IN REVIEW | feat/m8-complaints (merged into `dev`) | Phone camera upload not yet tried on a real phone |
 | M9 Notices and email | NOT STARTED | | |
 | M10 Committee home and compliance | IN PROGRESS (feat/m10-compliance) | | Then M11 in the same session |
@@ -27,6 +27,13 @@ Statuses: NOT STARTED · IN PROGRESS (branch) · IN REVIEW (PR link) · DONE · 
 ## Log
 
 Newest first. One entry per merged PR: date, milestone, what was built, how to try it, known gaps.
+
+- 2026-10-24 — M6 — Payments, receipts and dues.
+  Calc: `app/calc/payments.py` (oldest-first allocation, dues buckets per docs/06 §6, opening-balance months, amount in words in the Indian system; 100% covered).
+  Backend: migration `0006_payments` (`payments`, `payment_allocations` with `reversed_at`, `receipts`; `ledger_entries.months_pending`). Record cash/cheque/UPI/NEFT (cash and seen transfers can be confirmed in one tap; cheques only when cleared), confirm (payment ledger entry, receipt `R/2026-27/000001`, allocation, audit, one transaction), cheque bounced, reverse with reason (reversal row and ledger entry, allocations undone, receipt cancelled). Allocation is a reconciliation step after any confirm, reversal or new bill, so advances settle the next bill. Dues with buckets and suggested steps; flat ledger with running balance; statement export as PDF and Excel with the resolutions behind the charges. Residents report "I have paid" for their own flat (tenants only if `tenant_can_pay`). Receipt PDF with amount in words. Optional "Opening balance months pending" import column; the seed sets months from docs/02 §12. Interest now runs only on unpaid charges.
+  Front end (committee): Payments (waiting for you / all), record a payment (amount pre-filled with what the flat owes), payment page (confirm / cleared / bounced / reverse, what it paid, receipt), Dues (totals, bucket filters, suggested step), flat account statement with exports.
+  Acceptance: docs/06 §4 example end to end (₹10,000 → two bills paid, third ₹1,600, ₹19,400 left); no receipt for an unconfirmed payment; reversal restores ₹29,400 exactly; audit rows for record, confirm, bounce, reverse.
+  Known gaps: no bounce charge (Q-004); no bank matching (v1.5); reminders are M9's notices; resident screens in M7.
 
 - 2026-10-24 — M8 — Complaints.
   Backend: migration `0005_complaints` (`complaints`, append-only `complaint_updates`, forced RLS). Endpoints under `/societies/{id}/complaints`: list (filter `?status=`), raise, detail, post an update (optionally change status, optionally committee-only), assign to a person or vendor, resident feedback (Fixed / Not fixed, only after Resolved), add photo (JPEG/PNG/WebP checked by content, max 3), get photo. Admin, treasurer and committee manage; owners, tenants and delegates raise and see their flat's complaints (others' are 404); consultant and auditor get 403. Committee raising for a flat is recorded as "on behalf". Create, assign, status and feedback write `audit_log`.

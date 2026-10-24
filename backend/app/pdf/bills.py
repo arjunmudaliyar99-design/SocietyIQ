@@ -174,11 +174,15 @@ def _environment() -> Environment:
     )
 
 
-def render_html(bills: list[BillView], language: str, company: str = "") -> str:
-    template = _environment().get_template("bills.html")
+def render_template(name: str, language: str, company: str = "", **context: object) -> str:
+    template = _environment().get_template(name)
     return template.render(
-        bills=bills, language=language, L=label_function(language), company=company
+        language=language, L=label_function(language), company=company, **context
     )
+
+
+def render_html(bills: list[BillView], language: str, company: str = "") -> str:
+    return render_template("bills.html", language, company, bills=bills)
 
 
 def render_pdf(html: str) -> bytes:

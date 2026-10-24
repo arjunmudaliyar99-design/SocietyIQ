@@ -23,5 +23,7 @@ class LedgerEntry(Base):
     source_id: Mapped[UUID | None]
     reverses_entry_id: Mapped[UUID | None]
     reason: Mapped[str | None]
+    # Opening balances only: how many months they cover, for dues ageing.
+    months_pending: Mapped[int | None]
     created_by: Mapped[UUID | None]
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
