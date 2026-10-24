@@ -152,6 +152,81 @@
     "billAlreadyReissued": "A corrected bill was already issued.",
     "flatLeftOut": "This flat is missing information needed for its charges.",
     "pdfUnavailable": "The PDF cannot be made on this computer right now. Please contact SocietyIQ support.",
-    "noBills": "There are no bills to print."
+    "noBills": "There are no bills to print.",
+    "complaintStatusChange": "This status change is not allowed.",
+    "complaintChooseFlat": "Choose which flat this is for.",
+    "complaintNotResolved": "You can answer this after the committee marks it Resolved.",
+    "notAPhoto": "This is not a photo. Choose a JPG or PNG picture.",
+    "tooManyPhotos": "This complaint already has 3 photos."
+  },
+  "complaints": {
+    "title": "Complaints",
+    "myTitle": "My complaints",
+    "report": "Report a problem",
+    "raiseForFlat": "Raise a complaint",
+    "newTitle": "Raise a complaint for a flat",
+    "onBehalfNote": "For residents who do not use the app. Choose the flat, or Common area.",
+    "empty": "No complaints yet.",
+    "emptyFiltered": "No complaints with this status.",
+    "all": "All",
+    "sent": "Your complaint was sent. The committee will update you here.",
+    "history": "What happened",
+    "raised": "Complaint raised",
+    "raisedOnBehalf": "Raised by the committee for this flat",
+    "committeeOnly": "Committee only",
+    "photoAlt": "Photo {{n}}",
+    "assignedTo": "Assigned to: {{name}}",
+    "notAssigned": "Not assigned yet",
+    "assign": "Assign to a person or vendor",
+    "assignSave": "Save",
+    "addUpdate": "Add an update",
+    "updateMessage": "Message",
+    "changeStatus": "Change status to",
+    "keepStatus": "Keep as it is",
+    "committeeOnlyToggle": "Only the committee can see this",
+    "postUpdate": "Post update",
+    "back": "Back to complaints",
+    "askFixed": "Is the problem fixed?",
+    "fixedButton": "Yes, fixed",
+    "notFixedButton": "No, not fixed",
+    "description": "Details",
+    "status": {
+      "open": "Open",
+      "in_progress": "In progress",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "category": {
+      "water": "Water / leak",
+      "lift": "Lift",
+      "electricity": "Electricity",
+      "cleaning": "Cleaning",
+      "security": "Security",
+      "parking": "Parking",
+      "other": "Other"
+    },
+    "location": {
+      "my_flat": "My flat",
+      "common_area": "Common area"
+    },
+    "form": {
+      "what": "What is the problem?",
+      "where": "Where is it?",
+      "flat": "Flat",
+      "chooseFlat": "Choose a flat",
+      "pickCategory": "Choose what the problem is",
+      "pickFlat": "Choose the flat",
+      "photo": "Photo (optional)",
+      "addPhoto": "Add a photo",
+      "photoAdded": "Photo added",
+      "removePhoto": "Remove photo",
+      "describe": "Tell us more (optional)",
+      "send": "Send",
+      "sending": "Sending…"
+    },
+    "feedback": {
+      "fixed": "Resident says: Fixed",
+      "not_fixed": "Resident says: Not fixed"
+    }
   }
 }

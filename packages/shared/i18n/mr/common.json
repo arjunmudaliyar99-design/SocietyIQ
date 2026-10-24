@@ -153,6 +153,81 @@
     "billAlreadyReissued": "दुरुस्त बिल आधीच दिले आहे.",
     "flatLeftOut": "या फ्लॅटच्या शुल्कासाठी लागणारी माहिती कमी आहे.",
     "pdfUnavailable": "या संगणकावर आत्ता PDF बनू शकत नाही. कृपया SocietyIQ सपोर्टशी संपर्क साधा.",
-    "noBills": "छापण्यासाठी बिले नाहीत."
+    "noBills": "छापण्यासाठी बिले नाहीत.",
+    "complaintStatusChange": "हा स्थिती बदल करता येत नाही.",
+    "complaintChooseFlat": "ही कोणत्या सदनिकेसाठी आहे ते निवडा.",
+    "complaintNotResolved": "समितीने \"सोडवली\" केल्यावर तुम्ही उत्तर देऊ शकता.",
+    "notAPhoto": "हा फोटो नाही. JPG किंवा PNG चित्र निवडा.",
+    "tooManyPhotos": "या तक्रारीत आधीच 3 फोटो आहेत."
+  },
+  "complaints": {
+    "title": "तक्रारी",
+    "myTitle": "माझ्या तक्रारी",
+    "report": "समस्या कळवा",
+    "raiseForFlat": "तक्रार नोंदवा",
+    "newTitle": "एखाद्या सदनिकेसाठी तक्रार नोंदवा",
+    "onBehalfNote": "अ‍ॅप न वापरणाऱ्या रहिवाशांसाठी. सदनिका निवडा, किंवा सामायिक जागा.",
+    "empty": "अजून कोणतीही तक्रार नाही.",
+    "emptyFiltered": "या स्थितीची कोणतीही तक्रार नाही.",
+    "all": "सर्व",
+    "sent": "तुमची तक्रार पाठवली. समिती तुम्हाला इथेच कळवेल.",
+    "history": "काय झाले",
+    "raised": "तक्रार नोंदवली",
+    "raisedOnBehalf": "समितीने या सदनिकेसाठी नोंदवली",
+    "committeeOnly": "फक्त समिती",
+    "photoAlt": "फोटो {{n}}",
+    "assignedTo": "सोपवले: {{name}}",
+    "notAssigned": "अजून कोणाला सोपवले नाही",
+    "assign": "व्यक्ती किंवा विक्रेत्याला सोपवा",
+    "assignSave": "जतन करा",
+    "addUpdate": "अपडेट जोडा",
+    "updateMessage": "संदेश",
+    "changeStatus": "स्थिती बदला",
+    "keepStatus": "आहे तशीच ठेवा",
+    "committeeOnlyToggle": "फक्त समिती हे पाहू शकते",
+    "postUpdate": "अपडेट पाठवा",
+    "back": "तक्रारींकडे परत",
+    "askFixed": "समस्या दूर झाली का?",
+    "fixedButton": "हो, दूर झाली",
+    "notFixedButton": "नाही, दूर झाली नाही",
+    "description": "तपशील",
+    "status": {
+      "open": "उघडी",
+      "in_progress": "काम सुरू आहे",
+      "resolved": "सोडवली",
+      "closed": "बंद"
+    },
+    "category": {
+      "water": "पाणी / गळती",
+      "lift": "लिफ्ट",
+      "electricity": "वीज",
+      "cleaning": "स्वच्छता",
+      "security": "सुरक्षा",
+      "parking": "पार्किंग",
+      "other": "इतर"
+    },
+    "location": {
+      "my_flat": "माझी सदनिका",
+      "common_area": "सामायिक जागा"
+    },
+    "form": {
+      "what": "काय समस्या आहे?",
+      "where": "कुठे आहे?",
+      "flat": "सदनिका",
+      "chooseFlat": "सदनिका निवडा",
+      "pickCategory": "समस्येचा प्रकार निवडा",
+      "pickFlat": "सदनिका निवडा",
+      "photo": "फोटो (ऐच्छिक)",
+      "addPhoto": "फोटो जोडा",
+      "photoAdded": "फोटो जोडला",
+      "removePhoto": "फोटो काढा",
+      "describe": "आणखी सांगा (ऐच्छिक)",
+      "send": "पाठवा",
+      "sending": "पाठवत आहे…"
+    },
+    "feedback": {
+      "fixed": "रहिवासी म्हणतात: दूर झाली",
+      "not_fixed": "रहिवासी म्हणतात: दूर झाली नाही"
+    }
   }
 }

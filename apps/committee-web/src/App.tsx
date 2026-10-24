@@ -6,6 +6,9 @@ import { EmptyState, useTranslation } from "@societyiq/shared";
 import { BillPage } from "./billing/BillPage";
 import { BillsPage } from "./billing/BillsPage";
 import { RunPage } from "./billing/RunPage";
+import { ComplaintPage } from "./complaints/ComplaintPage";
+import { ComplaintsPage } from "./complaints/ComplaintsPage";
+import { NewComplaintPage } from "./complaints/NewComplaintPage";
 import { ChargesPage } from "./charges/ChargesPage";
 import { HeadPage } from "./charges/HeadPage";
 import { PreviewPage } from "./charges/PreviewPage";
@@ -43,7 +46,7 @@ function ComingSoon({ navKey }: { navKey: string }) {
 }
 
 // Menu items with real pages; the rest show "Coming soon" until their milestone.
-const BUILT = new Set(["/", "/settings", "/flats", "/charges", "/bills"]);
+const BUILT = new Set(["/", "/settings", "/flats", "/charges", "/bills", "/complaints"]);
 
 export default function App() {
   return (
@@ -70,6 +73,9 @@ export default function App() {
         <Route path="/charges/settings" element={<SettingsPage />} />
         <Route path="/charges/property-tax" element={<TaxImportPage />} />
         <Route path="/charges/:headId" element={<HeadPage />} />
+        <Route path="/complaints" element={<ComplaintsPage />} />
+        <Route path="/complaints/new" element={<NewComplaintPage />} />
+        <Route path="/complaints/:complaintId" element={<ComplaintPage />} />
         <Route path="/preview" element={<Preview />} />
         <Route path="*" element={<Home />} />
       </Routes>

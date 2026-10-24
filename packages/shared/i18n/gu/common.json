@@ -153,6 +153,81 @@
     "billAlreadyReissued": "સુધારેલું બિલ પહેલેથી આપેલ છે.",
     "flatLeftOut": "આ ફ્લેટના ચાર્જ માટે જરૂરી માહિતી ઓછી છે.",
     "pdfUnavailable": "આ કમ્પ્યુટર પર હમણાં PDF બની શકતી નથી. કૃપા કરી SocietyIQ સપોર્ટનો સંપર્ક કરો.",
-    "noBills": "છાપવા માટે કોઈ બિલ નથી."
+    "noBills": "છાપવા માટે કોઈ બિલ નથી.",
+    "complaintStatusChange": "આ સ્થિતિ બદલાવ શક્ય નથી.",
+    "complaintChooseFlat": "આ કયા ફ્લેટ માટે છે તે પસંદ કરો.",
+    "complaintNotResolved": "સમિતિ \"ઉકેલાઈ\" કરે પછી તમે જવાબ આપી શકો.",
+    "notAPhoto": "આ ફોટો નથી. JPG અથવા PNG ચિત્ર પસંદ કરો.",
+    "tooManyPhotos": "આ ફરિયાદમાં પહેલેથી 3 ફોટા છે."
+  },
+  "complaints": {
+    "title": "ફરિયાદો",
+    "myTitle": "મારી ફરિયાદો",
+    "report": "સમસ્યા જણાવો",
+    "raiseForFlat": "ફરિયાદ નોંધાવો",
+    "newTitle": "કોઈ ફ્લેટ માટે ફરિયાદ નોંધાવો",
+    "onBehalfNote": "જે રહેવાસીઓ ઍપ વાપરતા નથી તેમના માટે. ફ્લેટ પસંદ કરો, અથવા સામાન્ય વિસ્તાર.",
+    "empty": "હજી કોઈ ફરિયાદ નથી.",
+    "emptyFiltered": "આ સ્થિતિની કોઈ ફરિયાદ નથી.",
+    "all": "બધી",
+    "sent": "તમારી ફરિયાદ મોકલાઈ ગઈ. સમિતિ તમને અહીં જ જાણ કરશે.",
+    "history": "શું થયું",
+    "raised": "ફરિયાદ નોંધાઈ",
+    "raisedOnBehalf": "સમિતિએ આ ફ્લેટ માટે નોંધાવી",
+    "committeeOnly": "ફક્ત સમિતિ",
+    "photoAlt": "ફોટો {{n}}",
+    "assignedTo": "સોંપેલ: {{name}}",
+    "notAssigned": "હજી કોઈને સોંપી નથી",
+    "assign": "વ્યક્તિ અથવા વિક્રેતાને સોંપો",
+    "assignSave": "સાચવો",
+    "addUpdate": "અપડેટ ઉમેરો",
+    "updateMessage": "સંદેશ",
+    "changeStatus": "સ્થિતિ બદલો",
+    "keepStatus": "જેમ છે તેમ રાખો",
+    "committeeOnlyToggle": "ફક્ત સમિતિ આ જોઈ શકે",
+    "postUpdate": "અપડેટ મોકલો",
+    "back": "ફરિયાદો પર પાછા",
+    "askFixed": "શું સમસ્યા ઉકેલાઈ ગઈ?",
+    "fixedButton": "હા, ઉકેલાઈ ગઈ",
+    "notFixedButton": "ના, ઉકેલાઈ નથી",
+    "description": "વિગત",
+    "status": {
+      "open": "ખુલ્લી",
+      "in_progress": "કામ ચાલુ છે",
+      "resolved": "ઉકેલાઈ",
+      "closed": "બંધ"
+    },
+    "category": {
+      "water": "પાણી / લીકેજ",
+      "lift": "લિફ્ટ",
+      "electricity": "વીજળી",
+      "cleaning": "સફાઈ",
+      "security": "સુરક્ષા",
+      "parking": "પાર્કિંગ",
+      "other": "અન્ય"
+    },
+    "location": {
+      "my_flat": "મારો ફ્લેટ",
+      "common_area": "સામાન્ય વિસ્તાર"
+    },
+    "form": {
+      "what": "શું સમસ્યા છે?",
+      "where": "ક્યાં છે?",
+      "flat": "ફ્લેટ",
+      "chooseFlat": "ફ્લેટ પસંદ કરો",
+      "pickCategory": "સમસ્યાનો પ્રકાર પસંદ કરો",
+      "pickFlat": "ફ્લેટ પસંદ કરો",
+      "photo": "ફોટો (વૈકલ્પિક)",
+      "addPhoto": "ફોટો ઉમેરો",
+      "photoAdded": "ફોટો ઉમેરાયો",
+      "removePhoto": "ફોટો કાઢો",
+      "describe": "વધુ જણાવો (વૈકલ્પિક)",
+      "send": "મોકલો",
+      "sending": "મોકલાઈ રહ્યું છે…"
+    },
+    "feedback": {
+      "fixed": "રહેવાસી કહે છે: ઉકેલાઈ ગઈ",
+      "not_fixed": "રહેવાસી કહે છે: ઉકેલાઈ નથી"
+    }
   }
 }

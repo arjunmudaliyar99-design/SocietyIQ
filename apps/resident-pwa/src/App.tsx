@@ -26,6 +26,7 @@ import {
   useTranslation,
 } from "@societyiq/shared";
 
+import { ComplaintPage, MyComplaintsPage, ReportPage } from "./complaints/ComplaintPages";
 import { support } from "./config";
 import { InstallBanner } from "./InstallBanner";
 
@@ -215,11 +216,12 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/pay" element={<ComingSoon title={t("home.pay")} />} />
           <Route path="/notices" element={<ComingSoon title={t("home.notices")} />} />
-          <Route path="/report" element={<ComingSoon title={t("home.report")} />} />
+          <Route path="/report" element={<ReportPage />} />
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/bills" element={<ComingSoon title={t("menu.myBills")} />} />
           <Route path="/receipts" element={<ComingSoon title={t("menu.myReceipts")} />} />
-          <Route path="/complaints" element={<ComingSoon title={t("menu.myComplaints")} />} />
+          <Route path="/complaints" element={<MyComplaintsPage />} />
+          <Route path="/complaints/:complaintId" element={<ComplaintPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<Home />} />
         </Routes>

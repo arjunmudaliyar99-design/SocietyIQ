@@ -39,3 +39,4 @@ export { QueryClient, QueryClientProvider, useMutation, useQuery, useQueryClient
 
 // Apps must use this re-export so there is one react-i18next instance and one context.
 export { useTranslation } from "react-i18next";
+export * from "./complaints";
