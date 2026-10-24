@@ -16,6 +16,76 @@
         "title": "AcceptInviteIn",
         "type": "object"
       },
+      "AiDraftIn": {
+        "properties": {
+          "language": {
+            "default": "en",
+            "enum": [
+              "en",
+              "mr",
+              "hi",
+              "gu",
+              "ta"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
+          "notes": {
+            "maxLength": 4000,
+            "minLength": 3,
+            "title": "Notes",
+            "type": "string"
+          }
+        },
+        "required": [
+          "notes"
+        ],
+        "title": "AiDraftIn",
+        "type": "object"
+      },
+      "AiTextOut": {
+        "properties": {
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "body"
+        ],
+        "title": "AiTextOut",
+        "type": "object"
+      },
+      "AiTranslateIn": {
+        "properties": {
+          "languages": {
+            "items": {
+              "enum": [
+                "en",
+                "mr",
+                "hi",
+                "gu",
+                "ta"
+              ],
+              "type": "string"
+            },
+            "maxItems": 4,
+            "minItems": 1,
+            "title": "Languages",
+            "type": "array"
+          }
+        },
+        "required": [
+          "languages"
+        ],
+        "title": "AiTranslateIn",
+        "type": "object"
+      },
       "AllocationOut": {
         "properties": {
           "amount_paise": {
@@ -4139,6 +4209,486 @@
         "title": "MySocietyOut",
         "type": "object"
       },
+      "NoticeDetailOut": {
+        "properties": {
+          "ai_assisted": {
+            "title": "Ai Assisted",
+            "type": "boolean"
+          },
+          "audience": {
+            "enum": [
+              "all",
+              "owners",
+              "tenants",
+              "wing"
+            ],
+            "title": "Audience",
+            "type": "string"
+          },
+          "audience_wing_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Audience Wing Id"
+          },
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "can_edit": {
+            "default": false,
+            "title": "Can Edit",
+            "type": "boolean"
+          },
+          "can_publish": {
+            "default": false,
+            "title": "Can Publish",
+            "type": "boolean"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "emails_failed": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Emails Failed"
+          },
+          "emails_sent": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Emails Sent"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "is_read": {
+            "default": false,
+            "title": "Is Read",
+            "type": "boolean"
+          },
+          "language": {
+            "enum": [
+              "en",
+              "mr",
+              "hi",
+              "gu",
+              "ta"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "read_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Read Count"
+          },
+          "recipient_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recipient Count"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "translations": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/TranslationOut"
+            },
+            "propertyNames": {
+              "enum": [
+                "en",
+                "mr",
+                "hi",
+                "gu",
+                "ta"
+              ]
+            },
+            "title": "Translations",
+            "type": "object"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "body",
+          "language",
+          "audience",
+          "audience_wing_id",
+          "status",
+          "ai_assisted",
+          "published_at",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "NoticeDetailOut",
+        "type": "object"
+      },
+      "NoticeIn": {
+        "properties": {
+          "ai_assisted": {
+            "default": false,
+            "title": "Ai Assisted",
+            "type": "boolean"
+          },
+          "audience": {
+            "default": "all",
+            "enum": [
+              "all",
+              "owners",
+              "tenants",
+              "wing"
+            ],
+            "title": "Audience",
+            "type": "string"
+          },
+          "audience_wing_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Audience Wing Id"
+          },
+          "body": {
+            "maxLength": 10000,
+            "minLength": 1,
+            "title": "Body",
+            "type": "string"
+          },
+          "language": {
+            "default": "en",
+            "enum": [
+              "en",
+              "mr",
+              "hi",
+              "gu",
+              "ta"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "body"
+        ],
+        "title": "NoticeIn",
+        "type": "object"
+      },
+      "NoticeOptionsOut": {
+        "properties": {
+          "ai_available": {
+            "title": "Ai Available",
+            "type": "boolean"
+          },
+          "whatsapp_available": {
+            "default": false,
+            "title": "Whatsapp Available",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ai_available"
+        ],
+        "title": "NoticeOptionsOut",
+        "type": "object"
+      },
+      "NoticeOut": {
+        "properties": {
+          "ai_assisted": {
+            "title": "Ai Assisted",
+            "type": "boolean"
+          },
+          "audience": {
+            "enum": [
+              "all",
+              "owners",
+              "tenants",
+              "wing"
+            ],
+            "title": "Audience",
+            "type": "string"
+          },
+          "audience_wing_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Audience Wing Id"
+          },
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "is_read": {
+            "default": false,
+            "title": "Is Read",
+            "type": "boolean"
+          },
+          "language": {
+            "enum": [
+              "en",
+              "mr",
+              "hi",
+              "gu",
+              "ta"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "body",
+          "language",
+          "audience",
+          "audience_wing_id",
+          "status",
+          "ai_assisted",
+          "published_at",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "NoticeOut",
+        "type": "object"
+      },
+      "NoticeUpdate": {
+        "properties": {
+          "ai_assisted": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ai Assisted"
+          },
+          "audience": {
+            "anyOf": [
+              {
+                "enum": [
+                  "all",
+                  "owners",
+                  "tenants",
+                  "wing"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Audience"
+          },
+          "audience_wing_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Audience Wing Id"
+          },
+          "body": {
+            "anyOf": [
+              {
+                "maxLength": 10000,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Body"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "enum": [
+                  "en",
+                  "mr",
+                  "hi",
+                  "gu",
+                  "ta"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "translations": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/TranslationIn"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "propertyNames": {
+                  "enum": [
+                    "en",
+                    "mr",
+                    "hi",
+                    "gu",
+                    "ta"
+                  ]
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Translations"
+          }
+        },
+        "title": "NoticeUpdate",
+        "type": "object"
+      },
       "OverrideIn": {
         "properties": {
           "amount_paise": {
@@ -5152,6 +5702,19 @@
           "created_at"
         ],
         "title": "PropertyTaxOut",
+        "type": "object"
+      },
+      "ReadOut": {
+        "properties": {
+          "read": {
+            "title": "Read",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "read"
+        ],
+        "title": "ReadOut",
         "type": "object"
       },
       "ReasonIn": {
@@ -6336,6 +6899,56 @@
           "is_exempt"
         ],
         "title": "TaxImportRowOut",
+        "type": "object"
+      },
+      "TranslationIn": {
+        "properties": {
+          "body": {
+            "maxLength": 10000,
+            "minLength": 1,
+            "title": "Body",
+            "type": "string"
+          },
+          "reviewed": {
+            "default": true,
+            "title": "Reviewed",
+            "type": "boolean"
+          },
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "body"
+        ],
+        "title": "TranslationIn",
+        "type": "object"
+      },
+      "TranslationOut": {
+        "properties": {
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "reviewed": {
+            "title": "Reviewed",
+            "type": "boolean"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "body",
+          "reviewed"
+        ],
+        "title": "TranslationOut",
         "type": "object"
       },
       "ValidationError": {
@@ -11538,6 +12151,717 @@
         "summary": "My Receipt",
         "tags": [
           "resident"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/notices": {
+      "get": {
+        "operationId": "list_notices_api_v1_societies__society_id__notices_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "draft",
+                    "published",
+                    "archived"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/NoticeOut"
+                  },
+                  "title": "Response List Notices Api V1 Societies  Society Id  Notices Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Notices",
+        "tags": [
+          "notices"
+        ]
+      },
+      "post": {
+        "operationId": "create_notice_api_v1_societies__society_id__notices_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NoticeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Notice",
+        "tags": [
+          "notices"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/notices/ai-draft": {
+      "post": {
+        "operationId": "ai_draft_api_v1_societies__society_id__notices_ai_draft_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AiDraftIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiTextOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ai Draft",
+        "tags": [
+          "notices"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/notices/options": {
+      "get": {
+        "operationId": "options_api_v1_societies__society_id__notices_options_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeOptionsOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Options",
+        "tags": [
+          "notices"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/notices/{notice_id}": {
+      "get": {
+        "operationId": "get_notice_api_v1_societies__society_id__notices__notice_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "notice_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Notice Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Notice",
+        "tags": [
+          "notices"
+        ]
+      },
+      "patch": {
+        "operationId": "update_notice_api_v1_societies__society_id__notices__notice_id__patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "notice_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Notice Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NoticeUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Update Notice",
+        "tags": [
+          "notices"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/notices/{notice_id}/ai-translate": {
+      "post": {
+        "operationId": "ai_translate_api_v1_societies__society_id__notices__notice_id__ai_translate_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "notice_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Notice Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AiTranslateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ai Translate",
+        "tags": [
+          "notices"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/notices/{notice_id}/archive": {
+      "post": {
+        "operationId": "archive_api_v1_societies__society_id__notices__notice_id__archive_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "notice_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Notice Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Archive",
+        "tags": [
+          "notices"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/notices/{notice_id}/publish": {
+      "post": {
+        "operationId": "publish_api_v1_societies__society_id__notices__notice_id__publish_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "notice_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Notice Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeDetailOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Publish",
+        "tags": [
+          "notices"
+        ]
+      }
+    },
+    "/api/v1/societies/{society_id}/notices/{notice_id}/read": {
+      "post": {
+        "operationId": "mark_read_api_v1_societies__society_id__notices__notice_id__read_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "notice_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Notice Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "society_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Society Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Mark Read",
+        "tags": [
+          "notices"
         ]
       }
     },

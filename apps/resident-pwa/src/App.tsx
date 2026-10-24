@@ -245,8 +245,6 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/pay" element={<Signed title={t("home.pay")}><PayPage /></Signed>} />
-          <Route path="/notices" element={<ComingSoon title={t("home.notices")} />} />
-          <Route path="/pay" element={<ComingSoon title={t("home.pay")} />} />
           <Route path="/notices" element={<NoticesPage />} />
           <Route path="/notices/:noticeId" element={<NoticePage />} />
           <Route path="/report" element={<ReportPage />} />

@@ -1033,6 +1033,144 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/notices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Notices */
+        get: operations["list_notices_api_v1_societies__society_id__notices_get"];
+        put?: never;
+        /** Create Notice */
+        post: operations["create_notice_api_v1_societies__society_id__notices_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/notices/ai-draft": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Ai Draft */
+        post: operations["ai_draft_api_v1_societies__society_id__notices_ai_draft_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/notices/options": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Options */
+        get: operations["options_api_v1_societies__society_id__notices_options_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/notices/{notice_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Notice */
+        get: operations["get_notice_api_v1_societies__society_id__notices__notice_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Notice */
+        patch: operations["update_notice_api_v1_societies__society_id__notices__notice_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/notices/{notice_id}/ai-translate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Ai Translate */
+        post: operations["ai_translate_api_v1_societies__society_id__notices__notice_id__ai_translate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/notices/{notice_id}/archive": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Archive */
+        post: operations["archive_api_v1_societies__society_id__notices__notice_id__archive_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/notices/{notice_id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish */
+        post: operations["publish_api_v1_societies__society_id__notices__notice_id__publish_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/notices/{notice_id}/read": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Mark Read */
+        post: operations["mark_read_api_v1_societies__society_id__notices__notice_id__read_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/societies/{society_id}/payments": {
         parameters: {
             query?: never;
@@ -1283,6 +1421,29 @@ export interface components {
         AcceptInviteIn: {
             /** Token */
             token: string;
+        };
+        /** AiDraftIn */
+        AiDraftIn: {
+            /**
+             * Language
+             * @default en
+             * @enum {string}
+             */
+            language: "en" | "mr" | "hi" | "gu" | "ta";
+            /** Notes */
+            notes: string;
+        };
+        /** AiTextOut */
+        AiTextOut: {
+            /** Body */
+            body: string;
+            /** Title */
+            title: string;
+        };
+        /** AiTranslateIn */
+        AiTranslateIn: {
+            /** Languages */
+            languages: ("en" | "mr" | "hi" | "gu" | "ta")[];
         };
         /** AllocationOut */
         AllocationOut: {
@@ -2587,6 +2748,179 @@ export interface components {
             /** Roles */
             roles: ("admin" | "treasurer" | "committee" | "consultant" | "auditor" | "owner" | "tenant" | "delegate")[];
         };
+        /** NoticeDetailOut */
+        NoticeDetailOut: {
+            /** Ai Assisted */
+            ai_assisted: boolean;
+            /**
+             * Audience
+             * @enum {string}
+             */
+            audience: "all" | "owners" | "tenants" | "wing";
+            /** Audience Wing Id */
+            audience_wing_id: string | null;
+            /** Body */
+            body: string;
+            /**
+             * Can Edit
+             * @default false
+             */
+            can_edit: boolean;
+            /**
+             * Can Publish
+             * @default false
+             */
+            can_publish: boolean;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Emails Failed */
+            emails_failed?: number | null;
+            /** Emails Sent */
+            emails_sent?: number | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Is Read
+             * @default false
+             */
+            is_read: boolean;
+            /**
+             * Language
+             * @enum {string}
+             */
+            language: "en" | "mr" | "hi" | "gu" | "ta";
+            /** Published At */
+            published_at: string | null;
+            /** Read Count */
+            read_count?: number | null;
+            /** Recipient Count */
+            recipient_count?: number | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "published" | "archived";
+            /** Title */
+            title: string;
+            /** Translations */
+            translations?: {
+                [key: string]: components["schemas"]["TranslationOut"];
+            };
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** NoticeIn */
+        NoticeIn: {
+            /**
+             * Ai Assisted
+             * @default false
+             */
+            ai_assisted: boolean;
+            /**
+             * Audience
+             * @default all
+             * @enum {string}
+             */
+            audience: "all" | "owners" | "tenants" | "wing";
+            /** Audience Wing Id */
+            audience_wing_id?: string | null;
+            /** Body */
+            body: string;
+            /**
+             * Language
+             * @default en
+             * @enum {string}
+             */
+            language: "en" | "mr" | "hi" | "gu" | "ta";
+            /** Title */
+            title: string;
+        };
+        /** NoticeOptionsOut */
+        NoticeOptionsOut: {
+            /** Ai Available */
+            ai_available: boolean;
+            /**
+             * Whatsapp Available
+             * @default false
+             */
+            whatsapp_available: boolean;
+        };
+        /** NoticeOut */
+        NoticeOut: {
+            /** Ai Assisted */
+            ai_assisted: boolean;
+            /**
+             * Audience
+             * @enum {string}
+             */
+            audience: "all" | "owners" | "tenants" | "wing";
+            /** Audience Wing Id */
+            audience_wing_id: string | null;
+            /** Body */
+            body: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Is Read
+             * @default false
+             */
+            is_read: boolean;
+            /**
+             * Language
+             * @enum {string}
+             */
+            language: "en" | "mr" | "hi" | "gu" | "ta";
+            /** Published At */
+            published_at: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "published" | "archived";
+            /** Title */
+            title: string;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+        };
+        /** NoticeUpdate */
+        NoticeUpdate: {
+            /** Ai Assisted */
+            ai_assisted?: boolean | null;
+            /** Audience */
+            audience?: ("all" | "owners" | "tenants" | "wing") | null;
+            /** Audience Wing Id */
+            audience_wing_id?: string | null;
+            /** Body */
+            body?: string | null;
+            /** Language */
+            language?: ("en" | "mr" | "hi" | "gu" | "ta") | null;
+            /** Title */
+            title?: string | null;
+            /** Translations */
+            translations?: {
+                [key: string]: components["schemas"]["TranslationIn"] | null;
+            } | null;
+        };
         /** OverrideIn */
         OverrideIn: {
             /** Amount Paise */
@@ -2969,6 +3303,11 @@ export interface components {
              */
             is_exempt: boolean;
         };
+        /** ReadOut */
+        ReadOut: {
+            /** Read */
+            read: boolean;
+        };
         /** ReasonIn */
         ReasonIn: {
             /** Reason */
@@ -3335,6 +3674,27 @@ export interface components {
              * @enum {string}
              */
             status: "ok" | "warning" | "error";
+        };
+        /** TranslationIn */
+        TranslationIn: {
+            /** Body */
+            body: string;
+            /**
+             * Reviewed
+             * @default true
+             */
+            reviewed: boolean;
+            /** Title */
+            title: string;
+        };
+        /** TranslationOut */
+        TranslationOut: {
+            /** Body */
+            body: string;
+            /** Reviewed */
+            reviewed: boolean;
+            /** Title */
+            title: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -5878,6 +6238,360 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_notices_api_v1_societies__society_id__notices_get: {
+        parameters: {
+            query?: {
+                status?: ("draft" | "published" | "archived") | null;
+            };
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoticeOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_notice_api_v1_societies__society_id__notices_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["NoticeIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoticeDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    ai_draft_api_v1_societies__society_id__notices_ai_draft_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AiDraftIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AiTextOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    options_api_v1_societies__society_id__notices_options_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoticeOptionsOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_notice_api_v1_societies__society_id__notices__notice_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                notice_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoticeDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_notice_api_v1_societies__society_id__notices__notice_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                notice_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["NoticeUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoticeDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    ai_translate_api_v1_societies__society_id__notices__notice_id__ai_translate_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                notice_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AiTranslateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoticeDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    archive_api_v1_societies__society_id__notices__notice_id__archive_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                notice_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoticeDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    publish_api_v1_societies__society_id__notices__notice_id__publish_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                notice_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoticeDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    mark_read_api_v1_societies__society_id__notices__notice_id__read_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                notice_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReadOut"];
+                };
             };
             /** @description Validation Error */
             422: {
