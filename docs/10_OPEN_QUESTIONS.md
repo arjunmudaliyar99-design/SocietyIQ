@@ -23,6 +23,14 @@ Format: **ID — question** · who can answer · status.
 
 - **Q-028 — Which milestone builds the `documents` domain (docs/04 §3 lists it; docs/07 does not)?** · founders · open (stub only)
 
+## Build questions (raised during M1–M2)
+
+- **Q-030 — Which 5 items does the committee menu show in Simple view (docs/03 §1.2)?** · founders · open (placeholder: Home, Bills, Payments, Dues, Complaints — `apps/committee-web/src/nav.tsx`)
+- **Q-031 — How long should an invite link stay valid?** · founders · open (placeholder: 7 days, `INVITE_EXPIRY_DAYS`)
+- **Q-032 — Who may create a society: only SocietyIQ staff, or any signed-in person (docs/02 §3 says "done by us or the admin")?** · founders · open (placeholder: any signed-in person, who becomes its admin)
+- **Q-033 — Name of the default wing created with a society (docs/05 §2 asks for one; no name given)?** · founders · open (placeholder: "Main")
+- **Q-034 — Terms of use and privacy policy texts for the consent screen (docs/08 §8): who drafts, and where are they hosted?** · founders / lawyer · open (consent recorded against `POLICY_VERSION=draft-2026-10`; no links shown yet)
+
 ## Legal and compliance
 
 - **Q-012 — Exact provision allowing notices by SMS/electronic means (the Legal & Society Advisor's point): which section, rule or circular, and for which notices?** · the Legal & Society Advisor / lawyer · open

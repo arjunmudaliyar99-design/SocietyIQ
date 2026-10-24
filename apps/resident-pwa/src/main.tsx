@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import { SettingsProvider } from "@societyiq/shared";
 
-import App from "./App";
+import { Root } from "./Root";
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Root element missing");
@@ -16,7 +16,7 @@ createRoot(root).render(
   <StrictMode>
     <SettingsProvider>
       <BrowserRouter>
-        <App />
+        <Root />
       </BrowserRouter>
     </SettingsProvider>
   </StrictMode>,

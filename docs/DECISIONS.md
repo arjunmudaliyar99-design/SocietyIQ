@@ -2,6 +2,11 @@
 
 Decisions made during planning and building. Newest first. Format: date — decision — why — who.
 
+- 2026-10-24 — The migration creates `app_backend` without LOGIN; each environment enables login with its own password outside the migration — no secret ever sits in the repo — M2 build session, to be confirmed by the Co-founder (Engineering).
+- 2026-10-24 — Local-only dev sign-in (`POST /api/v1/dev/token`, mounted only when `APP_ENV=local` and a JWT secret is set; front ends show it only with `VITE_DEV_SIGN_IN=true` in dev builds) — lets anyone preview and test the apps without a Supabase project — M2 build session, to be confirmed.
+- 2026-10-24 — Until email sending (M9), invite links are shown to the admin once, to copy and share; tokens are random, stored only as SHA-256, single use, scoped to one society, and bound to the invited email when one is given — invites must work before an email provider is chosen — M2 build session, to be confirmed.
+- 2026-10-24 — Society routes return 404 (not 403) to people who are not members, so another society's ids are never confirmed; members without the needed role get 403 — docs/07 M2 acceptance — M2 build session.
+- 2026-10-24 — Front-end data layer: `@supabase/supabase-js` 2.118 for sign-in, TanStack Query 5 for API calls (hooks in `packages/shared/src/api`), API types generated with `openapi-typescript` 7 from the backend's OpenAPI (`pnpm --filter @societyiq/shared api:generate`) — stack in CLAUDE.md §3 and docs/04 §3 — M2 build session.
 - 2026-10-23 — Front-end toolchain pinned for M0: Vite 8, React 18.3, Tailwind 4 (`@tailwindcss/vite`), Vitest 5, ESLint 10 with typescript-eslint; TypeScript held at 5.9 because typescript-eslint does not support TypeScript 7 — React 18 is the decided stack (CLAUDE.md §3); the rest are current releases — M0 build session, to be confirmed by the Co-founder (Engineering).
 - 2026-10-23 — `packages/shared` exports TypeScript source (no pre-build step needed by apps); `tsc` still type-checks and builds it — simpler dev loop — M0 build session, to be confirmed.
 

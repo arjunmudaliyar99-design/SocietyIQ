@@ -4,8 +4,13 @@ version = "0.1.0"
 description = "SocietyIQ API (FastAPI)"
 requires-python = ">=3.12,<3.13"
 dependencies = [
+    "alembic>=1.20.1",
+    "asyncpg>=0.32.0",
     "fastapi>=0.161.1",
     "pydantic-settings>=2.16.1",
+    "pydantic[email]>=2.14.1",
+    "pyjwt[crypto]>=2.15.1",
+    "sqlalchemy[asyncio]>=2.1.6",
     "uvicorn[standard]>=0.54.0",
 ]
 
@@ -13,6 +18,7 @@ dependencies = [
 dev = [
     "httpx>=0.28.1",
     "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
     "ruff>=0.17.2",
 ]
 
@@ -32,3 +38,6 @@ select = ["E", "F", "W", "I", "B", "UP", "ANN"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"

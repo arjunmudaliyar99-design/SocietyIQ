@@ -4,6 +4,8 @@ from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import get_settings
+from app.errors import install_error_handlers
+from app.routers import auth, dev, societies
 
 
 def create_app() -> FastAPI:
@@ -16,12 +18,18 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    install_error_handlers(app)
 
     api = APIRouter(prefix="/api/v1")
 
     @api.get("/health")
     async def health() -> dict[str, str]:
         return {"status": "ok"}
+
+    api.include_router(auth.router)
+    api.include_router(societies.router)
+    if settings.app_env == "local" and settings.supabase_jwt_secret:
+        api.include_router(dev.router)
 
     app.include_router(api)
     return app

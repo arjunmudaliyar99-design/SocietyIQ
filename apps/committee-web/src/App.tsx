@@ -5,6 +5,7 @@ import { EmptyState, useTranslation } from "@societyiq/shared";
 
 import { Preview } from "./Preview";
 import { DETAILED_NAV, SIMPLE_NAV } from "./nav";
+import { PeoplePage } from "./setup/PeoplePage";
 import { Shell } from "./Shell";
 
 function Home() {
@@ -34,10 +35,11 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {[...SIMPLE_NAV, ...DETAILED_NAV]
-          .filter((item) => item.path !== "/")
+          .filter((item) => item.path !== "/" && item.path !== "/settings")
           .map((item) => (
             <Route key={item.path} path={item.path} element={<ComingSoon navKey={item.key} />} />
           ))}
+        <Route path="/settings" element={<PeoplePage />} />
         <Route path="/preview" element={<Preview />} />
         <Route path="*" element={<Home />} />
       </Routes>

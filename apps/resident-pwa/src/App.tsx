@@ -20,6 +20,8 @@ import {
   HelpButton,
   LanguageSwitcher,
   TextSizeSwitcher,
+  useAuth,
+  useCurrentSociety,
   useTranslation,
 } from "@societyiq/shared";
 
@@ -116,13 +118,26 @@ function MenuPage() {
           {item.label}
         </BigButton>
       ))}
-      <div>
-        <Button variant="secondary" disabled>
-          {tc("signOut")}
-        </Button>
-        <p className="mt-2 text-small text-muted">{tc("signOutSoon")}</p>
-      </div>
+      <SignOut />
     </Page>
+  );
+}
+
+/** Outside the sign-in gate (component tests) there is no account to sign out of. */
+function SignOut() {
+  const current = useCurrentSociety();
+  return current ? <SignOutButton /> : null;
+}
+
+function SignOutButton() {
+  const { t } = useTranslation();
+  const { signOut } = useAuth();
+  return (
+    <div>
+      <Button variant="secondary" onClick={() => void signOut()}>
+        {t("signOut")}
+      </Button>
+    </div>
   );
 }
 

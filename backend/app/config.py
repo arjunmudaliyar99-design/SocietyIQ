@@ -13,7 +13,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
-    app_env: Literal["local", "demo", "production"] = "local"
+    app_env: Literal["local", "test", "demo", "production"] = "local"
     cors_origins: list[str] = ["http://localhost:5173", "http://localhost:5174"]
 
     # Database (M2). The app connects as the restricted app_backend role; migrations
@@ -28,6 +28,15 @@ class Settings(BaseSettings):
     supabase_jwt_secret: str | None = None
     supabase_jwks_url: str | None = None
     jwt_audience: str = "authenticated"
+
+    # Invites (M2). Expiry is not set in the docs: TODO(confirm): Q-031.
+    invite_expiry_days: int = 7
+    committee_web_url: str = "http://localhost:5173"
+    resident_pwa_url: str = "http://localhost:5174"
+
+    # Version of the terms and privacy text a user consents to (docs/08 §8). The texts need
+    # a lawyer's review before the first pilot; bump this when they change.
+    policy_version: str = "draft-2026-10"
 
     # AI (docs/04 §11). "fake" works without any key.
     ai_provider: Literal["fake", "groq", "gemini"] = "fake"

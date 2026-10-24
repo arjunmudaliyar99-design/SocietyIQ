@@ -10,6 +10,8 @@ import {
   LanguageSwitcher,
   TextSizeSwitcher,
   ViewModeSwitcher,
+  useAuth,
+  useCurrentSociety,
   useSettings,
   useTranslation,
 } from "@societyiq/shared";
@@ -64,13 +66,15 @@ function TopBar({ onMenu, menuOpen }: { onMenu: () => void; menuOpen: boolean })
   const { t } = useTranslation();
   const { t: tc } = useTranslation("committee");
   const [accountOpen, setAccountOpen] = useState(false);
+  const current = useCurrentSociety();
 
   return (
     <header className="border-b border-line bg-surface">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 p-3">
         <img src="/logo-light.svg" alt={t("appName")} className="h-10 w-auto" />
-        {/* Society name comes from the signed-in membership in M2. */}
-        <p className="min-w-0 flex-1 truncate text-body font-semibold">{tc("societyPlaceholder")}</p>
+        <p className="min-w-0 flex-1 truncate text-body font-semibold">
+          {current?.society.name ?? tc("societyPlaceholder")}
+        </p>
         <div className="flex flex-wrap items-center gap-2">
           <Button
             variant="secondary"
@@ -92,14 +96,40 @@ function TopBar({ onMenu, menuOpen }: { onMenu: () => void; menuOpen: boolean })
         <div className="flex flex-col gap-6">
           <TextSizeSwitcher />
           <ViewModeSwitcher />
-          <div>
-            <Button variant="secondary" disabled>
-              {t("signOut")}
-            </Button>
-            <p className="mt-2 text-small text-muted">{t("signOutSoon")}</p>
-          </div>
+          <AccountActions onDone={() => setAccountOpen(false)} />
         </div>
       </Dialog>
     </header>
+  );
+}
+
+/** Outside the sign-in gate (component tests) there is no account to act on. */
+function AccountActions({ onDone }: { onDone: () => void }) {
+  const current = useCurrentSociety();
+  return current ? <SignedInActions onDone={onDone} /> : null;
+}
+
+function SignedInActions({ onDone }: { onDone: () => void }) {
+  const { t } = useTranslation();
+  const { signOut, email } = useAuth();
+  const current = useCurrentSociety();
+  return (
+    <div className="flex flex-col gap-3">
+      {email ? <p className="text-small text-muted">{email}</p> : null}
+      {current?.canSwitch ? (
+        <Button
+          variant="secondary"
+          onClick={() => {
+            onDone();
+            current.switchSociety();
+          }}
+        >
+          {t("picker.switch")}
+        </Button>
+      ) : null}
+      <Button variant="secondary" onClick={() => void signOut()}>
+        {t("signOut")}
+      </Button>
+    </div>
   );
 }

@@ -17,5 +17,9 @@
     "add": "Add to home screen",
     "later": "Not now",
     "iphone": "On iPhone: tap the Share button, then \"Add to Home Screen\"."
+  },
+  "noSociety": {
+    "title": "Your society has not added you yet",
+    "body": "Ask your society committee to invite you. Then open the link they send you."
   }
 }

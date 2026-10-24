@@ -108,6 +108,33 @@ Open one Claude Code session in each folder. Each session marks its task "IN PRO
 
 Store every key in the service's environment settings and in local `.env` files, never in code.
 
+## 6a. Local database and sign-in (from M2)
+
+You need Docker Desktop running.
+
+```bash
+# PostgreSQL 16 for development and tests (port 54329 so it does not clash with others)
+docker run -d --name societyiq-pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=societyiq -p 54329:5432 postgres:16
+
+cd backend
+cp .env.example .env
+# In .env set (local only, never real secrets):
+#   APP_ENV=local
+#   MIGRATIONS_DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:54329/societyiq
+#   DATABASE_URL=postgresql+asyncpg://app_backend:<choose a local password>@localhost:54329/societyiq
+#   SUPABASE_JWT_SECRET=<any long random string>
+uv run alembic upgrade head
+# The migration creates the app_backend role WITHOUT login. Enable it once per database:
+docker exec societyiq-pg psql -U postgres -d societyiq -c "ALTER ROLE app_backend LOGIN PASSWORD '<same local password>'"
+uv run uvicorn app.main:app --reload --port 8000
+```
+
+Front ends: in `apps/committee-web/.env.local` and `apps/resident-pwa/.env.local` put `VITE_API_BASE_URL=http://localhost:8000` and `VITE_DEV_SIGN_IN=true`. With no Supabase project, the sign-in screen then takes any `@example.com` email and the backend issues a local token. This only works when `APP_ENV=local`.
+
+Tests create their own scratch database `societyiq_test` on the same server (`TEST_DATABASE_ADMIN_URL`, default `postgresql://postgres:postgres@localhost:54329/postgres`). Without a reachable server the database tests are skipped locally; in CI they must run (`REQUIRE_TEST_DB=1`).
+
+**Supabase (demo and later):** run migrations with the project's owner connection string as `MIGRATIONS_DATABASE_URL`; then, in the SQL editor, run `ALTER ROLE app_backend LOGIN PASSWORD '<strong secret>'` and use that role in `DATABASE_URL` (through the pooler in transaction mode). Set `SUPABASE_JWKS_URL` or `SUPABASE_JWT_SECRET` to match how the project signs tokens (check the project's API settings). Front ends get `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` only, never the service-role key.
+
 ## 7. Hosting
 
 **Demo / internal sharing:** Vercel (front ends) + Render free (FastAPI) + Supabase free. Costs nothing; the backend sleeps when idle, so the first click after a while is slow.

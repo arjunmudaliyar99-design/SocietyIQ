@@ -10,7 +10,7 @@ def test_health_returns_ok() -> None:
     assert response.json() == {"status": "ok"}
 
 
-def test_domain_routers_not_mounted_yet() -> None:
-    # Stubs exist for every domain, but none is exposed before its milestone.
-    paths = set(app.openapi()["paths"])
-    assert paths == {"/api/v1/health"}
+def test_only_built_domains_are_mounted() -> None:
+    # Stubs exist for every domain; only those whose milestone is built are exposed.
+    prefixes = {p.split("/")[3] for p in app.openapi()["paths"]}
+    assert prefixes == {"health", "me", "societies"}

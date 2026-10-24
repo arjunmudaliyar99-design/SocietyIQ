@@ -11,6 +11,7 @@ export { Card, StatCard, type StatCardProps } from "./ui/Card";
 export { ConfirmDialog, Dialog, type ConfirmDialogProps } from "./ui/Dialog";
 export { Field, type FieldProps } from "./ui/Field";
 export { MoneyText, type MoneyTextProps } from "./ui/MoneyText";
+export { SelectField, type SelectFieldProps } from "./ui/SelectField";
 export {
   HelpButton,
   LanguageSwitcher,
@@ -21,6 +22,19 @@ export {
 export { EmptyState, StepHeader, type EmptyStateProps } from "./ui/Small";
 export { StatusPill, type Status } from "./ui/StatusPill";
 export { MIN_TOAST_MS, Toast, type ToastProps } from "./ui/Toast";
+
+export { ApiError, createApiClient, type ApiClient, type Schemas } from "./api/client";
+export * from "./api/hooks";
+export { AppGate, type PendingInvite } from "./auth/AppGate";
+export { readInvite } from "./auth/invite-link";
+export { AuthProvider, type AuthConfig } from "./auth/AuthProvider";
+export { SignInError, useAuth, type AuthMode, type AuthStatus } from "./auth/auth-context";
+export { messageKeyOf } from "./auth/errors";
+export { CenteredPage, ErrorText, LoadingPage } from "./auth/screens";
+export { useCurrentSociety, type CurrentSocietyValue } from "./auth/society-context";
+
+// One TanStack Query instance for both apps and this package.
+export { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 
 // Apps must use this re-export so there is one react-i18next instance and one context.
 export { useTranslation } from "react-i18next";

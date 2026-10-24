@@ -94,16 +94,18 @@ SocietyIQ is a company product. It must look and read like one.
 cd backend
 cp .env.example .env               # first time only
 uv sync
-uv run alembic upgrade head        # from M2 (no migrations yet)
+uv run alembic upgrade head        # needs MIGRATIONS_DATABASE_URL; see docs/09 §6a
 uv run uvicorn app.main:app --reload --port 8000
 uv run ruff check . && uv run ruff format --check .
-uv run pytest
+uv run pytest                      # DB tests need local Postgres on :54329 (docs/09 §6a)
+uv run python scripts/export_openapi.py ../packages/shared/openapi.json   # after API changes
 
 # front ends (repo root)
 pnpm install
 pnpm --filter committee-web dev     # http://localhost:5173
 pnpm --filter resident-pwa dev      # http://localhost:5174
 pnpm -r lint && pnpm -r typecheck && pnpm -r test && pnpm -r build
+pnpm --filter @societyiq/shared api:generate   # regenerate API types from openapi.json
 ```
 
 If a command here is wrong, fix this section in the same PR.
