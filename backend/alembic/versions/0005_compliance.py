@@ -1,13 +1,13 @@
 """M10: vendors, compliance items and events (docs/05 §6), compliance reminders.
 
 Revision ID: 0005_compliance
-Revises: 0005_complaints
+Revises: 0006_payments
 """
 
 from app.migration_sql import enable_society_isolation, execute_script
 
 revision = "0005_compliance"
-down_revision = "0005_complaints"
+down_revision = "0006_payments"
 branch_labels = None
 depends_on = None
 

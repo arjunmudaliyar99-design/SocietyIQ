@@ -21,6 +21,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/internal/jobs/compliance-reminders": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Run Compliance Job */
+        post: operations["run_compliance_job_api_v1_internal_jobs_compliance_reminders_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/internal/jobs/create-draft-billing-runs": {
         parameters: {
             query?: never;
@@ -508,6 +525,59 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/compliance/items": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Items */
+        get: operations["list_items_api_v1_societies__society_id__compliance_items_get"];
+        put?: never;
+        /** Create Item */
+        post: operations["create_item_api_v1_societies__society_id__compliance_items_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/compliance/items/{item_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Item */
+        get: operations["get_item_api_v1_societies__society_id__compliance_items__item_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Item */
+        patch: operations["update_item_api_v1_societies__society_id__compliance_items__item_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/compliance/items/{item_id}/done": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Mark Done */
+        post: operations["mark_done_api_v1_societies__society_id__compliance_items__item_id__done_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/societies/{society_id}/dues": {
         parameters: {
             query?: never;
@@ -732,6 +802,23 @@ export interface paths {
         put?: never;
         /** Add Tax */
         post: operations["add_tax_api_v1_societies__society_id__flats__flat_id__property_tax_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/home": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Home */
+        get: operations["get_home_api_v1_societies__society_id__home_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -1029,6 +1116,41 @@ export interface paths {
         patch: operations["change_settings_api_v1_societies__society_id__settings_patch"];
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/vendors": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Vendors */
+        get: operations["list_vendors_api_v1_societies__society_id__vendors_get"];
+        put?: never;
+        /** Create Vendor */
+        post: operations["create_vendor_api_v1_societies__society_id__vendors_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/vendors/{vendor_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update Vendor */
+        patch: operations["update_vendor_api_v1_societies__society_id__vendors__vendor_id__patch"];
+        trace?: never;
+    };
     "/api/v1/societies/{society_id}/wings": {
         parameters: {
             query?: never;
@@ -1084,6 +1206,17 @@ export interface components {
         AssignIn: {
             /** Assigned To Text */
             assigned_to_text?: string | null;
+        };
+        /** AttentionOut */
+        AttentionOut: {
+            /** Key */
+            key: string;
+            /** Link */
+            link: string;
+            /** Params */
+            params: {
+                [key: string]: unknown;
+            };
         };
         /** BillLineOut */
         BillLineOut: {
@@ -1598,6 +1731,16 @@ export interface components {
             /** Policy Version */
             policy_version: string;
         };
+        /** DoneIn */
+        DoneIn: {
+            /**
+             * Done On
+             * Format: date
+             */
+            done_on: string;
+            /** Notes */
+            notes?: string | null;
+        };
         /** DraftFlatOut */
         DraftFlatOut: {
             /** Charges Paise */
@@ -1647,6 +1790,21 @@ export interface components {
              * Format: date
              */
             end_date: string;
+        };
+        /** EventOut */
+        EventOut: {
+            /**
+             * Done On
+             * Format: date
+             */
+            done_on: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Notes */
+            notes: string | null;
         };
         /** ExcludedFlatOut */
         ExcludedFlatOut: {
@@ -1869,6 +2027,32 @@ export interface components {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
         };
+        /** HomeOut */
+        HomeOut: {
+            /** Attention */
+            attention: components["schemas"]["AttentionOut"][];
+            /** Collected Count */
+            collected_count: number;
+            /** Collected Paise */
+            collected_paise: number;
+            /** Coming Soon */
+            coming_soon: ("collected" | "outstanding" | "payments_waiting")[];
+            /** Compliance Due Soon */
+            compliance_due_soon: number;
+            /** Compliance Overdue */
+            compliance_overdue: number;
+            /** Flats With Dues */
+            flats_with_dues: number;
+            latest_run: components["schemas"]["LatestRunOut"] | null;
+            /** Next Bill Date */
+            next_bill_date: string | null;
+            /** Open Complaints */
+            open_complaints: number;
+            /** Outstanding Paise */
+            outstanding_paise: number;
+            /** Payments Waiting */
+            payments_waiting: number;
+        };
         /** ImportIssueOut */
         ImportIssueOut: {
             /** Key */
@@ -1944,10 +2128,156 @@ export interface components {
             invite_link: string;
             membership: components["schemas"]["MembershipOut"];
         };
+        /** ItemDetailOut */
+        ItemDetailOut: {
+            /** Contract Value Paise */
+            contract_value_paise: number | null;
+            /** Days Left */
+            days_left: number;
+            /** Events */
+            events: components["schemas"]["EventOut"][];
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Active */
+            is_active: boolean;
+            /**
+             * Item Type
+             * @enum {string}
+             */
+            item_type: "fire_audit" | "structural_audit" | "lift_amc" | "pump_amc" | "generator_service" | "tank_cleaning" | "cctv_amc" | "insurance" | "pest_control" | "other";
+            /** Last Done On */
+            last_done_on: string | null;
+            /**
+             * Next Due On
+             * Format: date
+             */
+            next_due_on: string;
+            /** Notes */
+            notes: string | null;
+            /** Repeat Months */
+            repeat_months: number | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "ok" | "due_soon" | "overdue" | "done";
+            /** Title */
+            title: string;
+            /** Vendor Id */
+            vendor_id: string | null;
+            /** Vendor Name */
+            vendor_name: string | null;
+        };
+        /** ItemIn */
+        ItemIn: {
+            /** Contract Value Paise */
+            contract_value_paise?: number | null;
+            /**
+             * Item Type
+             * @enum {string}
+             */
+            item_type: "fire_audit" | "structural_audit" | "lift_amc" | "pump_amc" | "generator_service" | "tank_cleaning" | "cctv_amc" | "insurance" | "pest_control" | "other";
+            /** Last Done On */
+            last_done_on?: string | null;
+            /**
+             * Next Due On
+             * Format: date
+             */
+            next_due_on: string;
+            /** Notes */
+            notes?: string | null;
+            /** Repeat Months */
+            repeat_months?: number | null;
+            /** Title */
+            title: string;
+            /** Vendor Id */
+            vendor_id?: string | null;
+        };
+        /** ItemOut */
+        ItemOut: {
+            /** Contract Value Paise */
+            contract_value_paise: number | null;
+            /** Days Left */
+            days_left: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Is Active */
+            is_active: boolean;
+            /**
+             * Item Type
+             * @enum {string}
+             */
+            item_type: "fire_audit" | "structural_audit" | "lift_amc" | "pump_amc" | "generator_service" | "tank_cleaning" | "cctv_amc" | "insurance" | "pest_control" | "other";
+            /** Last Done On */
+            last_done_on: string | null;
+            /**
+             * Next Due On
+             * Format: date
+             */
+            next_due_on: string;
+            /** Notes */
+            notes: string | null;
+            /** Repeat Months */
+            repeat_months: number | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "ok" | "due_soon" | "overdue" | "done";
+            /** Title */
+            title: string;
+            /** Vendor Id */
+            vendor_id: string | null;
+            /** Vendor Name */
+            vendor_name: string | null;
+        };
+        /** ItemUpdate */
+        ItemUpdate: {
+            /** Contract Value Paise */
+            contract_value_paise?: number | null;
+            /** Is Active */
+            is_active?: boolean | null;
+            /** Item Type */
+            item_type?: ("fire_audit" | "structural_audit" | "lift_amc" | "pump_amc" | "generator_service" | "tank_cleaning" | "cctv_amc" | "insurance" | "pest_control" | "other") | null;
+            /** Next Due On */
+            next_due_on?: string | null;
+            /** Notes */
+            notes?: string | null;
+            /** Repeat Months */
+            repeat_months?: number | null;
+            /** Title */
+            title?: string | null;
+            /** Vendor Id */
+            vendor_id?: string | null;
+        };
         /** JobIn */
         JobIn: {
             /** Today */
             today?: string | null;
+        };
+        /** LatestRunOut */
+        LatestRunOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Period Start
+             * Format: date
+             */
+            period_start: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "approved" | "sent" | "cancelled";
         };
         /** LedgerLineOut */
         LedgerLineOut: {
@@ -2876,6 +3206,56 @@ export interface components {
             /** Error Type */
             type: string;
         };
+        /** VendorIn */
+        VendorIn: {
+            /** Category */
+            category?: string | null;
+            /** Email */
+            email?: string | null;
+            /** Gstin */
+            gstin?: string | null;
+            /** Name */
+            name: string;
+            /** Notes */
+            notes?: string | null;
+            /** Phone E164 */
+            phone_e164?: string | null;
+        };
+        /** VendorOut */
+        VendorOut: {
+            /** Category */
+            category: string | null;
+            /** Email */
+            email: string | null;
+            /** Gstin */
+            gstin: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Name */
+            name: string;
+            /** Notes */
+            notes: string | null;
+            /** Phone E164 */
+            phone_e164: string | null;
+        };
+        /** VendorUpdate */
+        VendorUpdate: {
+            /** Category */
+            category?: string | null;
+            /** Email */
+            email?: string | null;
+            /** Gstin */
+            gstin?: string | null;
+            /** Name */
+            name?: string | null;
+            /** Notes */
+            notes?: string | null;
+            /** Phone E164 */
+            phone_e164?: string | null;
+        };
         /** WingIn */
         WingIn: {
             /**
@@ -2932,6 +3312,43 @@ export interface operations {
                     "application/json": {
                         [key: string]: string;
                     };
+                };
+            };
+        };
+    };
+    run_compliance_job_api_v1_internal_jobs_compliance_reminders_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "x-jobs-token"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["JobIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
@@ -4053,6 +4470,186 @@ export interface operations {
             };
         };
     };
+    list_items_api_v1_societies__society_id__compliance_items_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ItemOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_item_api_v1_societies__society_id__compliance_items_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ItemIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ItemDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_item_api_v1_societies__society_id__compliance_items__item_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                item_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ItemDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_item_api_v1_societies__society_id__compliance_items__item_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                item_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ItemUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ItemDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    mark_done_api_v1_societies__society_id__compliance_items__item_id__done_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                item_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DoneIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ItemDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     dues_api_v1_societies__society_id__dues_get: {
         parameters: {
             query?: {
@@ -4694,6 +5291,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PropertyTaxOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_home_api_v1_societies__society_id__home_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HomeOut"];
                 };
             };
             /** @description Validation Error */
@@ -5358,6 +5988,114 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SettingsOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_vendors_api_v1_societies__society_id__vendors_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VendorOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_vendor_api_v1_societies__society_id__vendors_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VendorIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VendorOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_vendor_api_v1_societies__society_id__vendors__vendor_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                vendor_id: string;
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VendorUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VendorOut"];
                 };
             };
             /** @description Validation Error */

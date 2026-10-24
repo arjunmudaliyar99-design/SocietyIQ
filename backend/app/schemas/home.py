@@ -24,6 +24,11 @@ class AttentionOut(BaseModel):
 class HomeOut(BaseModel):
     coming_soon: list[CardKey]
     open_complaints: int
+    collected_paise: int
+    collected_count: int
+    outstanding_paise: int
+    flats_with_dues: int
+    payments_waiting: int
     compliance_overdue: int
     compliance_due_soon: int
     next_bill_date: date | None

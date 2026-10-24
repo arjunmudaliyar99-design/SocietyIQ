@@ -17,6 +17,10 @@
     "title": "Home",
     "body": "Your society's summary will show here.",
     "cards": {
+      "collectedNote": "{{count}} payments",
+      "outstandingNote": "{{count}} flats with dues",
+      "waitingNote": "Tap to confirm",
+      "complaintsNote": "Open or in progress",
       "collected": "Collected this month",
       "outstanding": "Total outstanding",
       "payments_waiting": "Payments to confirm",
@@ -37,6 +41,7 @@
     "attentionTitle": "What needs your attention",
     "attentionNone": "Nothing needs your attention right now.",
     "attention": {
+      "paymentsWaiting": "{{count}} payments waiting for confirmation",
       "runWaiting": "Bills for {{period}} are waiting for approval",
       "overdue": "{{title}} is {{days}} days overdue",
       "dueSoon": "{{title}} is due on {{date}}"

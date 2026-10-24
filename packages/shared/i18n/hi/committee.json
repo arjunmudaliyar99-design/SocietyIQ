@@ -18,6 +18,10 @@
     "title": "होम",
     "body": "आपकी सोसायटी का सारांश यहाँ दिखेगा.",
     "cards": {
+      "collectedNote": "{{count}} भुगतान",
+      "outstandingNote": "{{count}} फ्लैट पर बकाया",
+      "waitingNote": "पुष्टि के लिए टैप करें",
+      "complaintsNote": "खुली या काम जारी",
       "collected": "इस महीने जमा",
       "outstanding": "कुल बकाया",
       "payments_waiting": "पुष्टि के लिए भुगतान",
@@ -38,6 +42,7 @@
     "attentionTitle": "आपके ध्यान के लिए",
     "attentionNone": "अभी किसी चीज़ पर ध्यान देने की ज़रूरत नहीं है.",
     "attention": {
+      "paymentsWaiting": "{{count}} भुगतान पुष्टि की प्रतीक्षा में",
       "runWaiting": "{{period}} के बिल मंज़ूरी की प्रतीक्षा में हैं",
       "overdue": "{{title}} की समय-सीमा {{days}} दिन पहले निकल गई",
       "dueSoon": "{{title}} {{date}} को देय है"

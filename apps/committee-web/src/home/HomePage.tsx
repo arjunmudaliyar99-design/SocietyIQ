@@ -8,6 +8,7 @@ import {
   LoadingBlock,
   StatCard,
   formatDate,
+  formatPaise,
   messageKeyOf,
   useSettings,
   useTranslation,
@@ -17,6 +18,7 @@ import { useHome, type Home } from "../api/compliance";
 
 type CardKey = Home["coming_soon"][number];
 const SOON_CARDS: CardKey[] = ["collected", "outstanding", "payments_waiting"];
+const isSoon = (h: Home, key: CardKey) => h.coming_soon.includes(key);
 
 function attentionParams(params: Record<string, unknown>, language: string): Record<string, unknown> {
   const out = { ...params };
@@ -44,11 +46,38 @@ export function HomePage() {
       {h ? (
         <>
           <div className="mb-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {SOON_CARDS.map((key) =>
-              h.coming_soon.includes(key) ? (
-                <StatCard key={key} label={t(`home.cards.${key}`)} value="—" note={tc("comingSoon")} />
-              ) : null,
-            )}
+            {SOON_CARDS.filter((key) => isSoon(h, key)).map((key) => (
+              <StatCard key={key} label={t(`home.cards.${key}`)} value="—" note={tc("comingSoon")} />
+            ))}
+            {/* Money and counts stay out of usage analytics (docs/04 §10). */}
+            {!isSoon(h, "collected") ? (
+              <div className="ph-no-capture">
+                <StatCard
+                  label={t("home.cards.collected")}
+                  value={formatPaise(h.collected_paise)}
+                  note={t("home.cards.collectedNote", { count: h.collected_count })}
+                  onClick={() => navigate("/payments")}
+                />
+              </div>
+            ) : null}
+            {!isSoon(h, "outstanding") ? (
+              <div className="ph-no-capture">
+                <StatCard
+                  label={t("home.cards.outstanding")}
+                  value={formatPaise(h.outstanding_paise)}
+                  note={t("home.cards.outstandingNote", { count: h.flats_with_dues })}
+                  onClick={() => navigate("/dues")}
+                />
+              </div>
+            ) : null}
+            {!isSoon(h, "payments_waiting") ? (
+              <StatCard
+                label={t("home.cards.payments_waiting")}
+                value={h.payments_waiting}
+                note={t("home.cards.waitingNote")}
+                onClick={() => navigate("/payments")}
+              />
+            ) : null}
             <StatCard
               label={t("home.cards.open_complaints")}
               value={h.open_complaints}

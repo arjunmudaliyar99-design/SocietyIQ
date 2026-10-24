@@ -25,8 +25,13 @@ const ITEM = {
 const TANK = { ...ITEM, id: "c2", item_type: "tank_cleaning", title: "Water tank cleaning", vendor_name: "AquaClean", status: "due_soon", days_left: 12, next_due_on: "2026-11-05" };
 
 const HOME = {
-  coming_soon: ["collected", "outstanding", "payments_waiting"],
+  coming_soon: [],
   open_complaints: 3,
+  collected_paise: 13100000,
+  collected_count: 31,
+  outstanding_paise: 7560000,
+  flats_with_dues: 6,
+  payments_waiting: 2,
   compliance_overdue: 1,
   compliance_due_soon: 2,
   next_bill_date: "2026-11-01",
@@ -89,7 +94,9 @@ describe("committee home and compliance", () => {
     const { container } = renderAt("/");
     expect(await screen.findByText("Compliance due soon")).toBeTruthy();
     expect(screen.getByText("1 overdue")).toBeTruthy();
-    expect(screen.getAllByText("Coming soon").length).toBe(3);
+    expect(screen.queryByText("Coming soon")).toBeNull();
+    expect(screen.getByText("₹1,31,000")).toBeTruthy();
+    expect(screen.getByText("6 flats with dues")).toBeTruthy();
     expect(screen.getByText("Open complaints")).toBeTruthy();
     expect(screen.getByText("Generator service is 5 days overdue")).toBeTruthy();
     await noSeriousAxe(container);

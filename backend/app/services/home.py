@@ -1,7 +1,7 @@
 """Committee home (docs/02 §10): the cards and "What needs your attention".
 
-Cards that depend on modules not built yet (payments M6) are returned as
-"coming_soon" so the screen shape is final and only the numbers arrive later. Figures are
+Cards that depend on a module not built yet are listed in "coming_soon" (none now) so the
+screen shape stays final while numbers arrive later. Figures are
 counts and dates from the database, never estimates.
 """
 
@@ -14,11 +14,14 @@ from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.jobs.billing import period_start_for
-from app.models import BillingRun, Complaint, Society
+from app.models import BillingRun, Complaint, Payment, Society
 from app.services import compliance as compliance_service
+from app.services import payments as payment_service
 
 # Modules whose cards are not live yet. Remove a key when its milestone is on dev.
-COMING_SOON = ("collected", "outstanding", "payments_waiting")
+COMING_SOON: tuple[str, ...] = ()
+# Same as "Waiting for you" on the Payments page (M6).
+WAITING_STATUSES = ("pending", "recorded")
 # Complaints still waiting on the committee; resolved ones wait on the resident, not on them.
 OPEN_COMPLAINT_STATUSES = ("open", "in_progress")
 ATTENTION_LIMIT = 8
@@ -49,6 +52,11 @@ def next_bill_date(today: date, bill_day: int | None, frequency: str, fy_start: 
 class Home:
     coming_soon: tuple[str, ...]
     open_complaints: int
+    collected_paise: int
+    collected_count: int
+    outstanding_paise: int
+    flats_with_dues: int
+    payments_waiting: int
     compliance_overdue: int
     compliance_due_soon: int
     next_bill_date: date | None
@@ -75,7 +83,34 @@ async def home(session: AsyncSession, society_id: UUID, today: date) -> Home:
         .where(Complaint.society_id == society_id, Complaint.status.in_(OPEN_COMPLAINT_STATUSES))
     )
 
+    month_start = today.replace(day=1)
+    collected = await payment_service.collected_between(session, society_id, month_start, today)
+    collected_count = await session.scalar(
+        select(func.count())
+        .select_from(Payment)
+        .where(
+            Payment.society_id == society_id,
+            Payment.status == "confirmed",
+            Payment.received_on >= month_start,
+            Payment.received_on <= today,
+        )
+    )
+    dues = await payment_service.dues(session, society_id)
+    waiting = await session.scalar(
+        select(func.count())
+        .select_from(Payment)
+        .where(Payment.society_id == society_id, Payment.status.in_(WAITING_STATUSES))
+    )
+
     attention: list[dict[str, Any]] = []
+    if waiting:
+        attention.append(
+            {
+                "key": "home.attention.paymentsWaiting",
+                "params": {"count": waiting},
+                "link": "/payments",
+            }
+        )
     if latest_run is not None and latest_run.status == "draft":
         attention.append(
             {
@@ -104,6 +139,12 @@ async def home(session: AsyncSession, society_id: UUID, today: date) -> Home:
     return Home(
         coming_soon=COMING_SOON,
         open_complaints=open_complaints or 0,
+        collected_paise=collected,
+        collected_count=collected_count or 0,
+        # Advances are not netted off, as on the Dues page.
+        outstanding_paise=sum(max(d.balance_paise, 0) for d in dues),
+        flats_with_dues=sum(1 for d in dues if d.balance_paise > 0),
+        payments_waiting=waiting or 0,
         compliance_overdue=len(overdue),
         compliance_due_soon=len(due_soon),
         next_bill_date=next_bill_date(

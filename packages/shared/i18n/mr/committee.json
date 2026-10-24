@@ -18,6 +18,10 @@
     "title": "मुख्यपृष्ठ",
     "body": "तुमच्या सोसायटीचा सारांश येथे दिसेल.",
     "cards": {
+      "collectedNote": "{{count}} देयके",
+      "outstandingNote": "{{count}} फ्लॅटवर थकबाकी",
+      "waitingNote": "निश्चित करण्यासाठी टॅप करा",
+      "complaintsNote": "उघड्या किंवा काम सुरू",
       "collected": "या महिन्यात जमा",
       "outstanding": "एकूण थकबाकी",
       "payments_waiting": "निश्चित करायची देयके",
@@ -38,6 +42,7 @@
     "attentionTitle": "तुमचे लक्ष हवे",
     "attentionNone": "सध्या काहीही लक्ष देण्यासारखे नाही.",
     "attention": {
+      "paymentsWaiting": "{{count}} देयके निश्चितीच्या प्रतीक्षेत",
       "runWaiting": "{{period}} ची बिले मंजुरीच्या प्रतीक्षेत आहेत",
       "overdue": "{{title}} ची मुदत {{days}} दिवसांपूर्वी संपली",
       "dueSoon": "{{title}} {{date}} रोजी देय आहे"

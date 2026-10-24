@@ -18,6 +18,10 @@
     "title": "હોમ",
     "body": "તમારી સોસાયટીનો સારાંશ અહીં દેખાશે.",
     "cards": {
+      "collectedNote": "{{count}} ચુકવણીઓ",
+      "outstandingNote": "{{count}} ફ્લેટ પર બાકી",
+      "waitingNote": "પુષ્ટિ માટે ટેપ કરો",
+      "complaintsNote": "ખુલ્લી અથવા કામ ચાલુ",
       "collected": "આ મહિને જમા",
       "outstanding": "કુલ બાકી",
       "payments_waiting": "પુષ્ટિ કરવાની ચુકવણીઓ",
@@ -38,6 +42,7 @@
     "attentionTitle": "તમારું ધ્યાન જરૂરી છે",
     "attentionNone": "હાલ કંઈ ધ્યાન આપવા જેવું નથી.",
     "attention": {
+      "paymentsWaiting": "{{count}} ચુકવણીઓ પુષ્ટિની રાહમાં",
       "runWaiting": "{{period}} ના બિલ મંજૂરીની રાહમાં છે",
       "overdue": "{{title}} ની મુદત {{days}} દિવસ પહેલાં વીતી ગઈ",
       "dueSoon": "{{title}} {{date}} ના રોજ બાકી છે"

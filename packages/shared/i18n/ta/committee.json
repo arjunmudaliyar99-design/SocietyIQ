@@ -18,6 +18,10 @@
     "title": "முகப்பு",
     "body": "உங்கள் சொசைட்டியின் சுருக்கம் இங்கே தெரியும்.",
     "cards": {
+      "collectedNote": "{{count}} கட்டணங்கள்",
+      "outstandingNote": "{{count}} வீடுகளில் நிலுவை",
+      "waitingNote": "உறுதிசெய்ய தட்டவும்",
+      "complaintsNote": "திறந்தவை அல்லது நடப்பில்",
       "collected": "இந்த மாதம் வசூல்",
       "outstanding": "மொத்த நிலுவை",
       "payments_waiting": "உறுதிசெய்ய வேண்டிய கட்டணங்கள்",
@@ -38,6 +42,7 @@
     "attentionTitle": "உங்கள் கவனம் தேவை",
     "attentionNone": "இப்போது கவனிக்க வேண்டியது எதுவும் இல்லை.",
     "attention": {
+      "paymentsWaiting": "{{count}} கட்டணங்கள் உறுதிக்காக காத்திருக்கின்றன",
       "runWaiting": "{{period}} பில்கள் ஒப்புதலுக்காக காத்திருக்கின்றன",
       "overdue": "{{title}} காலக்கெடு {{days}} நாட்கள் கடந்தது",
       "dueSoon": "{{title}} {{date}} அன்று வர வேண்டும்"

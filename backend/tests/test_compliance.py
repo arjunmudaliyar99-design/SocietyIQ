@@ -67,8 +67,11 @@ async def test_seed_generator_overdue_tank_due_soon_and_mark_done(client) -> Non
 
     home = (await client.get(f"{base}/home", headers=DEMO.headers)).json()
     assert home["compliance_due_soon"] >= 2  # tank cleaning and lift AMC
-    assert set(home["coming_soon"]) == {"collected", "outstanding", "payments_waiting"}
+    assert home["coming_soon"] == []
     assert home["open_complaints"] >= 0
+    # Seed dues are opening balances (docs/02 §12): ₹75,600 over 6 flats, unless other
+    # tests have recorded payments or bills for Shanti Sadan since.
+    assert home["outstanding_paise"] >= 0 and home["flats_with_dues"] >= 0
 
     # Mark done: generator repeats every 3 months in the seed.
     done_on = today_ist() - timedelta(days=1)

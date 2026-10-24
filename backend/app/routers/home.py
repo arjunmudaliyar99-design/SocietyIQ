@@ -22,6 +22,11 @@ async def get_home(ctx: Viewer, session: SessionDep) -> HomeOut:
     return HomeOut(
         coming_soon=list(h.coming_soon),  # type: ignore[arg-type]
         open_complaints=h.open_complaints,
+        collected_paise=h.collected_paise,
+        collected_count=h.collected_count,
+        outstanding_paise=h.outstanding_paise,
+        flats_with_dues=h.flats_with_dues,
+        payments_waiting=h.payments_waiting,
         compliance_overdue=h.compliance_overdue,
         compliance_due_soon=h.compliance_due_soon,
         next_bill_date=h.next_bill_date,
