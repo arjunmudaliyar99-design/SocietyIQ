@@ -14,6 +14,10 @@ import { HeadPage } from "./charges/HeadPage";
 import { PreviewPage } from "./charges/PreviewPage";
 import { SettingsPage } from "./charges/SettingsPage";
 import { TaxImportPage } from "./charges/TaxImportPage";
+import { CompliancePage } from "./compliance/CompliancePage";
+import { ItemFormPage } from "./compliance/ItemFormPage";
+import { ItemPage } from "./compliance/ItemPage";
+import { VendorsPage } from "./compliance/VendorsPage";
 import { FlatPage } from "./flats/FlatPage";
 import { FlatsPage } from "./flats/FlatsPage";
 import { ImportPage } from "./flats/ImportPage";
@@ -24,20 +28,11 @@ import { LedgerPage } from "./payments/LedgerPage";
 import { PaymentPage } from "./payments/PaymentPage";
 import { PaymentsPage } from "./payments/PaymentsPage";
 import { RecordPaymentPage } from "./payments/RecordPaymentPage";
+import { HomePage } from "./home/HomePage";
 import { Preview } from "./Preview";
 import { DETAILED_NAV, SIMPLE_NAV } from "./nav";
 import { PeoplePage } from "./setup/PeoplePage";
 import { Shell } from "./Shell";
-
-function Home() {
-  const { t } = useTranslation("committee");
-  return (
-    <>
-      <h1 className="mb-6 text-title font-bold">{t("home.title")}</h1>
-      <EmptyState message={t("home.body")} />
-    </>
-  );
-}
 
 function ComingSoon({ navKey }: { navKey: string }) {
   const { t } = useTranslation();
@@ -51,13 +46,13 @@ function ComingSoon({ navKey }: { navKey: string }) {
 }
 
 // Menu items with real pages; the rest show "Coming soon" until their milestone.
-const BUILT = new Set(["/", "/settings", "/flats", "/charges", "/bills", "/complaints", "/payments", "/dues"]);
+const BUILT = new Set(["/", "/settings", "/flats", "/charges", "/bills", "/complaints", "/payments", "/dues", "/compliance"]);
 
 export default function App() {
   return (
     <Shell>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         {[...SIMPLE_NAV, ...DETAILED_NAV]
           .filter((item) => !BUILT.has(item.path))
           .map((item) => (
@@ -86,8 +81,13 @@ export default function App() {
         <Route path="/complaints" element={<ComplaintsPage />} />
         <Route path="/complaints/new" element={<NewComplaintPage />} />
         <Route path="/complaints/:complaintId" element={<ComplaintPage />} />
+        <Route path="/compliance" element={<CompliancePage />} />
+        <Route path="/compliance/new" element={<ItemFormPage />} />
+        <Route path="/compliance/vendors" element={<VendorsPage />} />
+        <Route path="/compliance/:itemId" element={<ItemPage />} />
+        <Route path="/compliance/:itemId/edit" element={<ItemFormPage />} />
         <Route path="/preview" element={<Preview />} />
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<HomePage />} />
       </Routes>
     </Shell>
   );

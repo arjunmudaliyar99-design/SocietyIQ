@@ -15,7 +15,32 @@
   },
   "home": {
     "title": "Home",
-    "body": "Your society's summary will show here."
+    "body": "Your society's summary will show here.",
+    "cards": {
+      "collected": "Collected this month",
+      "outstanding": "Total outstanding",
+      "payments_waiting": "Payments to confirm",
+      "open_complaints": "Open complaints",
+      "compliance": "Compliance due soon",
+      "complianceNote": "In the next 30 days",
+      "complianceOverdue": "{{count}} overdue",
+      "billing": "Next bills",
+      "billingNotSet": "Not set",
+      "noRuns": "No bills made yet",
+      "lastRun": {
+        "draft": "Last run waiting for approval",
+        "approved": "Last run approved",
+        "sent": "Last run sent",
+        "cancelled": "Last run cancelled"
+      }
+    },
+    "attentionTitle": "What needs your attention",
+    "attentionNone": "Nothing needs your attention right now.",
+    "attention": {
+      "runWaiting": "Bills for {{period}} are waiting for approval",
+      "overdue": "{{title}} is {{days}} days overdue",
+      "dueSoon": "{{title}} is due on {{date}}"
+    }
   },
   "noSociety": {
     "title": "You are not part of a society yet",
@@ -596,6 +621,72 @@
       "payment": "Payment",
       "adjustment": "Adjustment",
       "reversal": "Reversal"
+    }
+  },
+  "compliance": {
+    "title": "Compliance",
+    "body": "Audits, AMCs, insurance and services the society must keep up to date. Reminders go to the committee only.",
+    "add": "Add item",
+    "edit": "Change item",
+    "back": "Back to item",
+    "empty": "No items yet. Add the audits and AMCs your society tracks.",
+    "status": {
+      "ok": "OK",
+      "due_soon": "Due soon",
+      "overdue": "Overdue",
+      "done": "Done"
+    },
+    "types": {
+      "fire_audit": "Fire safety audit (Form B)",
+      "structural_audit": "Structural audit",
+      "lift_amc": "Lift AMC",
+      "pump_amc": "Pump AMC",
+      "generator_service": "Generator service",
+      "tank_cleaning": "Water tank cleaning",
+      "cctv_amc": "CCTV AMC",
+      "insurance": "Building insurance",
+      "pest_control": "Pest control",
+      "other": "Other"
+    },
+    "dueIn": "Due in {{count}} days ({{date}})",
+    "dueToday": "Due today",
+    "overdueBy": "{{count}} days overdue",
+    "doneOn": "Done on {{date}}",
+    "lastDone": "Last done",
+    "never": "Not recorded",
+    "everyMonths": "Every {{count}} months",
+    "noRepeat": "Does not repeat",
+    "markDone": "Mark as done",
+    "doneDate": "Date done",
+    "markDoneQuestion": "Mark {{title}} as done on {{date}}? The next due date will be set from the repeat interval.",
+    "history": "History",
+    "noHistory": "Not marked done yet.",
+    "form": {
+      "type": "Type",
+      "title": "Name",
+      "titleHelp": "Leave empty to use the type as the name.",
+      "vendor": "Vendor",
+      "noVendor": "No vendor",
+      "nextDue": "Next due date",
+      "repeat": "Repeats every (months)",
+      "repeatHelp": "As your contract or rule says. Leave empty if it does not repeat.",
+      "contract": "Contract value (₹)",
+      "notes": "Notes",
+      "save": "Save",
+      "dueRequired": "Enter the next due date.",
+      "dateRequired": "Enter the date.",
+      "repeatInvalid": "Enter a whole number of months from 1 to 120.",
+      "amountInvalid": "Enter the amount in rupees, for example 192000."
+    },
+    "vendors": {
+      "title": "Vendors",
+      "empty": "No vendors yet.",
+      "add": "Add vendor",
+      "name": "Vendor name",
+      "category": "What they do",
+      "phone": "Phone",
+      "phoneInvalid": "Enter a 10-digit mobile number.",
+      "noDetails": "No contact details"
     }
   }
 }

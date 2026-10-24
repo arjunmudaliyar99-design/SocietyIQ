@@ -9,6 +9,7 @@ from app.models.charges import (
     PropertyTaxAssessment,
 )
 from app.models.complaints import Complaint, ComplaintUpdate
+from app.models.compliance import ComplianceEvent, ComplianceItem, ComplianceReminder, Vendor
 from app.models.flats import Flat, Member, Wing
 from app.models.ledger import LedgerEntry
 from app.models.payments import Payment, PaymentAllocation, Receipt
@@ -25,6 +26,9 @@ __all__ = [
     "ChargeHead",
     "Complaint",
     "ComplaintUpdate",
+    "ComplianceEvent",
+    "ComplianceItem",
+    "ComplianceReminder",
     "Consent",
     "Flat",
     "FlatChargeOverride",
@@ -42,5 +46,6 @@ __all__ = [
     "Society",
     "SocietyMembership",
     "User",
+    "Vendor",
     "Wing",
 ]

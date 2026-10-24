@@ -13,7 +13,8 @@ def main() -> None:
     print(
         f"Societies created: {report.societies_created}; flats created: {report.flats_created}; "
         f"opening balances created: {report.balances_created}; "
-        f"charge heads created: {report.heads_created}."
+        f"charge heads created: {report.heads_created}; "
+        f"compliance items created: {report.compliance_created}."
     )
     print(f"Demo logins (local dev sign-in): {DEMO_ADMIN_EMAIL}, {DEMO_RESIDENT_EMAIL}")
 

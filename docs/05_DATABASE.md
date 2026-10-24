@@ -94,6 +94,10 @@ The schema for v1 and v1.5. Build tables only when their milestone needs them (`
 
 **`compliance_events`** — `id`, `society_id`, `compliance_item_id`, `done_on DATE`, `notes`, `recorded_by`, `created_at`.
 
+**`compliance_reminders`** [added in M10] — `id`, `society_id`, `compliance_item_id`, `due_on DATE`, `days_before SMALLINT` (90, 60, 30, 7, 0, or negative days overdue on each weekly reminder), `created_at`. `UNIQUE (compliance_item_id, due_on, days_before)` so the daily job is idempotent. Email delivery to the committee reads these once the notify service exists (M9).
+
+Vendor names are unique per society, ignoring case. Compliance items are never deleted; `is_active = false` turns one off (a one-off item is turned off when marked done).
+
 ## 7. Vendor bills and AI extraction [M11–M12]
 
 **`expense_bills`** — `id`, `society_id`, `attachment_id`, `vendor_id NULL`, `vendor_name_raw TEXT NULL`, `invoice_number TEXT NULL`, `invoice_date DATE NULL`, `due_date DATE NULL`, `billing_period_month DATE NULL` (first day of month), `category TEXT NULL` (list in `06` §7), `subtotal_paise BIGINT NULL`, `gst_paise BIGINT NULL`, `total_paise BIGINT NULL`, `description TEXT NULL`, `status TEXT CHECK IN ('processing','needs_review','confirmed','rejected')`, `check_warnings JSONB DEFAULT '[]'`, `confirmed_by NULL`, `confirmed_at NULL`, `created_at`, `updated_at`.

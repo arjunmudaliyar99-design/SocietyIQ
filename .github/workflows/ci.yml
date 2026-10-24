@@ -37,7 +37,7 @@ jobs:
       - run: uv run ruff format --check .
       - run: uv run pytest
       # Money rules: every line of app/calc must be tested (docs/04 §15).
-      - run: uv run pytest tests/test_calc_charges.py tests/test_calc_legal.py tests/test_calc_bills.py tests/test_calc_payments.py --cov=app/calc --cov-fail-under=100
+      - run: uv run pytest tests/test_calc_charges.py tests/test_calc_legal.py tests/test_calc_bills.py tests/test_calc_payments.py tests/test_calc_compliance.py --cov=app/calc --cov-fail-under=100
 
   frontend:
     runs-on: ubuntu-latest

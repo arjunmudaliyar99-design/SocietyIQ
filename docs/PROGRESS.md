@@ -16,7 +16,7 @@ What is built, what is in progress, and what is next. Every Claude Code session 
 | M7 Resident PWA core | IN PROGRESS (feat/m7-resident) | | |
 | M8 Complaints | IN REVIEW | feat/m8-complaints (merged into `dev`) | Phone camera upload not yet tried on a real phone |
 | M9 Notices and email | NOT STARTED | | |
-| M10 Committee home and compliance | IN PROGRESS (feat/m10-compliance) | | Then M11 in the same session |
+| M10 Committee home and compliance | IN REVIEW | feat/m10-compliance | Dues and collections cards "Coming soon" until M6; then M11 |
 | M11 Analytics and admin tools | NOT STARTED | | |
 | M12 Vendor bills, AI, alerts | NOT STARTED | | |
 | M13 Quote comparison | NOT STARTED | | |
@@ -27,6 +27,15 @@ Statuses: NOT STARTED · IN PROGRESS (branch) · IN REVIEW (PR link) · DONE · 
 ## Log
 
 Newest first. One entry per merged PR: date, milestone, what was built, how to try it, known gaps.
+
+- 2026-10-24 — M10 — Committee home and compliance tracker.
+  Calc (pure, 100% covered, in the CI coverage gate): `app/calc/compliance.py` — status per docs/06 §9 (Overdue before today, Due soon within 30 days, else OK), next due = date done + repeat months (same day, clamped to month end), reminder days 90/60/30/7/0 then weekly while overdue.
+  Backend: migration `0005_compliance` (revision id `0005_compliance`, on top of `0005_complaints`): `vendors`, `compliance_items`, `compliance_events` (history, append-only), `compliance_reminders` (new, see DECISIONS) with forced RLS. Endpoints: compliance items (list, add, get with history, change, mark done), vendors (list, add, change), committee home `GET /societies/{id}/home` (cards, next bill date, latest run, "What needs your attention"). Roles per docs/02 §2 (admin, treasurer, committee, consultant manage; auditor views). Audit rows for every vendor and item change and every "done". Scheduled job `POST /api/v1/internal/jobs/compliance-reminders` (token; idempotent; logs to `job_runs`) and a daily step in `.github/workflows/jobs.yml`. Seed adds the docs/02 §12 compliance items and vendors for all three societies (14 items; due dates relative to the seed day).
+  Front end (committee): Home with six cards (three payment cards "Coming soon" until M6; open complaints (open + in progress) from M8; compliance due soon with overdue count; next bill date and last run status) and the attention list; Compliance list (status in words + icon), item page (details, mark done with confirmation, history, change), add/change form, Vendors. Five languages (non-English drafts).
+  Acceptance: Shanti Sadan seed → Generator service Overdue (−5 days), Water tank cleaning Due soon (12 days), checked by test and on the live API; marking done on D with 3-month repeat → next due D + 3 months (test).
+  Tests: backend 193 (12 new M10 incl. acceptance, roles, vendor isolation, job idempotency; 9 new routes in the isolation list), front end 96 (2 new: home and compliance with axe).
+  How to try: `uv run alembic upgrade head`, `uv run python -m app.seed`, sign in as `demo-admin@example.com`, Home; Detailed view → Compliance.
+  Known gaps: reminders are recorded but not emailed until M9; no attached document per item (Q-041); statutory audit intervals not seeded (Q-040); home cards for payments wait for M6; `App.test.tsx` shell tests now render `/preview` because `/` needs the API; not checked in a real browser (no Playwright on this machine) — component tests with axe only.
 
 - 2026-10-24 — M6 — Payments, receipts and dues.
   Calc: `app/calc/payments.py` (oldest-first allocation, dues buckets per docs/06 §6, opening-balance months, amount in words in the Indian system; 100% covered).

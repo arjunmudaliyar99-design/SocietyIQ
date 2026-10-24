@@ -164,7 +164,11 @@
     "notARecordedCheque": "Only a recorded cheque can bounce.",
     "paymentNotReversible": "This payment cannot be reversed.",
     "noReceipt": "There is no receipt until the payment is confirmed.",
-    "tenantCannotPay": "The owner has not allowed the tenant to pay for this flat."
+    "tenantCannotPay": "The owner has not allowed the tenant to pay for this flat.",
+    "vendorExists": "A vendor with this name already exists.",
+    "vendorNotFound": "This vendor was not found. Choose another.",
+    "complianceNotActive": "This item is already finished.",
+    "doneInFuture": "The date done cannot be in the future."
   },
   "complaints": {
     "title": "Complaints",

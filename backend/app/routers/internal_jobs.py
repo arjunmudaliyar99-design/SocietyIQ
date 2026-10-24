@@ -11,6 +11,7 @@ from pydantic import BaseModel
 from app.config import get_settings
 from app.errors import AppError
 from app.jobs.billing import create_draft_billing_runs
+from app.jobs.compliance import compliance_reminders
 from app.timeutil import today_ist
 
 router = APIRouter(prefix="/internal/jobs", tags=["internal"])
@@ -35,4 +36,15 @@ async def run_billing_job(
     if body.today and get_settings().app_env == "production":
         raise AppError(422, "TODAY_NOT_ALLOWED", "errors.generic")
     report = await create_draft_billing_runs(body.today or today_ist())
+    return report.as_dict()
+
+
+@router.post("/compliance-reminders")
+async def run_compliance_job(
+    body: JobIn, x_jobs_token: Annotated[str | None, Header()] = None
+) -> dict[str, Any]:
+    _check_token(x_jobs_token)
+    if body.today and get_settings().app_env == "production":
+        raise AppError(422, "TODAY_NOT_ALLOWED", "errors.generic")
+    report = await compliance_reminders(body.today or today_ist())
     return report.as_dict()

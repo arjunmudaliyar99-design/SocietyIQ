@@ -1,12 +1,14 @@
 """Fictional demo data from docs/02 §12. Safe to run again: it only adds what is missing.
 
 Societies, flats, members, the listed dues (as opening balances) and the charge setup from
-the "Seed charge setup" table. Spending and compliance items come with M10 and M12.
+the "Seed charge setup" table, and the compliance items with their vendors (due dates are
+days from the day the seed runs). Spending comes with M12.
 Bill day 1 and due after 15 days are demo choices, not rules. Logins are @example.com and
 work with the local dev sign-in (their user ids match `dev_user_id`).
 """
 
 from dataclasses import dataclass, field
+from datetime import timedelta
 from decimal import Decimal
 from uuid import UUID
 
@@ -15,9 +17,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.auth import AuthUser, dev_user_id
 from app.db import get_sessionmaker, set_society_context, set_user_context
-from app.models import Flat, Member, SocietyMembership, User, Wing
+from app.models import ComplianceItem, Flat, Member, SocietyMembership, User, Wing
 from app.services import auth as user_service
 from app.services import charges as charge_service
+from app.services import compliance as compliance_service
 from app.services import flats as flat_service
 from app.services import ledger
 from app.services import societies as society_service
@@ -119,6 +122,52 @@ SOCIETIES = [
 ]
 
 
+@dataclass(frozen=True)
+class SeedCompliance:
+    item_type: str
+    title: str
+    days_from_today: int
+    vendor: str | None = None
+    # Demo choices so "mark done" can be shown, not rules. Statutory audits get none until
+    # their intervals are confirmed. TODO(confirm): Q-040
+    repeat_months: int | None = None
+    contract_value_paise: int | None = None
+    notes: str | None = None
+
+
+# docs/02 §12 "Compliance (days from today)".
+COMPLIANCE: dict[str, list[SeedCompliance]] = {
+    "A": [
+        SeedCompliance("generator_service", "Generator service", -5, "Powergen Services", 3),
+        SeedCompliance("tank_cleaning", "Water tank cleaning", 12, "AquaClean", 6),
+        SeedCompliance(
+            "lift_amc",
+            "Lift AMC renewal",
+            25,
+            "ABC Elevators",
+            12,
+            contract_value_paise=19200000,
+            notes="Renewal quote ₹2,34,000 (current contract ₹1,92,000)",
+        ),
+        SeedCompliance("fire_audit", "Fire safety audit (Form B)", 40, "SafeFire Consultants"),
+        SeedCompliance("insurance", "Building insurance", 75, None, 12),
+        SeedCompliance("structural_audit", "Structural audit", 150),
+        SeedCompliance("cctv_amc", "CCTV AMC", 210, "SecureVision", 12),
+    ],
+    "B": [
+        SeedCompliance("fire_audit", "Fire safety audit", -18),
+        SeedCompliance("pump_amc", "Pump service", 20, "Jal Pumps", 6),
+        SeedCompliance("lift_amc", "Lift AMC renewal", 55, "Skyline Lifts", 12),
+        SeedCompliance("insurance", "Building insurance", 160, None, 12),
+    ],
+    "C": [
+        SeedCompliance("tank_cleaning", "Water tank cleaning", 45, "AquaClean", 6),
+        SeedCompliance("fire_audit", "Fire safety audit", 120, "SafeFire Consultants"),
+        SeedCompliance("structural_audit", "Structural audit", 300),
+    ],
+}
+
+
 def _label(wing: str | None, number: str) -> str:
     return f"{wing}-{number}" if wing else number
 
@@ -129,6 +178,7 @@ class SeedReport:
     flats_created: int = 0
     balances_created: int = 0
     heads_created: int = 0
+    compliance_created: int = 0
 
 
 async def _ensure_user(session: AsyncSession, email: str) -> User:
@@ -222,6 +272,7 @@ async def _seed_society(session: AsyncSession, spec: SeedSociety, report: SeedRe
             report.flats_created += 1
     await session.flush()
     await _seed_heads(session, society_id, admin, spec, report)
+    await _seed_compliance(session, society_id, admin, spec.key, report)
     return society_id
 
 
@@ -275,6 +326,44 @@ async def _seed_heads(
             },
         )
         report.heads_created += 1
+
+
+async def _seed_compliance(
+    session: AsyncSession, society_id: UUID, admin: User, key: str, report: SeedReport
+) -> None:
+    titles = set(
+        await session.scalars(
+            select(ComplianceItem.title).where(ComplianceItem.society_id == society_id)
+        )
+    )
+    vendors = {v.name: v.id for v in await compliance_service.list_vendors(session, society_id)}
+    today = today_ist()
+    for spec in COMPLIANCE.get(key, []):
+        if spec.title in titles:
+            continue
+        vendor_id = None
+        if spec.vendor:
+            if spec.vendor not in vendors:
+                vendor = await compliance_service.create_vendor(
+                    session, society_id, admin, {"name": spec.vendor}
+                )
+                vendors[spec.vendor] = vendor.id
+            vendor_id = vendors[spec.vendor]
+        await compliance_service.create_item(
+            session,
+            society_id,
+            admin,
+            {
+                "item_type": spec.item_type,
+                "title": spec.title,
+                "vendor_id": vendor_id,
+                "next_due_on": today + timedelta(days=spec.days_from_today),
+                "repeat_months": spec.repeat_months,
+                "contract_value_paise": spec.contract_value_paise,
+                "notes": spec.notes,
+            },
+        )
+        report.compliance_created += 1
 
 
 async def _seed_resident(session: AsyncSession, society_id: UUID, flat_label: str) -> None:

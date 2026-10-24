@@ -19,3 +19,14 @@ jobs:
         run: |
           if [ -z "$JOBS_BASE_URL" ]; then echo "JOBS_BASE_URL not set; skipping"; exit 0; fi
           curl --fail-with-body -sS -X POST "$JOBS_BASE_URL/api/v1/internal/jobs/create-draft-billing-runs"             -H "X-Jobs-Token: $INTERNAL_JOBS_TOKEN" -H "Content-Type: application/json" -d '{}'
+
+  compliance-reminders:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Record compliance reminders
+        env:
+          JOBS_BASE_URL: ${{ secrets.JOBS_BASE_URL }}
+          INTERNAL_JOBS_TOKEN: ${{ secrets.INTERNAL_JOBS_TOKEN }}
+        run: |
+          if [ -z "$JOBS_BASE_URL" ]; then echo "JOBS_BASE_URL not set; skipping"; exit 0; fi
+          curl --fail-with-body -sS -X POST "$JOBS_BASE_URL/api/v1/internal/jobs/compliance-reminders" -H "X-Jobs-Token: $INTERNAL_JOBS_TOKEN" -H "Content-Type: application/json" -d '{}'

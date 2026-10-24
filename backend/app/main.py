@@ -10,8 +10,10 @@ from app.routers import (
     billing,
     charges,
     complaints,
+    compliance,
     dev,
     flats,
+    home,
     imports,
     internal_jobs,
     payments,
@@ -45,6 +47,8 @@ def create_app() -> FastAPI:
     api.include_router(billing.router)
     api.include_router(complaints.router)
     api.include_router(payments.router)
+    api.include_router(compliance.router)
+    api.include_router(home.router)
     api.include_router(internal_jobs.router)
     if settings.app_env == "local" and settings.supabase_jwt_secret:
         api.include_router(dev.router)

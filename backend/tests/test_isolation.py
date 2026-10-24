@@ -130,6 +130,22 @@ SOCIETY_ROUTES: dict[tuple[str, str], object] = {
         "GET",
         "/api/v1/societies/{society_id}/complaints/{complaint_id}/photos/{attachment_id}",
     ): None,
+    # M10
+    ("GET", "/api/v1/societies/{society_id}/home"): None,
+    ("GET", "/api/v1/societies/{society_id}/compliance/items"): None,
+    ("POST", "/api/v1/societies/{society_id}/compliance/items"): {
+        "item_type": "other",
+        "title": "Test",
+        "next_due_on": "2026-11-30",
+    },
+    ("GET", "/api/v1/societies/{society_id}/compliance/items/{item_id}"): None,
+    ("PATCH", "/api/v1/societies/{society_id}/compliance/items/{item_id}"): {"notes": "x"},
+    ("POST", "/api/v1/societies/{society_id}/compliance/items/{item_id}/done"): {
+        "done_on": "2026-10-01"
+    },
+    ("GET", "/api/v1/societies/{society_id}/vendors"): None,
+    ("POST", "/api/v1/societies/{society_id}/vendors"): {"name": "Vendor"},
+    ("PATCH", "/api/v1/societies/{society_id}/vendors/{vendor_id}"): {"notes": "x"},
 }
 
 
@@ -157,6 +173,8 @@ def _url(path: str, society_id: object) -> str:
         "allotment_id",
         "complaint_id",
         "attachment_id",
+        "item_id",
+        "vendor_id",
     ):
         url = url.replace("{" + name + "}", ANY_ID)
     if url.endswith("/charges/preview"):
