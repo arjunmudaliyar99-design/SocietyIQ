@@ -1,6 +1,6 @@
 // Committee home (docs/02 §10): at most six tappable cards, then "What needs your attention".
 // Cards whose module is not built yet show "Coming soon" (the API says which).
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, FolderOpen } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -15,6 +15,7 @@ import {
 } from "@societyiq/shared";
 
 import { useHome, type Home } from "../api/compliance";
+import { useCanSeeRecords } from "../api/records";
 
 type CardKey = Home["coming_soon"][number];
 const SOON_CARDS: CardKey[] = ["collected", "outstanding", "payments_waiting"];
@@ -36,6 +37,7 @@ export function HomePage() {
   const { language } = useSettings();
   const navigate = useNavigate();
   const home = useHome();
+  const canSeeRecords = useCanSeeRecords();
   const h = home.data;
 
   return (
@@ -120,6 +122,15 @@ export function HomePage() {
               ))}
             </ul>
           )}
+          {canSeeRecords ? (
+            <Link
+              to="/records"
+              className="mt-8 inline-flex min-h-[48px] items-center gap-2 text-body font-semibold text-teal underline-offset-4 hover:underline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ink"
+            >
+              <FolderOpen size={22} aria-hidden="true" />
+              {t("admin.homeLink")}
+            </Link>
+          ) : null}
         </>
       ) : null}
     </>

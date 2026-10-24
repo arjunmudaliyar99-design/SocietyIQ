@@ -1,4 +1,5 @@
-"""M11 — Data export. Implements docs/07 M11, docs/04 §14.
+"""Data export (docs/07 M11)."""
 
-Not implemented yet.
-"""
+from typing import Literal
+
+ExportFormat = Literal["xlsx", "pdf"]

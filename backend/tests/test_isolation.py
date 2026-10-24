@@ -166,6 +166,9 @@ SOCIETY_ROUTES: dict[tuple[str, str], object] = {
     ("POST", "/api/v1/societies/{society_id}/notices/{notice_id}/publish"): None,
     ("POST", "/api/v1/societies/{society_id}/notices/{notice_id}/archive"): None,
     ("POST", "/api/v1/societies/{society_id}/notices/{notice_id}/read"): None,
+    # M11
+    ("GET", "/api/v1/societies/{society_id}/audit-log"): None,
+    ("GET", "/api/v1/societies/{society_id}/export"): None,
 }
 
 

@@ -2,6 +2,7 @@
 import { useState } from "react";
 
 import {
+  AnalyticsTracker,
   AppGate,
   AuthProvider,
   BigButton,
@@ -15,7 +16,7 @@ import {
 } from "@societyiq/shared";
 
 import App from "./App";
-import { authConfig } from "./config";
+import { analyticsConfig, authConfig } from "./config";
 import { SetupWizard } from "./setup/SetupWizard";
 
 function NoSociety() {
@@ -50,6 +51,7 @@ export function Root({ queryClient }: { queryClient?: QueryClient }) {
           }}
           noSociety={<NoSociety />}
         >
+          <AnalyticsTracker config={analyticsConfig} />
           <App />
         </AppGate>
       </AuthProvider>

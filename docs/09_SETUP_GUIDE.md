@@ -141,6 +141,20 @@ Tests create their own scratch database `societyiq_test` on the same server (`TE
 - PDFs need Pango (Linux). On Windows they answer "PDF unavailable"; use the image: `docker build -t societyiq-backend backend` then run it with the same `.env`. Hosting uses `backend/Dockerfile`.
 - GitHub → Settings → Secrets → Actions: add `JOBS_BASE_URL` (the backend's public URL) and `INTERNAL_JOBS_TOKEN` (same long random value as the backend's `INTERNAL_JOBS_TOKEN`). `.github/workflows/jobs.yml` then calls the billing job every day at 06:00 India time; it does nothing until these are set.
 
+## 6c. Usage analytics and the monthly restore test (from M11)
+
+**Analytics (PostHog, docs/04 §10).** Off unless all three hold: `VITE_POSTHOG_KEY` is set, `VITE_APP_ENV` is not `local`, and the person ticked analytics on the consent screen (or later in Settings). No key is ever committed; set it only in the hosting environment. `VITE_POSTHOG_HOST` sets the PostHog region; leave it empty to use the library's default, and check which region to use before the first pilot (DPDP; `docs/10` Q-042). People are identified by internal id only; all text, inputs and attributes are masked; recordings run for society admins only.
+
+**Monthly restore test (docs/04 §14).** Proves that a backup can be turned back into a working SocietyIQ. Once a month, by the Co-founder (Engineering) or whoever holds the Supabase owner login:
+
+1. In the live committee app, sign in as an admin of one pilot society → Home → Records → **Download Excel**. Note the time.
+2. Restore the latest daily backup into a **new scratch Supabase project** (never into the live one), following Supabase's current backup documentation for the plan in use.
+3. Point a local backend at the scratch project (`DATABASE_URL` and `MIGRATIONS_DATABASE_URL` in a separate `.env`), run `uv run alembic current` (it must show the same head as `main`), and start the backend and committee app locally.
+4. Sign in as the same admin, open the same society → Records → **Download Excel**.
+5. Compare: `uv run python scripts/compare_exports.py live.xlsx restored.xlsx`. Rows written between the backup time and step 1 can differ (usually only `audit_log` and today's records); anything else is a failed test.
+6. Delete both export files (they hold members' personal data) and pause or delete the scratch project.
+7. Record the date, who, the backup time and the result in `PROGRESS.md` → "Restore tests". A failed test is fixed before anything else.
+
 ## 7. Hosting
 
 **Demo / internal sharing:** Vercel (front ends) + Render free (FastAPI) + Supabase free. Costs nothing; the backend sleeps when idle, so the first click after a while is slow.

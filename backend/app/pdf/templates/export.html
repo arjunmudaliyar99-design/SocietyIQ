@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+<style>
+  @page { size: A4 landscape; margin: 10mm; }
+  .export th, .export td { font-size: 6.5pt; padding: 1.5pt 3pt; border-bottom: 1px solid #eef2f1;
+    text-align: left; vertical-align: top; word-break: break-word; }
+  .export th { border-bottom: 1px solid #17262e; }
+  .export { margin-bottom: 10pt; page-break-after: always; }
+  .export:last-child { page-break-after: auto; }
+</style>
+<header>
+  <h1>{{ society_name }}</h1>
+  <div class="society">{{ L("dataExport") }} · {{ as_on }}</div>
+</header>
+{% for s in sheets %}
+<section class="export">
+  <h2>{{ s.name }} ({{ s.rows|length }})</h2>
+  {% if s.rows %}
+  <table>
+    <tr>{% for h in s.headers %}<th>{{ h }}</th>{% endfor %}</tr>
+    {% for row in s.rows %}<tr>{% for v in row %}<td>{{ text(v) }}</td>{% endfor %}</tr>{% endfor %}
+  </table>
+  {% endif %}
+</section>
+{% endfor %}
+{% endblock %}

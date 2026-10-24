@@ -17,7 +17,7 @@ What is built, what is in progress, and what is next. Every Claude Code session 
 | M8 Complaints | IN REVIEW | feat/m8-complaints (merged into `dev`) | Phone camera upload not yet tried on a real phone |
 | M9 Notices and email | IN REVIEW | feat/m9-notices (merged into `dev`) | Email provider not chosen (Q-082): fake sender |
 | M10 Committee home and compliance | IN REVIEW | feat/m10-compliance | Then M11 |
-| M11 Analytics and admin tools | IN PROGRESS (feat/m11-admin) | | |
+| M11 Analytics and admin tools | IN REVIEW | feat/m11-admin | Settings toggle for analytics to be mounted in the account menus (UI polish owner) |
 | M12 Vendor bills, AI, alerts | IN PROGRESS (feat/m12-expenses) | | Then M13, M14 in the same session |
 | M13 Quote comparison | NOT STARTED | | |
 | M14 Minutes drafting | NOT STARTED | | |
@@ -27,6 +27,14 @@ Statuses: NOT STARTED · IN PROGRESS (branch) · IN REVIEW (PR link) · DONE · 
 ## Log
 
 Newest first. One entry per merged PR: date, milestone, what was built, how to try it, known gaps.
+
+- 2026-10-24 — M11 — Usage analytics and admin tools.
+  Backend: `GET /societies/{id}/audit-log` (newest first, 50 a page by id, filter by entity type or action, who did it from their membership name or email; admin, treasurer, auditor). `GET /societies/{id}/export?format=xlsx|pdf`: every table with `society_id` (found from the models; a test checks the database has no unmapped one), one sheet each, secrets left out, money as exact rupees, India time; PDF via the existing renderer (503 without Pango); each export is audited with its row counts. Same roles. No migration.
+  Front end: shared `AnalyticsTracker` (PostHog loaded only with `VITE_POSTHOG_KEY`, `VITE_APP_ENV` not `local`, and analytics consent; masks all text, inputs and attributes; recordings for admins only; identify by user id only) mounted in both apps; `AnalyticsSetting` toggle exported for Settings. Committee: Records page (Download Excel / PDF, change history with before/after, filter, older pages), linked from Home for admin, treasurer and auditor. Money and personal data marked `ph-no-capture`. Five languages.
+  Docs: docs/09 §6c analytics setup and the monthly restore test; `backend/scripts/compare_exports.py` compares live and restored exports without printing personal data.
+  Tests: backend 240 on the merged tree; 7 new (export completeness, exact rupees, no secrets, no other society's rows, roles, audit paging and filters, PDF or 503) + 2 for the compare script; isolation list +2 routes. Front end: 4 analytics (gate truth table, nothing loaded without key or consent, masking and admin-only recording) + 2 Records page (with axe); front end 108 on the merged tree.
+  How to try: sign in as `demo-admin@example.com` → Home → "Records". Analytics need a real key and `VITE_APP_ENV=staging`; none is in the repo.
+  Known gaps: the analytics on/off toggle is built but not yet placed in the two account menus (UI polish owner asked); PostHog region and privacy-policy wording open (Q-042); first real restore test waits for a Supabase Pro project; PDF export of a large society is long (every row of every table).
 
 - 2026-10-24 — M7 — Resident PWA core.
   Backend: `/societies/{id}/my/flats` (the person's linked flats with balance, months pending, latest bill, payments waiting, and UPI pay details: deep link `upi://pay?...&am=4200.00` and QR), my bills, my payments (pending reports show as "Received, waiting for confirmation"), bill and receipt PDFs. One access rule (`services/residents.py`): owners and delegates see and pay; a tenant only if `members.tenant_can_pay`.

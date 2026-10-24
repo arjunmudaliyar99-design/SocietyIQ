@@ -57,7 +57,8 @@
     "m_upi": "UPI",
     "m_neft": "Bank transfer (NEFT)",
     "m_other": "Other",
-    "m_gateway": "Online"
+    "m_gateway": "Online",
+    "dataExport": "Data export"
   },
   "mr": {
     "title": "देखभाल बिल",
@@ -116,7 +117,8 @@
     "m_upi": "UPI",
     "m_neft": "बँक हस्तांतरण (NEFT)",
     "m_other": "इतर",
-    "m_gateway": "ऑनलाइन"
+    "m_gateway": "ऑनलाइन",
+    "dataExport": "डेटा निर्यात"
   },
   "hi": {
     "title": "रखरखाव बिल",
@@ -175,7 +177,8 @@
     "m_upi": "UPI",
     "m_neft": "बैंक ट्रांसफर (NEFT)",
     "m_other": "अन्य",
-    "m_gateway": "ऑनलाइन"
+    "m_gateway": "ऑनलाइन",
+    "dataExport": "डेटा निर्यात"
   },
   "gu": {
     "title": "જાળવણી બિલ",
@@ -234,7 +237,8 @@
     "m_upi": "UPI",
     "m_neft": "બેંક ટ્રાન્સફર (NEFT)",
     "m_other": "અન્ય",
-    "m_gateway": "ઓનલાઇન"
+    "m_gateway": "ઓનલાઇન",
+    "dataExport": "ડેટા નિકાસ"
   },
   "ta": {
     "title": "பராமரிப்புப் பில்",
@@ -293,6 +297,7 @@
     "m_upi": "UPI",
     "m_neft": "வங்கிப் பரிமாற்றம் (NEFT)",
     "m_other": "பிற",
-    "m_gateway": "ஆன்லைன்"
+    "m_gateway": "ஆன்லைன்",
+    "dataExport": "தரவு ஏற்றுமதி"
   }
 }

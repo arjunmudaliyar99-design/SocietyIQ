@@ -51,6 +51,8 @@ Format: **ID — question** · who can answer · status.
 - **Q-040 — Statutory intervals for the fire safety audit (Form B) and the structural audit: how often, and from what date?** The seed leaves them without a repeat interval; the committee enters one per item. Generator, tank cleaning, AMC and insurance repeat intervals in the seed are demo choices · consultant / the Legal & Society Advisor · open (default: entered per item, none seeded)
 - **Q-041 — Compliance "attached document" (docs/02 §13) is not in the `compliance_items` columns of docs/05 §6. Attach certificates through `attachments` with a link column, or one document per `compliance_events` row?** · Co-founder (Engineering) · open (M10 ships without attachments)
 
+- **Q-042 — PostHog region (EU or US cloud) and whether usage data may leave India under DPDP; is the privacy-policy wording for analytics ready?** · founders / lawyer · open (analytics stay off until a key is set)
+
 - **Q-029 — The GitHub repository is public, but docs/09 §3 and DECISIONS say private. Make it private before pushing docs and code?** · the Founder · open (nothing pushed until answered)
 
 ## Business and people

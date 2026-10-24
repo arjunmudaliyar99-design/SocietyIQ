@@ -693,5 +693,45 @@
       "phoneInvalid": "Enter a 10-digit mobile number.",
       "noDetails": "No contact details"
     }
+  },
+  "admin": {
+    "title": "Records",
+    "body": "Download all of your society's data, and see who changed what and when.",
+    "homeLink": "Records: download data and see the change history",
+    "export": {
+      "title": "Download all data",
+      "body": "Every record of this society: flats, members, bills, payments, complaints, compliance and the change history. The download is noted in the change history.",
+      "excel": "Download Excel",
+      "pdf": "Download PDF",
+      "preparing": "Preparing the file…"
+    },
+    "audit": {
+      "title": "Change history",
+      "filter": "Show changes to",
+      "all": "Everything",
+      "empty": "No changes recorded yet.",
+      "show": "Show changes",
+      "hide": "Hide changes",
+      "field": "Field",
+      "before": "Before",
+      "after": "After",
+      "reason": "Reason: {{reason}}",
+      "someone": "A former member",
+      "system": "SocietyIQ (automatic)",
+      "more": "Show older changes"
+    },
+    "entities": {
+      "society": "Society",
+      "membership": "People and roles",
+      "flat": "Flats",
+      "member": "Members",
+      "charge_head": "Charges",
+      "billing_run": "Billing runs",
+      "bill": "Bills",
+      "payment": "Payments",
+      "complaint": "Complaints",
+      "compliance_item": "Compliance",
+      "vendor": "Vendors"
+    }
   }
 }

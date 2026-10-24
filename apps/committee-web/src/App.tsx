@@ -34,6 +34,7 @@ import { RecordPaymentPage } from "./payments/RecordPaymentPage";
 import { HomePage } from "./home/HomePage";
 import { Preview } from "./Preview";
 import { DETAILED_NAV, SIMPLE_NAV } from "./nav";
+import { RecordsPage } from "./records/RecordsPage";
 import { PeoplePage } from "./setup/PeoplePage";
 import { Shell } from "./Shell";
 
@@ -49,7 +50,7 @@ function ComingSoon({ navKey }: { navKey: string }) {
 }
 
 // Menu items with real pages; the rest show "Coming soon" until their milestone.
-const BUILT = new Set(["/", "/settings", "/flats", "/charges", "/bills", "/complaints", "/payments", "/dues", "/compliance", "/notices"]);
+const BUILT = new Set(["/", "/settings", "/flats", "/charges", "/bills", "/complaints", "/payments", "/dues", "/compliance", "/notices", "/records"]);
 
 export default function App() {
   return (
@@ -92,6 +93,7 @@ export default function App() {
         <Route path="/notices" element={<NoticesPage />} />
         <Route path="/notices/new" element={<NewNoticePage />} />
         <Route path="/notices/:noticeId" element={<NoticePage />} />
+        <Route path="/records" element={<RecordsPage />} />
         <Route path="/preview" element={<Preview />} />
         <Route path="*" element={<HomePage />} />
       </Routes>

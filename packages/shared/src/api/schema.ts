@@ -158,6 +158,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/societies/{society_id}/audit-log": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Audit Log */
+        get: operations["audit_log_api_v1_societies__society_id__audit_log_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/societies/{society_id}/billing-runs": {
         parameters: {
             query?: never;
@@ -587,6 +604,23 @@ export interface paths {
         };
         /** Dues */
         get: operations["dues_api_v1_societies__society_id__dues_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/societies/{society_id}/export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Export Society */
+        get: operations["export_society_api_v1_societies__society_id__export_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1467,6 +1501,43 @@ export interface components {
             params: {
                 [key: string]: unknown;
             };
+        };
+        /** AuditEntryOut */
+        AuditEntryOut: {
+            /** Action */
+            action: string;
+            /** Actor Name */
+            actor_name: string | null;
+            /** Actor User Id */
+            actor_user_id: string | null;
+            /** After */
+            after: {
+                [key: string]: unknown;
+            } | null;
+            /** Before */
+            before: {
+                [key: string]: unknown;
+            } | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Entity Id */
+            entity_id: string | null;
+            /** Entity Type */
+            entity_type: string;
+            /** Id */
+            id: number;
+            /** Reason */
+            reason: string | null;
+        };
+        /** AuditPageOut */
+        AuditPageOut: {
+            /** Entries */
+            entries: components["schemas"]["AuditEntryOut"][];
+            /** Next Before Id */
+            next_before_id: number | null;
         };
         /** BillLineOut */
         BillLineOut: {
@@ -4124,6 +4195,43 @@ export interface operations {
             };
         };
     };
+    audit_log_api_v1_societies__society_id__audit_log_get: {
+        parameters: {
+            query?: {
+                entity_type?: string | null;
+                action?: string | null;
+                before_id?: number | null;
+            };
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AuditPageOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     list_runs_api_v1_societies__society_id__billing_runs_get: {
         parameters: {
             query?: never;
@@ -5176,6 +5284,39 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["DuesOut"];
                 };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    export_society_api_v1_societies__society_id__export_get: {
+        parameters: {
+            query?: {
+                format?: "xlsx" | "pdf";
+            };
+            header?: {
+                authorization?: string | null;
+            };
+            path: {
+                society_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Validation Error */
             422: {

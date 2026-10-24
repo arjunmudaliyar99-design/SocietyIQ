@@ -1,4 +1,6 @@
 export { colors } from "./colors";
+export { AnalyticsSetting, AnalyticsTracker } from "./analytics";
+export { analyticsAllowed, type AnalyticsConfig } from "./analytics-gate";
 export { LANGUAGES, NAMESPACES, createI18n, isLanguageCode, resources, type LanguageCode } from "./i18n";
 export { SettingsProvider } from "./settings";
 export { TEXT_SIZES, useSettings, type Settings, type TextSize } from "./settings-context";
@@ -35,7 +37,14 @@ export { CenteredPage, ErrorText, LoadingPage } from "./auth/screens";
 export { useCurrentSociety, type CurrentSocietyValue } from "./auth/society-context";
 
 // One TanStack Query instance for both apps and this package.
-export { QueryClient, QueryClientProvider, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+export {
+  QueryClient,
+  QueryClientProvider,
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 // Apps must use this re-export so there is one react-i18next instance and one context.
 export { useTranslation } from "react-i18next";
