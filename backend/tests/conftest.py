@@ -20,7 +20,8 @@ import pytest
 ADMIN_URL = os.environ.get(
     "TEST_DATABASE_ADMIN_URL", "postgresql://postgres:postgres@localhost:54329/postgres"
 )
-TEST_DB = "societyiq_test"
+# Parallel sessions on one server need their own scratch database (TEST_DB_NAME).
+TEST_DB = os.environ.get("TEST_DB_NAME", "societyiq_test")
 APP_PASSWORD = "app_backend_test_only"
 JWT_SECRET = "test-secret-not-for-production-use-0123456789"
 
