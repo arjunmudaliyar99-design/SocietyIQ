@@ -89,13 +89,27 @@ export interface Contact {
  * Shows the society champion's contact (society data, from M2) and SocietyIQ support.
  * Support details come only from configuration, never hard-coded (CLAUDE.md §4a).
  */
-export function HelpButton({ society, support }: { society?: Contact; support: Contact }) {
+export function HelpButton({
+  society,
+  support,
+  compact = false,
+}: {
+  society?: Contact;
+  support: Contact;
+  /** On small screens show only the icon; the label stays for screen readers. */
+  compact?: boolean;
+}) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button variant="secondary" icon={<CircleQuestionMark size={22} />} onClick={() => setOpen(true)}>
-        {t("help.button")}
+      <Button
+        variant="secondary"
+        icon={<CircleQuestionMark size={22} />}
+        onClick={() => setOpen(true)}
+        className={compact ? "px-3 sm:px-5" : ""}
+      >
+        <span className={compact ? "sr-only sm:not-sr-only" : ""}>{t("help.button")}</span>
       </Button>
       <Dialog open={open} title={t("help.title")} onClose={() => setOpen(false)}>
         <section className="mb-5">

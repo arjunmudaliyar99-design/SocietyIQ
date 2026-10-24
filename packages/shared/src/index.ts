@@ -12,6 +12,7 @@ export { ConfirmDialog, Dialog, type ConfirmDialogProps } from "./ui/Dialog";
 export { Field, type FieldProps } from "./ui/Field";
 export { MoneyText, type MoneyTextProps } from "./ui/MoneyText";
 export { SelectField, type SelectFieldProps } from "./ui/SelectField";
+export { LoadingBlock, Skeleton } from "./ui/Skeleton";
 export {
   HelpButton,
   LanguageSwitcher,

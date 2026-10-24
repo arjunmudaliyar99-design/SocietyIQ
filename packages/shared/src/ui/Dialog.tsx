@@ -35,12 +35,12 @@ export function Dialog({ open, title, onClose, children, initialFocus }: DialogP
 
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink/60 p-3 sm:items-center">
+    <div className="fixed inset-0 z-50 flex animate-fade items-end justify-center bg-ink/60 p-3 sm:items-center">
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-card bg-surface p-5"
+        className="max-h-[90vh] w-full max-w-lg animate-sheet overflow-y-auto rounded-card bg-surface p-5 shadow-raised sm:animate-pop"
       >
         <div className="mb-4 flex items-start justify-between gap-3">
           <h2 id={titleId} className="text-section font-bold">
@@ -97,12 +97,12 @@ export function ConfirmDialog({
 
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink/60 p-3 sm:items-center">
+    <div className="fixed inset-0 z-50 flex animate-fade items-end justify-center bg-ink/60 p-3 sm:items-center">
       <div
         role="alertdialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="w-full max-w-lg rounded-card bg-surface p-5"
+        className="w-full max-w-lg animate-sheet rounded-card bg-surface p-5 shadow-raised sm:animate-pop"
       >
         <h2 id={titleId} className="mb-5 text-section font-bold">
           {question}

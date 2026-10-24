@@ -9,6 +9,7 @@ import { useAcceptInvite, useGiveConsent, type MySociety } from "../api/hooks";
 import { BigButton, Button } from "../ui/Button";
 import { Card } from "../ui/Card";
 import { Field } from "../ui/Field";
+import { Skeleton } from "../ui/Skeleton";
 import { useAuth } from "./auth-context";
 import { messageKeyOf } from "./errors";
 
@@ -26,12 +27,16 @@ export function ErrorText({ children }: { children: ReactNode }) {
 export function CenteredPage({ title, children }: { title: string; children: ReactNode }) {
   const { t } = useTranslation();
   return (
-    <div className="mx-auto flex min-h-screen max-w-lg flex-col justify-center gap-6 p-4">
-      <img src="/logo-light.svg" alt={t("appName")} className="h-12 w-auto self-start" />
-      <Card className="flex flex-col gap-5">
-        <h1 className="text-title font-bold">{title}</h1>
-        {children}
-      </Card>
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Soft brand band behind the card: gives the first screens some warmth without noise. */}
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-mint/40 to-transparent" />
+      <div className="relative mx-auto flex min-h-screen max-w-lg flex-col justify-center gap-6 p-4">
+        <img src="/logo-light.svg" alt={t("appName")} className="h-12 w-auto self-start" />
+        <Card className="flex animate-enter flex-col gap-5 shadow-raised">
+          <h1 className="text-title font-bold">{title}</h1>
+          {children}
+        </Card>
+      </div>
     </div>
   );
 }
@@ -39,10 +44,14 @@ export function CenteredPage({ title, children }: { title: string; children: Rea
 export function LoadingPage() {
   const { t } = useTranslation();
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
-      <p role="status" className="text-body text-muted">
-        {t("loading")}
-      </p>
+    <div role="status" className="mx-auto flex min-h-screen max-w-lg flex-col justify-center gap-4 p-4">
+      <img src="/logo-light.svg" alt={t("appName")} className="h-12 w-auto animate-pulse self-start" />
+      <span className="sr-only">{t("loading")}</span>
+      <div className="rounded-card border border-line bg-surface p-5 shadow-card">
+        <Skeleton className="mb-4 h-7 w-1/2" />
+        <Skeleton className="mb-2 h-4 w-full" />
+        <Skeleton className="h-4 w-3/4" />
+      </div>
     </div>
   );
 }

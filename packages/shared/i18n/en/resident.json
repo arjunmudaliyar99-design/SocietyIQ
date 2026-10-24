@@ -21,5 +21,9 @@
   "noSociety": {
     "title": "Your society has not added you yet",
     "body": "Ask your society committee to invite you. Then open the link they send you."
+  },
+  "nav": {
+    "home": "Home",
+    "label": "Main menu"
   }
 }

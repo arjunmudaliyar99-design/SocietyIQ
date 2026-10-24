@@ -3,15 +3,16 @@ import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 export type ButtonVariant = "primary" | "secondary" | "danger";
 
 const VARIANT: Record<ButtonVariant, string> = {
-  primary: "bg-teal text-surface hover:bg-teal-dark active:bg-teal-dark border-2 border-teal",
+  primary: "bg-teal text-surface shadow-card hover:bg-teal-dark hover:shadow-raised active:bg-teal-dark border-2 border-teal",
   secondary: "bg-surface text-teal border-2 border-teal hover:bg-paper",
   danger: "bg-red text-surface border-2 border-red hover:brightness-90",
 };
 
 const BASE =
   "inline-flex items-center justify-center gap-2 rounded-lg px-5 font-semibold text-body " +
+  "transition-[background-color,box-shadow,transform] duration-150 active:scale-[0.98] " +
   "focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ink " +
-  "disabled:cursor-not-allowed disabled:opacity-60";
+  "disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;

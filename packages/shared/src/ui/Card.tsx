@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode } from "react";
 
 export function Card({ className = "", children, ...rest }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={`rounded-card border border-line bg-surface p-5 ${className}`} {...rest}>
+    <div className={`rounded-card border border-line bg-surface p-5 shadow-card ${className}`} {...rest}>
       {children}
     </div>
   );
@@ -29,7 +29,7 @@ export function StatCard({ label, value, note, onClick }: StatCardProps) {
     <button
       type="button"
       onClick={onClick}
-      className="block w-full rounded-card border border-line bg-surface p-5 text-left hover:border-teal focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ink"
+      className="block w-full rounded-card border border-line bg-surface p-5 text-left shadow-card transition-[box-shadow,transform,border-color] duration-150 hover:-translate-y-0.5 hover:border-teal hover:shadow-raised focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-ink"
     >
       {body}
     </button>
