@@ -87,7 +87,7 @@ describe("committee notices (docs/02 §9)", () => {
   it("Help me write fills the form; saving keeps it a draft", async () => {
     const { container } = renderAt("/notices/new");
     fireEvent.change(await screen.findByLabelText("Your notes"), { target: { value: "tank cleaning sunday" } });
-    fireEvent.click(screen.getAllByRole("button", { name: "Help me write" })[0]);
+    fireEvent.click(screen.getAllByRole("button", { name: "Help me write" })[0]!);
     expect(await screen.findByText(/written with AI help/)).toBeTruthy();
     expect((screen.getByLabelText("Title") as HTMLInputElement).value).toBe("Water tank cleaning");
 
